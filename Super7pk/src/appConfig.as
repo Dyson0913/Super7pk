@@ -70,6 +70,7 @@ package
 		public var _settle_panel:Visual_SettlePanel = new Visual_SettlePanel();		
 		public var _progressbar:Visual_progressbar = new Visual_progressbar();
 		public var _Bigwin_Effect:Visual_Bigwin_Effect = new Visual_Bigwin_Effect();
+		public var _theme:Visual_theme = new Visual_theme();
 		
 		
 		//test
@@ -82,7 +83,7 @@ package
 		
 		public function appConfig() 
 		{
-			Debug.trace("DK init");
+			Debug.trace("7PK init");
 		}
 	
 	}

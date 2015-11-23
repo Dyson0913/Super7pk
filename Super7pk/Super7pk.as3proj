@@ -6,8 +6,8 @@
     <movie input="" />
     <movie path="bin\Super7pk.swf" />
     <movie fps="30" />
-    <movie width="800" />
-    <movie height="600" />
+    <movie width="1920" />
+    <movie height="1080" />
     <movie version="10" />
     <movie minorVersion="1" />
     <movie platform="Flash Player" />
@@ -48,14 +48,13 @@
   </build>
   <!-- SWC Include Libraries -->
   <includeLibraries>
-    <!-- example: <element path="..." /> -->
+    <element path="lib\super7pk.swc" />
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="lib\LibGen.swc" />
     <element path="lib\SoundAS.swc" />
     <element path="lib\DK.swc" />
-    <element path="lib\super7pk.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

@@ -22,7 +22,7 @@ package View.GameView
 		
 		public function HudView()  
 		{
-			utilFun.Log("HudView");
+			
 		}
 		
 		[MessageHandler(type="Model.valueObject.Intobject",selector="EnterView")]

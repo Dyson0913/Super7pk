@@ -22,11 +22,6 @@ package Res
 		public static const TextInfo:String = "Text_Info";	
 		public static const Betcoin:String = "Bet_coin";	
 		public static const Wincoin:String = "Win_coin";				
-		
-		public static const betlimit:String = "bet_limit";
-		public static const realtimeinfo:String = "realtime_info";
-		public static const betstaticarrow:String = "betstatic_arrow";
-		public static const betstaticarrow_right:String = "betstatic_arrow_right";
 				
 		public static const prob_square:String = "prob";
 		
@@ -70,8 +65,7 @@ package Res
 		
 		public static const emptymc:String = "Emptymc";
 		
-		public static const paytablemain:String = "paytable_main"		
-		public static const paytable_baridx:String = "paytable_bar_idx";
+	
 		
 		public function ResName() 
 		{

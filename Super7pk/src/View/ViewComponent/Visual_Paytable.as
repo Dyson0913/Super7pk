@@ -22,6 +22,8 @@ package View.ViewComponent
 	 */
 	public class Visual_Paytable  extends VisualHandler
 	{
+		public const paytablemain:String = "paytable_main"		
+		public const paytable_baridx:String = "paytable_bar_idx";
 		
 		public function Visual_Paytable() 
 		{
@@ -31,13 +33,13 @@ package View.ViewComponent
 		public function init():void
 		{			
 			//賠率提示
-			var paytable:MultiObject = create("paytable", [ResName.paytablemain]);
+			var paytable:MultiObject = create("paytable", [paytablemain]);
 			paytable.MouseFrame = utilFun.Frametype(MouseBehavior.Customized, [0, 0, 2, 1]);			
 			paytable.container.x = 230;
 			paytable.container.y =  124;
 			paytable.Create_(1, "paytable");
 			
-			var paytable_baridx:MultiObject = create("paytable_baridx", [ResName.paytable_baridx]);
+			var paytable_baridx:MultiObject = create("paytable_baridx", [paytable_baridx]);
 			paytable_baridx.container.x = paytable.container.x;
 			paytable_baridx.container.y = paytable.container.y;
 			paytable_baridx.Create_(1, "paytable_baridx");

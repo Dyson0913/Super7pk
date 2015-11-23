@@ -104,6 +104,9 @@ package View.ViewComponent
 		[Inject]
 		public var _Bigwin_Effect:Visual_Bigwin_Effect;
 		
+		[Inject]
+		public var _theme:Visual_theme = new Visual_theme();
+		
 		public function Visual_testInterface() 
 		{
 			
@@ -222,12 +225,17 @@ package View.ViewComponent
 			changeBG(ResName.Bet_Scene);
 			
 			//=============================================gameinfo			
-			_gameinfo.init();
-			_gameinfo.opencard_parse();
+			_gameinfo.init();		
 			
+			_theme.init();
+			_theme.debug();
+			return;
 			//=============================================paytable
-			fake_hisotry();
+			//fake_hisotry();
 			_paytable.init();
+			
+			
+			
 			
 			//_paytable.opencard_parse();
 			_settle_panel.init();
@@ -372,8 +380,10 @@ package View.ViewComponent
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "3")]
 		public function pack_sim():void
 		{
-			dispatcher(new Intobject(utilFun.Random(2), "power_up"));
-			return;
+			_theme.opencard_parse();
+			//dispatcher(new Intobject(utilFun.Random(2), "power_up"));
+			//return;
+			
 			//dispatcher(new Intobject(modelName.Hud, ViewCommand.ADD)) ;			
 			//pack test
 			//_loader.init();

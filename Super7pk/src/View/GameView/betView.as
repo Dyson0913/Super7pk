@@ -80,7 +80,7 @@ package View.GameView
 		
 		public function betView()  
 		{
-			utilFun.Log("betView");
+			
 		}
 		
 		[MessageHandler(type="Model.valueObject.Intobject",selector="EnterView")]

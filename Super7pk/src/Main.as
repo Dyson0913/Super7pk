@@ -20,7 +20,7 @@ package
 	{
 		private var _context:Context;
 		
-		private var _appconfig:appConfig = new appConfig();
+		private var _appconfig:appConfig;
 		
 		private var _credit:Number =-1;
 		private var _clientidx:Number =-1;
@@ -51,16 +51,9 @@ package
 			if ( CONFIG::debug ) 
 			{
 				Debug.monitor(stage);
-				utilFun.Log("welcome DK alcon");
+				utilFun.Log("welcome Super7PK alcon");
 			}
-			//else
-			//{
-				//Debug.enabled = false;
-			//}
-			//Debug.monitor(stage);
-				//utilFun.Log("welcome DK alcon");
 			
-			//no thing ,ok
 			_context  = ActionScriptContextBuilder.build(appConfig);
 			
 			addChild(_context.getObjectByType(LoadingView) as LoadingView);			
