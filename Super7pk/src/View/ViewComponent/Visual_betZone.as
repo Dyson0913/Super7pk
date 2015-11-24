@@ -21,6 +21,8 @@ package View.ViewComponent
 		[Inject]
 		public var _betCommand:BetCommand;	
 		
+		public const bet_tableitem:String = "bet_table_item";
+		
 		public function Visual_betZone() 
 		{
 			
@@ -29,87 +31,67 @@ package View.ViewComponent
 		public function init():void
 		{
 			
-			var tableitem:MultiObject = create("tableitem", [ResName.bet_tableitem]);	
-			tableitem.container.x = 193;
-			tableitem.container.y = 655;
-			tableitem.Create_(1, "tableitem");
+			var tableitem:MultiObject = create(bet_tableitem, [bet_tableitem]);	
+			tableitem.container.x = 3;
+			tableitem.container.y = 605;
+			tableitem.Create_(1, bet_tableitem);
+			
 			
 			var avaliblezone:Array = _model.getValue(modelName.AVALIBLE_ZONE);
-			var zone_xy:Array = _model.getValue(modelName.AVALIBLE_ZONE_XY);						
 			
 			//下注區
 			var pz:MultiObject = create("betzone", avaliblezone);
 			pz.MouseFrame = utilFun.Frametype(MouseBehavior.Customized,[1,2,2,0]);
-			pz.container.x = 457;
-			pz.container.y = 662;
-			pz.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
-			pz.Post_CustomizedData = zone_xy;
-			pz.Create_(avaliblezone.length, "betzone");
+			pz.container.x = tableitem.container.x;
+			pz.container.y = tableitem.container.y;
+			pz.Create_(avaliblezone.length, "betzone");		
+			//setFrame("betzone", 2);
 			
-			var highpayrate:MultiObject = create("highpayrate", [ResName.highpayrate]);	
-			highpayrate.Create_(1, "highpayrate");
 			
-			put_to_lsit(pz);
 			put_to_lsit(tableitem);
-			put_to_lsit(highpayrate);
+			put_to_lsit(pz);
 		}		
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "display")]
-		public function display():void
+		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
+		public function start_bet():void
 		{			
+			
+			
 			var betzone:MultiObject = Get("betzone");
 			betzone.mousedown = _betCommand.empty_reaction;			
 			betzone.rollout = _betCommand.empty_reaction;
 			betzone.rollover = _betCommand.empty_reaction;
 			
-			Get("tableitem").container.visible = true;
-			GetSingleItem("highpayrate").gotoAndStop(1);
-			Get("highpayrate").container.x = 783;
-			Get("highpayrate").container.y = 575;
-			
-			pull();
-			
-			_regular.Twinkle_by_JumpFrame(GetSingleItem("betzone", 5), 25, 25, 1, 3);
-			
 			
 		}
 		
-		public function pull():void
-		{
-			_regular.moveTo(Get("highpayrate").container, Get("highpayrate").container.x, Get("highpayrate").container.y - 10, 1, 0, pull_up);
-		}
-		
-		public function pull_up():void
-		{
-			_regular.moveTo(Get("highpayrate").container, Get("highpayrate").container.x, Get("highpayrate").container.y + 10, 1, 0, pull);
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "hide")]
-		public function timer_hide():void
+		public function hide():void
 		{
 			var betzone:MultiObject = Get("betzone");
-			betzone.mousedown = null;				
+			betzone.mousedown = null;		
+			betzone.rollout = null;
+			betzone.rollover = null;
 			
-			betzone.rollout = _betCommand.empty_reaction;
-			betzone.rollover = _betCommand.empty_reaction;
-			
-			var frame:Array = [];
-			for ( var i:int = 0; i  <  betzone.ItemList.length; i++) frame.push(1);
-			betzone.CustomizedFun = _regular.FrameSetting;
-			betzone.CustomizedData = frame;
-			betzone.FlushObject();
-			
-			Get("tableitem").container.visible = false;
-			
-						
-			Tweener.pauseTweens(GetSingleItem("betzone",5));
-			
-			GetSingleItem("highpayrate").gotoAndStop(2);
-			
-			Tweener.pauseTweens(Get("highpayrate"));		
-			
+			setFrame(bet_tableitem, 1);
 		}
 		
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
+		public function stop_bet():void
+		{
+			hide();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		public function open_card():void
+		{
+			hide();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
+		public function settle():void
+		{
+			hide();
+		}
 		
 	}
 

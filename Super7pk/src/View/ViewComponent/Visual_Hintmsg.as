@@ -19,6 +19,10 @@ package View.ViewComponent
 	{
 		public const Hint:String = "HintMsg";
 		
+		private var frame_start_bet:int = 2;
+		private var frame_stop_bet:int = 3;
+		private var frame_open_card:int = 4;
+		
 		public function Visual_Hintmsg() 
 		{
 			
@@ -26,56 +30,35 @@ package View.ViewComponent
 		
 		public function init():void
 		{
-			var hintmsg:MultiObject = create(modelName.HINT_MSG, [Hint]);
-			hintmsg.Create_(1, "hintmsg");
-			hintmsg.container.x = 960.3;
-			hintmsg.container.y = 439.3;
-			hintmsg.container.visible = false;
+			var Hintmsg:MultiObject = create(Hint, [Hint]);
+			Hintmsg.Create_(1, Hint);
+			Hintmsg.container.x = 951.65;
+			Hintmsg.container.y = 517.80;		
 			
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "display")]
-		public function display():void
-		{
-			Get(modelName.HINT_MSG).container.visible = true;
-			GetSingleItem(modelName.HINT_MSG).gotoAndStop(1);	
-			_regular.FadeIn( GetSingleItem(modelName.HINT_MSG), 2, 2, _regular.Fadeout);			
-			dispatcher(new StringObject("sound_start_bet","sound" ) );
+		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
+		public function start_bet():void
+		{			
+			GetSingleItem(Hint).gotoAndStop(frame_start_bet);
+			_regular.FadeIn( GetSingleItem(Hint), 2, 2, _regular.Fadeout);
+			play_sound("sound_start_bet");
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "hide")]
-		public function hide():void
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
+		public function stop_bet():void
 		{
-			Get(modelName.HINT_MSG).container.visible = true;
-			var state:int = _model.getValue(modelName.GAMES_STATE);
-			if ( state == gameState.START_OPEN) 
-			{
-				
-				GetSingleItem(modelName.HINT_MSG).gotoAndStop(4);
-			}			
-			if ( state == gameState.END_BET)
-			{
-				GetSingleItem(modelName.HINT_MSG).gotoAndStop(2);
-				dispatcher(new StringObject("sound_stop_bet","sound" ) );
-			}
-			_regular.FadeIn( GetSingleItem(modelName.HINT_MSG), 2, 2, _regular.Fadeout);			
-			
-		}		
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "show_public_card_hint")]
-		public function public_ard():void
-		{
-			Get(modelName.HINT_MSG).container.visible = true;
-			GetSingleItem(modelName.HINT_MSG).gotoAndStop(5);
+			GetSingleItem(Hint).gotoAndStop(frame_stop_bet);
+			_regular.FadeIn( GetSingleItem(Hint), 2, 2, _regular.Fadeout);
+			play_sound("sound_stop_bet");			
 		}
 		
-		[MessageHandler(type = "ConnectModule.websocket.WebSoketInternalMsg", selector = "CreditNotEnough")]
-		public function no_credit():void
-		{
-			Get(modelName.HINT_MSG).container.visible = true;
-			GetSingleItem(modelName.HINT_MSG).gotoAndStop(3);
-			_regular.FadeIn( GetSingleItem(modelName.HINT_MSG), 2, 2, _regular.Fadeout);
-		}
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		public function openCard():void
+		{			
+			GetSingleItem(Hint).gotoAndStop(frame_open_card);			
+			_regular.FadeIn( GetSingleItem(Hint), 2, 2, _regular.Fadeout);			
+		}	
 		
 	}
 

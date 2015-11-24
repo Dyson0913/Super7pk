@@ -47,7 +47,7 @@ package View.ViewComponent
 			bet.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting
 			bet.Post_CustomizedData = [2,50,0];
 			bet.Create_(2, "game_title_info");
-			bet.container.x = 302;
+			bet.container.x = 132;
 			bet.container.y = 48;		
 			
 			put_to_lsit(bet);			

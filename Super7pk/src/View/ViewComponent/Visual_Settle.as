@@ -124,8 +124,8 @@ package View.ViewComponent
 						var extra_two:int = resultob.bet_amount * resultob.odds;
 						if ( extra_two )
 						{
-							var array:Array = _model.getValue("power_jp");
-							array[1] = resultob.bet_amount * resultob.odds;
+							var array2:Array = _model.getValue("power_jp");
+							array2[1] = resultob.bet_amount * resultob.odds;
 							hintJp = 1;
 						}
 						continue;

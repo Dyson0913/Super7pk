@@ -29,29 +29,14 @@ package Res
 		public static const PowerJP_Num:String = "Power_JP_Num";		
 		
 		
-		
-		
-		public static const historytable:String = "history_table";
-		public static const historyball:String = "history_ball";		
-		
 		public static const powerbar:String = "power_bar";
 		public static const power_bar3:String = "power_bar_3";
 		public static const power_bar_2pair:String = "power_bar_2_pair";
 		public static const contractpower:String = "contract_power";
 		
 		
-		public static const Timer:String = "countDowntimer";		
 		
-		public static const betzone_player:String = "playerzone";
-		public static const betzone_banker:String = "bankerzone";
-		public static const betzone_tie:String = "tiezone";		
-		public static const betzone_banker_pair:String = "bankerzone_pair";
-		public static const betzone_player_pari:String = "playerzone_pair";		
-		public static const special_Zone:String = "specialzone";		
-		
-		public static const bet_tableitem:String = "bet_table_item";		
-		public static const open_tableitem:String = "open_table_item";
-		public static const highpayrate:String = "high_payrate";
+		public static const open_tableitem:String = "open_table_item";		
 		
 		
 		public static const playerScore:String = "PlayerScore";

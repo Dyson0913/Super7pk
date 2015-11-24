@@ -19,8 +19,7 @@ package Model
 		public static const CREDIT:int = Num++;
 		public static const NICKNAME:int = Num++;
 		public static const UUID:int = Num++;
-		
-		public static const HINT_MSG:int = Num++;
+				
 		public static const REMAIN_TIME:int = Num++;
 		public static const GAMES_STATE:int = Num++;
 		

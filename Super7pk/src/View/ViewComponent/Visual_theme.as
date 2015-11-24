@@ -53,14 +53,14 @@ package View.ViewComponent
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
-		public function display():void
+		public function start_bet():void
 		{			
 			GetSingleItem("theme").gotoAndStop(1);
 			GetSingleItem("Zonetitle", 0).gotoAndStop(1);
 			GetSingleItem("Zonetitle", 1).gotoAndStop(2);
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "openCard")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
 		public function opencard_parse():void
 		{
 			//TODO why to working

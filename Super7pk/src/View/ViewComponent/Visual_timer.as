@@ -17,7 +17,8 @@ package View.ViewComponent
 	 */
 	public class Visual_timer  extends VisualHandler
 	{
-		public var already_countDown:Boolean;
+		public const Timer:String = "countDowntimer";
+		
 		public var Waring_sec:int;
 		
 		public function Visual_timer() 
@@ -27,91 +28,55 @@ package View.ViewComponent
 		
 		public function init():void
 		{
-			var countDown:MultiObject = create(modelName.REMAIN_TIME,[ResName.Timer]);
-		   countDown.Create_(1,modelName.REMAIN_TIME.toString());
-		   countDown.container.x = 1148;
-		   countDown.container.y = 338;
+			var countDown:MultiObject = create(Timer,[Timer]);
+		   countDown.Create_(1,Timer);
+		   countDown.container.x = 1188;
+		   countDown.container.y = 528;
 		   countDown.container.visible = false;
-		   
-		   
-		   	var timellight:MultiObject = create("timellight" , ["time_light"], countDown.container);
-		   timellight.Create_(1, "time_light");		   
-		   timellight.container.x = 75;
-		   timellight.container.y = 75;
 		   
 		   //TODO item test model put in here ?
 		   //_model.putValue(modelName.REMAIN_TIME, 10);
-		   	
-		   	//_tool.SetControlMc(playerzone.ItemList[0]);
-			//_tool.SetControlMc(timellight.container);
-			//_tool.x = 100;
-			//add(_tool);
-			already_countDown = false;
+		   				
 			Waring_sec = 7;
 			
 			put_to_lsit(countDown);
-			put_to_lsit(timellight);
-			
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "display")]
-		public function display():void
+		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
+		public function start_bet():void
 		{			
-			Get(modelName.REMAIN_TIME).container.visible = true;			
+			Get(Timer).container.visible = true;	
 			var time:int = _model.getValue(modelName.REMAIN_TIME);
-			utilFun.SetText(GetSingleItem(modelName.REMAIN_TIME)["_Text"], utilFun.Format(time, 2) );
+			frame_setting_way(time);
 			
-			if ( !already_countDown) 
-			{
-				already_countDown = true;
-				Tweener.addCaller(this, { time:time , count: time, onUpdate:TimeCount , transition:"linear" } );
-			}
+			Tweener.addCaller(this, { time:time , count: time, onUpdate:TimeCount , transition:"linear" } );
 		}
 		
 		private function TimeCount():void
 		{			
 			var time:int  = _opration.operator(modelName.REMAIN_TIME, DataOperation.sub, 1);
-			
-			if ( time <= 0) 
-			{
-				//may be the timer bug
-				//GetSingleItem(modelName.REMAIN_TIME).visible = false;				
-				//_regular.Call(Get(modelName.REMAIN_TIME).container, { onComplete:this.timer_hide }, 1, 1.5, 1, "linear")	
-				//return;
-			}
-			
-			var mc:MovieClip = GetSingleItem("timellight");
-			if ( time == Waring_sec ) 
-			{
-				GetSingleItem(modelName.REMAIN_TIME)["_Text"].textColor = 0xFF0000;
-				GetSingleItem(modelName.REMAIN_TIME).gotoAndStop(2);
-				mc.gotoAndStop(2);
-				
-			}
-			
-			if ( time <= Waring_sec ) dispatcher(new StringObject("sound_final","sound" ) );
-			
-			utilFun.SetText(GetSingleItem(modelName.REMAIN_TIME)["_Text"], utilFun.Format(time, 2) );			
+			if ( time < 0) return;
+			if ( time <= Waring_sec ) dispatcher(new StringObject("sound_final", "sound" ) );
 			
 			
-			Tweener.addCaller(mc, { time:1 , count: 36, onUpdate:TimeLight , onUpdateParams:[mc, 10 ], transition:"linear" } );			
+			frame_setting_way(time);			
 		}
 		
-		private function TimeLight(mc:MovieClip,angel:int):void
+		public function frame_setting_way(time:int):void
 		{
-		   mc.rotation += angel;
-		}		
+			var arr:Array = utilFun.arrFormat(time, 2);
+			if ( arr[0] == 0 ) arr[0] = 10;
+			if ( arr[1] == 0 ) arr[1] = 10;
+			GetSingleItem(Timer)["_num_0"].gotoAndStop(arr[0]);
+			GetSingleItem(Timer)["_num_1"].gotoAndStop(arr[1]);
+		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "hide")]
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
 		public function timer_hide():void
 		{			
-			Get(modelName.REMAIN_TIME).container.visible = false;
+			Get(Timer).container.visible = false;		
 			
-			GetSingleItem(modelName.REMAIN_TIME)["_Text"].textColor = 0x0099CC;
-			GetSingleItem(modelName.REMAIN_TIME).gotoAndStop(1);
-			GetSingleItem("timellight").gotoAndStop(1);
-			
-			already_countDown = false;
 		}
 		
 		

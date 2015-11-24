@@ -2,6 +2,7 @@ package Command
 {
 	import ConnectModule.websocket.WebSoketInternalMsg;
 	import flash.events.Event;
+	import Interface.CollectionsInterface;
 	import Model.*;
 	import Model.valueObject.StringObject;
 	import util.DI;
@@ -70,20 +71,20 @@ package Command
 			_model.putValue("Bet_name_to_idx", bet_name_to_idx);		
 			_model.putValue("Bet_idx_to_name", bet_idx_to_name);
 			
-			var allzone:Array = [ResName.betzone_player, ResName.betzone_banker,ResName.betzone_tie,ResName.betzone_banker_pair,ResName.betzone_player_pari,ResName.special_Zone];			
 			var avaliblezone:Array = [];
 			var avaliblezone_s:Array = [];
-			for each (var k:int in betzone)
+			for ( var i:int = 0; i < 12; i++)			
 			{
-				avaliblezone.push ( allzone[k]);
-				avaliblezone_s.push ( allzone[k]+"_sence");
+				avaliblezone.push ( "zone_" + i);
+				avaliblezone_s.push ( "zone_" + i + "_sence");				
 			}
 			
-			_model.putValue(modelName.AVALIBLE_ZONE_IDX, betzone);
 			_model.putValue(modelName.AVALIBLE_ZONE, avaliblezone);
 			_model.putValue(modelName.AVALIBLE_ZONE_S, avaliblezone_s);
+			
+			_model.putValue(modelName.AVALIBLE_ZONE_IDX, betzone);
+			
 						
-			_model.putValue(modelName.AVALIBLE_ZONE_XY,  [[0, 0], [644, 3], [356, 129], [973, 58], [-259, 48], [369, 3]]);
 			_model.putValue(modelName.COIN_STACK_XY,   [ [30, 0], [670, -10],  [350, 23], [970, -20], [-279, -12], [340, -182]]);
 			
 			var poermapping:DI = new DI();	

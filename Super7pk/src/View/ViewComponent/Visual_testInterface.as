@@ -192,7 +192,7 @@ package View.ViewComponent
 			_paytable.init();
 			
 			//================================================betzone
-			_betzone.init();			
+			
 			_coin_stack.init();
 			_coin.init();
 			_sencer.init();
@@ -225,9 +225,27 @@ package View.ViewComponent
 			changeBG(ResName.Bet_Scene);
 			
 			//=============================================gameinfo			
-			_gameinfo.init();		
 			
 			_theme.init();
+			_gameinfo.init();		
+			
+			
+			
+			_hint.init();
+			_model.putValue(modelName.GAMES_STATE,gameState.END_BET);
+			_hint.start_bet();			
+			
+			_model.putValue(modelName.REMAIN_TIME, 20);					
+			_timer.init();
+			_timer.start_bet();
+			
+			fake_hisotry();
+			_HistoryRecoder.init();
+			_HistoryRecoder.start_bet();
+			
+			_betzone.init();
+			_betzone.start_bet();
+			
 			_theme.debug();
 			return;
 			//=============================================paytable
@@ -243,9 +261,7 @@ package View.ViewComponent
 			_ProbData.init();
 
 			//=============================================Hintmsg
-			_hint.init();
-			_model.putValue(modelName.GAMES_STATE,gameState.END_BET);
-			_hint.hide();			
+		
 		
 			//================================================poker
 			_poker.init();
@@ -301,6 +317,9 @@ package View.ViewComponent
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "2")]
 		public function settleScript():void
 		{
+			_hint.stop_bet();
+			return;
+			
 			_model.putValue(modelName.PLAYER_POKER, ["9d","3d"]);				
 			_model.putValue(modelName.BANKER_POKER, ["2d","9s"]);		
 			_model.putValue(modelName.RIVER_POKER, []);					
@@ -361,18 +380,12 @@ package View.ViewComponent
 		
 		
 		public function fake_hisotry():void
-		{
-			//{"player_pair": false, "winner": "BetBWPlayer", "banker_pair": false, "point": 4}
+		{			
 			var arr:Array = [];
 			for ( var i:int = 0; i < 60; i++)
 			{					
-				var p:int = utilFun.Random(3);
-				var str:String = "";
-				if ( p == 0)  str = "BetBWPlayer";
-				if ( p == 1)  str = "BetBWBanker";
-				if ( p == 2)  str = "None";
-				var ob:Object = { "player_pair": utilFun.Random(2) , "winner": str, "banker_pair": utilFun.Random(2) , "point": utilFun.Random(10) };
-				arr.push(ob);
+				var p:int = utilFun.Random(12)+1;				
+				arr.push(p);
 			}			
 			 _model.putValue("history_list",arr);
 		}
@@ -380,7 +393,7 @@ package View.ViewComponent
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "3")]
 		public function pack_sim():void
 		{
-			_theme.opencard_parse();
+			_hint.openCard();
 			//dispatcher(new Intobject(utilFun.Random(2), "power_up"));
 			//return;
 			
