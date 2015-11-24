@@ -89,7 +89,7 @@ package View.ViewComponent
 		{
 			//TODO why to working
 			//TODO open five or last 2
-			//GetSingleItem("theme").gotoAndStop(2);
+			GetSingleItem("theme").gotoAndStop(2);
 			GetSingleItem("theme")["Logo"].gotoAndPlay(2);
 			
 			//開牌中

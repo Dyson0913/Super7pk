@@ -102,8 +102,8 @@ package View.ViewComponent
 		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
 		public function stop_bet():void
 		{
-			_regular.Fadeout(Get(modelName.POKER_1).container, 1, 1);			
-			_regular.FadeIn(Get(modelName.POKER_2).container, 1, 1, null);
+			Get(modelName.POKER_1).container.alpha = 0;			
+			Get(modelName.POKER_2).container.alpha = 1;
 			
 		}	
 		
@@ -113,7 +113,7 @@ package View.ViewComponent
 			//_regular.Fadeout(Get(Poker_1).container, 1, 1);			
 			//_regular.FadeIn(Get(Poker_1).container, 1, 1, null);
 			//TODO open five or last 2
-			Get(modelName.POKER_1).container.alpha = 1;
+			Get(modelName.POKER_1).container.alpha = 0;
 			Get(modelName.POKER_2).container.alpha = 1;
 		}
 		

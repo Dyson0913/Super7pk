@@ -195,10 +195,10 @@ package View.ViewComponent
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "1")]
 		public function opencardScript():void
 		{						
-			_model.putValue(modelName.POKER_1, []);				
-			_model.putValue(modelName.POKER_2, []);			
+			_model.putValue(modelName.POKER_1, ["1s", "2d", "3s", "5c", "6h"]);				
+			_model.putValue(modelName.POKER_2, ["1s", "2d", "3s", "5c", "6h"]);			
 			
-			_model.putValue("scirpt_pai", ["1s","2d","3s","5c","6h","9d","7d"]);		
+			_model.putValue("scirpt_pai", ["3d","6d"]);		
 			
 			changeBG(ResName.Bet_Scene);
 			
@@ -226,11 +226,17 @@ package View.ViewComponent
 			_btn.init();
 			_btn.debug();
 //			_ProbData.init();
-			dispatcher(new ModelEvent("open_card"));			
+				
+			_model.putValue(modelName.GAMES_STATE,gameState.END_BET);			
+			dispatcher(new ModelEvent("update_state"));
+			dispatcher(new Intobject(modelName.POKER_1, "poker_No_mi"));
+			dispatcher(new Intobject(modelName.POKER_2, "poker_No_mi"));
 			
+			_model.putValue(modelName.GAMES_STATE,gameState.START_OPEN);			
+			dispatcher(new ModelEvent("update_state"));
 			
 			//================================================ simu deal
-			var testpoker:Array = ["Player", "Player", "Player","Player","Player","Player","Player","Player"];
+			var testpoker:Array = ["Player", "Player"];
 			_regular.Call(this, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 25, 0, 7, "linear");						
 		}
 		
@@ -285,12 +291,15 @@ package View.ViewComponent
 			cardlist.shift();
 			Log("fackeDeal card = " + card);
 			var mypoker:Array = [];
+			var mypoker2:Array = [];
 			if ( card_type == "Player")
 			{										
 				mypoker = _model.getValue(modelName.POKER_1);										
+				mypoker2 = _model.getValue(modelName.POKER_2);										
 				mypoker.push(card);
+				mypoker2.push(card);
 				_model.putValue(modelName.POKER_1, mypoker);
-				_model.putValue(modelName.POKER_2, mypoker);
+				_model.putValue(modelName.POKER_2, mypoker2);
 				dispatcher(new Intobject(modelName.POKER_1, "poker_mi"));				
 				dispatcher(new Intobject(modelName.POKER_2, "poker_mi"));
 			}		
