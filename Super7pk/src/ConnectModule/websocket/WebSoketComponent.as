@@ -132,19 +132,16 @@ package ConnectModule.websocket
 						var card:Array = result.card_list;
 						var card_type:String = result.card_type;
 						var mypoker:Array =[];
+						var mypoker2:Array =[];
 						if ( card_type == "Player")
 						{										
-							mypoker = _model.getValue(modelName.POKER_1);										
+							mypoker = _model.getValue(modelName.POKER_1);
+							mypoker2 = _model.getValue(modelName.POKER_2);
 							mypoker.push(card[0]);
-							_model.putValue(modelName.POKER_1, mypoker);										
+							mypoker2.push(card[0]);
+							_model.putValue(modelName.POKER_1, mypoker);
+							_model.putValue(modelName.POKER_2, mypoker2);
 							dispatcher(new Intobject(modelName.POKER_1, "poker_mi"));
-							
-						}
-						else if ( card_type == "Banker")
-						{							
-							mypoker = _model.getValue(modelName.POKER_2);										
-							mypoker.push( card[0]);										
-							_model.putValue(modelName.POKER_2, mypoker);					
 							dispatcher(new Intobject(modelName.POKER_2, "poker_mi"));
 						}					
 					}

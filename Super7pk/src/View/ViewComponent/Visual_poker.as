@@ -67,13 +67,13 @@ package View.ViewComponent
 			
 			var playerCon:MultiObject = Get(modelName.POKER_1);
 			playerCon.CleanList();				
-			playerCon.Create_(2, modelName.POKER_1.toString());
+			playerCon.Create_(7, modelName.POKER_1.toString());
 			Tweener.pauseTweens(playerCon.container);
 			playerCon.container.alpha = 0;				
 			
 			var bankerCon:MultiObject = Get(modelName.POKER_2);
 			bankerCon.CleanList();			    
-			bankerCon.Create_(2,modelName.POKER_2.toString());
+			bankerCon.Create_(7,modelName.POKER_2.toString());
 			Tweener.pauseTweens(bankerCon.container);
 			bankerCon.container.alpha = 0;		
 			
@@ -139,7 +139,7 @@ package View.ViewComponent
 				anipoker.gotoAndStop(anipoker.totalFrames);				
 				//Tweener.addTween(anipoker["_poker"], { rotationZ:24.5, time:0.3,onCompleteParams:[anipoker,anipoker["_poker"],0],onComplete:this.pullback} );
 			}				
-			dispatcher(new Intobject(type.Value, "show_judge"));
+			//dispatcher(new Intobject(type.Value, "show_judge"));
 		}
 		
 		[MessageHandler(type = "Model.valueObject.Intobject", selector = "poker_mi")]

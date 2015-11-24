@@ -30,7 +30,7 @@ package Command
 			if ( state  == gameState.PRE_OPEN) dispatcher(new ModelEvent("pre_open"));
 			if ( state  == gameState.NEW_ROUND)
 			{				
-				dispatcher(new ModelEvent("clearn"));
+				//dispatcher(new ModelEvent("clearn"));
 				//dispatcher(new ModelEvent("display"));			
 				dispatcher(new ModelEvent("start_bet"));			
 			}
