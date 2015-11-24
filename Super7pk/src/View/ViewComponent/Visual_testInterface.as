@@ -210,53 +210,67 @@ package View.ViewComponent
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "1")]
 		public function opencardScript():void
 		{			
+			
 			_model.putValue(modelName.POKER_1, []);				
 			_model.putValue(modelName.POKER_2, []);			
-			_model.putValue("scirpt_pai", ["1s","2d","3s","5c","6h","9d"]);		
+			_model.putValue("scirpt_pai", ["1s","2d","3s","5c","6h","9d","7d"]);		
 			
-		
+			changeBG(ResName.Bet_Scene);
+			
+			_theme.init();
+			_gameinfo.init();
+			
+			_hint.init();
+			_model.putValue(modelName.GAMES_STATE,gameState.END_BET);			
+			
+			_timer.init();			
+			
+			fake_hisotry();
+			_HistoryRecoder.init();
+			
 			//_progressbar.init();
 			//_paytable.init();			
 			//_settle_panel.init();
+			_betzone.init();		
+			_coin_stack.init();		
+			_coin.init();
+			_sencer.init();		
 			
-			_ProbData.init();			
+			_poker.init();
+			
+			_btn.init();
+			_btn.debug();
+//			_ProbData.init();			
 		
-			//================================================settle info
-			//_settle.init();
+		
 			
-			
-			dispatcher(new ModelEvent("clearn"));
-			dispatcher(new ModelEvent("hide"));
+						
+			//dispatcher(new ModelEvent("open_card"));
+			dispatcher(new ModelEvent("pre_open"));
 			
 			
 			//================================================ simu deal
-			var testpoker:Array = ["Player", "Banker", "Player"];// , "Banker", "River", "River"];
-			_regular.Call(Get(modelName.POKER_1).container, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 25, 0, 6, "linear");						
+			var testpoker:Array = ["Player", "Player", "Player","Player","Player","Player","Player","Player"];
+			_regular.Call(this, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 25, 0, 7, "linear");						
 		}
 		
 		public function fackeDeal(type:Array):void
-		{
-			utilFun.Log("fackeDeal = "+fackeDeal);
+		{			
 			var cardlist:Array = _model.getValue("scirpt_pai");
 			
 			var card_type:String = type[0];
 			var card:String = cardlist[0];
 			type.shift();
 			cardlist.shift();
-			utilFun.Log("card = " + card);
+			Log("fackeDeal card = " + card);
 			var mypoker:Array = [];
 			if ( card_type == "Player")
 			{										
 				mypoker = _model.getValue(modelName.POKER_1);										
 				mypoker.push(card);
-				_model.putValue(modelName.POKER_1, mypoker);										
+				_model.putValue(modelName.POKER_1, mypoker);
+				_model.putValue(modelName.POKER_2, mypoker);
 				dispatcher(new Intobject(modelName.POKER_1, "poker_mi"));				
-			}
-			else if ( card_type == "Banker")
-			{							
-				mypoker = _model.getValue(modelName.POKER_2);										
-				mypoker.push( card);										
-				_model.putValue(modelName.POKER_2, mypoker);									
 				dispatcher(new Intobject(modelName.POKER_2, "poker_mi"));
 			}		
 		}

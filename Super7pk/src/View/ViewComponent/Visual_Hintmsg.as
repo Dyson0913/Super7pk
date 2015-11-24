@@ -21,7 +21,8 @@ package View.ViewComponent
 		
 		private var frame_start_bet:int = 2;
 		private var frame_stop_bet:int = 3;
-		private var frame_open_card:int = 4;
+		private var frame_pre_open:int = 4;
+		private var frame_open_card:int = 5;
 		
 		public function Visual_Hintmsg() 
 		{
@@ -35,6 +36,13 @@ package View.ViewComponent
 			Hintmsg.container.x = 951.65;
 			Hintmsg.container.y = 517.80;		
 			
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		public function pre_open():void
+		{
+			GetSingleItem(Hint).gotoAndStop(frame_pre_open);
+			_regular.FadeIn( GetSingleItem(Hint), 2, 2, _regular.Fadeout);
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]

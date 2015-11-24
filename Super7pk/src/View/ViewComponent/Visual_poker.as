@@ -17,10 +17,7 @@ package View.ViewComponent
 	 * @author ...
 	 */
 	public class Visual_poker  extends VisualHandler
-	{		
-		public const Poker_1:String = "Poker_1";
-		public const Poker_2:String = "Poker_2";
-		
+	{
 		//res
 		public const just_turnpoker:String = "just_turn_poker";
 		
@@ -32,20 +29,22 @@ package View.ViewComponent
 		public function init():void
 		{			
 			var pokerkind:Array = [just_turnpoker];
-			var playerCon:MultiObject = create(Poker_1, pokerkind);			
-			playerCon.Post_CustomizedData = [[0.0],[199,0],[398,0],[597,0],[94,116],[294,116],[494,116]];
+			var playerCon:MultiObject = create(modelName.POKER_1, pokerkind);			
+			playerCon.Post_CustomizedData = [[0.0],[91,108],[192,0],[382,0],[475,108],[572,0],[283,108]];
 			playerCon.Posi_CustzmiedFun = _regular.Posi_xy_Setting;			
-			playerCon.Create_(7, Poker_1);
-			playerCon.container.x = 52;
-			playerCon.container.y = 194;
+			playerCon.Create_(7, modelName.POKER_1.toString());
+			playerCon.container.x = 59;
+			playerCon.container.y = 198;
 			utilFun.scaleXY(playerCon.container, 0.8, 0.8);
 			playerCon.container.alpha = 0;
+			playerCon.order_switch(5, 4);
+			playerCon.order_switch(1, 2);
 			put_to_lsit(playerCon);
 			
-			var bankerCon:MultiObject =  create(Poker_2, pokerkind);
+			var bankerCon:MultiObject =  create(modelName.POKER_2, pokerkind);
 			bankerCon.Post_CustomizedData = [7, 204, 240];
 			bankerCon.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;			
-			bankerCon.Create_(7, Poker_2);
+			bankerCon.Create_(7, modelName.POKER_2.toString());
 			bankerCon.container.x = 270;
 			bankerCon.container.y = 614;
 			bankerCon.container.alpha = 0;			
@@ -66,15 +65,15 @@ package View.ViewComponent
 		{			
 			var pokerkind:Array = [just_turnpoker];
 			
-			var playerCon:MultiObject = Get(Poker_1);
+			var playerCon:MultiObject = Get(modelName.POKER_1);
 			playerCon.CleanList();				
-			playerCon.Create_(2, "Poker_1");
+			playerCon.Create_(2, modelName.POKER_1.toString());
 			Tweener.pauseTweens(playerCon.container);
 			playerCon.container.alpha = 0;				
 			
-			var bankerCon:MultiObject = Get(Poker_2);
+			var bankerCon:MultiObject = Get(modelName.POKER_2);
 			bankerCon.CleanList();			    
-			bankerCon.Create_(2, "Poker_2");
+			bankerCon.Create_(2,modelName.POKER_2.toString());
 			Tweener.pauseTweens(bankerCon.container);
 			bankerCon.container.alpha = 0;		
 			
@@ -86,18 +85,25 @@ package View.ViewComponent
 			_model.putValue(modelName.POKER_2, [] );
 		}
 		
+		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		public function pre_open():void
+		{
+			Get(modelName.POKER_1).container.alpha = 1;
+			Get(modelName.POKER_2).container.alpha = 1;
+		}
+		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
 		{			
-			Get(Poker_1).container.alpha = 1;
-			Get(Poker_2).container.alpha = 0;
+			Get(modelName.POKER_1).container.alpha = 1;
+			Get(modelName.POKER_2).container.alpha = 0;
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
 		public function stop_bet():void
 		{
-			_regular.Fadeout(Get(Poker_1).container, 1, 1);			
-			_regular.FadeIn(Get(Poker_1).container, 1, 1, null);
+			_regular.Fadeout(Get(modelName.POKER_1).container, 1, 1);			
+			_regular.FadeIn(Get(modelName.POKER_2).container, 1, 1, null);
 			
 		}	
 		
@@ -106,13 +112,15 @@ package View.ViewComponent
 		{
 			//_regular.Fadeout(Get(Poker_1).container, 1, 1);			
 			//_regular.FadeIn(Get(Poker_1).container, 1, 1, null);
-			
+			//TODO open five or last 2
+			Get(modelName.POKER_1).container.alpha = 1;
+			Get(modelName.POKER_2).container.alpha = 1;
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
 		public function settle():void
 		{
-			_regular.Fadeout(Get(Poker_1).container, 1, 1);			
+			_regular.Fadeout(Get(modelName.POKER_1).container, 1, 1);			
 			//_regular.FadeIn(Get(Poker_1).container, 1, 1, null);
 		}
 		
@@ -140,45 +148,9 @@ package View.ViewComponent
 			
 			var mypoker:Array =   _model.getValue(type.Value);
 			var pokerid:int = pokerUtil.pokerTrans(mypoker[mypoker.length - 1]);		
-			if ( mypoker.length == 2  )
-			{	
-				
-				Get("mipoker").CleanList();		
-				Get("mipoker").Create_by_list(1, [ResName.Mipoker_zone], 0 , 0, 1, 130, 0, "Bet_");
-				Get("mipoker").container.alpha = 0;
-				
-				
-				var mipoker:MultiObject = Get("mipoker");
-				if ( type.Value == modelName.POKER_1)
-				{
-					mipoker.container.x = 500;
-					mipoker.container.y = 680;
-				}
-						
-				
-				var mc:MovieClip = mipoker.ItemList[0];
-				
-				var pokerf:MovieClip = utilFun.GetClassByString(ResName.Poker);				
-				var pokerb:MovieClip = utilFun.GetClassByString(ResName.poker_back);				
-				var pokerm:MovieClip = utilFun.GetClassByString(ResName.pokermask);
-				pokerb.x  = 39;
-				pokerb.y  = 28;
-				pokerf.x = pokerb.x;
-				pokerf.y  = pokerb.y;
-				pokerm.x = 136.35;
-				pokerm.y = 185.8;
-				pokerf.gotoAndStop(pokerid);
-				pokerf.visible = false;
-				pokerf.addChild(pokerm);
-				mc.addChild(pokerf);
-				mc.addChild(pokerb);
-				
-				//_tool.SetControlMc(pokerb);
-				//add(_tool);				
-				Tweener.addTween(mipoker.container, { alpha:1, time:1, onCompleteParams:[pokerf,pokerid,type.Value],onComplete:this.poker_mi_ani } );
-				
-				return;
-			}			
+			
+			if ( need_mi_poker()) return;
+			
 			
 			var anipoker:MovieClip = GetSingleItem(type.Value, mypoker.length - 1);
 			anipoker.visible = true;
@@ -186,8 +158,46 @@ package View.ViewComponent
 			anipoker["_poker"].gotoAndStop(pokerid);			
 			anipoker.gotoAndPlay(2);
 			_regular.Call(anipoker, { onComplete:this.show_point_prob, onCompleteParams:[type.Value] }, 1, 0, 1);
-			dispatcher(new StringObject("sound_poker_turn","sound" ) );
-			//Tweener.addTween(anipoker["_poker"], { rotationZ:24.5, time:0.3,onCompleteParams:[anipoker,anipoker["_poker"],0,mypoker.length,type.Value],onComplete:this.pullback} );
+			dispatcher(new StringObject("sound_poker_turn","sound" ) );			
+		}
+		
+		public function need_mi_poker():Boolean
+		{
+			return false;
+			
+			Get("mipoker").CleanList();		
+			Get("mipoker").Create_by_list(1, [ResName.Mipoker_zone], 0 , 0, 1, 130, 0, "Bet_");
+			Get("mipoker").container.alpha = 0;
+				
+				
+			var mipoker:MultiObject = Get("mipoker");
+			if ( type.Value == modelName.POKER_1)
+			{
+				mipoker.container.x = 500;
+				mipoker.container.y = 680;
+			}
+				
+			var mc:MovieClip = mipoker.ItemList[0];
+				
+			var pokerf:MovieClip = utilFun.GetClassByString(ResName.Poker);				
+			var pokerb:MovieClip = utilFun.GetClassByString(ResName.poker_back);				
+			var pokerm:MovieClip = utilFun.GetClassByString(ResName.pokermask);
+			pokerb.x  = 39;
+			pokerb.y  = 28;
+			pokerf.x = pokerb.x;
+			pokerf.y  = pokerb.y;
+			pokerm.x = 136.35;
+			pokerm.y = 185.8;
+			pokerf.gotoAndStop(pokerid);
+			pokerf.visible = false;
+			pokerf.addChild(pokerm);
+			mc.addChild(pokerf);
+			mc.addChild(pokerb);
+				
+			//_tool.SetControlMc(pokerb);
+			//add(_tool);				
+			Tweener.addTween(mipoker.container, { alpha:1, time:1, onCompleteParams:[pokerf, pokerid, type.Value], onComplete:this.poker_mi_ani } );
+			
 		}
 		
 		public function poker_mi_ani(pokerf:MovieClip,pokerid:int,pokertype:int):void

@@ -57,6 +57,12 @@ package View.ViewComponent
 			
 		}
 		
+		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		public function pre_open():void
+		{
+			hide();
+		}
+		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
 		{

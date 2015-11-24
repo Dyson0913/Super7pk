@@ -52,7 +52,9 @@ package View.ViewComponent
 			
 			put_to_lsit(bet);			
 		}
-			
+		
+		
+		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function show():void
 		{			

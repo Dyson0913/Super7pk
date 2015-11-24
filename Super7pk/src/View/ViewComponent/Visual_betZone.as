@@ -71,6 +71,12 @@ package View.ViewComponent
 			setFrame(bet_tableitem, 1);
 		}
 		
+		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		public function pre_open():void
+		{
+			hide();
+		}
+		
 		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
 		public function stop_bet():void
 		{

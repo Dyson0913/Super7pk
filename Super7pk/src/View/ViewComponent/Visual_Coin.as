@@ -65,12 +65,17 @@ package View.ViewComponent
 			mc["_coin"].gotoAndStop(idx+1);
 		}
 		
+		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		public function pre_open():void
+		{
+			_regular.Fadeout(_coin.container, 0, 1);
+		}
+		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
 		{
 			_regular.FadeIn(_coin.container, 0, 1, null);
-		}
-		
+		}		
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
 		public function stop_bet():void

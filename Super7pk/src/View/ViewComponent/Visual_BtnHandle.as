@@ -99,11 +99,16 @@ package View.ViewComponent
 			return false;
 		}
 		
+		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		public function pre_open():void
+		{
+			hide();
+		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "display")]
-		public function display():void
+		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
+		public function start_bet():void
 		{			
-			utilFun.Log("_betCommand.need_rebet() ="+_betCommand.need_rebet());
+			Log("_betCommand.need_rebet() ="+_betCommand.need_rebet());
 			if ( !_betCommand.need_rebet() )
 			{
 				can_not_rebet()				
@@ -114,6 +119,30 @@ package View.ViewComponent
 			}		
 			
 		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
+		public function stop_bet():void
+		{
+			hide();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		public function open_card():void
+		{
+			hide();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
+		public function settle():void
+		{
+			hide();
+		}
+		
+		public function hide():void
+		{
+			var betzone:MultiObject = Get("mybtn_group");
+			betzone.container.visible = false;	
+		}		
 		
 		public function can_rebet():void
 		{
@@ -139,12 +168,6 @@ package View.ViewComponent
 		}
 		
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "hide")]
-		public function hide():void
-		{
-			var betzone:MultiObject = Get("mybtn_group");
-			betzone.container.visible = false;		
-		}
 		
 	}
 

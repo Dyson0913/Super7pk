@@ -40,7 +40,14 @@ package View.ViewComponent
 			put_to_lsit(history_bg);	
 			put_to_lsit(history_symble);			
 		}
-	
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		public function pre_open():void
+		{
+			Get(historybg).container.visible = true;
+			update_history();
+		}
+		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
 		{			
@@ -61,8 +68,19 @@ package View.ViewComponent
 			Get(historysymble).FlushObject();			
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "hide")]
-		public function opencard_parse():void
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		public function open_card():void
+		{
+			hide();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
+		public function settle():void
+		{
+			hide();
+		}
+		
+		public function hide():void
 		{
 			Get(historybg).container.visible = false;
 		}

@@ -27,6 +27,7 @@ package Command
 		public function state_update():void
 		{
 			var state:int = _model.getValue(modelName.GAMES_STATE);			
+			if ( state  == gameState.PRE_OPEN) dispatcher(new ModelEvent("pre_open"));
 			if ( state  == gameState.NEW_ROUND)
 			{				
 				dispatcher(new ModelEvent("clearn"));

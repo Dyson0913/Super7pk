@@ -61,6 +61,16 @@ package View.ViewComponent
 			put_to_lsit(table_hint);
 		}
 		
+		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		public function pre_open():void
+		{
+			GetSingleItem("theme").gotoAndStop(1);
+			GetSingleItem("Zonetitle", 0).gotoAndStop(1);
+			GetSingleItem("Zonetitle", 1).gotoAndStop(2);
+			
+			Get("table_hint").container.visible = false;
+		}
+		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
 		{			
@@ -78,7 +88,8 @@ package View.ViewComponent
 		public function opencard_parse():void
 		{
 			//TODO why to working
-			GetSingleItem("theme").gotoAndStop(2);
+			//TODO open five or last 2
+			//GetSingleItem("theme").gotoAndStop(2);
 			GetSingleItem("theme")["Logo"].gotoAndPlay(2);
 			
 			//開牌中

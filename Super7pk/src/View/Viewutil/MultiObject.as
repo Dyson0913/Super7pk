@@ -299,8 +299,7 @@ package View.Viewutil
 		public function Clear_ItemChildren():void
 		{
 			//removeListen();
-			var cnt:int = ItemList.length;
-			utilFun.Log("cnt[i] = "+cnt);
+			var cnt:int = ItemList.length;			
 			for ( var i:int = 0; i < cnt; i++)
 			{
 			
@@ -318,6 +317,11 @@ package View.Viewutil
 		{
 			var s:String = utilFun.Regex_CutPatten(name, new RegExp(_ItemName, "i"));
 			return parseInt(s);
+		}
+		
+		public function order_switch(target:int ,to:int):void
+		{			
+			_Container.swapChildrenAt(target, to);
 		}
 		
 		private function Listen():void
