@@ -17,10 +17,6 @@ package View.ViewComponent
 	 */
 	public class Visual_betZone  extends VisualHandler
 	{	
-		
-		[Inject]
-		public var _betCommand:BetCommand;	
-		
 		public const bet_tableitem:String = "bet_table_item";
 		
 		public function Visual_betZone() 
@@ -45,7 +41,7 @@ package View.ViewComponent
 			pz.container.x = tableitem.container.x;
 			pz.container.y = tableitem.container.y;
 			pz.Create_(avaliblezone.length, "betzone");		
-			//setFrame("betzone", 2);
+			
 			
 			
 			put_to_lsit(tableitem);
@@ -54,13 +50,13 @@ package View.ViewComponent
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
-		{			
+		{	
+			setFrame(bet_tableitem, 2);
 			
-			
-			var betzone:MultiObject = Get("betzone");
-			betzone.mousedown = _betCommand.empty_reaction;			
-			betzone.rollout = _betCommand.empty_reaction;
-			betzone.rollover = _betCommand.empty_reaction;
+			var betzone:MultiObject = Get("betzone");			
+			betzone.mousedown = empty_reaction;	
+			betzone.rollout = empty_reaction;
+			betzone.rollover = empty_reaction;
 			
 			
 		}

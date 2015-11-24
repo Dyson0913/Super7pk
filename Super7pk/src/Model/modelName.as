@@ -35,9 +35,8 @@ package Model
 		public static const COIN_STACK_XY:int = Num++;
 		
 		
-		public static const PLAYER_POKER:int = Num++;
-		public static const BANKER_POKER:int = Num++;
-		public static const RIVER_POKER:int = Num++;
+		public static const POKER_1:int = Num++;
+		public static const POKER_2:int = Num++;
 		
 		public static const BET_AMOUNT:int = Num++;
 		public static const SETTLE_AMOUNT:int = Num++;

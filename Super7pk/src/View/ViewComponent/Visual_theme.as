@@ -32,12 +32,15 @@ package View.ViewComponent
 		}
 		
 		public function init():void
-		{			
+		{
+			//----------------------------------------------------------------bet
 			//賠率提示
 			var theme:MultiObject = create("theme", [theme]);			
 			theme.container.x = 41.15;
 			theme.container.y =  92.8;
 			theme.Create_(1, "theme");
+			
+			put_to_lsit(theme);
 			
 			//Zonetitle
 			var Zonetitle:MultiObject = create("Zonetitle", [Zonetitle]);
@@ -47,9 +50,15 @@ package View.ViewComponent
 			Zonetitle.container.y = 67.35;
 			Zonetitle.Create_(2, "theme");
 			
-			put_to_lsit(theme);
-			put_to_lsit(Zonetitle);
+			put_to_lsit(Zonetitle);			
+			//----------------------------------------------------------------open_card			
+			var table_hint:MultiObject = create("table_hint", [ResName.emptymc]);						
+			table_hint.Create_(1, "table_hint");
+			table_hint.container.x = 200;
+			table_hint.container.y = 567;
+			table_hint.container.visible = false;
 			
+			put_to_lsit(table_hint);
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
@@ -58,6 +67,11 @@ package View.ViewComponent
 			GetSingleItem("theme").gotoAndStop(1);
 			GetSingleItem("Zonetitle", 0).gotoAndStop(1);
 			GetSingleItem("Zonetitle", 1).gotoAndStop(2);
+			
+			Get("table_hint").container.visible = false;
+			
+			//more and more
+			//  xxx. setting ....
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
@@ -71,12 +85,21 @@ package View.ViewComponent
 			GetSingleItem("Zonetitle", 0).gotoAndStop(3);
 			GetSingleItem("Zonetitle", 1).gotoAndStop(4);
 			
+			Get("table_hint").container.visible = true;
+			
+			//more and more
+			//  xxx. setting ....
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "round_result")]
 		public function settle_parse():void
 		{			
 			GetSingleItem("Zonetitle", 1).gotoAndStop(5);
+			
+			Get("table_hint").container.visible = false;
+			
+			//more and more
+			//  xxx. setting ....
 		}
 		
 	}

@@ -181,91 +181,45 @@ package View.ViewComponent
 			
 			changeBG(ResName.Bet_Scene);
 			
-			//_PowerUp.init();
-			_progressbar.init();
+			_theme.init();
+			_gameinfo.init();		
 			
-			//=============================================gameinfo			
-			_gameinfo.init();
-			
-			//=============================================paytable
-			fake_hisotry();
-			_paytable.init();
-			
-			//================================================betzone
-			
-			_coin_stack.init();
-			_coin.init();
-			_sencer.init();
-			
-			//=============================================Hintmsg
 			_hint.init();
+			_model.putValue(modelName.GAMES_STATE,gameState.END_BET);			
 			
-			//================================================timer
-			_model.putValue(modelName.REMAIN_TIME, 20);					
-			_timer.init();
+			_model.putValue(modelName.REMAIN_TIME, 20);
+			_timer.init();			
+			
+			fake_hisotry();
+			_HistoryRecoder.init();			
+			
+			_betzone.init();			
+			_coin_stack.init();			
+			_coin.init();
+			_sencer.init();			
+			
+			_poker.init();			
 			
 			_btn.init();
-			_HistoryRecoder.init();
-			
-			
 			_btn.debug();
-			dispatcher(new ModelEvent("display"));
 			
-			//dispatcher(new StringObject("WSBWTwoPair", "winstr_hint"));
+			dispatcher(new ModelEvent("start_bet"));
+			
 		}	
 		
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "1")]
 		public function opencardScript():void
 		{			
-			_model.putValue(modelName.PLAYER_POKER, []);				
-			_model.putValue(modelName.BANKER_POKER, []);		
-			_model.putValue(modelName.RIVER_POKER, []);		
+			_model.putValue(modelName.POKER_1, []);				
+			_model.putValue(modelName.POKER_2, []);			
 			_model.putValue("scirpt_pai", ["1s","2d","3s","5c","6h","9d"]);		
 			
-			changeBG(ResName.Bet_Scene);
-			
-			//=============================================gameinfo			
-			
-			_theme.init();
-			_gameinfo.init();		
-			
-			
-			
-			_hint.init();
-			_model.putValue(modelName.GAMES_STATE,gameState.END_BET);
-			_hint.start_bet();			
-			
-			_model.putValue(modelName.REMAIN_TIME, 20);					
-			_timer.init();
-			_timer.start_bet();
-			
-			fake_hisotry();
-			_HistoryRecoder.init();
-			_HistoryRecoder.start_bet();
-			
-			_betzone.init();
-			_betzone.start_bet();
-			
-			_theme.debug();
-			return;
-			//=============================================paytable
-			//fake_hisotry();
-			_paytable.init();
-			
-			
-			
-			
-			//_paytable.opencard_parse();
-			_settle_panel.init();
-			
-			_ProbData.init();
-
-			//=============================================Hintmsg
 		
-		
-			//================================================poker
-			_poker.init();
-			_poker.debug();
+			//_progressbar.init();
+			//_paytable.init();			
+			//_settle_panel.init();
+			
+			_ProbData.init();			
 		
 			//================================================settle info
 			//_settle.init();
@@ -277,7 +231,7 @@ package View.ViewComponent
 			
 			//================================================ simu deal
 			var testpoker:Array = ["Player", "Banker", "Player"];// , "Banker", "River", "River"];
-			_regular.Call(Get(modelName.PLAYER_POKER).container, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 25, 0, 6, "linear");						
+			_regular.Call(Get(modelName.POKER_1).container, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 25, 0, 6, "linear");						
 		}
 		
 		public function fackeDeal(type:Array):void
@@ -293,25 +247,18 @@ package View.ViewComponent
 			var mypoker:Array = [];
 			if ( card_type == "Player")
 			{										
-				mypoker = _model.getValue(modelName.PLAYER_POKER);										
+				mypoker = _model.getValue(modelName.POKER_1);										
 				mypoker.push(card);
-				_model.putValue(modelName.PLAYER_POKER, mypoker);										
-				dispatcher(new Intobject(modelName.PLAYER_POKER, "poker_mi"));				
+				_model.putValue(modelName.POKER_1, mypoker);										
+				dispatcher(new Intobject(modelName.POKER_1, "poker_mi"));				
 			}
 			else if ( card_type == "Banker")
 			{							
-				mypoker = _model.getValue(modelName.BANKER_POKER);										
+				mypoker = _model.getValue(modelName.POKER_2);										
 				mypoker.push( card);										
-				_model.putValue(modelName.BANKER_POKER, mypoker);									
-				dispatcher(new Intobject(modelName.BANKER_POKER, "poker_mi"));
-			}					
-			else if ( card_type == "River")
-			{							
-				mypoker = _model.getValue(modelName.RIVER_POKER);										
-				mypoker.push( card);										
-				_model.putValue(modelName.RIVER_POKER, mypoker);										
-				dispatcher(new Intobject(modelName.RIVER_POKER, "poker_mi"));
-			}					
+				_model.putValue(modelName.POKER_2, mypoker);									
+				dispatcher(new Intobject(modelName.POKER_2, "poker_mi"));
+			}		
 		}
 		
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "2")]
@@ -320,8 +267,8 @@ package View.ViewComponent
 			_hint.stop_bet();
 			return;
 			
-			_model.putValue(modelName.PLAYER_POKER, ["9d","3d"]);				
-			_model.putValue(modelName.BANKER_POKER, ["2d","9s"]);		
+			_model.putValue(modelName.POKER_1, ["9d","3d"]);				
+			_model.putValue(modelName.POKER_2, ["2d","9s"]);		
 			_model.putValue(modelName.RIVER_POKER, []);					
 			
 			
@@ -351,8 +298,8 @@ package View.ViewComponent
 			//dispatcher(new ModelEvent("display"));
 			//================================================settle info
 			_settle.init();			
-			dispatcher(new Intobject(modelName.PLAYER_POKER, "show_judge"));
-			dispatcher(new Intobject(modelName.BANKER_POKER, "show_judge"));			
+			dispatcher(new Intobject(modelName.POKER_1, "show_judge"));
+			dispatcher(new Intobject(modelName.POKER_2, "show_judge"));			
 			//摸擬押注
 			//_betzone.init();			
 			//_coin_stack.init();

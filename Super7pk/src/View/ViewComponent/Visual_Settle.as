@@ -78,8 +78,8 @@ package View.ViewComponent
 			var winst:String = "";			
 			var hintJp:int = -1;
 			
-			var playerPoint:int = pokerUtil.ca_point(_model.getValue(modelName.PLAYER_POKER));
-			var bankerPoint:int = pokerUtil.ca_point(_model.getValue(modelName.BANKER_POKER));
+			var playerPoint:int = pokerUtil.ca_point(_model.getValue(modelName.POKER_1));
+			var bankerPoint:int = pokerUtil.ca_point(_model.getValue(modelName.POKER_2));
 			var clean:Array = [];
 			for ( var i:int = 0; i < num; i++)
 			{
@@ -191,8 +191,8 @@ package View.ViewComponent
 		[MessageHandler(type = "Model.valueObject.Intobject", selector = "show_who_win")]
 		public function show_who_win():void
 		{
-			var ppoker:Array =   _model.getValue(modelName.PLAYER_POKER);
-			var bpoker:Array =   _model.getValue(modelName.BANKER_POKER);
+			var ppoker:Array =   _model.getValue(modelName.POKER_1);
+			var bpoker:Array =   _model.getValue(modelName.POKER_2);
 			
 			var ppoint:int = pokerUtil.ca_point(ppoker);
 			var bpoint:int = pokerUtil.ca_point(bpoker);			

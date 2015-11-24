@@ -34,6 +34,9 @@ package View.ViewComponent
 		//coin seperate to N stack
 		private var _stack_num:int = 1;		
 		
+		public const Betcoin:String = "Bet_coin";
+		public const Wincoin:String = "Win_coin";
+		
 		public function Visual_Coin_stack() 
 		{
 			
@@ -44,30 +47,41 @@ package View.ViewComponent
 			var avaliblezone:Array = _model.getValue(modelName.AVALIBLE_ZONE);						
 			var coin_xy:Array = _model.getValue(modelName.COIN_STACK_XY);
 			var coinstack:MultiObject = create("coinstakeZone", [ResName.emptymc]);
-			coinstack.container.x = 580 ;
-			coinstack.container.y = 898 ;
+			coinstack.container.x = 3;
+			coinstack.container.y = 605;
 			coinstack.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
 			coinstack.Post_CustomizedData =  coin_xy;
 			coinstack.Create_(avaliblezone.length, "coinstakeZone");
 			
-			
-							
-			//
-			//_tool.SetControlMc(coinstack.ItemList[5]);
-			//_tool.SetControlMc(coinstack.container);
-			//_tool.y  = 200;
-			//add(_tool);		
+			put_to_lsit(coinstack);
 			
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "display")]
-		public function display():void
+		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
+		public function start_bet():void
 		{
 			Get("coinstakeZone").container.visible = true;
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "hide")]
-		public function timer_hide():void
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
+		public function stop_bet():void
+		{
+			hide();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		public function open_card():void
+		{
+			hide();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
+		public function settle():void
+		{
+			hide();
+		}
+		
+		public function hide():void
 		{
 			Get("coinstakeZone").container.visible = false;
 		}
@@ -142,7 +156,7 @@ package View.ViewComponent
 			secoin.CustomizedFun = coinput;
 			secoin.CustomizedData = Allcoin;
 			secoin.setContainer(contain);
-			secoin.Create_by_list( Allcoin.length-1, [ResName.Betcoin] , 0 +shiftx+ (cointype * shX) , 0+shifty +shY, 1, 0, coinshY, "Bet_1");			
+			secoin.Create_by_list( Allcoin.length-1, [Betcoin] , 0 +shiftx+ (cointype * shX) , 0+shifty +shY, 1, 0, coinshY, "Bet_1");			
 		}
 		
 		public function coinput(mc:MovieClip, idx:int, betlist_with_type_in_first:Array):void
@@ -177,7 +191,7 @@ package View.ViewComponent
 			secoin.container.x = path[0];
 			secoin.container.y = path[1];
 			contain.addChild(secoin.container);
-			secoin.Create_by_list( Allcoin.length - 1, [ResName.Wincoin] , 0  , 0, 1, 0, -5, "Bet_"+bettype);			
+			secoin.Create_by_list( Allcoin.length - 1, [Wincoin] , 0  , 0, 1, 0, -5, "Bet_"+bettype);			
 			
 			return secoin;
 		}	
@@ -193,7 +207,7 @@ package View.ViewComponent
 			secoin.container.x = path[0];
 			secoin.container.y = path[1];
 			contain.addChild(secoin.container);
-			secoin.Create_by_list( 1, [ResName.Wincoin] , 0  , 0, 1, 0, -5, "Bet_");			
+			secoin.Create_by_list( 1, [Wincoin] , 0  , 0, 1, 0, -5, "Bet_");			
 			
 			return secoin;
 		}	

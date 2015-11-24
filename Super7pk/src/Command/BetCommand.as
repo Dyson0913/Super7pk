@@ -73,7 +73,7 @@ package Command
 			
 			var avaliblezone:Array = [];
 			var avaliblezone_s:Array = [];
-			for ( var i:int = 0; i < 12; i++)			
+			for ( i = 0; i < 12; i++)			
 			{
 				avaliblezone.push ( "zone_" + i);
 				avaliblezone_s.push ( "zone_" + i + "_sence");				
@@ -85,7 +85,9 @@ package Command
 			_model.putValue(modelName.AVALIBLE_ZONE_IDX, betzone);
 			
 						
-			_model.putValue(modelName.COIN_STACK_XY,   [ [30, 0], [670, -10],  [350, 23], [970, -20], [-279, -12], [340, -182]]);
+			_model.putValue(modelName.COIN_STACK_XY,   [ [1782, 292], [1472, 292],  [1168, 292], [856, 292], [548, 292], [238, 284],
+																									  [1734, 100], [1446, 100],  [1152,100], [864, 100], [568, 100], [276, 100]			
+			]);
 			
 			var poermapping:DI = new DI();	
 			poermapping.putValue("WSBWOnePairBig", -2);			

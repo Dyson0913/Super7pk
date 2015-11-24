@@ -31,6 +31,8 @@ package View.ViewComponent
 		
 		private var _coin:MultiObject;
 		
+		public const Betcoin:String = "Bet_coin";
+		
 		public function Visual_Coin() 
 		{
 			
@@ -40,23 +42,21 @@ package View.ViewComponent
 		{
 			var avaliblezone:Array = _model.getValue(modelName.AVALIBLE_ZONE);
 			
-			_coin = prepare("CoinOb", new MultiObject(), GetSingleItem("_view").parent.parent);
+			_coin = create(Betcoin, [Betcoin]);
 			_coin.container.x = 1080;
 			_coin.container.y = 1000;
 			_coin.MouseFrame = utilFun.Frametype(MouseBehavior.Customized,[1,2,2,0]);
-			_coin.CustomizedFun = ocin_setup;			
-			_coin.Create_by_list(5,  [ResName.Betcoin], 0 , 0, 5, 85, 0, "Coin_");
+			_coin.CustomizedFun = ocin_setup;
+			_coin.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
+			_coin.Post_CustomizedData = [5, 85, 0];
+			_coin.Create_(5, Betcoin);
 			_coin.rollout = excusive_rollout;
 			_coin.rollover = excusive_select_action;
 			_coin.mousedown = betSelect;
 			_coin.ItemList[0].y -= 20;
 			_coin.ItemList[0].gotoAndStop(2);
 			
-			//_tool.SetControlMc(coinstack.ItemList[7]);
-			//_tool.SetControlMc(_coin.container);
-			//_tool.y = 200;
-			//add(_tool);	
-			
+			put_to_lsit(_coin);
 			
 		}
 		
@@ -65,17 +65,29 @@ package View.ViewComponent
 			mc["_coin"].gotoAndStop(idx+1);
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "display")]
-		public function display_coin():void
-		{			
-			_regular.FadeIn(_coin.container, 0, 1, null);			
+		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
+		public function start_bet():void
+		{
+			_regular.FadeIn(_coin.container, 0, 1, null);
 		}
 		
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "hide")]
-		public function hide_coin():void
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
+		public function stop_bet():void
 		{			
 			_regular.Fadeout(_coin.container, 0, 1);			
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		public function open_card():void
+		{			
+			_regular.Fadeout(_coin.container, 0, 1);
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
+		public function settle():void
+		{			
+			_regular.Fadeout(_coin.container, 0, 1);
 		}
 		
 		public function excusive_rollout(e:Event, idx:int):Boolean

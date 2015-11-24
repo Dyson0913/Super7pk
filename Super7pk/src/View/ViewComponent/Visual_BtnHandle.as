@@ -23,6 +23,10 @@ package View.ViewComponent
 		
 		private var _rule_table:MultiObject ;
 		
+		public const paytable_btn:String = "btn_paytable";
+		public const rebet_btn:String = "btn_rebet";
+		public const ruletable:String = "rule_table";
+		
 		public function Visual_BtnHandle() 
 		{
 			
@@ -30,7 +34,7 @@ package View.ViewComponent
 		
 		public function init():void
 		{
-			var btnlist:Array = [ResName.paytable_btn];// , ResName.rebet_btn];// , ResName.betcancel_btn];
+			var btnlist:Array = [paytable_btn];
 			//patable說明
 			var btn_group:MultiObject = create("btn_group", btnlist);
 			btn_group.MouseFrame = utilFun.Frametype(MouseBehavior.Customized,[1,2,3,1]);
@@ -39,31 +43,31 @@ package View.ViewComponent
 			btn_group.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
 			btn_group.Post_CustomizedData = [[0, 0], [1580, -10], [1780, -10]];
 			btn_group.Create_(btnlist.length, "btn_group");
-			btn_group.rollout = test_reaction;
-			btn_group.rollover = test_reaction;
+			btn_group.rollout = empty_reaction;
+			btn_group.rollover = empty_reaction;
 			btn_group.mousedown = table_true;
-			btn_group.mouseup = test_reaction;
+			btn_group.mouseup = empty_reaction;
 			
 			//rebet
-			var mylist:Array = [ ResName.rebet_btn];// , ResName.betcancel_btn];
+			var mylist:Array = [ rebet_btn];
 			var mybtn_group:MultiObject = create("mybtn_group", mylist);
 			mybtn_group.MouseFrame = utilFun.Frametype(MouseBehavior.Customized,[1,2,3,1]);
 			mybtn_group.container.x = 1710;
 			mybtn_group.container.y = 950;
 			//mybtn_group.CustomizedFun = scal;			
 			mybtn_group.Create_(mylist.length, "mybtn_group");
-			mybtn_group.rollout = test_reaction;
-			mybtn_group.rollover = test_reaction;
+			mybtn_group.rollout = empty_reaction;
+			mybtn_group.rollover = empty_reaction;
 			mybtn_group.mousedown = rebet_fun;
-			mybtn_group.mouseup = test_reaction;
+			mybtn_group.mouseup = empty_reaction;
 			
 			
-			_rule_table  = create("rule_table", [ResName.ruletable]);
+			_rule_table  = create("rule_table", [ruletable]);
 			_rule_table.MouseFrame = utilFun.Frametype(MouseBehavior.Customized, [0, 0, 2, 1]);
 			_rule_table.mousedown = table_true;
-			_rule_table.mouseup = test_reaction;
+			_rule_table.mouseup = empty_reaction;
 			_rule_table.container.x = -10;
-			_rule_table.container.y = 50;			
+			_rule_table.container.y = 50;
 			_rule_table.Create_(1, "rule_table");
 			_rule_table.container.visible = false;
 			
@@ -75,11 +79,6 @@ package View.ViewComponent
 			//utilFun.scaleXY(mc, 0.68, 0.68);
 		//}
 		
-		public function test_reaction(e:Event, idx:int):Boolean
-		{
-			return true;
-		}
-				
 		public function table_true(e:Event, idx:int):Boolean
 		{
 			_rule_table.container.visible = !_rule_table.container.visible;				

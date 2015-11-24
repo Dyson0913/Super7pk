@@ -112,9 +112,8 @@ package ConnectModule.websocket
 						}
 						dispatcher(new ValueObject(  _opration.getMappingValue("state_mapping", result.game_state) , modelName.GAMES_STATE) );	
 						
-						dispatcher( new ValueObject(result.cards_info["player_card_list"], modelName.PLAYER_POKER) );
-						dispatcher( new ValueObject(result.cards_info["banker_card_list"], modelName.BANKER_POKER) );
-						dispatcher( new ValueObject(result.cards_info["river_card_list"], modelName.RIVER_POKER) );
+						dispatcher( new ValueObject(result.cards_info["player_card_list"], modelName.POKER_1) );
+						dispatcher( new ValueObject(result.cards_info["banker_card_list"], modelName.POKER_2) );						
 						
 						dispatcher(new ValueObject(  result.game_round, "game_round") );
 						dispatcher(new ValueObject(  result.game_id, "game_id") );
@@ -122,9 +121,9 @@ package ConnectModule.websocket
 						dispatcher(new Intobject(modelName.Bet, ViewCommand.SWITCH) );								
 						
 						dispatcher(new ModelEvent("update_state"));
-						dispatcher(new Intobject(modelName.PLAYER_POKER, "poker_No_mi"));
-						dispatcher(new Intobject(modelName.BANKER_POKER, "poker_No_mi"));
-						dispatcher(new Intobject(modelName.RIVER_POKER, "poker_No_mi"));						
+						dispatcher(new Intobject(modelName.POKER_1, "poker_No_mi"));
+						dispatcher(new Intobject(modelName.POKER_2, "poker_No_mi"));
+						
 					}
 					break;
 					
@@ -135,26 +134,19 @@ package ConnectModule.websocket
 						var mypoker:Array =[];
 						if ( card_type == "Player")
 						{										
-							mypoker = _model.getValue(modelName.PLAYER_POKER);										
+							mypoker = _model.getValue(modelName.POKER_1);										
 							mypoker.push(card[0]);
-							_model.putValue(modelName.PLAYER_POKER, mypoker);										
-							dispatcher(new Intobject(modelName.PLAYER_POKER, "poker_mi"));
+							_model.putValue(modelName.POKER_1, mypoker);										
+							dispatcher(new Intobject(modelName.POKER_1, "poker_mi"));
 							
 						}
 						else if ( card_type == "Banker")
 						{							
-							mypoker = _model.getValue(modelName.BANKER_POKER);										
+							mypoker = _model.getValue(modelName.POKER_2);										
 							mypoker.push( card[0]);										
-							_model.putValue(modelName.BANKER_POKER, mypoker);									
-							dispatcher(new Intobject(modelName.BANKER_POKER, "poker_mi"));
+							_model.putValue(modelName.POKER_2, mypoker);					
+							dispatcher(new Intobject(modelName.POKER_2, "poker_mi"));
 						}					
-						else if ( card_type == "River")
-						{							
-							mypoker = _model.getValue(modelName.RIVER_POKER);										
-							mypoker.push( card[0]);										
-							_model.putValue(modelName.RIVER_POKER, mypoker);										
-							dispatcher(new Intobject(modelName.RIVER_POKER, "poker_mi"));
-						}
 					}
 					break;
 					

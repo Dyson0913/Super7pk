@@ -17,8 +17,12 @@ package View.ViewComponent
 	 * @author ...
 	 */
 	public class Visual_poker  extends VisualHandler
-	{
-		private var pokerpath:Array = [];
+	{		
+		public const Poker_1:String = "Poker_1";
+		public const Poker_2:String = "Poker_2";
+		
+		//res
+		public const just_turnpoker:String = "just_turn_poker";
 		
 		public function Visual_poker() 
 		{
@@ -27,36 +31,26 @@ package View.ViewComponent
 		
 		public function init():void
 		{			
-			var table_hint:MultiObject = create("table_hint", [ResName.open_tableitem]);						
-			table_hint.Create_(1, "table_hint");
-			table_hint.container.x = 200;
-			table_hint.container.y = 567;	
-			table_hint.container.visible = false;
-			
-			var pokerkind:Array = [ResName.just_turnpoker];
-			var playerCon:MultiObject = create(modelName.PLAYER_POKER, pokerkind);
-			playerCon.Post_CustomizedData = [2, 204, 0];
-			playerCon.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;			
-			playerCon.Create_(2, "playerpoker");
-			playerCon.container.x = 259;
-			playerCon.container.y = 634;
+			var pokerkind:Array = [just_turnpoker];
+			var playerCon:MultiObject = create(Poker_1, pokerkind);			
+			playerCon.Post_CustomizedData = [[0.0],[199,0],[398,0],[597,0],[94,116],[294,116],[494,116]];
+			playerCon.Posi_CustzmiedFun = _regular.Posi_xy_Setting;			
+			playerCon.Create_(7, Poker_1);
+			playerCon.container.x = 52;
+			playerCon.container.y = 194;
+			utilFun.scaleXY(playerCon.container, 0.8, 0.8);
 			playerCon.container.alpha = 0;
+			put_to_lsit(playerCon);
 			
-			var bankerCon:MultiObject =  create(modelName.BANKER_POKER, pokerkind);
-			bankerCon.Post_CustomizedData = [2, 204, 0];
+			var bankerCon:MultiObject =  create(Poker_2, pokerkind);
+			bankerCon.Post_CustomizedData = [7, 204, 240];
 			bankerCon.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;			
-			bankerCon.Create_(2, "bankerpoker");
-			bankerCon.container.x = 1277;
-			bankerCon.container.y = 634;
-			bankerCon.container.alpha = 0;
+			bankerCon.Create_(7, Poker_2);
+			bankerCon.container.x = 270;
+			bankerCon.container.y = 614;
+			bankerCon.container.alpha = 0;			
 			
-			var riverCon:MultiObject = create(modelName.RIVER_POKER, pokerkind);
-			riverCon.Post_CustomizedData = [2, 204, 0];
-			riverCon.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;		
-			riverCon.Create_(2,"riverpoker");
-			riverCon.container.x = 774;
-			riverCon.container.y = 634;
-			riverCon.container.alpha = 0;
+			put_to_lsit(bankerCon);
 			
 			var mipoker:MultiObject =  create("mipoker", [ResName.Mipoker_zone]);	
 			mipoker.Create_(1, "mipoker");
@@ -64,75 +58,63 @@ package View.ViewComponent
 			mipoker.container.y = 570;
 			mipoker.container.alpha = 0;
 			
-			put_to_lsit(table_hint);
-			put_to_lsit(playerCon);
-			put_to_lsit(bankerCon);
-			put_to_lsit(riverCon);
 			put_to_lsit(mipoker);
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "clearn")]
 		public function Clean_poker():void
 		{			
-			var pokerkind:Array = [ResName.just_turnpoker];
+			var pokerkind:Array = [just_turnpoker];
 			
-			var playerCon:MultiObject = Get(modelName.PLAYER_POKER);
+			var playerCon:MultiObject = Get(Poker_1);
 			playerCon.CleanList();				
-			playerCon.Create_(2, "playerpoker");
+			playerCon.Create_(2, "Poker_1");
 			Tweener.pauseTweens(playerCon.container);
 			playerCon.container.alpha = 0;				
 			
-			var bankerCon:MultiObject = Get(modelName.BANKER_POKER);
+			var bankerCon:MultiObject = Get(Poker_2);
 			bankerCon.CleanList();			    
-			bankerCon.Create_(2, "bankerpoker");
+			bankerCon.Create_(2, "Poker_2");
 			Tweener.pauseTweens(bankerCon.container);
-			bankerCon.container.alpha = 0;
-			
-			var riverCon:MultiObject = Get(modelName.RIVER_POKER);
-			riverCon.CleanList();				
-			riverCon.Create_(2, "riverpoker");
-			Tweener.pauseTweens(riverCon.container);
-			riverCon.container.alpha = 0;
+			bankerCon.container.alpha = 0;		
 			
 			Get("mipoker").CleanList();		
 			Get("mipoker").Create_by_list(1, [ResName.Mipoker_zone], 0 , 0, 1, 130, 0, "Bet_");			
 			Get("mipoker").container.alpha = 0;
 			
-			_model.putValue(modelName.PLAYER_POKER, [] );
-			_model.putValue(modelName.BANKER_POKER, [] );
-			_model.putValue(modelName.RIVER_POKER, []);
-			
-			Get("table_hint").container.visible = false;
-			
-			
+			_model.putValue(modelName.POKER_1, [] );
+			_model.putValue(modelName.POKER_2, [] );
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "hide")]
-		public function poker_display():void
+		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
+		public function start_bet():void
 		{			
-			var playerCon:MultiObject = Get(modelName.PLAYER_POKER);					
-			_regular.FadeIn(playerCon.container, 1, 1,null);
-			
-			var bankerCon:MultiObject = Get(modelName.BANKER_POKER);			
-			_regular.FadeIn(bankerCon.container, 1, 1,null);
-			
-			var riverCon:MultiObject = Get(modelName.RIVER_POKER);			
-			_regular.FadeIn(riverCon.container, 1, 1, null);
-			
-			Get("table_hint").container.visible = true;
-			//utilFun.Log("poker_display = "+ playpoker[0]);
-			//_regular.FadeIn_no_out(playpoker[0] , 0.5, 1, this.soun);
+			Get(Poker_1).container.alpha = 1;
+			Get(Poker_2).container.alpha = 0;
 		}
 		
-		//public function soun():void
-		//{
-			//utilFun.Log("soun = "+ playpoker.length);
-			//dispatcher(new StringObject("sound_coin", "sound" ) );
-			//if ( playpoker.length != 0)
-			//{				
-				//_regular.FadeIn_no_out(playpoker[0] , 0.1, 0, this.soun);
-			//}
-		//}
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
+		public function stop_bet():void
+		{
+			_regular.Fadeout(Get(Poker_1).container, 1, 1);			
+			_regular.FadeIn(Get(Poker_1).container, 1, 1, null);
+			
+		}	
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		public function open_card():void
+		{
+			//_regular.Fadeout(Get(Poker_1).container, 1, 1);			
+			//_regular.FadeIn(Get(Poker_1).container, 1, 1, null);
+			
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
+		public function settle():void
+		{
+			_regular.Fadeout(Get(Poker_1).container, 1, 1);			
+			//_regular.FadeIn(Get(Poker_1).container, 1, 1, null);
+		}
 		
 		
 		[MessageHandler(type = "Model.valueObject.Intobject", selector = "poker_No_mi")]
@@ -158,7 +140,7 @@ package View.ViewComponent
 			
 			var mypoker:Array =   _model.getValue(type.Value);
 			var pokerid:int = pokerUtil.pokerTrans(mypoker[mypoker.length - 1]);		
-			if ( mypoker.length == 2 && type.Value != modelName.RIVER_POKER )
+			if ( mypoker.length == 2  )
 			{	
 				
 				Get("mipoker").CleanList();		
@@ -167,21 +149,12 @@ package View.ViewComponent
 				
 				
 				var mipoker:MultiObject = Get("mipoker");
-				if ( type.Value == modelName.PLAYER_POKER)
+				if ( type.Value == modelName.POKER_1)
 				{
 					mipoker.container.x = 500;
 					mipoker.container.y = 680;
 				}
-				if ( type.Value == modelName.RIVER_POKER)
-				{
-					mipoker.container.x = 1020;
-					mipoker.container.y = 680;
-				}
-				if ( type.Value == modelName.BANKER_POKER)
-				{
-					mipoker.container.x = 1500;
-					mipoker.container.y = 680;
-				}
+						
 				
 				var mc:MovieClip = mipoker.ItemList[0];
 				
@@ -273,10 +246,10 @@ package View.ViewComponent
 		public function show_point_prob(type:int):void
 		{			
 			
-			dispatcher(new Intobject(type, "show_judge"));
+			//dispatcher(new Intobject(type, "show_judge"));
 			
-			prob_cal();
-			dispatcher(new Intobject(type, "caculate_prob"));
+			//prob_cal();
+			//dispatcher(new Intobject(type, "caculate_prob"));
 			
 			
 		}
@@ -287,8 +260,8 @@ package View.ViewComponent
 			var Mypoker:Array =   _model.getValue(type.Value);
 			
 			var zone:int = -1;
-			if ( modelName.PLAYER_POKER == type.Value)  zone = 0;
-			else if ( modelName.BANKER_POKER == type.Value) zone = 1;
+			if ( modelName.POKER_1 == type.Value)  zone = 0;
+			else if ( modelName.POKER_2 == type.Value) zone = 1;
 			if ( zone == -1 ) return;
 			
 			if ( Mypoker.length != 2) return;
@@ -334,8 +307,8 @@ package View.ViewComponent
 		[MessageHandler(type = "Model.valueObject.Intobject",selector="check_opencard_msg")]
 		public function early_check_result(type:Intobject):void
 		{			
-			var ppoker:Array =   _model.getValue(modelName.PLAYER_POKER);
-			var bpoker:Array =   _model.getValue(modelName.BANKER_POKER);			
+			var ppoker:Array =   _model.getValue(modelName.POKER_1);
+			var bpoker:Array =   _model.getValue(modelName.POKER_2);			
 			
 			if ( ppoker.length + bpoker.length != 4) return;
 			dispatcher(new ModelEvent("show_public_card_hint"));		
@@ -375,8 +348,8 @@ package View.ViewComponent
 			_model.putValue("percent_prob",arr);
 			return;
 			
-			var ppoker:Array =   _model.getValue(modelName.PLAYER_POKER);
-			var bpoker:Array =   _model.getValue(modelName.BANKER_POKER);
+			var ppoker:Array =   _model.getValue(modelName.POKER_1);
+			var bpoker:Array =   _model.getValue(modelName.POKER_2);
 			var rpoker:Array =   _model.getValue(modelName.RIVER_POKER);
 			
 			var totalPoker:Array = [];			
