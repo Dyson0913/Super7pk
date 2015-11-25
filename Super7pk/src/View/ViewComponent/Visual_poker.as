@@ -120,8 +120,8 @@ package View.ViewComponent
 		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
 		public function settle():void
 		{
-			_regular.Fadeout(Get(modelName.POKER_1).container, 1, 1);			
-			//_regular.FadeIn(Get(Poker_1).container, 1, 1, null);
+			Get(modelName.POKER_1).container.alpha = 0;		
+			Get(modelName.POKER_2).container.alpha = 1;
 		}
 		
 		

@@ -163,12 +163,6 @@ package Command
 			dispatcher( new WebSoketInternalMsg(WebSoketInternalMsg.BET));
 			
 			return true;
-		}		
-		
-		public function empty_reaction(e:Event, idx:int):Boolean
-		{
-			//utilFun.Log("emtpey reaction ="+e.currentTarget.name);
-			return true;
 		}	
 		
 		public function bet_local(e:Event,idx:int):Boolean
@@ -223,9 +217,6 @@ package Command
 			
 			var credit:int = _model.getValue(modelName.CREDIT);
 			_model.putValue("after_bet_credit", credit - total);
-			
-			
-		
 		}
 		
 		public function all_betzone_totoal():Number
@@ -287,7 +278,24 @@ package Command
 			}			
 			return arr;
 		}
-				
+		
+		public function bet_zone_amount():Array
+		{
+			var mylist:Array = [];
+			var zone:Array = _model.getValue(modelName.AVALIBLE_ZONE_IDX);
+			var maping:DI = _model.getValue("idx_to_result_idx");
+			var total:int = 0;
+			for ( var i:int = 0; i < zone.length; i++)
+			{				
+				var map:int = maping.getValue(zone[i]);
+				var amount:int = get_total_bet(zone[i]);				
+				mylist.splice(map, 0, amount);
+				total += amount;
+			}			
+			
+			mylist.push(total);
+			return mylist;
+		}
 		
 		public function check_jp():Number
 		{

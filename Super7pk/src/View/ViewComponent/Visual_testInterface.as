@@ -175,6 +175,7 @@ package View.ViewComponent
 			_coin_stack.init();			
 			_coin.init();
 			_sencer.init();			
+			_settle_panel.init();
 			
 			_poker.init();			
 			_paytable.init();
@@ -216,7 +217,7 @@ package View.ViewComponent
 			
 			//_progressbar.init();
 			
-			//_settle_panel.init();
+			_settle_panel.init();
 			_betzone.init();		
 			_coin_stack.init();		
 			_coin.init();
@@ -261,8 +262,8 @@ package View.ViewComponent
 			_paytable.init();
 			
 			//_progressbar.init();
-			//_settle_panel.init();
-			//_settle_panel.init();
+			_settle_panel.init();
+			
 			
 			_betzone.init();		
 			_coin_stack.init();		
@@ -336,7 +337,18 @@ package View.ViewComponent
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "3")]
 		public function pack_sim():void
 		{
-			_hint.openCard();
+			var mu:MultiObject = Get("pay_num");			
+			
+			var mylist:Array = [];
+			for (var i:int = 0; i < 12; i++)
+			{
+				mylist.push( utilFun.Random(10000) * 100000);
+			}
+			
+			mu.CustomizedFun = payodd;
+			mu.CustomizedData = mylist;
+			mu.Create_(12, "pay_num");
+			
 			//dispatcher(new Intobject(utilFun.Random(2), "power_up"));
 			//return;
 			
@@ -355,6 +367,29 @@ package View.ViewComponent
 			//power bar test
 			//_betCommand.bet_local(new MouseEvent(MouseEvent.MOUSE_DOWN, true, false), 0);
 			//dispatcher(new Intobject(utilFun.Random(2), "power_up"));		
+		}
+		
+		public function payodd(mc:MovieClip, idx:int, data:Array):void
+		{
+			var num:String = data[idx];
+			var arr:Array = utilFun.arrFormat(data[idx], num.length);
+			
+			var p_num:MultiObject = create_dynamic(mc.parent.name + "_" + idx, ["pay_num"], mc);
+			p_num.CustomizedFun = FrameSetting
+			p_num.CustomizedData = arr.reverse();
+			p_num.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
+			p_num.Post_CustomizedData = [num.length, -22, 0];		
+			p_num.Create_(num.length, mc.parent.name + "_" + idx);
+		}
+		
+		public function FrameSetting(mc:MovieClip, idx:int, data:Array):void
+		{
+			if ( data[idx] == 0) data[idx] = 10;
+			var value:int = data[idx];
+			value += 1;
+			data[idx] = value;			
+			
+			mc.gotoAndStop(data[idx]);
 		}
 		
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "4")]
@@ -379,7 +414,7 @@ package View.ViewComponent
 			
 			//_progressbar.init();
 			_paytable.init();			
-			//_settle_panel.init();
+			_settle_panel.init();
 			_betzone.init();		
 			_coin_stack.init();		
 			_coin.init();

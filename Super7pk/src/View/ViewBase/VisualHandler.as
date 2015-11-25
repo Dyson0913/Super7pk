@@ -159,6 +159,18 @@ package View.ViewBase
 			return utilFun.prepare(name,ob , _viewcom.currentViewDI , Stick_in_container);
 		}
 		
+		protected function create_dynamic(name:*,resNameArr:Array,Stick_in_container:DisplayObjectContainer ):*
+		{
+			var mu:MultiObject = new MultiObject();
+			mu.resList = resNameArr;
+			var sp:Sprite = new Sprite();
+			sp.name  = name;
+			mu.setContainer(sp);
+			Stick_in_container.addChild(sp);
+			
+			return mu;
+		}
+		
 		protected function play_sound(soundname:String):void
 		{			
 			_sound.playSound(new StringObject(soundname,"sound") );			

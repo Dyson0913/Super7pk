@@ -120,10 +120,10 @@ package View.ViewComponent
 			var betzone:MultiObject = Get("mybtn_group");
 			betzone.container.visible = true;
 			betzone.ItemList[0].gotoAndStop(1);
-			betzone.rollout = _betCommand.empty_reaction;
-			betzone.rollover = _betCommand.empty_reaction;
+			betzone.rollout = empty_reaction;
+			betzone.rollover = empty_reaction;
 			betzone.mousedown = rebet_fun;
-			betzone.mouseup = _betCommand.empty_reaction;
+			betzone.mouseup = empty_reaction;
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "can_not_rebet")]

@@ -1,5 +1,6 @@
 package View.ViewComponent 
 {
+	import flash.display.MovieClip;
 	import View.ViewBase.Visual_Text;
 	import View.ViewBase.VisualHandler;
 	import Model.valueObject.*;
@@ -23,6 +24,14 @@ package View.ViewComponent
 		[Inject]
 		public var _betCommand:BetCommand;
 		
+		private const settletable:String = "settle_table";
+		private const bet_symble:String = "bet_symble";
+		
+		//res
+		private const paytable:String = "paytable_main";		
+		private const settlenum:String = "settle_num";		
+		private const paytable_baridx:String = "paytable_bar_idx";;
+		
 		public function Visual_SettlePanel() 
 		{
 			
@@ -30,73 +39,38 @@ package View.ViewComponent
 		
 		public function init():void
 		{
-			var settletable:MultiObject = create("settletable",  [ResName.emptymc]);
-			settletable.Create_(1, "settletable");	
-			settletable.container.x = 1240;
-			settletable.container.y = 90;
-			settletable.container.visible = false;
+			var settle_table:MultiObject = create(settletable, [paytable]);			
+			settle_table.container.x = 1270;
+			settle_table.container.y =  101;
+			settle_table.Create_(1, settletable);
 			
-			var settletable_title:MultiObject = create("settletable_title",  [ResName.TextInfo], settletable.container);		
-			settletable_title.container.x = 70;
-			settletable_title.container.y = 40;
-			settletable_title.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
-			settletable_title.Post_CustomizedData = [[0,0],[150,0],[270,0]];
-			settletable_title.CustomizedFun = _text.textSetting;
-			settletable_title.CustomizedData = [{size:22}, "投注內容","押分","得分"];
-			settletable_title.Create_(3, "settletable_title");
-			GetSingleItem("settletable_title", 2).visible = false;
+			put_to_lsit(settle_table);
 			
-			var settletable_zone:MultiObject = create("settletable_zone", [ResName.TextInfo], settletable.container);		
-			settletable_zone.container.x = 70;
-			settletable_zone.container.y = 70;		
-			settletable_zone.CustomizedFun = _text.textSetting;
-			settletable_zone.CustomizedData = [ { size:22 }, "莊", "閒", "和", "莊對", "閒對", "特殊牌型", "合計"];
-			settletable_zone.Post_CustomizedData = [7, 30, 32];
-			settletable_zone.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			settletable_zone.Create_(7, "settletable_zone");
+			var bet_num:MultiObject = create(bet_symble, [ResName.emptymc]);			
+			bet_num.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
+			bet_num.Post_CustomizedData = [13, 0, 33.5];
+			bet_num.container.x = 1600;
+			bet_num.container.y =  108;
 			
-			var settletable_zone_bet:MultiObject = create("settletable_zone_bet", [ResName.TextInfo], settletable.container);		
-			settletable_zone_bet.container.x = -360;
-			settletable_zone_bet.container.y = settletable_zone.container.y;		
-			settletable_zone_bet.CustomizedFun = _text.textSetting;
-			settletable_zone_bet.CustomizedData = [ { size:18,align:_text.align_right,color:0xFF0000 }, "100", "100", "1000", "0", "200", "100000","0"];
-			settletable_zone_bet.Post_CustomizedData = [7, 30, 32];
-			settletable_zone_bet.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			settletable_zone_bet.Create_(7, "settletable_zone_bet");
+			put_to_lsit(bet_num);			
 			
 			
-			var settletable_zone_settle:MultiObject = create("settletable_zone_settle",  [ResName.TextInfo], settletable.container);		
-			settletable_zone_settle.container.x = -240;
-			settletable_zone_settle.container.y = settletable_zone.container.y;		
-			settletable_zone_settle.CustomizedFun = _text.colortextSetting;
-			settletable_zone_settle.CustomizedData = [ { size:18,align:_text.align_right }, "0", "0", "1000", "0", "0", "100000", "10000"];
-			settletable_zone_settle.Post_CustomizedData = [7, 30, 32];
-			settletable_zone_settle.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			settletable_zone_settle.Create_(7, "settletable_zone_settle");
-			settletable_zone_settle.container.visible = false;
+			//= clip or word
+			//Posi_CustzmiedFun  = _regular.Posi_xy_Setting;
+			//Post_CustomizedData = [0,0],[150,0],[270,0];
+			// CustomizedFun  = _text.textSetting;
+			// CustomizedData =  [{size:22}, "投注內容","押分","得分"]  			
 			
-			//var settletable_desh:MultiObject = create("settletable_desh", [ResName.TextInfo], settletable.container);		
-			//settletable_desh.container.x = 70;
-			//settletable_desh.container.y = 235;					
-			//settletable_desh.CustomizedFun = _text.textSetting;
-			//settletable_desh.CustomizedData = [{size:24},"______________________________"];
-			//settletable_desh.Create_(1, "settletable_desh");
+			// CustomizedFun  = _text.textSetting;
+			// CustomizedData =  [ { size:22 }, "莊", "閒", "和", "莊對", "閒對", "特殊牌型", "合計"];
+			//Post_CustomizedData Post_CustomizedData = [7, 30, 32];		
 			
-			//_model.putValue("result_str_list", []);
-			//var historystr_model:Array = _model.getValue("result_str_list");			
-			//var result_str_list:MultiObject = prepare("result_str_list", new MultiObject() , settletable.container);
-			//result_str_list.CustomizedFun =_text.textSetting;
-			//result_str_list.CustomizedData =[{size:20,align:_text.align_center},historystr_model.join("、")];	
-			//result_str_list.container.x = 287;
-			//result_str_list.container.y = 344;
-			//result_str_list.Create_by_list(1, [ResName.TextInfo], 0 , 0,1,0 , 0, "Bet_");		
+			//CustomizedData = [ { size:18,align:_text.align_right,color:0xFF0000 }, "100", "100", "1000", "0", "200", "100000","0"];
+			//settletable_zone_bet.Post_CustomizedData = [7, 30, 32];		
 			
-			put_to_lsit(settletable);
-			put_to_lsit(settletable_title);
-			put_to_lsit(settletable_zone);
-			put_to_lsit(settletable_zone_bet);
-			put_to_lsit(settletable_zone_settle);
-			//put_to_lsit(settletable_desh);
+			//CustomizedData = [ { size:18,align:_text.align_right }, "0", "0", "1000", "0", "0", "100000", "10000"];
+			//settletable_zone_settle.Post_CustomizedData = [7, 30, 32];
+			
 		}		
 		
 		public function sprite_idx_setting_player(mc:*, idx:int, data:Array):void
@@ -110,42 +84,84 @@ package View.ViewComponent
 		
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "display")]
-		public function display():void
-		{				
-			Get("settletable").container.visible = false;
-			GetSingleItem("settletable_title", 2).visible = false;
-			Get("settletable_zone_settle").container.visible = false;
+		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		public function pre_open():void
+		{
+			disappear();
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "hide")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
 		public function opencard_parse():void
 		{
-			Get("settletable").container.visible = true;			
-			GetSingleItem("settletable_title", 2).visible = false;
-			Get("settletable_zone_settle").container.visible = false;
+			appear();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
+		public function stop_bet():void
+		{
+			appear();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
+		public function settle():void
+		{
+			appear();
+		}
+		
+		public function disappear():void
+		{
+			setFrame(settletable, 1);
 			
-			var mylist:Array = [];// ["0", "0", "0", "0", "0", "0", "0", "0"];
-			var zone:Array = _model.getValue(modelName.AVALIBLE_ZONE_IDX);
-			var maping:DI = _model.getValue("idx_to_result_idx");
-			for ( var i:int = 0; i < zone.length; i++)
-			{				
-				var map:int = maping.getValue(zone[i]);				 
-				mylist.splice(map, 0,_betCommand.get_total_bet(zone[i]));
-			}			
+			Get(bet_symble).CleanList();
+		}
+		
+		public function appear():void
+		{
+			//TODO settle or not settle
+			setFrame(settletable, 3);
 			
-			mylist.push(_betCommand.all_betzone_totoal());		
-			var font:Array = [{size:24,align:_text.align_right,color:0xFF0000}];
-			font = font.concat(mylist);
+			//TODO better way ?
+			//var mylist:Array = _betCommand.bet_zone_amount();
+			var mylist:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100,30000];
+			Get(bet_symble).CustomizedFun = settleodd;
+			Get(bet_symble).CustomizedData = mylist;
+			Get(bet_symble).Create_(13, bet_symble);
+			
+			//TODO word type setting
+			//var font:Array = [{size:24,align:_text.align_right,color:0xFF0000}];
+			//font = font.concat(mylist);
 			//utilFun.Log("font = "+mylist);
-			Get("settletable_zone_bet").CustomizedData = font;
-			Get("settletable_zone_bet").Create_by_list(mylist.length, [ResName.TextInfo], 0 , 0, 1, 0, 30, "Bet_");	
+			//Get("settletable_zone_bet").CustomizedData = font;
+			//Get("settletable_zone_bet").Create_by_list(mylist.length, [ResName.TextInfo], 0 , 0, 1, 0, 30, "Bet_");	
+		}
+		
+		public function settleodd(mc:MovieClip, idx:int, data:Array):void
+		{
+			var num:String = data[idx];
+			var arr:Array = utilFun.arrFormat(data[idx], num.length);
+			//Log("pay odd = " + mc.parent.name);
+			
+			var p_num:MultiObject = create_dynamic(mc.parent.name + "_" + idx, [settlenum], mc);			
+			p_num.CustomizedFun = FrameSetting;
+			p_num.CustomizedData = arr.reverse();
+			p_num.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
+			p_num.Post_CustomizedData = [num.length, -22, 0];		
+			p_num.Create_(num.length, mc.parent.name + "_" + idx);
+		}
+		
+		public function FrameSetting(mc:MovieClip, idx:int, data:Array):void
+		{
+			if ( data[idx] == 0) data[idx] = 10;
+			var value:int = data[idx];
+			value += 1;
+			data[idx] = value;			
+			
+			mc.gotoAndStop(data[idx]);
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "show_settle_table")]
 		public function show_settle():void
-		{
-			
+		{			
 			utilFun.Log("show_settle");			
 			Get("settletable").container.visible = true;			
 			GetSingleItem("settletable_title", 2).visible = true;
