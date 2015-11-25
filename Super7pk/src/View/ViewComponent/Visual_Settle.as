@@ -63,8 +63,6 @@ package View.ViewComponent
 			var winst:String = "";			
 			var hintJp:int = -1;
 			
-			var playerPoint:int = pokerUtil.ca_point(_model.getValue(modelName.POKER_1));
-			var bankerPoint:int = pokerUtil.ca_point(_model.getValue(modelName.POKER_2));
 			var clean:Array = [];
 			for ( var i:int = 0; i < num; i++)
 			{
