@@ -33,13 +33,15 @@ package View.ViewComponent
 			var avaliblezone_s:Array = _model.getValue(modelName.AVALIBLE_ZONE_S);
 			
 			var playerzone_s:MultiObject = create("betzone_s", avaliblezone_s);
-			playerzone_s.MouseFrame = utilFun.Frametype(MouseBehavior.Customized,[1,1,2,1]);
+			playerzone_s.MouseFrame = utilFun.Frametype(MouseBehavior.Customized, [1, 1, 2, 1]);
+			playerzone_s.mousedown = null;
+			playerzone_s.mouseup = null;
+			playerzone_s.rollout = null;
+			playerzone_s.rollover = null;
 			playerzone_s.container.x = 3;
 			playerzone_s.container.y = 605;
 			playerzone_s.Create_(avaliblezone_s.length, "betzone_s");
-		}		
-		
-		
+		}
 		
 		public function bet_sencer(e:Event,idx:int):Boolean
 		{				
@@ -70,21 +72,6 @@ package View.ViewComponent
 			return true;
 		}
 		
-		public function hide():void
-		{
-			var betzone:MultiObject = Get("betzone_s");
-			betzone.mousedown = null;
-			betzone.mouseup = null;
-			betzone.rollout = null;
-			betzone.rollover = null;			
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
-		public function pre_open():void
-		{
-			hide();
-		}
-		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
 		{
@@ -93,24 +80,6 @@ package View.ViewComponent
 			betzone.mouseup = bet_sencer;
 			betzone.rollout = bet_sencer;
 			betzone.rollover = bet_sencer;
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
-		public function stop_bet():void
-		{
-			hide();
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function open_card():void
-		{
-			hide();
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
-		public function settle():void
-		{
-			hide();
 		}
 		
 	}

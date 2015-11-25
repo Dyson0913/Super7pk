@@ -29,6 +29,7 @@ package View.ViewComponent
 			history_bg.container.x = 1253;
 			history_bg.container.y =  175;
 			history_bg.Create_(1, historybg);
+			history_bg.container.visible = false;
 			
 			var history_symble:MultiObject = create(historysymble,  [historysymble] , history_bg.container);
 			history_symble.container.x = 8;
@@ -67,24 +68,6 @@ package View.ViewComponent
 			Get(historysymble).CustomizedFun = _regular.FrameSetting;
 			Get(historysymble).FlushObject();			
 		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function open_card():void
-		{
-			hide();
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
-		public function settle():void
-		{
-			hide();
-		}
-		
-		public function hide():void
-		{
-			Get(historybg).container.visible = false;
-		}
-		
 	}
 
 }

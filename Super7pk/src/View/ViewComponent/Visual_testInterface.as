@@ -244,39 +244,54 @@ package View.ViewComponent
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "2")]
 		public function settleScript():void
 		{						
-			_model.putValue(modelName.POKER_1, ["9d","3d"]);				
-			_model.putValue(modelName.POKER_2, ["2d","9s"]);			
-			
+			_model.putValue(modelName.POKER_1, ["1s", "2d", "3s", "5c", "6h","3d","6d"]);				
+			_model.putValue(modelName.POKER_2, ["1s", "2d", "3s", "5c", "6h","3d","6d"]);			
+						
 			changeBG(ResName.Bet_Scene);
 			
-			_settle_panel.init();
+			
+			_theme.init();
+			_gameinfo.init();
+			
+			_hint.init();			
+			_timer.init();
+			
+			fake_hisotry();
+			_HistoryRecoder.init();
+			_paytable.init();
+			
+			//_progressbar.init();
+			//_settle_panel.init();
+			//_settle_panel.init();
+			
+			_betzone.init();		
+			_coin_stack.init();		
+			_coin.init();
+			_sencer.init();		
+			
+			_poker.init();
+			
+			_btn.init();
+			_btn.debug();
+//			_ProbData.init();
 			
 			
-			
-			dispatcher(new ModelEvent("hide"));			
-			//dispatcher(new ModelEvent("display"));
-			//================================================settle info
-			_settle.init();			
-			dispatcher(new Intobject(modelName.POKER_1, "show_judge"));
-			dispatcher(new Intobject(modelName.POKER_2, "show_judge"));			
-			//摸擬押注
-			//_betzone.init();			
-			//_coin_stack.init();
-			_betCommand.bet_local(new MouseEvent(MouseEvent.MOUSE_DOWN, true, false), 0);
-			//_betCommand.bet_local(new MouseEvent(MouseEvent.MOUSE_DOWN, true, false), 1);
-			
+			_model.putValue(modelName.GAMES_STATE,gameState.END_ROUND);			
+			dispatcher(new ModelEvent("update_state"));
+			dispatcher(new Intobject(modelName.POKER_1, "poker_No_mi"));
+			dispatcher(new Intobject(modelName.POKER_2, "poker_No_mi"));
 			
 			_model.putValue("win_odd", 2) ;
 			
-			_Bigwin_Effect.init();
-			_Bigwin_Effect.debug();
+			//_Bigwin_Effect.init();
+			//_Bigwin_Effect.debug();
 			//
 			//順子			
-			var fakePacket:Object = {"result_list": [{"bet_attr": "BetAttrMain", "bet_amount": 100, "odds": 2, "win_state": "WSBWStraight", "real_win_amount": 100, "bet_type": "BetBWPlayer", "settle_amount": 200}, {"bet_attr": "BetAttrMain", "bet_amount": 100, "odds": 2, "win_state": "WSBWStraight", "real_win_amount": 100, "bet_type": "BetBWBanker", "settle_amount": 200}, {"bet_attr": "BetAttrSide", "bet_amount": 100, "odds": 9, "win_state": "WSWin", "real_win_amount": 800, "bet_type": "BetBWTiePoint", "settle_amount": 900}, {"bet_attr": "BetAttrSide", "bet_amount": 100, "odds": 5, "win_state": "WSBWStraight", "real_win_amount": 400, "bet_type": "BetBWSpecial", "settle_amount": 500}, {"bet_attr": "BetAttrSide", "bet_amount": 100, "odds": 0, "win_state": "WSLost", "real_win_amount": -100, "bet_type": "BetBWPlayerPair", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 100, "odds": 0, "win_state": "WSLost", "real_win_amount": -100, "bet_type": "BetBWBankerPair", "settle_amount": 0}, {"bet_attr": "BetAttrBonus", "bet_amount": 200, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetBWBonusTripple", "settle_amount": 0}, {"bet_attr": "BetAttrBonus", "bet_amount": 200, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetBWBonusTwoPair", "settle_amount": 0}], "game_state": "EndRoundState", "game_result_id": "351965", "timestamp": 1447818541.783871, "remain_time": 9, "game_type": "BigWin", "id": "4e53cdba8da711e589d3f23c9189e2a9", "game_id": "BigWin-1", "message_type": "MsgBPEndRound", "game_round": 36}
+			//var fakePacket:Object = {"result_list": [{"bet_attr": "BetAttrMain", "bet_amount": 100, "odds": 2, "win_state": "WSBWStraight", "real_win_amount": 100, "bet_type": "BetBWPlayer", "settle_amount": 200}, {"bet_attr": "BetAttrMain", "bet_amount": 100, "odds": 2, "win_state": "WSBWStraight", "real_win_amount": 100, "bet_type": "BetBWBanker", "settle_amount": 200}, {"bet_attr": "BetAttrSide", "bet_amount": 100, "odds": 9, "win_state": "WSWin", "real_win_amount": 800, "bet_type": "BetBWTiePoint", "settle_amount": 900}, {"bet_attr": "BetAttrSide", "bet_amount": 100, "odds": 5, "win_state": "WSBWStraight", "real_win_amount": 400, "bet_type": "BetBWSpecial", "settle_amount": 500}, {"bet_attr": "BetAttrSide", "bet_amount": 100, "odds": 0, "win_state": "WSLost", "real_win_amount": -100, "bet_type": "BetBWPlayerPair", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 100, "odds": 0, "win_state": "WSLost", "real_win_amount": -100, "bet_type": "BetBWBankerPair", "settle_amount": 0}, {"bet_attr": "BetAttrBonus", "bet_amount": 200, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetBWBonusTripple", "settle_amount": 0}, {"bet_attr": "BetAttrBonus", "bet_amount": 200, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetBWBonusTwoPair", "settle_amount": 0}], "game_state": "EndRoundState", "game_result_id": "351965", "timestamp": 1447818541.783871, "remain_time": 9, "game_type": "BigWin", "id": "4e53cdba8da711e589d3f23c9189e2a9", "game_id": "BigWin-1", "message_type": "MsgBPEndRound", "game_round": 36}
 			//full + 和
 			//var fakePacket:Object = {"result_list": [{"bet_type": "BetBWPlayer", "settle_amount": 0, "odds": 4, "win_state": "WSBWFullHouse", "bet_amount": 0}, {"bet_type": "BetBWBanker", "settle_amount": 0, "odds": 4, "win_state": "WSBWFullHouse", "bet_amount": 0}, {"bet_type": "BetBWTiePoint", "settle_amount": 0, "odds": 0, "win_state": "WSLost", "bet_amount": 0}, {"bet_type": "BetBWSpecial", "settle_amount": 0, "odds": 11, "win_state": "WSBWFullHouse", "bet_amount": 0}, {"bet_type": "BetBWPlayerPair", "settle_amount": 0, "odds": 0, "win_state": "WSLost", "bet_amount": 0}, {"bet_type": "BetBWBankerPair", "settle_amount": 0, "odds": 0, "win_state": "WSLost", "bet_amount": 0}], "game_state": "EndRoundState", "game_result_id": "302523", "timestamp": 1443767410.186916, "remain_time": 9, "game_type": "BigWin", "game_round": 131, "game_id": "BigWin-1", "message_type": "MsgBPEndRound", "id": "07bac7b668cf11e5a9aef23c9189e2a9"}
 			
-			_MsgModel.push(fakePacket);	
+			//_MsgModel.push(fakePacket);	
 			
 			
 			
@@ -355,7 +370,7 @@ package View.ViewComponent
 			_gameinfo.init();
 			
 			_hint.init();
-			_model.putValue(modelName.GAMES_STATE,gameState.END_BET);			
+			
 			
 			_timer.init();			
 			
@@ -378,10 +393,10 @@ package View.ViewComponent
 		
 		
 			
-						
+			_model.putValue(modelName.GAMES_STATE,gameState.PRE_OPEN);
 			//dispatcher(new ModelEvent("open_card"));
-			dispatcher(new ModelEvent("pre_open"));
-			
+			//dispatcher(new ModelEvent("pre_open"));
+			dispatcher(new ModelEvent("update_state"));
 			
 			//================================================ simu deal
 			var testpoker:Array = ["Player", "Player", "Player","Player","Player"];

@@ -102,9 +102,12 @@ package View.ViewComponent
 			//  xxx. setting ....
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "round_result")]
-		public function settle_parse():void
+		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
+		public function settle():void
 		{			
+			GetSingleItem("theme").gotoAndStop(2);
+			
+			GetSingleItem("Zonetitle", 0).gotoAndStop(4);			
 			GetSingleItem("Zonetitle", 1).gotoAndStop(5);
 			
 			Get("table_hint").container.visible = false;

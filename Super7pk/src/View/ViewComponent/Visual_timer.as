@@ -71,22 +71,7 @@ package View.ViewComponent
 			GetSingleItem(Timer)["_num_1"].gotoAndStop(arr[1]);
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
-		public function pre_open():void
-		{
-			hide();
-		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
-		public function timer_hide():void
-		{			
-			hide();
-		}
-		
-		public function hide():void
-		{
-			Get(Timer).container.visible = false;
-		}
 		
 	}
 

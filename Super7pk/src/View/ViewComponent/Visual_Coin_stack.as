@@ -52,44 +52,16 @@ package View.ViewComponent
 			coinstack.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
 			coinstack.Post_CustomizedData =  coin_xy;
 			coinstack.Create_(avaliblezone.length, "coinstakeZone");
+			coinstack.container.visible = false;
 			
 			put_to_lsit(coinstack);
 			
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
-		public function pre_open():void
-		{
-			hide();
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
 		{
 			Get("coinstakeZone").container.visible = true;
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
-		public function stop_bet():void
-		{
-			hide();
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function open_card():void
-		{
-			hide();
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
-		public function settle():void
-		{
-			hide();
-		}
-		
-		public function hide():void
-		{
-			Get("coinstakeZone").container.visible = false;
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "clearn")]
@@ -109,10 +81,10 @@ package View.ViewComponent
 			
 			
 		}
-				
+		
 		[MessageHandler(type = "Model.ModelEvent", selector = "updateCoin")]
 		public function updateCredit():void
-		{					
+		{
 			var bet_ob:Object = _Actionmodel.excutionMsg();			
 			_Actionmodel.dropMsg();
 			

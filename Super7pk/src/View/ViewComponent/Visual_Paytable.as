@@ -130,9 +130,7 @@ package View.ViewComponent
 			GetSingleItem(paytable, 1).gotoAndStop(1);			
 			
 			GetSingleItem(settletable).gotoAndStop(1);
-			setFrame(x_symble, 1);
-			var mu:MultiObject
-			
+			setFrame(x_symble, 1);			
 			Get(paynum).CleanList();
 			Get(bet_symble).CleanList();
 			
