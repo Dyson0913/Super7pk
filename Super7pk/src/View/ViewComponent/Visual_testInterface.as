@@ -177,7 +177,7 @@ package View.ViewComponent
 			_sencer.init();			
 			
 			_poker.init();			
-			
+			_paytable.init();
 			_btn.init();
 			_btn.debug();
 			
@@ -212,9 +212,10 @@ package View.ViewComponent
 			
 			fake_hisotry();
 			_HistoryRecoder.init();
+			_paytable.init();
 			
 			//_progressbar.init();
-			//_paytable.init();			
+			
 			//_settle_panel.init();
 			_betzone.init();		
 			_coin_stack.init();		
@@ -237,7 +238,7 @@ package View.ViewComponent
 			
 			//================================================ simu deal
 			var testpoker:Array = ["Player", "Player"];
-			_regular.Call(this, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 25, 0, 7, "linear");						
+			_regular.Call(this, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 25, 0, 2, "linear");						
 		}
 		
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "2")]
@@ -362,7 +363,7 @@ package View.ViewComponent
 			_HistoryRecoder.init();
 			
 			//_progressbar.init();
-			//_paytable.init();			
+			_paytable.init();			
 			//_settle_panel.init();
 			_betzone.init();		
 			_coin_stack.init();		

@@ -47,7 +47,7 @@ package View.ViewComponent
 			Zonetitle.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			Zonetitle.Post_CustomizedData = [2,1204.0];
 			Zonetitle.container.x = 266.15;
-			Zonetitle.container.y = 67.35;
+			Zonetitle.container.y = 53.35;
 			Zonetitle.Create_(2, "theme");
 			
 			put_to_lsit(Zonetitle);			
@@ -93,8 +93,8 @@ package View.ViewComponent
 			GetSingleItem("theme")["Logo"].gotoAndPlay(2);
 			
 			//開牌中
-			GetSingleItem("Zonetitle", 0).gotoAndStop(3);
-			GetSingleItem("Zonetitle", 1).gotoAndStop(4);
+			GetSingleItem("Zonetitle", 0).gotoAndStop(4);
+			GetSingleItem("Zonetitle", 1).gotoAndStop(3);
 			
 			Get("table_hint").container.visible = true;
 			

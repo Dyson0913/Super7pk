@@ -209,7 +209,7 @@ package View.Viewutil
 			for (var i:int = 0 ; i < ItemNum; i++)
 			{
 				var mc:MovieClip = utilFun.GetClassByString(resList[i]);				
-				mc.name = ItemName + i;
+				mc.name = _ItemName + i;
 				
 				ItemList.push(mc);
 				_Container.addChild(mc);
