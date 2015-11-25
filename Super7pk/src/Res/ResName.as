@@ -35,10 +35,6 @@ package Res
 		public static const contractpower:String = "contract_power";		
 		
 		
-		public static const playerScore:String = "PlayerScore";
-		public static const bankerScore:String = "BankerScore";
-		public static const TieScore:String = "tieScore";			
-		
 		public static const emptymc:String = "Emptymc";
 		
 	

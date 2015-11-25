@@ -1,10 +1,6 @@
 package View.ViewComponent 
 {
-	import asunit.framework.Assert;
-	import flash.display.MovieClip;
-	import flash.text.TextField;
-	import flash.text.TextFormat;
-	import View.ViewBase.Visual_Text;
+	import flash.display.MovieClip;		
 	import View.ViewBase.VisualHandler;
 	import Model.valueObject.*;
 	import Model.*;
@@ -15,24 +11,17 @@ package View.ViewComponent
 	import Res.ResName;
 	import caurina.transitions.Tweener;
 	
-	import flash.text.TextFormat;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.TextFormatAlign;
-	
 	/**
-	 * hintmsg present way
+	 * settle present way
 	 * @author ...
 	 */
 	public class Visual_Settle  extends VisualHandler
 	{
 		[Inject]
-		public var _text:Visual_Text;
-		
-		[Inject]
 		public var _Bigwin_Effect:Visual_Bigwin_Effect;
 		
 		[Inject]
-		public var _betCommand:BetCommand;
+		public var _betCommand:BetCommand;	
 		
 		public function Visual_Settle() 
 		{
@@ -41,21 +30,17 @@ package View.ViewComponent
 		
 		public function init():void
 		{
-			var zoneCon:MultiObject = create("zone", [ResName.playerScore, ResName.bankerScore, ResName.TieScore]);
-			zoneCon.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
-			zoneCon.Post_CustomizedData = [[0, 0], [1018, 0], [560, 0]];
-			zoneCon.Create_(3, "zone");
-			zoneCon.container.x = 358;
-			zoneCon.container.y = 560;		
+			var zoneCon:MultiObject = create("zone", [ResName.emptymc]);		
+			zoneCon.Create_(3, "zone");			
 			
 			put_to_lsit(zoneCon);
 			
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "clearn")]
-		public function Clean():void
+		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		public function pre_open():void
 		{
-			setFrame("zone", 1);			
+			setFrame("zone", 1);		
 		}
 		
 		//move to model command to parse ,then send event

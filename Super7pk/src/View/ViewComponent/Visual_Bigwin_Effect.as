@@ -74,8 +74,8 @@ package View.ViewComponent
 			
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "clearn")]
-		public function Clean():void
+		
+		public function hide():void
 		{
 			_playing = false;
 			setFrame("bigwinmsg", 1);
@@ -233,7 +233,8 @@ package View.ViewComponent
 			
 			if ( toIn <= 10) 
 			{
-				//utilFun.Log("add carry over");
+				utilFun.Log("add carry over");
+				hide();
 				dispatcher(new Intobject(1, "settle_step"));
 				PowerJPNum.ItemList[PowerJPNum.ItemList.length - 1].gotoAndStop(10);				
 				pause_sound(sound_getpoint);				
