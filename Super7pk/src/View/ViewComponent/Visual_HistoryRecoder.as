@@ -26,6 +26,7 @@ package View.ViewComponent
 		public function init():void
 		{
 			var history_bg:MultiObject = create(historybg, [historybg]);
+			
 			history_bg.container.x = 1253;
 			history_bg.container.y =  175;
 			history_bg.Create_(1, historybg);
@@ -36,7 +37,7 @@ package View.ViewComponent
 			history_symble.container.y = 8;
 			history_symble.Post_CustomizedData = [6, 60, 58.5 ];
 			history_symble.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			history_symble.Create_(60, historysymble);
+			history_symble.Create_(60, historysymble);			
 			
 			put_to_lsit(history_bg);	
 			put_to_lsit(history_symble);			
@@ -51,22 +52,25 @@ package View.ViewComponent
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
-		{			
-			Get(historybg).container.visible = true;			
+		{
+			Get(historybg).container.visible = true;
 			update_history();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		public function opencard_parse():void
+		{
+			Get(historybg).container.visible = false;
 		}
 		
 		public function update_history():void
 		{			
-			for ( var i:int = 0; i < 60; i ++)
-			{
-				GetSingleItem(historysymble, i).gotoAndStop(1);			
-			}
+			var history_model:Array = _model.getValue("history_list");
+			Log("histor model =" + history_model);
 			
-			var history_model:Array = _model.getValue("history_list");			
 			Get(historysymble).CustomizedData = history_model;
 			Get(historysymble).CustomizedFun = _regular.FrameSetting;
-			Get(historysymble).FlushObject();			
+			Get(historysymble).FlushObject();
 		}
 	}
 
