@@ -32,24 +32,36 @@ package View.ViewComponent
 		   countDown.Create_(1,Timer);
 		   countDown.container.x = 1188;
 		   countDown.container.y = 528;
-		   countDown.container.visible = false;
 		   
-		   //TODO item test model put in here ?
-		   //_model.putValue(modelName.REMAIN_TIME, 10);
-		   				
 			Waring_sec = 7;
-			
+			disappear();
 			put_to_lsit(countDown);
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
 		{			
+			appear();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		public function opencard_parse():void
+		{
+			disappear();
+		}
+		
+		public function appear():void
+		{
 			Get(Timer).container.visible = true;	
 			var time:int = _model.getValue(modelName.REMAIN_TIME);
 			frame_setting_way(time);
 			
 			Tweener.addCaller(this, { time:time , count: time, onUpdate:TimeCount , transition:"linear" } );
+		}
+		
+		public function disappear():void
+		{
+			Get(Timer).container.visible = false;			
 		}
 		
 		private function TimeCount():void
@@ -69,9 +81,7 @@ package View.ViewComponent
 			if ( arr[1] == 0 ) arr[1] = 10;
 			GetSingleItem(Timer)["_num_0"].gotoAndStop(arr[0]);
 			GetSingleItem(Timer)["_num_1"].gotoAndStop(arr[1]);
-		}
-		
-		
+		}		
 		
 	}
 

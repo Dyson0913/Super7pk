@@ -58,7 +58,7 @@ package View.ViewComponent
 			
 			put_to_lsit(bet_num);			
 			
-			//bet_num
+			//settle_num
 			var settlesymble:MultiObject = create(settle_symble, [ResName.emptymc]);			
 			settlesymble.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
 			settlesymble.Post_CustomizedData = [13, 0, 33.5];
@@ -124,7 +124,9 @@ package View.ViewComponent
 		{
 			setFrame(settletable, 1);
 			
+			
 			Get(bet_symble).CleanList();
+			Get(settle_symble).CleanList();
 		}
 		
 		public function appear():void

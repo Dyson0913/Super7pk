@@ -439,7 +439,7 @@ package Command
 			}
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "clearn")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function Clean_bet():void
 		{
 			save_bet();

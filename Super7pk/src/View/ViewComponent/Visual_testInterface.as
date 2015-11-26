@@ -220,7 +220,7 @@ package View.ViewComponent
 			
 			//================================================ simu deal
 			var testpoker:Array = ["Player", "Player"];
-			_regular.Call(this, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 25, 0, 2, "linear");						
+			_regular.Call(this, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 5, 0, 2, "linear");						
 		}
 		
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "2")]
@@ -282,7 +282,7 @@ package View.ViewComponent
 				
 			//================================================ simu deal
 			var testpoker:Array = ["Player", "Player", "Player","Player","Player"];
-			_regular.Call(this, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 25, 0, 5, "linear");
+			_regular.Call(this, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 5, 0, 5, "linear");
 		}
 		
 		public function fackeDeal(type:Array):void

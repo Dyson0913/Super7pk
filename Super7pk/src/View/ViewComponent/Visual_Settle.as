@@ -50,7 +50,7 @@ package View.ViewComponent
 			//TODO like model filter
 			Log("bigwin =" + bigwin);
 			//大獎
-			if ( bigwin!=-1 && bigwin >=10)
+			if ( bigwin!=-1 && bigwin >=1)
 			{				
 				_Bigwin_Effect.hitbigwin(bigwin);
 			}

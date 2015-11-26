@@ -59,17 +59,18 @@ package View.ViewComponent
 			
 			put_to_lsit(mipoker);
 		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "clearn")]
+			
 		public function Clean_poker():void
 		{			
 			var pokerkind:Array = [just_turnpoker];
 			
 			var playerCon:MultiObject = Get(modelName.POKER_1);
-			playerCon.CleanList();				
+			playerCon.CleanList();
 			playerCon.Create_(7, modelName.POKER_1.toString());
+			playerCon.order_switch(5, 4);
+			playerCon.order_switch(1, 2);
 			Tweener.pauseTweens(playerCon.container);
-			playerCon.container.alpha = 0;				
+			playerCon.container.alpha = 0;		
 			
 			var bankerCon:MultiObject = Get(modelName.POKER_2);
 			bankerCon.CleanList();			    
@@ -88,6 +89,7 @@ package View.ViewComponent
 		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
 		public function pre_open():void
 		{
+			Clean_poker();
 			Get(modelName.POKER_1).container.alpha = 1;
 			Get(modelName.POKER_2).container.alpha = 1;
 			GetSingleItem(modelName.POKER_2, 2).y = 0;
@@ -98,7 +100,7 @@ package View.ViewComponent
 		public function start_bet():void
 		{			
 			Get(modelName.POKER_1).container.alpha = 1;
-			Get(modelName.POKER_2).container.alpha = 0;
+			Get(modelName.POKER_2).container.alpha = 0;			
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
@@ -274,8 +276,8 @@ package View.ViewComponent
 			var mypoker:Array =   _model.getValue(type);			
 			if ( mypoker.length != 7) return ;
 			
-			Tweener.addTween(GetSingleItem(type, 2), { y: GetSingleItem(type, 2).y+100 , time:1} );
-			Tweener.addTween(GetSingleItem(type, 4), { y: GetSingleItem(type, 4).y+100 , time:1} );
+			Tweener.addTween(GetSingleItem(type, 2), { y: 100 , time:1} );
+			Tweener.addTween(GetSingleItem(type, 4), { y: 100 , time:1} );
 		}
 		
 		

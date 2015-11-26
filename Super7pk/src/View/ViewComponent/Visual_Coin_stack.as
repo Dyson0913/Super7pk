@@ -62,9 +62,9 @@ package View.ViewComponent
 		public function start_bet():void
 		{
 			Get("coinstakeZone").container.visible = true;
+			Clean_poker();
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "clearn")]
 		public function Clean_poker():void
 		{
 			//TODO why not 
