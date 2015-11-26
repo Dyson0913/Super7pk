@@ -177,14 +177,14 @@ package View.ViewComponent
 			_paytable.init();
 			_btn.init();
 			_Bigwin_Effect.init();
-			//_btn.debug();
 			
-			//_progressbar.init();
+			
+			_progressbar.init();
 			//_ProbData.init();
 			
 			
 			
-			
+			_btn.debug();
 			_model.putValue("test_init",true);
 		}
 		
@@ -251,6 +251,7 @@ package View.ViewComponent
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "3")]
 		public function pack_sim():void
 		{
+			dispatcher(new Intobject(0, "power_up"));
 			//dispatcher(new Intobject(utilFun.Random(2), "power_up"));
 			//return;
 			
