@@ -43,115 +43,31 @@ package View.ViewComponent
 			setFrame("zone", 1);		
 		}
 		
-		//move to model command to parse ,then send event
-		[MessageHandler(type = "Model.ModelEvent", selector = "round_result")]
-		public function round_():void
+		[MessageHandler(type = "Model.ModelEvent", selector = "settle_bigwin")]
+		public function settle_bigwin():void
 		{
-			var result_list:Array = _model.getValue(modelName.ROUND_RESULT);
-			var num:int = result_list.length;
-			var name_to_idx:DI = _model.getValue("Bet_name_to_idx");
-			var idx_to_result_idx:DI = _model.getValue("idx_to_result_idx");
-			var betZone:Array = _model.getValue(modelName.AVALIBLE_ZONE_IDX);
-			var bigwin:int = -1;			
-			var sigwin:int = -1;
-						
-			var settle_amount:Array = [0,0,0,0,0,0];
-			var zonebet_amount:Array = [0, 0, 0, 0, 0, 0];			
-			var total:int = 0;
-			
-			var odd:int = -1;			
-			var winst:String = "";			
-			var hintJp:int = -1;
-			
-			var clean:Array = [];
-			for ( var i:int = 0; i < num; i++)
-			{
-				var resultob:Object = result_list[i];				
-				utilFun.Log("bet_type=" + resultob.bet_type  + "  " + resultob.win_state + " bigwin= " + bigwin);				
-				
-				//coin 清除區
-				if ( resultob.win_state == "WSLost") clean.push (name_to_idx.getValue(resultob.bet_type));
-				else
-				{					
-					if ( resultob.bet_type == "BetBWPlayer" ) 
-					{						
-						//大獎
-						if ( resultob.win_state != "WSBWNormalWin" && resultob.win_state !="WSWin")
-						{						
-							bigwin = _opration.getMappingValue(modelName.BIG_POKER_MSG, resultob.win_state);
-						}						
-						winst = resultob.win_state;
-						odd = resultob.odds;
-					}
-					
-					if ( resultob.bet_type == "BetBWSpecial" ) 
-					{						
-						sigwin = _opration.getMappingValue(modelName.BIG_POKER_MSG, resultob.win_state);						
-					}
-					
-					//{"bet_attr": "BetAttrBonus", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetBWBonusTripple", "settle_amount": 0},
-					//{"bet_attr": "BetAttrBonus", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetBWBonusTwoPair", "settle_amount": 0}
-					if( resultob.bet_type =="BetBWBonusTwoPair") 
-					{
-						var extra:int = resultob.bet_amount * resultob.odds;
-						if ( extra > 0)
-						{
-							var array:Array = _model.getValue("power_jp");
-							array[0] = resultob.bet_amount * resultob.odds;
-							hintJp = 1;
-						}
-						continue;
-					}
-					if( resultob.bet_type =="BetBWBonusTripple") 
-					{
-						var extra_two:int = resultob.bet_amount * resultob.odds;
-						if ( extra_two )
-						{
-							var array2:Array = _model.getValue("power_jp");
-							array2[1] = resultob.bet_amount * resultob.odds;
-							hintJp = 1;
-						}
-						continue;
-					}
-					
-				}
-				
-				//總押注和贏分
-				settle_amount[ idx_to_result_idx.getValue( name_to_idx.getValue(resultob.bet_type) )] =  resultob.settle_amount;
-				zonebet_amount[ idx_to_result_idx.getValue( name_to_idx.getValue(resultob.bet_type)) ]  = resultob.bet_amount;
-				total += resultob.settle_amount;
-			}			
-			
-			
-			
-			_model.putValue("result_settle_amount",settle_amount);
-			_model.putValue("result_zonebet_amount",zonebet_amount);
-			_model.putValue("result_total", total);			
-			_model.putValue("winstr", winst);
-			_model.putValue("win_odd", odd);
-			
-			
-			var wintzone:Array = utilFun.Get_restItem(betZone, clean);
-			utilFun.Log("clean zone =" + clean);
-			utilFun.Log("wintzone =" + wintzone);
-			utilFun.Log("result_settle_amount =" + settle_amount);
-			utilFun.Log("result_zonebet_amount =" + zonebet_amount);
-			utilFun.Log("result_total =" + total);
-			utilFun.Log("bigwin =" + bigwin);			
-			
-			//大獎 (排除2對,3條和11以上J對)
-			if ( bigwin!=-1 && bigwin >=2)
+			var bigwin:int = 3;// _model.getValue("bigwin");
+			//TODO like model filter
+			Log("bigwin =" + bigwin);
+			//大獎
+			if ( bigwin!=-1 && bigwin >=10)
 			{				
 				_Bigwin_Effect.hitbigwin(bigwin);
 			}
-			else
-			{
-				//2對,3條集氣吧				
-				if ( hintJp !=-1 && (sigwin ==1 || sigwin ==0)) dispatcher(new Intobject(sigwin, "power_up"));
-				else settle(new Intobject(1, "settle_step"));
-			}
-			
+			else settle(new Intobject(1, "settle_step"));
 		}
+		
+		public function settle_powerbar():void
+		{
+			var hintJp:int =  _model.getValue("hintJp");
+			var sigwin:int =  _model.getValue("sigwin");			
+			//2對,3條集氣吧
+			if ( hintJp != -1 && (sigwin == 1 || sigwin == 0)) 
+			{
+				dispatcher(new Intobject(sigwin, "power_up"));
+			}
+		}
+		
 			
 		[MessageHandler(type="Model.valueObject.Intobject",selector="settle_step")]
 		public function settle(v:Intobject):void

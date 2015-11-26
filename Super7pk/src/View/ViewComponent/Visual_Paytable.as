@@ -134,9 +134,7 @@ package View.ViewComponent
 			var wintype:String = winstr.Value;
 			utilFun.Log("winst = " + wintype);
 			
-			if ( wintype == "") return ;
-			if (wintype ==  "WSWin" || wintype == "WSBWNormalWin")  return;
-			if (wintype ==  "WSBWOnePairBig")  return;
+			if ( wintype == "") return ;			
 			
 			var y:int = 0;
 			if (wintype == "WSBWStraight") y = 7;
@@ -144,9 +142,9 @@ package View.ViewComponent
 			if (wintype == "WSBWFullHouse") y = 5;
 			if ( wintype == "WSBWFourOfAKind")y = 4;
 			if ( wintype == "WSBWStraightFlush") y = 3;
-			if ( wintype == "WSBWRoyalFlush") y = 2;			
-			
-			GetSingleItem("paytable_baridx").gotoAndStop(y);
+			if ( wintype == "WSBWRoyalFlush") y = 2;		
+						
+			GetSingleItem(x_symble,y).gotoAndStop(23);
 			
 			//utilFun.Log("GetSingleItem =" + GetSingleItem("pay_text"));						
 			//GetSingleItem("pay_text",y).getChildByName("Dy_Text").textColor = 0xFFFF00;			

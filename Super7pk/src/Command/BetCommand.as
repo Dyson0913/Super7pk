@@ -73,7 +73,7 @@ package Command
 			
 			var avaliblezone:Array = [];
 			var avaliblezone_s:Array = [];
-			for ( i = 0; i < 12; i++)			
+			for ( i = 0; i < 12; i++)
 			{
 				avaliblezone.push ( "zone_" + i);
 				avaliblezone_s.push ( "zone_" + i + "_sence");				
@@ -89,49 +89,20 @@ package Command
 																									  [1734, 100], [1446, 100],  [1152,100], [864, 100], [568, 100], [276, 100]			
 			]);
 			
-			var poermapping:DI = new DI();	
-			poermapping.putValue("WSBWOnePairBig", -2);			
-			poermapping.putValue("WSBWTwoPair", 0);			
-			poermapping.putValue("WSBWTripple", 1);
-			poermapping.putValue("WSBWStraight", 2);
-			poermapping.putValue("WSBWFlush", 3);
-			poermapping.putValue("WSBWFullHouse", 4);
+			var poermapping:DI = new DI();			
+			poermapping.putValue("WSBWbnone", 12);
+			poermapping.putValue("WSBWbigPair", 11);
+			poermapping.putValue("WSBWTwoPair", 10);
+			poermapping.putValue("WSBWTripple", 9);
+			poermapping.putValue("WSBWStraight", 8);
+			poermapping.putValue("WSBWFlush", 7);
+			poermapping.putValue("WSBWFullHouse", 6);
 			poermapping.putValue("WSBWFourOfAKind", 5);
-			poermapping.putValue("WSBWStraightFlush", 6);
-			poermapping.putValue("WSBWRoyalFlush", 7);
-			_model.putValue(modelName.BIG_POKER_MSG , poermapping);
-			
-			var history_str:DI = new DI();	
-			history_str.putValue(0, "2P");
-			history_str.putValue(1, "3K");
-			history_str.putValue(2, "STR");
-			history_str.putValue(3, "FLU");
-			history_str.putValue(4, "FUH");
-			history_str.putValue(5, "4K");
-			history_str.putValue(6, "STF");
-			history_str.putValue(7, "RTF");
-			_model.putValue(modelName.SMALL_POKER_MSG , history_str);
-			
-			var history_str_mapp:DI = new DI();			
-			history_str_mapp.putValue("WSBWStraight", "STR");
-			history_str_mapp.putValue("WSBWFlush", "FLU");
-			history_str_mapp.putValue("WSBWFullHouse", "FUH");
-			history_str_mapp.putValue("WSBWFourOfAKind", "4K");
-			history_str_mapp.putValue("WSBWStraightFlush", "STF");
-			history_str_mapp.putValue("WSBWRoyalFlush", "RTF");
-			_model.putValue(modelName.HIS_SHORT_MSG , history_str_mapp);
-			
-			var poer_msg:DI = new DI();		
-			poer_msg.putValue("WSBWOnePairBig", "J以上一對");
-			poer_msg.putValue("WSBWTwoPair", "兩對");
-			poer_msg.putValue("WSBWTripple", "三條");
-			poer_msg.putValue("WSBWStraight", "順子");
-			poer_msg.putValue("WSBWFlush", "同花");
-			poer_msg.putValue("WSBWFullHouse", "葫蘆");
-			poer_msg.putValue("WSBWFourOfAKind", "四條");
-			poer_msg.putValue("WSBWStraightFlush", "同花順");
-			poer_msg.putValue("WSBWRoyalFlush", "同花大順");
-			_model.putValue(modelName.BIG_POKER_TEXT , poer_msg);
+			poermapping.putValue("WSBWStraightFlush", 4);
+			poermapping.putValue("WSBWfiveclub", 3);
+			poermapping.putValue("WSBWRoyalFlush", 2);
+			poermapping.putValue("WSBWPureRoyalFlush", 1);
+			_model.putValue(modelName.BIG_POKER_MSG , poermapping);			
 			
 			_model.putValue("power_jp",[0,0]);
 			_model.putValue("power_idx",[0,0]);
@@ -336,7 +307,7 @@ package Command
 			return _Bet_info.getValue("self");		
 		}
 		
-		//[MessageHandler(type = "Model.ModelEvent", selector = "round_result")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "round_result")]
 		public function settle_data_parse():void
 		{
 			//who win
@@ -344,8 +315,7 @@ package Command
 			//bet_amount
 			//settle_amount
 			//special_
-			var result_list:Array = _model.getValue(modelName.ROUND_RESULT);
-			var betZone:Array = _model.getValue(modelName.AVALIBLE_ZONE_IDX);			
+			
 						
 			var settle_amount:Array = [];
 			var zonebet_amount:Array = [];
@@ -355,15 +325,18 @@ package Command
 				zonebet_amount.push(0);
 			}
 			
-			var total:int = 0;						
 			_model.putValue("clean_zone", []);
 			_model.putValue("bigwin",-1);
-			_model.putValue("sigwin",-1);			
+			_model.putValue("sigwin",-1);
 			_model.putValue("win_odd", -1);
 			_model.putValue("winstr", "");			
 			_model.putValue("winstr", "");			
 			_model.putValue("hintJp", -1);
-			var num:int = betZone.length;
+			
+			var total:int = 0;
+			var result_list:Array = _model.getValue(modelName.ROUND_RESULT);
+			var betZone:Array = _model.getValue(modelName.AVALIBLE_ZONE_IDX);			
+			var num:int = betZone.length;			
 			for ( var i:int = 0; i < num; i++)
 			{
 				var resultob:Object = result_list[i];				
@@ -387,17 +360,18 @@ package Command
 			
 			_model.putValue("result_settle_amount",settle_amount);
 			_model.putValue("result_zonebet_amount",zonebet_amount);
-			_model.putValue("result_total", total);			
-					
+			_model.putValue("result_total", total);
 			
 			
 			//var wintzone:Array = utilFun.Get_restItem(betZone, clean);
 			//utilFun.Log("clean zone =" + clean);
 			//utilFun.Log("wintzone =" + wintzone);
-			//utilFun.Log("result_settle_amount =" + settle_amount);
-			//utilFun.Log("result_zonebet_amount =" + zonebet_amount);
-			//utilFun.Log("result_total =" + total);
-			//utilFun.Log("bigwin =" + bigwin);
+			utilFun.Log("result_settle_amount =" + settle_amount);
+			utilFun.Log("result_zonebet_amount =" + zonebet_amount);
+			utilFun.Log("result_total =" + total);
+			
+			dispatcher(new ModelEvent("settle_bigwin"));
+			
 		}
 		
 		public function check_lost(resultob:Object,betzon_idx:int):void

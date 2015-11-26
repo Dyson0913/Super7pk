@@ -90,6 +90,8 @@ package View.ViewComponent
 		{
 			Get(modelName.POKER_1).container.alpha = 1;
 			Get(modelName.POKER_2).container.alpha = 1;
+			GetSingleItem(modelName.POKER_2, 2).y = 0;
+			GetSingleItem(modelName.POKER_2, 4).y = 0;
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
@@ -137,9 +139,12 @@ package View.ViewComponent
 				anipoker.gotoAndStop(1);
 				anipoker["_poker"].gotoAndStop(pokerid);				
 				anipoker.gotoAndStop(anipoker.totalFrames);				
+				if ( mypoker.length  == 7 && type.Value == modelName.POKER_2) 
+				{
+					_regular.Call(anipoker, { onComplete:this.show_point_prob, onCompleteParams:[type.Value] }, 1, 0, 1);
+				}
 				//Tweener.addTween(anipoker["_poker"], { rotationZ:24.5, time:0.3,onCompleteParams:[anipoker,anipoker["_poker"],0],onComplete:this.pullback} );
-			}				
-			//dispatcher(new Intobject(type.Value, "show_judge"));
+			}			
 		}
 		
 		[MessageHandler(type = "Model.valueObject.Intobject", selector = "poker_mi")]
@@ -261,10 +266,20 @@ package View.ViewComponent
 			//prob_cal();
 			//dispatcher(new Intobject(type, "caculate_prob"));
 			
-			
+			pull_down(type);
 		}
 		
-		[MessageHandler(type = "Model.valueObject.Intobject",selector="show_judge")]
+		public function pull_down(type:int):void
+		{
+			var mypoker:Array =   _model.getValue(type);			
+			if ( mypoker.length != 7) return ;
+			
+			Tweener.addTween(GetSingleItem(type, 2), { y: GetSingleItem(type, 2).y+100 , time:1} );
+			Tweener.addTween(GetSingleItem(type, 4), { y: GetSingleItem(type, 4).y+100 , time:1} );
+		}
+		
+		
+		//[MessageHandler(type = "Model.valueObject.Intobject",selector="show_judge")]
 		public function early_check_point(type:Intobject):void
 		{
 			var Mypoker:Array =   _model.getValue(type.Value);
