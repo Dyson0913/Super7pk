@@ -78,6 +78,9 @@ package View.GameView
 		[Inject]
 		public var _Bigwin_Effect:Visual_Bigwin_Effect;
 		
+		[Inject]
+		public var _theme:Visual_theme = new Visual_theme();
+		
 		public function betView()  
 		{
 			
@@ -96,26 +99,23 @@ package View.GameView
 			var view:MultiObject = prepare("_view", new MultiObject() , this);
 			view.Create_by_list(1, [ResName.Bet_Scene], 0, 0, 1, 0, 0, "a_");	
 			
-			_HistoryRecoder.init();
-			_ProbData.init();
-			_progressbar.init();
-			
-			_gameinfo.init();
-			_paytable.init();
-			_settle_panel.init();			
-			_timer.init();		
+			_theme.init();
+			_gameinfo.init();			
 			_hint.init();			
+			_timer.init();
+			_HistoryRecoder.init();
 			
+			_poker.init();			
+				
 			_betzone.init();
 			_coin_stack.init();
 			_coin.init();
-			_poker.init();
+			_sencer.init();
+			_settle_panel.init();
 			
-			_settle.init();
-			_sencer.init();	
-			
+		
+			_paytable.init();
 			_btn.init();
-			_Bigwin_Effect.init();
 			
 			//dispatcher(new StringObject("Soun_Bet_BGM","Music" ) );
 		}

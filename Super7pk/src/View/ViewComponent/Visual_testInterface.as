@@ -165,20 +165,23 @@ package View.ViewComponent
 			_timer.init();
 			_HistoryRecoder.init();
 			
+			_poker.init();			
+				
 			_betzone.init();
 			_coin_stack.init();
 			_coin.init();
 			_sencer.init();
 			_settle_panel.init();
 			
-			_poker.init();			
+			
 			_paytable.init();
 			_btn.init();
+			_Bigwin_Effect.init();
 			//_btn.debug();
 			
 			//_progressbar.init();
 			//_ProbData.init();
-			_Bigwin_Effect.init();
+			
 			
 			
 			

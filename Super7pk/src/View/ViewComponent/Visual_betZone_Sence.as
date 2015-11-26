@@ -45,7 +45,7 @@ package View.ViewComponent
 		
 		public function bet_sencer(e:Event,idx:int):Boolean
 		{				
-			Log("betsence type =" + e.type);
+//			Log("betsence type =" + e.type);
 			if ( e.type == MouseEvent.MOUSE_DOWN)
 			{
 				//玩家手動第一次下注,取消上一局的betinfo
