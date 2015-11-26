@@ -20,6 +20,10 @@ package View.ViewComponent
 	{
 		//res
 		public const just_turnpoker:String = "just_turn_poker";
+		public const pokermask:String = "poker_mask";
+		public const Poker:String = "poker";
+		public const poker_back:String = "pokerback";
+		public const Mipoker_zone:String = "Mi_poker_zone";
 		
 		public function Visual_poker() 
 		{
@@ -51,7 +55,7 @@ package View.ViewComponent
 			
 			put_to_lsit(bankerCon);
 			
-			var mipoker:MultiObject =  create("mipoker", [ResName.Mipoker_zone]);	
+			var mipoker:MultiObject =  create("mipoker", [Mipoker_zone]);	
 			mipoker.Create_(1, "mipoker");
 			mipoker.container.x = 740;
 			mipoker.container.y = 570;
@@ -79,7 +83,7 @@ package View.ViewComponent
 			bankerCon.container.alpha = 0;		
 			
 			Get("mipoker").CleanList();		
-			Get("mipoker").Create_by_list(1, [ResName.Mipoker_zone], 0 , 0, 1, 130, 0, "Bet_");			
+			Get("mipoker").Create_by_list(1, [Mipoker_zone], 0 , 0, 1, 130, 0, "Bet_");			
 			Get("mipoker").container.alpha = 0;
 			
 			_model.putValue(modelName.POKER_1, [] );
@@ -186,9 +190,9 @@ package View.ViewComponent
 				
 			var mc:MovieClip = mipoker.ItemList[0];
 				
-			var pokerf:MovieClip = utilFun.GetClassByString(ResName.Poker);				
-			var pokerb:MovieClip = utilFun.GetClassByString(ResName.poker_back);				
-			var pokerm:MovieClip = utilFun.GetClassByString(ResName.pokermask);
+			var pokerf:MovieClip = utilFun.GetClassByString(Poker);				
+			var pokerb:MovieClip = utilFun.GetClassByString(poker_back);				
+			var pokerm:MovieClip = utilFun.GetClassByString(pokermask);
 			pokerb.x  = 39;
 			pokerb.y  = 28;
 			pokerf.x = pokerb.x;

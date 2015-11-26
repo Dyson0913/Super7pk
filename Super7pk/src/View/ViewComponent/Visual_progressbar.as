@@ -28,11 +28,16 @@ package View.ViewComponent
 		
 		public const powerbar:String = "power_bar";
 		
+	
+		
+		//res
 		public const bar_continue:String = "power_bar_continue";
 		public const powerbar_name:String = "power_bar_name";
 		public const powerbar_tail:String = "power_bar_tail";
+		public const contractpower:String = "contract_power";
 		
-	
+		public const PowerJP:String = "Power_JP";
+		public const PowerJP_Num:String = "Power_JP_Num";
 		
 		public function Visual_progressbar() 
 		{
@@ -42,7 +47,7 @@ package View.ViewComponent
 		public function init():void
 		{
 			//two_pair
-			var powerbar_0:MultiObject = create("powerbar_0",  [powerbar,bar_continue, powerbar_tail,ResName.TextInfo,ResName.contractpower]);
+			var powerbar_0:MultiObject = create("powerbar_0",  [powerbar,bar_continue, powerbar_tail,ResName.TextInfo,contractpower]);
 			powerbar_0.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
 			powerbar_0.Post_CustomizedData = [[0, 0], [12.35,4], [8.4, 3.5], [315.35, -1],[-60, -20]];
 			powerbar_0.container.x = 1302;
@@ -55,7 +60,7 @@ package View.ViewComponent
 			_text.textSetting_s(powerbar_0.ItemList[3], [ { size:22, align:_text.align_left } , ""]);
 			
 			//3條
-			var powerbar_1:MultiObject = create("powerbar_1",  [powerbar,bar_continue, powerbar_tail,ResName.TextInfo,ResName.contractpower]);
+			var powerbar_1:MultiObject = create("powerbar_1",  [powerbar,bar_continue, powerbar_tail,ResName.TextInfo,contractpower]);
 			powerbar_1.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
 			powerbar_1.Post_CustomizedData = [[0, 0], [12.35,4], [8.4, 3.5], [315.35, -1],[-60,-20]];
 			powerbar_1.container.x = 1302;
@@ -67,13 +72,13 @@ package View.ViewComponent
 			powerbar_1.ItemList[2].visible = false;
 			_text.textSetting_s(powerbar_1.ItemList[3], [ { size:22, align:_text.align_left } , ""]);
 			
-			var PowerJP:MultiObject = create("Power_JP",  [ResName.PowerJP]);
+			var PowerJP:MultiObject = create("Power_JP",  [PowerJP]);
 			PowerJP.container.x = 969;
 			PowerJP.container.y = 433;			
 			PowerJP.Create_(1, "Power_JP");
 			PowerJP.container.visible = false;
 			
-			var PowerJPNum:MultiObject = create("Power_JP_num",  [ResName.PowerJP_Num], Get("Power_JP").container);
+			var PowerJPNum:MultiObject = create("Power_JP_num",  [PowerJP_Num], Get("Power_JP").container);
 			
 			put_to_lsit(powerbar_0);
 			put_to_lsit(powerbar_1);		

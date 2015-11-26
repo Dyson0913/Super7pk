@@ -23,7 +23,7 @@ package View.ViewComponent
 	 */
 	public class Visual_ProbData  extends VisualHandler
 	{
-		
+		public static const prob_square:String = "prob";		
 		public function Visual_ProbData() 
 		{
 			
@@ -31,7 +31,7 @@ package View.ViewComponent
 		
 		public function init():void
 		{			
-			var pro:MultiObject = create("prob",  [ResName.prob_square]);	
+			var pro:MultiObject = create("prob",  [prob_square]);	
 			pro.container.x = 384;
 			pro.container.y =  176;
 			pro.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
