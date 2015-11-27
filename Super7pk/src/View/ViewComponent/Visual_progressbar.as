@@ -35,7 +35,7 @@ package View.ViewComponent
 		//res
 		public const progress_bar:String = "bar_bg";
 		public const bar_continue:String = "power_bar_continue";
-		public const contractpower:String = "progress_effect";
+		public const fire_effect:String = "progress_effect";
 		public const progress_bartag:String = "progress_bar_tag";
 		public const progressnum:String = "progress_num";
 		
@@ -51,20 +51,16 @@ package View.ViewComponent
 		}
 		
 		public function init():void
-		{			
-			var powerbar_0:MultiObject = create("powerbar_0",  [progress_bar,bar_continue,progressnum,contractpower,progress_bartag]);
-			powerbar_0.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
-			powerbar_0.Post_CustomizedData = [[0, 0], [8.3,7], [289.4, 7.5], [-38.95, -19],[-90, 0]];
-			powerbar_0.container.x = 887;
-			powerbar_0.container.y = 180;
-			powerbar_0.Create_(5, "powerbar_0");		
-			GetSingleItem("powerbar_0",bg).gotoAndStop(3);			
-			GetSingleItem("powerbar_0",style)["_colorbar"].gotoAndStop(3);
-			GetSingleItem("powerbar_0", tag).gotoAndStop(1);
+		{
+			var progress_container:MultiObject = create("progress_container", [ResName.emptymc]);
+			progress_container.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
+			progress_container.Post_CustomizedData = [5, 0, 48];
+			progress_container.CustomizedFun = obinit;			
+			progress_container.container.x = 887;
+			progress_container.container.y = 180;
+			progress_container.Create_(5, "progress_container");			
 			
-			object_init("powerbar_0",percent);		
-			
-			//add more same kind of item
+			_model.putValue("power_idx",[0,0,0,0,0]);
 			
 			//TODO mo to bigwin message
 			var PowerJP:MultiObject = create("Power_JP",  [PowerJP]);
@@ -74,9 +70,22 @@ package View.ViewComponent
 			PowerJP.container.visible = false;
 			
 			var PowerJPNum:MultiObject = create("Power_JP_num",  [PowerJP_Num], Get("Power_JP").container);
-			
-			put_to_lsit(powerbar_0);			
 		}		
+		
+		public function obinit(mc:MovieClip, idx:int, data:Array):void
+		{
+			var powerbar_0:MultiObject = create("powerbar_"+idx,  [progress_bar,bar_continue,ResName.emptymc,fire_effect,progress_bartag],mc);
+			powerbar_0.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
+			powerbar_0.Post_CustomizedData = [[0, 0], [8.3,7], [289.4, 7.5], [-38.95, -19],[-90, 0]];		
+			powerbar_0.Create_(5, "powerbar_" + idx);
+			GetSingleItem("powerbar_" + idx, bg).gotoAndStop(3);			
+			GetSingleItem("powerbar_" + idx, style)["_colorbar"].gotoAndStop(3);			
+			GetSingleItem("powerbar_" + idx, tag).gotoAndStop(1);			
+			
+			object_init("powerbar_"+idx, percent);
+			
+			put_to_lsit(powerbar_0);	
+		}
 		
 		//mode -> (contorl ?)->view 
 		public function progress(zero_position:Number,full_position:Number,To_percent:Number):Number
@@ -140,52 +149,66 @@ package View.ViewComponent
 			//gotoAndPlay
 			//gotoAndStop
 			
-			var acumu:Array = _model.getValue("power_jp");
-			//utilFun.Log("acu_jp = " + acumu[kind]);
-			//TODO Dock type
-			data_setting("powerbar_" + kind,percent,)
-			if ( Get("powerbar_0").resList[percent] == ResName.TextInfo)
-			{
-				GetSingleItem("powerbar_" + kind, percent).getChildByName("Dy_Text").text =  acumu[kind];
-			}
+			var acumu:Array = [utilFun.Random(100)];// _model.getValue("power_jp");			
 			
-			GetSingleItem("powerbar_0",tag).gotoAndStop(utilFun.Random(10));
+			data_setting("powerbar_" + kind, percent, acumu, kind);
+			
+			GetSingleItem("powerbar_"+kind,tag).gotoAndStop(utilFun.Random(10));
 			
 			//effect 
 			no_effect(GetSingleItem("powerbar_" + kind, style)["_colorbar"], move_dis);
-			effect_in_tail(GetSingleItem("powerbar_"+kind, style)["_colorbar"],GetSingleItem("powerbar_" + kind, effect), move_dis, 2, kind);
+			//effect_in_tail(GetSingleItem("powerbar_"+kind, style)["_colorbar"],GetSingleItem("powerbar_" + kind, effect), move_dis, 2, kind);
 			
 			
 			
 		}
-		
-		data_setting
-		
-		object_init
 		
 		//dock type handle
-		public function object_init(obname:String,resTag:String):void
+		public function object_init(obname:String,resTag:int):void
 		{
 			if ( Get(obname).resList[resTag] == ResName.TextInfo)
 			{
-				_text.textSetting_s(GetSingleItem(obname, percent), [ { size:22, align:_text.align_left } , ""]);
+				_text.textSetting_s(GetSingleItem(obname, resTag), [ { size:22, align:_text.align_left } , ""]);
 			}
-			else if (Get(obname).resList[resTag]== progressnum)
+			else if (Get(obname).resList[resTag]== ResName.emptymc)
 			{
-				
+				frame_setting(GetSingleItem(obname, resTag), 0);
 			}
 		}
 		
-		public function data_setting(obname:String, resTag:String):void
+		public function data_setting(obname:String, resTag:int,data:Array,data_idx:int):void
 		{
 			if ( Get(obname).resList[resTag] == ResName.TextInfo)
 			{
-				GetSingleItem(obname, resTag).getChildByName("Dy_Text").text =  acumu[kind];
+				//TODO move to _text object
+				GetSingleItem(obname, resTag).getChildByName("Dy_Text").text =  data[data_idx];
 			}
-			else if (Get(obname).resList[resTag]== progressnum)
-			{
-				
+			else if (Get(obname).resList[resTag]== ResName.emptymc)
+			{				
+				frame_setting(GetSingleItem(obname, resTag), data[data_idx]);
 			}
+		}
+		
+		//TODO move to frame Object
+		private function frame_setting(mc:MovieClip,data:int):void
+		{			
+			utilFun.Clear_ItemChildren(mc);
+			var arr:Array = data.toString().split("");
+			arr.push(11);
+			var num:int = arr.length;
+			var p_num:MultiObject = create_dynamic(mc.parent.name, [progressnum], mc);			
+			p_num.CustomizedFun = FrameSetting;
+			p_num.CustomizedData = arr.reverse();
+			p_num.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
+			p_num.Post_CustomizedData = [num, -18, 0];		
+			p_num.Create_(num, mc.parent.name);		
+			
+		}
+		
+		public function FrameSetting(mc:MovieClip, idx:int, data:Array):void
+		{			
+			if ( data[idx] == 0 ) data[idx] = 10;
+			mc.gotoAndStop(data[idx]);			
 		}
 		
 		private function triger():void

@@ -251,7 +251,7 @@ package View.ViewComponent
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "3")]
 		public function pack_sim():void
 		{
-			dispatcher(new Intobject(0, "power_up"));
+			dispatcher(new Intobject(3, "power_up"));
 			//dispatcher(new Intobject(utilFun.Random(2), "power_up"));
 			//return;
 			

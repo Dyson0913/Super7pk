@@ -105,7 +105,7 @@ package Command
 			_model.putValue(modelName.BIG_POKER_MSG , poermapping);			
 			
 			_model.putValue("power_jp",[0,0]);
-			_model.putValue("power_idx",[0,0]);
+			
 			
 			_Bet_info.putValue("self", [] ) ;
 			_model.putValue("history_bet", []);
