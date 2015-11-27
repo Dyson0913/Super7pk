@@ -63,7 +63,7 @@ package View.ViewComponent
 			var progress_container:MultiObject = create("progress_container", [ResName.emptymc]);
 			progress_container.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
 			progress_container.Post_CustomizedData = [6, 0, 55];
-			progress_container.CustomizedFun = obinit;			
+			progress_container.CustomizedFun = obinit;
 			progress_container.container.x = 887;
 			progress_container.container.y = 220;
 			progress_container.Create_(6, "progress_container");			

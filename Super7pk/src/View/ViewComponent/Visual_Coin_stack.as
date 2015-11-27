@@ -31,11 +31,15 @@ package View.ViewComponent
 		//sound name
 		public const soundcoin:String = "sound_coin";
 		
+		private const amount:int = 0;
+		
 		//coin seperate to N stack
 		private var _stack_num:int = 1;		
 		
+		//res
 		public const Betcoin:String = "Bet_coin";
 		public const Wincoin:String = "Win_coin";
+		public const r_coin_amount:String = "coin_amount";
 		
 		public function Visual_Coin_stack() 
 		{
@@ -46,16 +50,40 @@ package View.ViewComponent
 		{
 			var avaliblezone:Array = _model.getValue(modelName.AVALIBLE_ZONE);						
 			var coin_xy:Array = _model.getValue(modelName.COIN_STACK_XY);
-			var coinstack:MultiObject = create("coinstakeZone", [ResName.emptymc]);
-			coinstack.container.x = 3;
-			coinstack.container.y = 605;
+			
+			var coinstack:MultiObject = create("coinstakeZone", [ResName.emptymc]);			
 			coinstack.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
 			coinstack.Post_CustomizedData =  coin_xy;
+			coinstack.container.x = 3;
+			coinstack.container.y = 605;
 			coinstack.Create_(avaliblezone.length, "coinstakeZone");
 			coinstack.container.visible = false;
 			
 			put_to_lsit(coinstack);
 			
+			var amount_xy:Array = _model.getValue(modelName.COIN_AMOUNT_XY);
+			//coin amount
+			var coin_amount_container:MultiObject = create("coin_amount_container", [ResName.emptymc]);
+			coin_amount_container.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
+			coin_amount_container.Post_CustomizedData =  amount_xy;			
+			coin_amount_container.CustomizedFun = obinit;
+			coin_amount_container.CustomizedData = amount_xy;			
+			coin_amount_container.container.x = -47;
+			coin_amount_container.container.y = 565;
+			coin_amount_container.Create_(12, "coin_amount_container");			
+			
+			put_to_lsit(coin_amount_container);
+			
+		}
+		
+		public function obinit(mc:MovieClip, idx:int, data:Array):void
+		{
+			var coin_amount_:MultiObject = create(r_coin_amount + "_" + idx,  [r_coin_amount], mc);			
+			coin_amount_.Create_(1, r_coin_amount + "_" + idx);			
+			
+			//object_init(r_coin_amount_+idx, percent);
+			
+			//put_to_lsit(progress_bar);	
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
@@ -93,9 +121,48 @@ package View.ViewComponent
 			
 			play_sound(soundcoin);		
 			
+			//coin amount
+			var type:int = bet_ob["betType"];
+			var total:int = _betCommand.get_total_bet(type);
+			//TODO temp way
+			var mylist:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];			
+			mylist.splice(type, 0, total);
+			Log("My list ="+mylist);
+			data_setting(r_coin_amount + "_" + type, amount, mylist, type);
+			
+			//data_setting(
+			
 			//coin動畫
 			stack(_betCommand.Bet_type_betlist(bet_ob["betType"]), GetSingleItem("coinstakeZone",bet_ob["betType"] ),bet_ob["betType"]);	
 		}		
+		
+		public function data_setting(obname:String, resTag:int, data:Array, data_idx:int):void
+		{
+			if ( Get(obname).resList[resTag] == r_coin_amount)
+			{
+				coin_setting(GetSingleItem(obname, resTag), data[data_idx]);
+			}
+		}
+		
+		private function coin_setting(mc:MovieClip,data:int):void
+		{			
+			utilFun.Clear_ItemChildren(mc);
+			var arr:Array = data.toString().split("");
+			arr.unshift(11);
+			var num:int = arr.length;
+			var p_num:MultiObject = create_dynamic(mc.parent.name, [r_coin_amount], mc);			
+			p_num.CustomizedFun = FrameSetting;
+			p_num.CustomizedData = arr.reverse();
+			p_num.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
+			p_num.Post_CustomizedData = [num, -18, 0];		
+			p_num.Create_(num, mc.parent.name);
+		}
+		
+		public function FrameSetting(mc:MovieClip, idx:int, data:Array):void
+		{
+			if ( data[idx] == 0 ) data[idx] = 10;
+			mc.gotoAndStop(data[idx]);
+		}
 		
 		public function stack(Allcoin:Array,contain:DisplayObjectContainer,bettype:int):void
 		{			
@@ -149,8 +216,8 @@ package View.ViewComponent
 			
 			if ( idx ==  (betlist_with_type_in_first.length-2))
 			{
-				var total:int = _betCommand.get_total_bet(betlist_with_type_in_first[0]);			
-				mc["_text"].text = total.toString();
+				//var total:int = _betCommand.get_total_bet(betlist_with_type_in_first[0]);			
+				//mc["_text"].text = total.toString();
 			}			
 		}	
 		

@@ -89,6 +89,10 @@ package Command
 																									  [1734, 100], [1446, 100],  [1152,100], [864, 100], [568, 100], [276, 100]			
 			]);
 			
+			_model.putValue(modelName.COIN_AMOUNT_XY,   [ [1782, 292], [1472, 292],  [1168, 292], [876, 292], [568, 292], [258, 292],
+																									  [1744, 120], [1456, 120],  [1162,120], [874, 120], [578, 120], [296, 120]			
+			]);
+			
 			var poermapping:DI = new DI();			
 			poermapping.putValue("WSBWbnone", 12);
 			poermapping.putValue("WSBWbigPair", 11);
@@ -141,7 +145,7 @@ package Command
 		public function bet_local(e:Event,idx:int):Boolean
 		{			
 			//idx += 1;
-			utilFun.Log("idx ="+idx);
+			utilFun.Log("bet_local idx ="+idx);
 			
 			var bet:Object = { "betType": idx,
 										   "bet_idx":_model.getValue("coin_selectIdx"),

@@ -65,8 +65,7 @@ package View.ViewComponent
 		
 		public function update_history():void
 		{			
-			var history_model:Array = _model.getValue("history_list");
-			Log("histor model =" + history_model);
+			var history_model:Array = _model.getValue("history_list");			
 			
 			Get(historysymble).CustomizedData = history_model;
 			Get(historysymble).CustomizedFun = _regular.FrameSetting;
