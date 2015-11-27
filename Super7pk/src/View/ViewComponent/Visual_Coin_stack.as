@@ -34,7 +34,7 @@ package View.ViewComponent
 		private const amount:int = 0;
 		
 		//coin seperate to N stack
-		private var _stack_num:int = 1;		
+		private var _stack_num:int = 1;
 		
 		//res
 		public const Betcoin:String = "Bet_coin";
@@ -65,9 +65,9 @@ package View.ViewComponent
 			//coin amount
 			var coin_amount_container:MultiObject = create("coin_amount_container", [ResName.emptymc]);
 			coin_amount_container.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
-			coin_amount_container.Post_CustomizedData =  amount_xy;			
+			coin_amount_container.Post_CustomizedData =  amount_xy;
 			coin_amount_container.CustomizedFun = obinit;
-			coin_amount_container.CustomizedData = amount_xy;			
+			coin_amount_container.CustomizedData = amount_xy;
 			coin_amount_container.container.x = -47;
 			coin_amount_container.container.y = 565;
 			coin_amount_container.Create_(12, "coin_amount_container");			
@@ -78,19 +78,64 @@ package View.ViewComponent
 		
 		public function obinit(mc:MovieClip, idx:int, data:Array):void
 		{
-			var coin_amount_:MultiObject = create(r_coin_amount + "_" + idx,  [r_coin_amount], mc);			
-			coin_amount_.Create_(1, r_coin_amount + "_" + idx);			
+			var res:Array =  [r_coin_amount];
+			var coin_amount_:MultiObject = create(r_coin_amount + "_" + idx,  res, mc);			
+			coin_amount_.Create_(res.length, r_coin_amount + "_" + idx);			
 			
-			//object_init(r_coin_amount_+idx, percent);
+			object_init(r_coin_amount + "_" + idx, amount);			
 			
 			//put_to_lsit(progress_bar);	
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
+		{			
+			appear();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		public function opencard_parse():void
+		{
+			disappear();
+		}	
+		
+		public function appear():void
 		{
 			Get("coinstakeZone").container.visible = true;
+			
+			//TODO obinit way
 			Clean_poker();
+			
+			var mu:MultiObject = Get("coin_amount_container");
+			mu.FlushObject();
+		}
+		
+		public function disappear():void
+		{
+			Get("coinstakeZone").container.visible = false;
+			
+			var mu:MultiObject = Get("coin_amount_container");
+			mu.FlushObject();
+			
+			//TODO obinit way
+			Clean_poker();
+		}
+		
+		//dock type handle
+		public function object_init(obname:String,resTag:int):void
+		{
+			if ( Get(obname).resList[resTag] == r_coin_amount)
+			{
+				coin_setting(GetSingleItem(obname, resTag), 0);
+			}			
+		}
+		
+		public function data_setting(obname:String, resTag:int, data:Array, data_idx:int):void
+		{
+			if ( Get(obname).resList[resTag] == r_coin_amount)
+			{
+				coin_setting(GetSingleItem(obname, resTag), data[data_idx]);
+			}
 		}
 		
 		public function Clean_poker():void
@@ -128,25 +173,16 @@ package View.ViewComponent
 			var mylist:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];			
 			mylist.splice(type, 0, total);
 			Log("My list ="+mylist);
-			data_setting(r_coin_amount + "_" + type, amount, mylist, type);
-			
-			//data_setting(
+			data_setting(r_coin_amount + "_" + type, amount, mylist, type);			
 			
 			//coin動畫
 			stack(_betCommand.Bet_type_betlist(bet_ob["betType"]), GetSingleItem("coinstakeZone",bet_ob["betType"] ),bet_ob["betType"]);	
-		}		
-		
-		public function data_setting(obname:String, resTag:int, data:Array, data_idx:int):void
-		{
-			if ( Get(obname).resList[resTag] == r_coin_amount)
-			{
-				coin_setting(GetSingleItem(obname, resTag), data[data_idx]);
-			}
 		}
 		
 		private function coin_setting(mc:MovieClip,data:int):void
 		{			
 			utilFun.Clear_ItemChildren(mc);
+			if ( data == 0 ) return;
 			var arr:Array = data.toString().split("");
 			arr.unshift(11);
 			var num:int = arr.length;
