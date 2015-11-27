@@ -235,8 +235,7 @@ package View.ViewComponent
 		//TODO move to frame Object
 		private function frame_setting(mc:MovieClip,data:int):void
 		{			
-			utilFun.Clear_ItemChildren(mc);
-			if ( data == 0 ) return;
+			utilFun.Clear_ItemChildren(mc);			
 			var arr:Array = data.toString().split("");
 			arr.push(11);
 			var num:int = arr.length;
