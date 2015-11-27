@@ -33,6 +33,7 @@ package View.ViewComponent
 		private const tag:int = 4;
 		
 		//res
+		public const progresstitle:String = "progress_title";
 		public const progress_bar:String = "bar_bg";
 		public const bar_continue:String = "power_bar_continue";
 		public const fire_effect:String = "progress_effect";
@@ -52,20 +53,29 @@ package View.ViewComponent
 		
 		public function init():void
 		{
+			var title:MultiObject = create("progresstitle", [progresstitle]);
+			title.container.x = 1127;
+			title.container.y = 170;
+			title.Create_(1, "progresstitle");
+			
+			put_to_lsit(title);	
+			
 			var progress_container:MultiObject = create("progress_container", [ResName.emptymc]);
 			progress_container.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			progress_container.Post_CustomizedData = [5, 0, 48];
+			progress_container.Post_CustomizedData = [6, 0, 55];
 			progress_container.CustomizedFun = obinit;			
 			progress_container.container.x = 887;
-			progress_container.container.y = 180;
-			progress_container.Create_(5, "progress_container");			
+			progress_container.container.y = 220;
+			progress_container.Create_(6, "progress_container");			
+			
+			put_to_lsit(progress_container);	
 			
 			_model.putValue("power_idx",[0,0,0,0,0]);
 			
 			//TODO mo to bigwin message
 			var PowerJP:MultiObject = create("Power_JP",  [PowerJP]);
 			PowerJP.container.x = 969;
-			PowerJP.container.y = 433;			
+			PowerJP.container.y = 433;
 			PowerJP.Create_(1, "Power_JP");
 			PowerJP.container.visible = false;
 			
@@ -74,17 +84,17 @@ package View.ViewComponent
 		
 		public function obinit(mc:MovieClip, idx:int, data:Array):void
 		{
-			var powerbar_0:MultiObject = create("powerbar_"+idx,  [progress_bar,bar_continue,ResName.emptymc,fire_effect,progress_bartag],mc);
-			powerbar_0.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
-			powerbar_0.Post_CustomizedData = [[0, 0], [8.3,7], [289.4, 7.5], [-38.95, -19],[-90, 0]];		
-			powerbar_0.Create_(5, "powerbar_" + idx);
-			GetSingleItem("powerbar_" + idx, bg).gotoAndStop(3);			
-			GetSingleItem("powerbar_" + idx, style)["_colorbar"].gotoAndStop(3);			
-			GetSingleItem("powerbar_" + idx, tag).gotoAndStop(1);			
+			var progress_bar:MultiObject = create("progress_"+idx,  [progress_bar,bar_continue,ResName.emptymc,fire_effect,progress_bartag],mc);
+			progress_bar.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
+			progress_bar.Post_CustomizedData = [[0, 0], [8.3,7], [289.4, 7.5], [-38.95, -19],[-90, 0]];		
+			progress_bar.Create_(5, "progress_" + idx);
+			GetSingleItem("progress_" + idx, bg).gotoAndStop(3);
+			GetSingleItem("progress_" + idx, style)["_colorbar"].gotoAndStop(3);			
+			GetSingleItem("progress_" + idx, tag).gotoAndStop(1);			
 			
-			object_init("powerbar_"+idx, percent);
+			object_init("progress_"+idx, percent);
 			
-			put_to_lsit(powerbar_0);	
+			//put_to_lsit(progress_bar);	
 		}
 		
 		//mode -> (contorl ?)->view 
@@ -149,14 +159,14 @@ package View.ViewComponent
 			//gotoAndPlay
 			//gotoAndStop
 			
-			var acumu:Array = [utilFun.Random(100)];// _model.getValue("power_jp");			
+			var acumu:Array = [utilFun.Random(100),utilFun.Random(100),utilFun.Random(100),utilFun.Random(100),utilFun.Random(100),utilFun.Random(100)];// _model.getValue("power_jp");			
 			
-			data_setting("powerbar_" + kind, percent, acumu, kind);
+			data_setting("progress_" + kind, percent, acumu, kind);
 			
-			GetSingleItem("powerbar_"+kind,tag).gotoAndStop(utilFun.Random(10));
+			GetSingleItem("progress_"+kind,tag).gotoAndStop(utilFun.Random(10));
 			
 			//effect 
-			no_effect(GetSingleItem("powerbar_" + kind, style)["_colorbar"], move_dis);
+			no_effect(GetSingleItem("progress_" + kind, style)["_colorbar"], move_dis);
 			//effect_in_tail(GetSingleItem("powerbar_"+kind, style)["_colorbar"],GetSingleItem("powerbar_" + kind, effect), move_dis, 2, kind);
 			
 			
@@ -245,9 +255,9 @@ package View.ViewComponent
 			arr[kind] = 0;
 			_model.putValue("power_idx", arr);
 			
-			GetSingleItem("powerbar_"+kind, 1)["_colorbar"].x = progress_lenth;
-			GetSingleItem("powerbar_"+kind, 2).visible = false;
-			GetSingleItem("powerbar_"+kind, 3).getChildByName("Dy_Text").text = "";
+			GetSingleItem("progress_"+kind, 1)["_colorbar"].x = progress_lenth;
+			GetSingleItem("progress_"+kind, 2).visible = false;
+			GetSingleItem("progress_"+kind, 3).getChildByName("Dy_Text").text = "";
 			
 			var acu_jp:Array  = _model.getValue("power_jp");
 			acu_jp[kind] = 0;
