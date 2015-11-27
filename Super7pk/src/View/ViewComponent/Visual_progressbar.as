@@ -72,6 +72,8 @@ package View.ViewComponent
 			
 			_model.putValue("power_idx",[0,0,0,0,0]);
 			
+			disappear();
+			
 			//TODO mo to bigwin message
 			var PowerJP:MultiObject = create("Power_JP",  [PowerJP]);
 			PowerJP.container.x = 969;
@@ -95,6 +97,37 @@ package View.ViewComponent
 			object_init("progress_"+idx, percent);
 			
 			//put_to_lsit(progress_bar);	
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
+		public function start_bet():void
+		{			
+			appear();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		public function opencard_parse():void
+		{
+			disappear();
+		}
+		
+		public function appear():void
+		{
+			var mu:MultiObject = Get("progresstitle");
+			mu.container.visible = true;
+			
+			mu = Get("progress_container");
+			mu.container.visible = true;
+			mu.FlushObject();
+		}
+		
+		public function disappear():void
+		{
+			var mu:MultiObject = Get("progresstitle");
+			mu.container.visible = false;
+			
+			mu = Get("progress_container");
+			mu.container.visible = false;		
 		}
 		
 		//mode -> (contorl ?)->view 
@@ -203,6 +236,7 @@ package View.ViewComponent
 		private function frame_setting(mc:MovieClip,data:int):void
 		{			
 			utilFun.Clear_ItemChildren(mc);
+			if ( data == 0 ) return;
 			var arr:Array = data.toString().split("");
 			arr.push(11);
 			var num:int = arr.length;

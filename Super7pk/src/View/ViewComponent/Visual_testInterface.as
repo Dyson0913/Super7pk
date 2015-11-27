@@ -164,7 +164,7 @@ package View.ViewComponent
 			_hint.init();			
 			_timer.init();
 			_HistoryRecoder.init();
-			
+			_progressbar.init();
 			_poker.init();			
 				
 			_betzone.init();
@@ -179,7 +179,7 @@ package View.ViewComponent
 			_Bigwin_Effect.init();
 			
 			
-			_progressbar.init();
+			
 			//_ProbData.init();
 			
 			

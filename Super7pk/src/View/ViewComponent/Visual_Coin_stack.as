@@ -74,6 +74,7 @@ package View.ViewComponent
 			
 			put_to_lsit(coin_amount_container);
 			
+			disappear();
 		}
 		
 		public function obinit(mc:MovieClip, idx:int, data:Array):void

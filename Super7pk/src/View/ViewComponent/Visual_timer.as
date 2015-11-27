@@ -28,14 +28,15 @@ package View.ViewComponent
 		
 		public function init():void
 		{
-			var countDown:MultiObject = create(Timer,[Timer]);
+		   var countDown:MultiObject = create(Timer,[Timer]);
 		   countDown.Create_(1,Timer);
 		   countDown.container.x = 1188;
 		   countDown.container.y = 528;
 		   
-			Waring_sec = 7;
-			disappear();
-			put_to_lsit(countDown);
+		   put_to_lsit(countDown);
+		   disappear();
+		   
+		   Waring_sec = 7;
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
