@@ -56,7 +56,7 @@ package View.ViewComponent
 			coinstack.Post_CustomizedData =  coin_xy;
 			coinstack.container.x = 3;
 			coinstack.container.y = 605;
-			coinstack.Create_(avaliblezone.length, "coinstakeZone");
+			coinstack.Create_(avaliblezone.length);
 			coinstack.container.visible = false;
 			
 			put_to_lsit(coinstack);
@@ -70,7 +70,7 @@ package View.ViewComponent
 			coin_amount_container.CustomizedData = amount_xy;
 			coin_amount_container.container.x = -47;
 			coin_amount_container.container.y = 565;
-			coin_amount_container.Create_(12, "coin_amount_container");			
+			coin_amount_container.Create_(12);			
 			
 			put_to_lsit(coin_amount_container);
 			
@@ -81,7 +81,7 @@ package View.ViewComponent
 		{
 			var res:Array =  [r_coin_amount];
 			var coin_amount_:MultiObject = create(r_coin_amount + "_" + idx,  res, mc);			
-			coin_amount_.Create_(res.length, r_coin_amount + "_" + idx);			
+			coin_amount_.Create_(res.length);			
 			
 			object_init(r_coin_amount + "_" + idx, amount);			
 			
@@ -192,7 +192,7 @@ package View.ViewComponent
 			p_num.CustomizedData = arr.reverse();
 			p_num.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			p_num.Post_CustomizedData = [num, -18, 0];		
-			p_num.Create_(num, mc.parent.name);
+			p_num.Create_(num);
 		}
 		
 		public function FrameSetting(mc:MovieClip, idx:int, data:Array):void

@@ -42,7 +42,7 @@ package View.ViewComponent
 			btn_group.container.y = 952;
 			btn_group.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
 			btn_group.Post_CustomizedData = [[0, 0], [1580, -10], [1780, -10]];
-			btn_group.Create_(btnlist.length, "btn_group");
+			btn_group.Create_(btnlist.length);
 			btn_group.rollout = empty_reaction;
 			btn_group.rollover = empty_reaction;
 			btn_group.mousedown = table_true;
@@ -55,7 +55,7 @@ package View.ViewComponent
 			mybtn_group.container.x = 1710;
 			mybtn_group.container.y = 950;
 			//mybtn_group.CustomizedFun = scal;			
-			mybtn_group.Create_(mylist.length, "mybtn_group");
+			mybtn_group.Create_(mylist.length);
 			mybtn_group.container.visible = false;
 			mybtn_group.rollout = empty_reaction;
 			mybtn_group.rollover = empty_reaction;
@@ -69,7 +69,7 @@ package View.ViewComponent
 			_rule_table.mouseup = empty_reaction;
 			_rule_table.container.x = -10;
 			_rule_table.container.y = 50;
-			_rule_table.Create_(1, "rule_table");
+			_rule_table.Create_(1);
 			_rule_table.container.visible = false;
 			
 			put_to_lsit(_rule_table);

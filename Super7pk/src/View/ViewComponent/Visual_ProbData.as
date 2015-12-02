@@ -36,7 +36,7 @@ package View.ViewComponent
 			pro.container.y =  176;
 			pro.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
 			pro.Post_CustomizedData = [6, 50, 50];
-			pro.Create_(6, "prob");
+			pro.Create_(6);
 			
 			put_to_lsit(pro);	
 		}

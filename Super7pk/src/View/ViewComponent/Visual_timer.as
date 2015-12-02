@@ -29,7 +29,7 @@ package View.ViewComponent
 		public function init():void
 		{
 		   var countDown:MultiObject = create(Timer,[Timer]);
-		   countDown.Create_(1,Timer);
+		   countDown.Create_(1);
 		   countDown.container.x = 1188;
 		   countDown.container.y = 528;
 		   

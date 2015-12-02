@@ -30,7 +30,7 @@ package View.ViewComponent
 			var tableitem:MultiObject = create(bet_tableitem, [bet_tableitem]);	
 			tableitem.container.x = 3;
 			tableitem.container.y = 605;
-			tableitem.Create_(1, bet_tableitem);			
+			tableitem.Create_(1);			
 			
 			put_to_lsit(tableitem);
 			
@@ -41,7 +41,7 @@ package View.ViewComponent
 			pz.MouseFrame = utilFun.Frametype(MouseBehavior.Customized, [1, 2, 2, 0]);			
 			pz.container.x = tableitem.container.x;
 			pz.container.y = tableitem.container.y;
-			pz.Create_(avaliblezone.length, "betzone");
+			pz.Create_(avaliblezone.length);
 			
 			disappear();
 			

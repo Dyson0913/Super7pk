@@ -45,7 +45,7 @@ package View.ViewComponent
 			var settle_table:MultiObject = create(settletable, [paytable]);			
 			settle_table.container.x = 1270;
 			settle_table.container.y =  101;
-			settle_table.Create_(1, settletable);
+			settle_table.Create_(1);
 			
 			put_to_lsit(settle_table);
 			
@@ -136,10 +136,11 @@ package View.ViewComponent
 			
 			//TODO better way ?
 			//var mylist:Array = _betCommand.bet_zone_amount();
-			var mylist:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100,30000];
-			Get(bet_symble).CustomizedFun = settleodd;
-			Get(bet_symble).CustomizedData = mylist;
-			Get(bet_symble).Create_(13, bet_symble);
+			var mylist:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
+			var symbl:MultiObject = Get(bet_symble);
+			symbl.CustomizedFun = settleodd;
+			symbl.CustomizedData = mylist;
+			symbl.Create_(13);
 			
 		
 			
@@ -162,7 +163,7 @@ package View.ViewComponent
 			p_num.CustomizedData = arr.reverse();
 			p_num.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			p_num.Post_CustomizedData = [num.length, -22, 0];		
-			p_num.Create_(num.length, mc.parent.name + "_" + idx);
+			p_num.Create_(num.length);
 		}
 		
 		public function FrameSetting(mc:MovieClip, idx:int, data:Array):void
@@ -185,16 +186,18 @@ package View.ViewComponent
 			//zone_amount.push(_betCommand.all_betzone_totoal());		
 			var zone_amount:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100];
 			//var mylist:Array = zone_amount;
-			Get(bet_symble).CustomizedFun = settleodd;
-			Get(bet_symble).CustomizedData = zone_amount;
-			Get(bet_symble).Create_(zone_amount.length , bet_symble);
+			var bet_s:MultiObject = Get(bet_symble);
+			bet_s.CustomizedFun = settleodd;
+			bet_s.CustomizedData = zone_amount;
+			bet_s.Create_(zone_amount.length);
 			
 			//總結
 //			var settle_amount:Array = _model.getValue("result_settle_amount");	
-			var settle_amount:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];		
-			Get(settle_symble).CustomizedFun = settleodd;
-			Get(settle_symble).CustomizedData = settle_amount;
-			Get(settle_symble).Create_(settle_amount.length, settle_symble);
+			var settle_amount:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
+			var settle_s:MultiObject = Get(settle_symble);
+			settle_s.CustomizedFun = settleodd;
+			settle_s.CustomizedData = settle_amount;
+			settle_s.Create_(settle_amount.length);
 			
 			
 			//= clip or word ,font property push in to mapping,

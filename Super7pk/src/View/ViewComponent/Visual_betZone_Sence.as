@@ -40,7 +40,7 @@ package View.ViewComponent
 			playerzone_s.rollover = null;
 			playerzone_s.container.x = 3;
 			playerzone_s.container.y = 605;
-			playerzone_s.Create_(avaliblezone_s.length, "betzone_s");
+			playerzone_s.Create_(avaliblezone_s.length);
 		}
 		
 		public function bet_sencer(e:Event,idx:int):Boolean

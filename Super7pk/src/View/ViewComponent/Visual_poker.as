@@ -36,7 +36,7 @@ package View.ViewComponent
 			var playerCon:MultiObject = create(modelName.POKER_1, pokerkind);			
 			playerCon.Post_CustomizedData = [[0.0],[91,108],[192,0],[382,0],[475,108],[572,0],[283,108]];
 			playerCon.Posi_CustzmiedFun = _regular.Posi_xy_Setting;			
-			playerCon.Create_(7, modelName.POKER_1.toString());
+			playerCon.Create_(7);
 			playerCon.container.x = 59;
 			playerCon.container.y = 198;
 			utilFun.scaleXY(playerCon.container, 0.8, 0.8);
@@ -48,7 +48,7 @@ package View.ViewComponent
 			var bankerCon:MultiObject =  create(modelName.POKER_2, pokerkind);
 			bankerCon.Post_CustomizedData = [7, 204, 240];
 			bankerCon.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;			
-			bankerCon.Create_(7, modelName.POKER_2.toString());
+			bankerCon.Create_(7);
 			bankerCon.container.x = 270;
 			bankerCon.container.y = 614;
 			bankerCon.container.alpha = 0;			
@@ -56,7 +56,7 @@ package View.ViewComponent
 			put_to_lsit(bankerCon);
 			
 			var mipoker:MultiObject =  create("mipoker", [Mipoker_zone]);	
-			mipoker.Create_(1, "mipoker");
+			mipoker.Create_(1);
 			mipoker.container.x = 740;
 			mipoker.container.y = 570;
 			mipoker.container.alpha = 0;
@@ -70,7 +70,7 @@ package View.ViewComponent
 			
 			var playerCon:MultiObject = Get(modelName.POKER_1);
 			playerCon.CleanList();
-			playerCon.Create_(7, modelName.POKER_1.toString());
+			playerCon.Create_(7);
 			playerCon.order_switch(5, 4);
 			playerCon.order_switch(1, 2);
 			Tweener.pauseTweens(playerCon.container);
@@ -78,7 +78,7 @@ package View.ViewComponent
 			
 			var bankerCon:MultiObject = Get(modelName.POKER_2);
 			bankerCon.CleanList();			    
-			bankerCon.Create_(7,modelName.POKER_2.toString());
+			bankerCon.Create_(7);
 			Tweener.pauseTweens(bankerCon.container);
 			bankerCon.container.alpha = 0;		
 			

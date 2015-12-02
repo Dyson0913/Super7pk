@@ -31,7 +31,7 @@ package View.ViewComponent
 		public function init():void
 		{
 			var zoneCon:MultiObject = create("zone", [ResName.emptymc]);		
-			zoneCon.Create_(3, "zone");			
+			zoneCon.Create_(3);			
 			
 			put_to_lsit(zoneCon);
 			

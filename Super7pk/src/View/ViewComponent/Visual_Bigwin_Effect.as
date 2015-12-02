@@ -50,14 +50,14 @@ package View.ViewComponent
 		{	
 			//金幣泉
 			var bigwinfire:MultiObject = create("bigwinfire", [bigwinfire]);
-			bigwinfire.Create_(1, "bigwinfire");
+			bigwinfire.Create_(1);
 			bigwinfire.container.x = 0;
 			bigwinfire.container.y = -90;
 			setFrame("bigwinfire", 1);
 			
 			//大獎字樣集
 			var bigwinCon:MultiObject = create("bigwinmsg",  [Bigwinmsg]);
-			bigwinCon.Create_(1, "bigwinmsg");
+			bigwinCon.Create_(1);
 			bigwinCon.container.x = 981;
 			bigwinCon.container.y = 420;
 			setFrame("bigwinmsg", 1);
@@ -150,7 +150,7 @@ package View.ViewComponent
 			PowerJPNum.CustomizedFun = settlt_FrameSetting;
 			PowerJPNum.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			PowerJPNum.Post_CustomizedData = [arr.length, 91, 0];
-			PowerJPNum.Create_(arr.length, "bigwin_JP_num");
+			PowerJPNum.Create_(arr.length);
 		}
 		
 		public function ready_to_cunt():void
@@ -187,7 +187,7 @@ package View.ViewComponent
 			PowerJPNum.CustomizedFun = settlt_FrameSetting;
 			PowerJPNum.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			PowerJPNum.Post_CustomizedData = [arr.length, 91, 0];
-			PowerJPNum.Create_(arr.length, "bigwin_JP_num");	
+			PowerJPNum.Create_(arr.length);	
 			coin_effect();
 			
 			//停留N秒
@@ -227,7 +227,7 @@ package View.ViewComponent
 			PowerJPNum.CustomizedFun = settlt_FrameSetting;
 			PowerJPNum.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			PowerJPNum.Post_CustomizedData = [arr.length, 91, 0];
-			PowerJPNum.Create_(arr.length, "bigwin_JP_num");	
+			PowerJPNum.Create_(arr.length);	
 			PowerJPNum.ItemList[PowerJPNum.ItemList.length-1].gotoAndPlay(11);			
 			
 			

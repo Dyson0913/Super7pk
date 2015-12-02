@@ -135,7 +135,7 @@ package View.ViewComponent
 			script_list.CustomizedFun = _text.textSetting;			
 			script_list.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			script_list.Post_CustomizedData = [5, 100, 100];			
-			script_list.Create_(script_list.CustomizedData.length -1, "script_list");
+			script_list.Create_(script_list.CustomizedData.length -1);
 			
 			
 			

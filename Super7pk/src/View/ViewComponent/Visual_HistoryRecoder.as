@@ -29,7 +29,7 @@ package View.ViewComponent
 			
 			history_bg.container.x = 1253;
 			history_bg.container.y =  175;
-			history_bg.Create_(1, historybg);
+			history_bg.Create_(1);
 			history_bg.container.visible = false;
 			
 			var history_symble:MultiObject = create(historysymble,  [historysymble] , history_bg.container);
@@ -37,7 +37,7 @@ package View.ViewComponent
 			history_symble.container.y = 8;
 			history_symble.Post_CustomizedData = [6, 60, 58.5 ];
 			history_symble.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			history_symble.Create_(60, historysymble);			
+			history_symble.Create_(60);			
 			
 			put_to_lsit(history_bg);	
 			put_to_lsit(history_symble);			

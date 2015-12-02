@@ -200,12 +200,12 @@ package View.Viewutil
 			Listen();
 		}		
 		
-		public function Create_(ItemNum:int,ItemName:String):void
+		public function Create_(ItemNum:int):void
 		{
 			CleanList();
 			
 			compensatory_diff(ItemNum);
-			_ItemName = ItemName;			
+			_ItemName = _Container.name;
 			for (var i:int = 0 ; i < ItemNum; i++)
 			{
 				var mc:MovieClip = utilFun.GetClassByString(resList[i]);				

@@ -34,7 +34,7 @@ package View.ViewComponent
 			var ptable:MultiObject = create(paytable, [paytable,paytable_baridx]);			
 			ptable.container.x = 80;
 			ptable.container.y =  101;
-			ptable.Create_(2, paytable);			
+			ptable.Create_(2);			
 			put_to_lsit(ptable);
 			
 			//X
@@ -43,7 +43,7 @@ package View.ViewComponent
 			x_sym.Post_CustomizedData = [12, 0, 36];
 			x_sym.container.x = 380;
 			x_sym.container.y =  108;
-			x_sym.Create_(12, x_symble);
+			x_sym.Create_(12);
 			
 			put_to_lsit(x_sym);
 			
@@ -53,7 +53,7 @@ package View.ViewComponent
 			p_num.Post_CustomizedData = [12, 0, 36];
 			p_num.container.x = 630;
 			p_num.container.y =  108;			
-			p_num.Create_(12, paynum);
+			p_num.Create_(12);
 			put_to_lsit(p_num);
 			
 		}
@@ -69,7 +69,7 @@ package View.ViewComponent
 			p_num.CustomizedData = arr.reverse();
 			p_num.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			p_num.Post_CustomizedData = [num.length, -22, 0];		
-			p_num.Create_(num.length, mc.parent.name + "_" + idx);
+			p_num.Create_(num.length);
 		}
 		
 		public function FrameSetting(mc:MovieClip, idx:int, data:Array):void
@@ -124,7 +124,7 @@ package View.ViewComponent
 			var mu:MultiObject = Get(paynum);			
 			mu.CustomizedFun = payodd;
 			mu.CustomizedData = [10000, 1000, 200, 100, 50, 30, 15, 8, 5, 3, 2, 1,0];
-			mu.Create_(12, paynum);
+			mu.Create_(12);
 		}
 		
 		

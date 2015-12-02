@@ -49,7 +49,7 @@ package View.ViewComponent
 			_coin.CustomizedFun = ocin_setup;
 			_coin.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			_coin.Post_CustomizedData = [5, 85, 0];
-			_coin.Create_(5, Betcoin);
+			_coin.Create_(5);
 			_coin.rollout = excusive_rollout;
 			_coin.rollover = excusive_select_action;
 			_coin.mousedown = betSelect;

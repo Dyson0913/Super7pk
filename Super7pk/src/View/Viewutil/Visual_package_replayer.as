@@ -74,7 +74,7 @@ package View.Viewutil
 			sim_pack.mousedown = pack;
 			sim_pack.Post_CustomizedData = [packName.length, 10, 32];
 			sim_pack.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			sim_pack.Create_(packName.length, "sim_pack");
+			sim_pack.Create_(packName.length);
 			//
 			//put_to_lsit(sim_pack);
 		}

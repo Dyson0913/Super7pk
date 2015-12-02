@@ -38,7 +38,7 @@ package View.ViewComponent
 			var theme:MultiObject = create("theme", [theme]);			
 			theme.container.x = 41.15;
 			theme.container.y =  92.8;
-			theme.Create_(1, "theme");
+			theme.Create_(1);
 			
 			put_to_lsit(theme);
 			
@@ -48,12 +48,12 @@ package View.ViewComponent
 			Zonetitle.Post_CustomizedData = [2,1204.0];
 			Zonetitle.container.x = 266.15;
 			Zonetitle.container.y = 53.35;
-			Zonetitle.Create_(2, "theme");
+			Zonetitle.Create_(2);
 			
 			put_to_lsit(Zonetitle);			
 			//----------------------------------------------------------------open_card			
 			var table_hint:MultiObject = create("table_hint", [ResName.emptymc]);						
-			table_hint.Create_(1, "table_hint");
+			table_hint.Create_(1);
 			table_hint.container.x = 200;
 			table_hint.container.y = 567;
 			table_hint.container.visible = false;

@@ -56,7 +56,7 @@ package View.ViewComponent
 			var title:MultiObject = create("progresstitle", [progresstitle]);
 			title.container.x = 1127;
 			title.container.y = 170;
-			title.Create_(1, "progresstitle");
+			title.Create_(1);
 			
 			put_to_lsit(title);	
 			
@@ -66,7 +66,7 @@ package View.ViewComponent
 			progress_container.CustomizedFun = obinit;
 			progress_container.container.x = 887;
 			progress_container.container.y = 220;
-			progress_container.Create_(6, "progress_container");			
+			progress_container.Create_(6);		
 			
 			put_to_lsit(progress_container);	
 			
@@ -78,7 +78,7 @@ package View.ViewComponent
 			var PowerJP:MultiObject = create("Power_JP",  [PowerJP]);
 			PowerJP.container.x = 969;
 			PowerJP.container.y = 433;
-			PowerJP.Create_(1, "Power_JP");
+			PowerJP.Create_(1);
 			PowerJP.container.visible = false;
 			
 			var PowerJPNum:MultiObject = create("Power_JP_num",  [PowerJP_Num], Get("Power_JP").container);
@@ -89,7 +89,7 @@ package View.ViewComponent
 			var progress_bar:MultiObject = create("progress_"+idx,  [progress_bar,bar_continue,ResName.emptymc,fire_effect,progress_bartag],mc);
 			progress_bar.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
 			progress_bar.Post_CustomizedData = [[0, 0], [8.3,7], [289.4, 7.5], [-38.95, -19],[-90, 0]];		
-			progress_bar.Create_(5, "progress_" + idx);
+			progress_bar.Create_(5);
 			GetSingleItem("progress_" + idx, bg).gotoAndStop(3);
 			GetSingleItem("progress_" + idx, style)["_colorbar"].gotoAndStop(3);			
 			GetSingleItem("progress_" + idx, tag).gotoAndStop(1);			
@@ -244,7 +244,7 @@ package View.ViewComponent
 			p_num.CustomizedData = arr.reverse();
 			p_num.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			p_num.Post_CustomizedData = [num, -18, 0];		
-			p_num.Create_(num, mc.parent.name);		
+			p_num.Create_(num);		
 			
 		}
 		
@@ -275,7 +275,7 @@ package View.ViewComponent
 			PowerJPNum.CustomizedFun = _regular.FrameSetting;
 			PowerJPNum.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			PowerJPNum.Post_CustomizedData = [arr.length, 57, 10];
-			PowerJPNum.Create_(arr.length, "Power_JP_num");					
+			PowerJPNum.Create_(arr.length);					
 			_regular.Call(this, { onComplete:this.showok,onCompleteParams:[kind] }, 4, 1, 1, "linear");
 			dispatcher(new StringObject("sound_bigPoker", "sound" ) );
 			
