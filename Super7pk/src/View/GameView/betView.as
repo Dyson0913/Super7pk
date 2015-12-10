@@ -70,9 +70,6 @@ package View.GameView
 		public var _HistoryRecoder:Visual_HistoryRecoder;
 		
 		[Inject]
-		public var _ProbData:Visual_ProbData;
-		
-		[Inject]
 		public var _progressbar:Visual_progressbar;
 		
 		[Inject]

@@ -96,9 +96,6 @@ package View.ViewComponent
 		public var _HistoryRecoder:Visual_HistoryRecoder;
 		
 		[Inject]
-		public var _ProbData:Visual_ProbData;
-		
-		[Inject]
 		public var _fileStream:fileStream;
 		
 		[Inject]
@@ -177,10 +174,6 @@ package View.ViewComponent
 			_paytable.init();
 			_btn.init();
 			_Bigwin_Effect.init();
-			
-			
-			
-			//_ProbData.init();
 			
 			
 			

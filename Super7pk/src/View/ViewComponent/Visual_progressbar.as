@@ -75,13 +75,13 @@ package View.ViewComponent
 			disappear();
 			
 			//TODO mo to bigwin message
-			var PowerJP:MultiObject = create("Power_JP",  [PowerJP]);
-			PowerJP.container.x = 969;
-			PowerJP.container.y = 433;
-			PowerJP.Create_(1);
-			PowerJP.container.visible = false;
-			
-			var PowerJPNum:MultiObject = create("Power_JP_num",  [PowerJP_Num], Get("Power_JP").container);
+			//var PowerJP:MultiObject = create("Power_JP",  [PowerJP]);
+			//PowerJP.container.x = 969;
+			//PowerJP.container.y = 433;
+			//PowerJP.Create_(1);
+			//PowerJP.container.visible = false;
+			//
+			//var PowerJPNum:MultiObject = create("Power_JP_num",  [PowerJP_Num], Get("Power_JP").container);
 		}		
 		
 		public function obinit(mc:MovieClip, idx:int, data:Array):void
