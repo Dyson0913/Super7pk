@@ -1,5 +1,6 @@
 package View.ViewComponent 
 {
+	import caurina.transitions.properties.ColorShortcuts;
 	import flash.display.MovieClip;
 	import util.math.Path_Generator;
 	import View.ViewBase.VisualHandler;
@@ -11,6 +12,7 @@ package View.ViewComponent
 	import Res.ResName;
 	import caurina.transitions.Tweener;	
 	import Command.*;
+	import flash.geom.ColorTransform;
 	
 	/**
 	 * poker present way
@@ -46,12 +48,13 @@ package View.ViewComponent
 			put_to_lsit(playerCon);
 			
 			var bankerCon:MultiObject =  create(modelName.POKER_2, pokerkind);
-			bankerCon.Post_CustomizedData = [7, 204, 240];
+			bankerCon.Post_CustomizedData = [7, 180, 240];
 			bankerCon.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;			
 			bankerCon.Create_(7);
-			bankerCon.container.x = 270;
-			bankerCon.container.y = 614;
-			bankerCon.container.alpha = 0;			
+			bankerCon.container.x = 145;
+			bankerCon.container.y = 594;
+			utilFun.scaleXY(bankerCon.container, 1.3, 1.3);
+			bankerCon.container.alpha = 0;
 			
 			put_to_lsit(bankerCon);
 			
@@ -79,6 +82,7 @@ package View.ViewComponent
 			var bankerCon:MultiObject = Get(modelName.POKER_2);
 			bankerCon.CleanList();			    
 			bankerCon.Create_(7);
+			utilFun.scaleXY(bankerCon.container, 1.35, 1.35);
 			Tweener.pauseTweens(bankerCon.container);
 			bankerCon.container.alpha = 0;		
 			
@@ -281,9 +285,35 @@ package View.ViewComponent
 			if ( mypoker.length != 7) return ;
 			
 			Tweener.addTween(GetSingleItem(type, 2), { y: 100 , time:1} );
-			Tweener.addTween(GetSingleItem(type, 4), { y: 100 , time:1} );
+			Tweener.addTween(GetSingleItem(type, 4), { y: 100 , time:1 } );
+			
+			//押暗
+			var mc:MovieClip = GetSingleItem(type, 2);
+			var color:uint = 0x000000;
+			var mul:Number = 70 / 100;
+			var ctMul:Number=(1-mul);
+			var ctRedOff:Number=Math.round(mul*extractRed(color));
+			var ctGreenOff:Number=Math.round(mul*extractGreen(color));
+			var ctBlueOff:Number=Math.round(mul*extractBlue(color));
+			var ct:ColorTransform = new ColorTransform(ctMul,ctMul,ctMul,1,ctRedOff,ctGreenOff,ctBlueOff,0);
+			mc.transform.colorTransform=ct;
+			
+			var mc2:MovieClip = GetSingleItem(type, 4);		
+			mc2.transform.colorTransform=ct;
+			
 		}
 		
+		function extractRed(c:uint):uint {
+		return (( c >> 16 ) & 0xFF);
+		}
+		 
+		function extractGreen(c:uint):uint {
+		return ( (c >> 8) & 0xFF );
+		}
+		 
+		function extractBlue(c:uint):uint {
+		return ( c & 0xFF );
+		}
 		
 		//[MessageHandler(type = "Model.valueObject.Intobject",selector="show_judge")]
 		public function early_check_point(type:Intobject):void

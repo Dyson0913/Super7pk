@@ -177,7 +177,7 @@ package View.ViewComponent
 			
 			
 			
-			//_btn.debug();
+			_btn.debug();
 			_model.putValue("test_init",true);
 		}
 		

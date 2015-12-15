@@ -25,17 +25,14 @@ package View.ViewComponent
 		
 		public function init():void
 		{
-			var history_bg:MultiObject = create(historybg, [historybg]);
-			
-			history_bg.container.x = 1253;
-			history_bg.container.y =  175;
+			var history_bg:MultiObject = create(historybg, [historybg]);			
 			history_bg.Create_(1);
 			history_bg.container.visible = false;
 			
 			var history_symble:MultiObject = create(historysymble,  [historysymble] , history_bg.container);
-			history_symble.container.x = 8;
-			history_symble.container.y = 8;
-			history_symble.Post_CustomizedData = [6, 60, 58.5 ];
+			history_symble.container.x = 1246.55;
+			history_symble.container.y = 159.95;
+			history_symble.Post_CustomizedData = [6, 62.2, 60.95 ];
 			history_symble.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
 			history_symble.Create_(60);			
 			

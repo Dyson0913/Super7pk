@@ -33,7 +33,7 @@ package View.ViewComponent
 			//賠率提示
 			var ptable:MultiObject = create(paytable, [paytable,paytable_baridx]);			
 			ptable.container.x = 80;
-			ptable.container.y =  101;
+			ptable.container.y =  111;
 			ptable.Create_(2);			
 			put_to_lsit(ptable);
 			
@@ -42,7 +42,7 @@ package View.ViewComponent
 			x_sym.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
 			x_sym.Post_CustomizedData = [12, 0, 36];
 			x_sym.container.x = 380;
-			x_sym.container.y =  108;
+			x_sym.container.y =  118;
 			x_sym.Create_(12);
 			
 			put_to_lsit(x_sym);
@@ -52,7 +52,7 @@ package View.ViewComponent
 			p_num.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
 			p_num.Post_CustomizedData = [12, 0, 36];
 			p_num.container.x = 630;
-			p_num.container.y =  108;			
+			p_num.container.y =  118;			
 			p_num.Create_(12);
 			put_to_lsit(p_num);
 			

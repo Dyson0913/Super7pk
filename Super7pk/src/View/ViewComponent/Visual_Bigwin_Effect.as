@@ -27,7 +27,7 @@ package View.ViewComponent
 		
 		//res name
 		public const Bigwinmsg:String = "big_win_msg";		
-		public const bigwinfire:String = "bigwin_fire";
+		public const bigwinfire:String = "sun_effect";
 		
 		public const bigwin_num:String = "big_win_num";
 		
@@ -51,8 +51,8 @@ package View.ViewComponent
 			//金幣泉
 			var bigwinfire:MultiObject = create("bigwinfire", [bigwinfire]);
 			bigwinfire.Create_(1);
-			bigwinfire.container.x = 0;
-			bigwinfire.container.y = -90;
+			bigwinfire.container.x = 550;
+			bigwinfire.container.y = 50;
 			setFrame("bigwinfire", 1);
 			
 			//大獎字樣集
@@ -72,8 +72,13 @@ package View.ViewComponent
 			put_to_lsit(bigwinCon);
 			put_to_lsit(PowerJPNum);
 			
-		}
+		}		
 		
+		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		public function pre_open():void
+		{
+			hide();
+		}
 		
 		public function hide():void
 		{
@@ -112,7 +117,13 @@ package View.ViewComponent
 			GetSingleItem("bigwinmsg").gotoAndStop(bigwin_frame);
 			
 			_model.putValue("Hit_count", 0);
-			pop_effect(1,0.5);			
+			
+			play_sound(soundBombLong);
+			odd_present();
+			coin_effect();
+			_cunt();
+			//重擊特效
+			//pop_effect(1,0.5);			
 		}
 		
 		public function pop_effect(start:Number ,end:Number):void
@@ -125,6 +136,7 @@ package View.ViewComponent
 		
 		public function hit(start:int ,end:int):void
 		{
+			//動畫次數
 			if ( _model.getValue("Hit_count") == 3) 
 			{
 				play_sound(soundBombLong);
@@ -231,7 +243,7 @@ package View.ViewComponent
 			PowerJPNum.ItemList[PowerJPNum.ItemList.length-1].gotoAndPlay(11);			
 			
 			
-			if ( toIn <= 10) 
+			if ( toIn <= 0) 
 			{
 				utilFun.Log("add carry over");				
 				dispatcher(new Intobject(1, "settle_step"));

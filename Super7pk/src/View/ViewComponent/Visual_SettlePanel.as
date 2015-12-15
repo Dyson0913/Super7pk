@@ -44,7 +44,7 @@ package View.ViewComponent
 			//settle
 			var settle_table:MultiObject = create(settletable, [paytable]);			
 			settle_table.container.x = 1270;
-			settle_table.container.y =  101;
+			settle_table.container.y =  111;
 			settle_table.Create_(1);
 			
 			put_to_lsit(settle_table);
@@ -54,7 +54,7 @@ package View.ViewComponent
 			bet_num.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
 			bet_num.Post_CustomizedData = [13, 0, 33.5];
 			bet_num.container.x = 1600;
-			bet_num.container.y =  108;
+			bet_num.container.y =  118;
 			
 			put_to_lsit(bet_num);			
 			
@@ -63,7 +63,7 @@ package View.ViewComponent
 			settlesymble.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
 			settlesymble.Post_CustomizedData = [13, 0, 33.5];
 			settlesymble.container.x = 1830;
-			settlesymble.container.y =  108;
+			settlesymble.container.y =  118;
 			
 			put_to_lsit(settlesymble);		
 			
