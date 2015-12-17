@@ -56,7 +56,7 @@ package ConnectModule.websocket
 			//var object:Object = _model.getValue(modelName.LOGIN_INFO);						
 			var uuid:String = _model.getValue(modelName.UUID);
 			utilFun.Log("uuid =" + uuid);
-			websocket = new WebSocket("ws://" + _model.getValue(modelName.Domain_Name) +":8201/gamesocket/token/" + uuid, "");
+			websocket = new WebSocket("ws://" + _model.getValue(modelName.Domain_Name) +":8401/gamesocket/token/" + uuid, "");
 			websocket.addEventListener(WebSocketEvent.OPEN, handleWebSocket);
 			websocket.addEventListener(WebSocketEvent.CLOSED, handleWebSocket);
 			websocket.addEventListener(WebSocketErrorEvent.CONNECTION_FAIL, handleConnectionFail);
