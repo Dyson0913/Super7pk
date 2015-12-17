@@ -41,39 +41,28 @@ package Command
 			_model.putValue("after_bet_credit", 0);
 			
 			//閒對,閒,和,莊,莊對
-			var betzone:Array = [0, 1, 2, 3, 4, 5];
-			var betzone_name:Array = ["BetBWPlayer", "BetBWBanker", "BetBWTiePoint", "BetBWBankerPair", "BetBWPlayerPair", "BetBWSpecial"];
+			var betzone:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];			
+			var betzone_name:Array = ["BetS7PKNone", "BetS7PKOnePair", "BetS7PKTwoPair", "BetS7PKTripple", "BetS7PKStraight", "BetS7PKFlush","BetS7PKFullHouse","BetS7PKFourOfAKind","BetS7PKStraightFlush","BetS7PKFiveOfAKind","BetS7PKRoyalFlush","BetS7PKPureRoyalFlush"];
 			
 			var bet_name_to_idx:DI = new DI();
 			var bet_idx_to_name:DI = new DI();
+			var _idx_to_result_idx:DI = new DI();
 			for ( var i:int = 0; i < betzone.length ; i++)
 			{
 				bet_name_to_idx.putValue(betzone_name[i], i);
 				bet_idx_to_name.putValue(i, betzone_name[i]);
-			}
+				
+				_idx_to_result_idx.putValue(i,betzone.length-i );
+			}		
 			
-			var _idx_to_result_idx:DI = new DI();
-			
-			_idx_to_result_idx.putValue("0", 1);
-			_idx_to_result_idx.putValue("1", 0);
-			_idx_to_result_idx.putValue("2", 2);
-			_idx_to_result_idx.putValue("3", 3);
-			_idx_to_result_idx.putValue("4", 4);
-			_idx_to_result_idx.putValue("5", 5);
-			_model.putValue("idx_to_result_idx", _idx_to_result_idx);		
-			//_model.putValue("BetBWPlayer", 0);
-			//_model.putValue("BetBWBanker", 1);			
-			//_model.putValue("BetBWTie", 2);			
-			//_model.putValue("BetBWBankerPair", 3);			
-			//_model.putValue("BetBWPlayerPair", 4);						
-			//_model.putValue("BetBWSpecial", 5);		
 			
 			_model.putValue("Bet_name_to_idx", bet_name_to_idx);		
 			_model.putValue("Bet_idx_to_name", bet_idx_to_name);
+			_model.putValue("idx_to_result_idx", _idx_to_result_idx);
 			
 			var avaliblezone:Array = [];
 			var avaliblezone_s:Array = [];
-			for ( i = 0; i < 12; i++)
+			for ( i = 0; i < betzone.length; i++)
 			{
 				avaliblezone.push ( "zone_" + i);
 				avaliblezone_s.push ( "zone_" + i + "_sence");				

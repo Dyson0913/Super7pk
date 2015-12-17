@@ -3,6 +3,7 @@ package View.ViewComponent
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.geom.ColorTransform;
 	import View.ViewBase.VisualHandler;
 	import Model.valueObject.*;
 	import Model.*;
@@ -80,6 +81,42 @@ package View.ViewComponent
 			betzone.mouseup = bet_sencer;
 			betzone.rollout = bet_sencer;
 			betzone.rollover = bet_sencer;
+			
+			//TODO zone dock
+			var avaliblezone:Array = _model.getValue("round_paytable");
+			//[-1, -1, -1, -1, -1, -1, 15, 21, 24, 10, 0.9, 1.7]
+			var dark_zone: Array = [];
+			for ( var i:int = 0; i < avaliblezone.length ; i++)
+			{
+				if ( avaliblezone[i] == -1) dark( GetSingleItem("betzone", i));//dark_zone.push[i];
+			}
+			
+		}
+		
+		private function dark(mc:MovieClip):void
+		{
+			//var mc:MovieClip = GetSingleItem(type, 2);
+
+			var color:uint = 0x000000;
+			var mul:Number = 70 / 100;
+			var ctMul:Number=(1-mul);
+			var ctRedOff:Number=Math.round(mul*extractRed(color));
+			var ctGreenOff:Number=Math.round(mul*extractGreen(color));
+			var ctBlueOff:Number=Math.round(mul*extractBlue(color));
+			var ct:ColorTransform = new ColorTransform(ctMul,ctMul,ctMul,1,ctRedOff,ctGreenOff,ctBlueOff,0);
+			mc.transform.colorTransform=ct;
+		}
+		
+			function extractRed(c:uint):uint {
+		return (( c >> 16 ) & 0xFF);
+		}
+		 
+		function extractGreen(c:uint):uint {
+		return ( (c >> 8) & 0xFF );
+		}
+		 
+		function extractBlue(c:uint):uint {
+		return ( c & 0xFF );
 		}
 		
 	}

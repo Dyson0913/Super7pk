@@ -102,17 +102,17 @@ package View.ViewComponent
 			disappear();
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function opencard_parse():void
-		{
-			appear();
-		}
-		
 		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
 		public function stop_bet():void
 		{
 			appear();
 		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		public function opencard_parse():void
+		{
+			appear();
+		}	
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
 		public function settle():void
@@ -135,14 +135,19 @@ package View.ViewComponent
 			setFrame(settletable, 3);
 			
 			//TODO better way ?
-			//var mylist:Array = _betCommand.bet_zone_amount();
-			var mylist:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
+			var mylist:Array = _betCommand.bet_zone_amount();			
+			//var mylist:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
 			var symbl:MultiObject = Get(bet_symble);
 			symbl.CustomizedFun = settleodd;
 			symbl.CustomizedData = mylist;
 			symbl.Create_(13);
 			
-		
+			var settle:Array = _model.getValue("result_settle_amount");
+			//var mylist:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
+			var symbl:MultiObject = Get(settle_symble);
+			symbl.CustomizedFun = settleodd;
+			symbl.CustomizedData = settle;
+			symbl.Create_(13);
 			
 			//TODO word type setting
 			//var font:Array = [{size:24,align:_text.align_right,color:0xFF0000}];

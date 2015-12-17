@@ -50,9 +50,10 @@ package
 			// entry point
 			if ( CONFIG::debug ) 
 			{
-				Debug.monitor(stage);
-				utilFun.Log("welcome Super7PK alcon");
+				
 			}
+			Debug.monitor(stage);
+				utilFun.Log("welcome Super7PK alcon");
 			
 			_context  = ActionScriptContextBuilder.build(appConfig);
 			

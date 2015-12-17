@@ -106,14 +106,14 @@ package ConnectModule.websocket
 					case Message.MSG_TYPE_INTO_GAME:
 					{
 						dispatcher(new ValueObject(  result.remain_time, modelName.REMAIN_TIME) );
-						if ( _opration.getMappingValue("state_mapping", result.game_state) == gameState.NEW_ROUND)
+						if ( _opration.getMappingValue("state_mapping", result.game_state) == gameState.START_BET)
 						{
 						    dispatcher(new ValueObject(  result.record_list, "history_list") );
 						}
 						dispatcher(new ValueObject(  _opration.getMappingValue("state_mapping", result.game_state) , modelName.GAMES_STATE) );	
 						
-						dispatcher( new ValueObject(result.cards_info["player_card_list"], modelName.POKER_1) );
-						dispatcher( new ValueObject(result.cards_info["banker_card_list"], modelName.POKER_2) );						
+						dispatcher( new ValueObject(result.cards_info["extra_card_list"], modelName.POKER_1) );
+						dispatcher( new ValueObject(result.cards_info["extra_card_list"], modelName.POKER_2) );						
 						
 						dispatcher(new ValueObject(  result.game_round, "game_round") );
 						dispatcher(new ValueObject(  result.game_id, "game_id") );
@@ -137,6 +137,7 @@ package ConnectModule.websocket
 						{																						
 							if ( result.update_odds)
 							{
+								dispatcher(new ValueObject(  result.update_odds, "round_paytable") );						
 								utilFun.Log("get odd");
 							}
 						}
