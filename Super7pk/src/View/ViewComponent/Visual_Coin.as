@@ -65,7 +65,7 @@ package View.ViewComponent
 			mc["_coin"].gotoAndStop(idx+1);
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
 		public function pre_open():void
 		{
 			_regular.Fadeout(_coin.container, 0, 1);

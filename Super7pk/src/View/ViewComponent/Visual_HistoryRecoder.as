@@ -40,7 +40,7 @@ package View.ViewComponent
 			put_to_lsit(history_symble);			
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
 		public function pre_open():void
 		{
 			Get(historybg).container.visible = true;

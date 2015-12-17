@@ -128,32 +128,46 @@ package ConnectModule.websocket
 					break;
 					
 					case Message.MSG_TYPE_GAME_OPEN_INFO:
-					{				
+					{
 						var card:Array = result.card_list;
 						var card_type:String = result.card_type;
 						var mypoker:Array =[];
 						var mypoker2:Array =[];
-						if ( card_type == "Player")
-						{										
-							mypoker = _model.getValue(modelName.POKER_1);
-							mypoker2 = _model.getValue(modelName.POKER_2);
-							mypoker.push(card[0]);
-							mypoker2.push(card[0]);
-							_model.putValue(modelName.POKER_1, mypoker);
-							_model.putValue(modelName.POKER_2, mypoker2);
-							dispatcher(new Intobject(modelName.POKER_1, "poker_mi"));
-							dispatcher(new Intobject(modelName.POKER_2, "poker_mi"));
-						}					
+						if ( _opration.getMappingValue("state_mapping", result.game_state) == gameState.NEW_ROUND)
+						{																						
+							if ( result.update_odds)
+							{
+								utilFun.Log("get odd");
+							}
+						}
+						
+						if ( _opration.getMappingValue("state_mapping", result.game_state) == gameState.START_OPEN)
+						{
+							
+						}
+						
+						mypoker = _model.getValue(modelName.POKER_1);
+						mypoker2 = _model.getValue(modelName.POKER_2);
+						mypoker.push(card[0]);
+						mypoker2.push(card[0]);
+						_model.putValue(modelName.POKER_1, mypoker);
+						_model.putValue(modelName.POKER_2, mypoker2);
+						dispatcher(new Intobject(modelName.POKER_1, "poker_mi"));
+						dispatcher(new Intobject(modelName.POKER_2, "poker_mi"));
 					}
 					break;
 					
 					case Message.MSG_TYPE_STATE_INFO:
 					{						
 						dispatcher(new ValueObject(  result.game_round, "game_round") );
-						dispatcher(new ValueObject(  result.remain_time, modelName.REMAIN_TIME) );
+						
 						if ( _opration.getMappingValue("state_mapping", result.game_state) == gameState.NEW_ROUND)
 						{
 						    dispatcher(new ValueObject(  result.record_list, "history_list") );
+						}
+						if ( _opration.getMappingValue("state_mapping", result.game_state) == gameState.START_BET)
+						{
+							dispatcher(new ValueObject(  result.remain_time, modelName.REMAIN_TIME) );
 						}
 						
 						dispatcher(new ValueObject(  _opration.getMappingValue("state_mapping", result.game_state) , modelName.GAMES_STATE) );
@@ -180,10 +194,11 @@ package ConnectModule.websocket
 					case Message.MSG_TYPE_ROUND_INFO:
 					{						
 						dispatcher(new ValueObject(  _opration.getMappingValue("state_mapping", result.game_state) , modelName.GAMES_STATE) );							
-						dispatcher(new ModelEvent("update_state"));
+						
 						
 						dispatcher( new ValueObject(result.result_list, modelName.ROUND_RESULT));
-						dispatcher(new ModelEvent("round_result"));				
+						//dispatcher(new ModelEvent("round_result"));				
+						dispatcher(new ModelEvent("update_state"));
 					}
 					break;
 					

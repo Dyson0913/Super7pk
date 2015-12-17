@@ -311,7 +311,8 @@ package Command
 			return _Bet_info.getValue("self");		
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "round_result")]
+		//[MessageHandler(type = "Model.ModelEvent", selector = "round_result")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
 		public function settle_data_parse():void
 		{
 			//who win

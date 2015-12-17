@@ -62,7 +62,7 @@ package View.GameView
 			
 			var state:DI = new DI();
 			state.putValue("NewRoundState", gameState.NEW_ROUND);
-			state.putValue("StartBetState", gameState.PRE_OPEN);
+			state.putValue("StartBetState", gameState.START_BET);
 			state.putValue("EndBetState", gameState.END_BET);
 			state.putValue("OpenState", gameState.START_OPEN);
 			state.putValue("EndRoundState", gameState.END_ROUND);			
@@ -83,8 +83,8 @@ package View.GameView
 			var view:MultiObject = prepare("_view", new MultiObject() , this);
 			view.Create_by_list(1, [ResName.emptymc], 0, 0, 1, 0, 0, "a_");
 					
-			utilFun.SetTime(connet, 0.1);
-			//_test.init();
+			//utilFun.SetTime(connet, 0.1);
+			_test.init();
 			
 			
 		}

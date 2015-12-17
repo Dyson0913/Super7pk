@@ -187,7 +187,7 @@ package View.ViewComponent
 			_model.putValue(modelName.REMAIN_TIME, 20);
 			fake_hisotry();
 			
-			_model.putValue(modelName.GAMES_STATE,gameState.NEW_ROUND);			
+			_model.putValue(modelName.GAMES_STATE,gameState.START_BET);			
 			dispatcher(new ModelEvent("update_state"));
 			
 			_model.putValue(modelName.POKER_1, ["1s", "2d", "3s", "5c", "6h"]);			
@@ -244,7 +244,10 @@ package View.ViewComponent
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "3")]
 		public function pack_sim():void
 		{
-			var fakePacket:Object = { "game_state": "NewRoundState", "record_list": [ { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKTripple" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKStraight" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKFullHouse" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKTripple" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKFlush" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKStraight" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKStraight" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKOnePair" } ], "timestamp": 1450340823.776597, "remain_time": 1, "game_type": "Super7PK", "game_round": 59, "game_id": "Super7PK-1", "message_type": "MsgBPState", "id": "f38ca28ca49711e5964bf23c9189e2a9" }
+			var fakePacket:Object = {"game_state": "NewRoundState", "record_list": [{"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKStraight"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKFullHouse"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKTripple"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKFlush"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKStraight"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKStraight"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKStraight"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKTwoPair"}], 
+ "timestamp": 1450340990.776315, "remain_time": 1, "game_type": "Super7PK", "game_round": 62, "game_id": "Super7PK-1", 
+ "message_type": "MsgBPState", "id": "5716c5b2a49811e5964bf23c9189e2a9"}
+			
 			_MsgModel.push(fakePacket);	
 			//dispatcher(new Intobject(3, "power_up"));
 			//dispatcher(new Intobject(utilFun.Random(2), "power_up"));
@@ -276,7 +279,7 @@ package View.ViewComponent
 			
 			fake_hisotry();
 			
-			_model.putValue(modelName.GAMES_STATE,gameState.PRE_OPEN);			
+			_model.putValue(modelName.GAMES_STATE,gameState.NEW_ROUND);			
 			dispatcher(new ModelEvent("update_state"));
 				
 			//================================================ simu deal
@@ -295,7 +298,7 @@ package View.ViewComponent
 			Log("fackeDeal card = " + card);
 			var mypoker:Array = [];
 			var mypoker2:Array = [];
-			if ( card_type == "Player")
+			if ( card_type == "Extra")
 			{										
 				mypoker = _model.getValue(modelName.POKER_1);										
 				mypoker2 = _model.getValue(modelName.POKER_2);										

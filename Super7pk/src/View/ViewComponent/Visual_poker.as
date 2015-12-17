@@ -94,7 +94,7 @@ package View.ViewComponent
 			_model.putValue(modelName.POKER_2, [] );
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
 		public function pre_open():void
 		{
 			Clean_poker();

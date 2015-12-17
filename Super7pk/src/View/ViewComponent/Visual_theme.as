@@ -59,7 +59,7 @@ package View.ViewComponent
 			put_to_lsit(table_hint);
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
 		public function pre_open():void
 		{
 			//還原

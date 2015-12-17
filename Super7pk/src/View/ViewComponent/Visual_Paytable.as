@@ -82,7 +82,7 @@ package View.ViewComponent
 			mc.gotoAndStop(data[idx]);
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "pre_open")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
 		public function pre_open():void
 		{
 			disappear();
