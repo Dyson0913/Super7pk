@@ -94,18 +94,18 @@ package Command
 			]);
 			
 			var poermapping:DI = new DI();			
-			poermapping.putValue("WSBWbnone", 12);
-			poermapping.putValue("WSBWbigPair", 11);
-			poermapping.putValue("WSBWTwoPair", 10);
-			poermapping.putValue("WSBWTripple", 9);
-			poermapping.putValue("WSBWStraight", 8);
-			poermapping.putValue("WSBWFlush", 7);
-			poermapping.putValue("WSBWFullHouse", 6);
-			poermapping.putValue("WSBWFourOfAKind", 5);
-			poermapping.putValue("WSBWStraightFlush", 4);
-			poermapping.putValue("WSBWfiveclub", 3);
-			poermapping.putValue("WSBWRoyalFlush", 2);
-			poermapping.putValue("WSBWPureRoyalFlush", 1);
+			poermapping.putValue("BetS7PKNone", 13);
+			poermapping.putValue("BetS7PKOnePair", 12);
+			poermapping.putValue("BetS7PKTwoPair", 11);
+			poermapping.putValue("BetS7PKTripple", 10);
+			poermapping.putValue("BetS7PKStraight", 9);
+			poermapping.putValue("BetS7PKFlush", 8);
+			poermapping.putValue("BetS7PKFullHouse", 7);
+			poermapping.putValue("BetS7PKFourOfAKind", 6);
+			poermapping.putValue("BetS7PKStraightFlush", 5);
+			poermapping.putValue("BetS7PKFiveOfAKind", 4);
+			poermapping.putValue("BetS7PKRoyalFlush", 3);
+			poermapping.putValue("BetS7PKPureRoyalFlush", 2);
 			_model.putValue(modelName.BIG_POKER_MSG , poermapping);			
 			
 			_model.putValue("power_jp",[0,0]);

@@ -58,10 +58,11 @@ package View.GameView
 			
 			_betCommand.bet_init();
 			_sound.init();
-			_model.putValue(modelName.Game_Name, "BigWin");
+			_model.putValue(modelName.Game_Name, "Super7PK");
 			
 			var state:DI = new DI();
 			state.putValue("NewRoundState", gameState.NEW_ROUND);
+			state.putValue("StartBetState", gameState.PRE_OPEN);
 			state.putValue("EndBetState", gameState.END_BET);
 			state.putValue("OpenState", gameState.START_OPEN);
 			state.putValue("EndRoundState", gameState.END_ROUND);			
