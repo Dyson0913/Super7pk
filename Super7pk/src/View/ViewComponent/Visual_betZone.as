@@ -54,6 +54,12 @@ package View.ViewComponent
 			appear();			
 		}		
 		
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
+		public function stop_bet():void
+		{
+			disappear();			
+		}		
+		
 		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
 		public function opencard_parse():void
 		{

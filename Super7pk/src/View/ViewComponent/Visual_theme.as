@@ -87,6 +87,16 @@ package View.ViewComponent
 			//  xxx. setting ....
 		}
 		
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
+		public function stop_bet():void
+		{
+			GetSingleItem("theme").gotoAndStop(2);
+			GetSingleItem("Zonetitle", 0).gotoAndStop(1);
+			GetSingleItem("Zonetitle", 1).gotoAndStop(2);
+			
+			Get("table_hint").container.visible = false;
+		}		
+		
 		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
 		public function opencard_parse():void
 		{			

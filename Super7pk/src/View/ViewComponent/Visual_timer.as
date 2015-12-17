@@ -39,6 +39,12 @@ package View.ViewComponent
 		   Waring_sec = 7;
 		}
 		
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
+		public function stop_bet():void
+		{
+			disappear();
+		}		
+		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
 		{			

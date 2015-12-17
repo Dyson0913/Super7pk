@@ -47,6 +47,12 @@ package View.ViewComponent
 			update_history();
 		}
 		
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
+		public function stop_bet():void
+		{
+			Get(historybg).container.visible = false;
+		}		
+		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
 		{

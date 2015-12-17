@@ -104,6 +104,9 @@ package View.ViewComponent
 		[Inject]
 		public var _theme:Visual_theme = new Visual_theme();
 		
+		
+		private var _pack:Array = [];
+		
 		public function Visual_testInterface() 
 		{
 			
@@ -134,9 +137,21 @@ package View.ViewComponent
 			script_list.Post_CustomizedData = [5, 100, 100];			
 			script_list.Create_(script_list.CustomizedData.length -1);
 			
+			_pack = [ { "game_state": "NewRoundState", "record_list": [ { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKStraight" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKFullHouse" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKTripple" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKFlush" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKStraight" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKStraight" }, { "winner": "BetS7PKTwoPair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKNone" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKStraight" }, { "winner": "BetS7PKOnePair" }, { "winner": "BetS7PKTwoPair" } ], "timestamp": 1450340990.776315, "remain_time": 1, "game_type": "Super7PK", "game_round": 62, "game_id": "Super7PK-1", "message_type": "MsgBPState", "id": "5716c5b2a49811e5964bf23c9189e2a9" },
+			              {"card_list": ["6s"], "game_state": "NewRoundState", "timestamp": 1450340992.776562, "game_type": "Super7PK", "game_round": 62, "card_type": "Extra", "game_id": "Super7PK-1", "message_type": "MsgBPOpenCard", "id": "5847fc30a49811e5964bf23c9189e2a9" },
+						  {"card_list": ["7h"], "game_state": "NewRoundState", "timestamp": 1450340993.776742, "game_type": "Super7PK", "game_round": 62, "card_type": "Extra", "game_id": "Super7PK-1", "message_type": "MsgBPOpenCard", "id": "58e099aea49811e5964bf23c9189e2a9" },
+						  {"card_list": ["1s"], "game_state": "NewRoundState", "timestamp": 1450340994.776843, "game_type": "Super7PK", "game_round": 62, "card_type": "Extra", "game_id": "Super7PK-1", "message_type": "MsgBPOpenCard", "id": "59793402a49811e5964bf23c9189e2a9" },
+						  {"card_list": ["9d"], "game_state": "NewRoundState", "timestamp": 1450340995.776157, "game_type": "Super7PK", "game_round": 62, "card_type": "Extra", "game_id": "Super7PK-1", "message_type": "MsgBPOpenCard", "id": "5a11af34a49811e5964bf23c9189e2a9" },
+						  {"card_list": ["6c"], "game_state": "NewRoundState", "update_odds": [-1, -1, -1, -1, 175, 22, -1, 17, 7, 1.6, 0.9, -1], "timestamp": 1450340996.776354, "game_type": "Super7PK", "game_round": 62, "card_type": "Extra", "game_id": "Super7PK-1", "message_type": "MsgBPOpenCard", "id": "5aaa4ddea49811e5964bf23c9189e2a9"},
+						  {"game_state": "StartBetState", "timestamp": 1450340997.776744, "remain_time": 24, "game_type": "Super7PK", "game_round": 62, "game_id": "Super7PK-1", "message_type": "MsgBPState", "id": "5b42f412a49811e5964bf23c9189e2a9" },
+						  {"game_state": "EndBetState", "timestamp": 1450341023.776447, "remain_time": 2, "game_type": "Super7PK", "game_round": 62, "game_id": "Super7PK-1", "message_type": "MsgBPState", "id": "6ac23042a49811e5964bf23c9189e2a9" },
+						  {"card_list": ["4s"], "game_state": "OpenState", "timestamp": 1450341027.776838, "game_type": "Super7PK", "game_round": 62, "card_type": "River", "game_id": "Super7PK-1", "message_type": "MsgBPOpenCard", "id": "6d249942a49811e5964bf23c9189e2a9" },
+						  {"card_list": ["jh"], "game_state": "OpenState", "timestamp": 1450341033.776575, "game_type": "Super7PK", "game_round": 62, "card_type": "River", "game_id": "Super7PK-1", "message_type": "MsgBPOpenCard", "id": "70b8170aa49811e5964bf23c9189e2a9" },
+						  {"result_list": [ { "bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKPureRoyalFlush", "settle_amount": 0 }, { "bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKRoyalFlush", "settle_amount": 0 }, { "bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFiveOfAKind", "settle_amount": 0 }, { "bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKStraightFlush", "settle_amount": 0 }, { "bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFourOfAKind", "settle_amount": 0 }, { "bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFullHouse", "settle_amount": 0 }, { "bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFlush", "settle_amount": 0 }, { "bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKStraight", "settle_amount": 0 }, { "bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKTripple", "settle_amount": 0 }, { "bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKTwoPair", "settle_amount": 0 }, { "bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0.9, "win_state": "WSWin", "real_win_amount": 0, "bet_type": "BetS7PKOnePair", "settle_amount": 0 }, { "bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKNone", "settle_amount": 0 } ], "game_state": "EndRoundState", "game_result_id": "testid0001", "timestamp": 1450341034.780169, "remain_time": 9, "game_type": "Super7PK", "game_round": 62, "game_id": "Super7PK-1", "message_type": "MsgBPEndRound", "id": "71513a34a49811e5964bf23c9189e2a9" }
+						  ];
+						  
 			
-			
-			_model.putValue("Script_idx", 0);			
+			_model.putValue("Script_idx", 0);
 		
 		}				
 		
@@ -177,7 +192,7 @@ package View.ViewComponent
 			
 			
 			
-			_btn.debug();
+			//_btn.debug();
 			_model.putValue("test_init",true);
 		}
 		
@@ -244,11 +259,10 @@ package View.ViewComponent
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "3")]
 		public function pack_sim():void
 		{
-			var fakePacket:Object = {"game_state": "NewRoundState", "record_list": [{"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKStraight"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKFullHouse"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKTripple"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKFlush"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKStraight"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKStraight"}, {"winner": "BetS7PKTwoPair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKNone"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKStraight"}, {"winner": "BetS7PKOnePair"}, {"winner": "BetS7PKTwoPair"}], 
- "timestamp": 1450340990.776315, "remain_time": 1, "game_type": "Super7PK", "game_round": 62, "game_id": "Super7PK-1", 
- "message_type": "MsgBPState", "id": "5716c5b2a49811e5964bf23c9189e2a9"}
 			
+			var fakePacket:Object  = _pack[0]; 
 			_MsgModel.push(fakePacket);	
+			_pack.shift();
 			//dispatcher(new Intobject(3, "power_up"));
 			//dispatcher(new Intobject(utilFun.Random(2), "power_up"));
 			//return;
