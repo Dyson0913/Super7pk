@@ -65,8 +65,15 @@ package View.ViewComponent
 			var history_model:Array = _model.getValue("history_list");			
 			
 			Get(historysymble).CustomizedData = history_model;
-			Get(historysymble).CustomizedFun = _regular.FrameSetting;
+			Get(historysymble).CustomizedFun = history_ball_Setting;
 			Get(historysymble).FlushObject();
+		}
+		
+		public function history_ball_Setting(mc:MovieClip, idx:int, data:Array):void
+		{
+			var info:Object = data[idx];
+			var frame:int = _opration.getMappingValue(modelName.BIG_POKER_MSG,  info.winner);	
+			mc.gotoAndStop(frame);			
 		}
 	}
 
