@@ -276,6 +276,7 @@ package View.ViewComponent
 			//prob_cal();
 			//dispatcher(new Intobject(type, "caculate_prob"));
 			
+			//TODO diplay timing
 			pull_down(type);
 		}
 		

@@ -76,7 +76,7 @@ package View.GameView
 		public var _Bigwin_Effect:Visual_Bigwin_Effect;
 		
 		[Inject]
-		public var _theme:Visual_theme = new Visual_theme();
+		public var _theme:Visual_theme;
 		
 		public function betView()  
 		{

@@ -132,7 +132,9 @@ package ConnectModule.websocket
 						var card:Array = result.card_list;
 						var card_type:String = result.card_type;
 						var mypoker:Array =[];
-						var mypoker2:Array =[];
+						var mypoker2:Array = [];
+						
+						//handle pre 5 poker
 						if ( _opration.getMappingValue("state_mapping", result.game_state) == gameState.NEW_ROUND)
 						{																						
 							if ( result.update_odds)
@@ -142,10 +144,7 @@ package ConnectModule.websocket
 							}
 						}
 						
-						if ( _opration.getMappingValue("state_mapping", result.game_state) == gameState.START_OPEN)
-						{
-							
-						}
+						
 						
 						mypoker = _model.getValue(modelName.POKER_1);
 						mypoker2 = _model.getValue(modelName.POKER_2);
@@ -155,6 +154,13 @@ package ConnectModule.websocket
 						_model.putValue(modelName.POKER_2, mypoker2);
 						dispatcher(new Intobject(modelName.POKER_1, "poker_mi"));
 						dispatcher(new Intobject(modelName.POKER_2, "poker_mi"));
+						
+						//last 2 poker (open card become just handle half in)
+						if ( _opration.getMappingValue("state_mapping", result.game_state) == gameState.END_BET)
+						{
+							dispatcher(new ValueObject(  _opration.getMappingValue("state_mapping", result.game_state) , modelName.GAMES_STATE) );
+							dispatcher(new ModelEvent("update_state"));
+						}
 					}
 					break;
 					

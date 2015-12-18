@@ -91,8 +91,8 @@ package View.ViewComponent
 		public function stop_bet():void
 		{
 			GetSingleItem("theme").gotoAndStop(2);
-			GetSingleItem("Zonetitle", 0).gotoAndStop(1);
-			GetSingleItem("Zonetitle", 1).gotoAndStop(2);
+			GetSingleItem("Zonetitle", 0).gotoAndStop(4);
+			GetSingleItem("Zonetitle", 1).gotoAndStop(3);
 			
 			Get("table_hint").container.visible = false;
 		}		
