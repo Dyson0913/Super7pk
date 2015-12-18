@@ -46,6 +46,16 @@ package View.ViewComponent
 		
 		public function bet_sencer(e:Event,idx:int):Boolean
 		{				
+				var avaliblezone:Array = _model.getValue("round_paytable");
+				if ( avaliblezone != null)
+				{
+					if ( avaliblezone[idx] == -1) 
+					{
+						utilFun.Log("bet reject");
+						return false;
+					}
+				}
+				
 //			Log("betsence type =" + e.type);
 			if ( e.type == MouseEvent.MOUSE_DOWN)
 			{
@@ -85,11 +95,11 @@ package View.ViewComponent
 			//TODO zone dock
 			var avaliblezone:Array = _model.getValue("round_paytable");
 			//[-1, -1, -1, -1, -1, -1, 15, 21, 24, 10, 0.9, 1.7]
-			var dark_zone: Array = [];
-			for ( var i:int = 0; i < avaliblezone.length ; i++)
-			{
-				if ( avaliblezone[i] == -1) dark( GetSingleItem("betzone", i));//dark_zone.push[i];
-			}
+			//var dark_zone: Array = [];
+			//for ( var i:int = 0; i < avaliblezone.length ; i++)
+			//{
+				//if ( avaliblezone[i] == -1) dark( GetSingleItem("betzone", i));//dark_zone.push[i];
+			//}
 			
 		}
 		

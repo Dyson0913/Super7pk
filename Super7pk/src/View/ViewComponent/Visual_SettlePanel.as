@@ -201,8 +201,7 @@ package View.ViewComponent
 			var settle_s:MultiObject = Get(settle_symble);
 			settle_s.CustomizedFun = settleodd;
 			settle_s.CustomizedData = settle_amount;
-			settle_s.Create_(settle_amount.length);
-			
+			settle_s.Create_(settle_amount.length);			
 			
 			//= clip or word ,font property push in to mapping,			
 			//Get("settletable_zone_settle").CustomizedFun = _text.colortextSetting;

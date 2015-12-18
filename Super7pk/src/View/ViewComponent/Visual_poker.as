@@ -164,7 +164,7 @@ package View.ViewComponent
 			var mypoker:Array =   _model.getValue(type.Value);
 			var pokerid:int = pokerUtil.pokerTrans(mypoker[mypoker.length - 1]);		
 			
-			if ( need_mi_poker()) return;
+			if ( need_mi_poker(type.Value)) return;
 			
 			
 			var anipoker:MovieClip = GetSingleItem(type.Value, mypoker.length - 1);
@@ -176,17 +176,21 @@ package View.ViewComponent
 			dispatcher(new StringObject("sound_poker_turn","sound" ) );			
 		}
 		
-		public function need_mi_poker():Boolean
+		public function need_mi_poker(pokertype:int):Boolean
 		{
 			return false;
+			var mypoker:Array =   _model.getValue(pokertype);
+			if( mypoker.length <5) return false;
+			
+			var pokerid:int = pokerUtil.pokerTrans(mypoker[mypoker.length - 1]);		
 			
 			Get("mipoker").CleanList();		
-			Get("mipoker").Create_by_list(1, [ResName.Mipoker_zone], 0 , 0, 1, 130, 0, "Bet_");
+			Get("mipoker").Create_by_list(1, [Mipoker_zone], 0 , 0, 1, 130, 0, "Bet_");
 			Get("mipoker").container.alpha = 0;
 				
 				
 			var mipoker:MultiObject = Get("mipoker");
-			if ( type.Value == modelName.POKER_1)
+			if ( pokertype == modelName.POKER_1)
 			{
 				mipoker.container.x = 500;
 				mipoker.container.y = 680;
@@ -211,8 +215,8 @@ package View.ViewComponent
 				
 			//_tool.SetControlMc(pokerb);
 			//add(_tool);				
-			Tweener.addTween(mipoker.container, { alpha:1, time:1, onCompleteParams:[pokerf, pokerid, type.Value], onComplete:this.poker_mi_ani } );
-			
+			Tweener.addTween(mipoker.container, { alpha:1, time:1, onCompleteParams:[pokerf, pokerid, pokertype], onComplete:this.poker_mi_ani } );
+			return true;
 		}
 		
 		public function poker_mi_ani(pokerf:MovieClip,pokerid:int,pokertype:int):void

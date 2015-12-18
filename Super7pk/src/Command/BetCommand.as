@@ -4,7 +4,7 @@ package Command
 	import flash.events.Event;
 	import Interface.CollectionsInterface;
 	import Model.*;
-	import Model.valueObject.StringObject;
+	import Model.valueObject.*;	
 	import util.DI;
 	import util.utilFun;
 	import View.GameView.*;
@@ -326,11 +326,10 @@ package Command
 			}
 			
 			_model.putValue("clean_zone", []);
-			_model.putValue("bigwin",-1);
+			_model.putValue("bigwin",null);
 			_model.putValue("sigwin",-1);
 			_model.putValue("win_odd", -1);
-			_model.putValue("winstr", "");			
-			_model.putValue("winstr", "");			
+			_model.putValue("winstr", "");
 			_model.putValue("hintJp", -1);
 			
 			var total_bet:int = 0;
@@ -347,8 +346,8 @@ package Command
 				
 				check_lost(resultob, betzon_idx);
 				check_bingWin(resultob);
-				check_specail(resultob);
-				check_powerbar(resultob);
+			//	check_specail(resultob);
+			//	check_powerbar(resultob);
 				
 				//總押注和贏分
 				var display_idx:int = _opration.getMappingValue("idx_to_result_idx", betzon_idx);
@@ -371,7 +370,18 @@ package Command
 			utilFun.Log("total_settle =" + total_settle);
 			utilFun.Log("zonebet_amount =" + zonebet_amount);
 			
-			dispatcher(new ModelEvent("settle_bigwin"));
+			if ( _model.getValue("bigwin") != null)
+			{
+				dispatcher(new ModelEvent("settle_bigwin"));
+			}
+			else 	if ( _model.getValue("hintJp") != -1)
+			{				
+				dispatcher(new Intobject(_model.getValue("sigwin"), "power_up"));
+			}
+			else
+			{
+				dispatcher(new Intobject(1, "settle_step"));
+			}
 			
 		}
 		
@@ -389,28 +399,21 @@ package Command
 		public function check_bingWin(resultob:Object):void
 		{
 			//bigwin condition  type:player,winstat:!WSBWNormalWin && !WSWin
-			//winst: winste  odd:result.odds
-			if ( resultob.bet_type == "BetBWPlayer" ) 
+			//winst: winste  odd:result.odds		
+			//大獎
+			if ( resultob.win_state =="WSWin")
 			{
-				//大獎
-				if ( resultob.win_state != "WSBWNormalWin" && resultob.win_state !="WSWin")
-				{
 					//bigwin = _opration.getMappingValue(modelName.BIG_POKER_MSG, resultob.win_state);
-					_model.putValue("bigwin", _opration.getMappingValue(modelName.BIG_POKER_MSG, resultob.win_state) );
-					
-				}				
-				_model.putValue("winstr", resultob.win_state);
+				var bingwin:int = _opration.getMappingValue(modelName.BIG_POKER_MSG, resultob.bet_type);
+				_model.putValue("bigwin", bingwin);
+				_model.putValue("winstr", bingwin);
 				_model.putValue("win_odd",resultob.odds);
-			}
+			}			
 		}
 		
 		public function check_specail(resultob:Object):void
 		{
-			//special condition
-			if ( resultob.bet_type == "BetBWSpecial" ) 
-			{				
-				_model.putValue("sigwin",_opration.getMappingValue(modelName.BIG_POKER_MSG, resultob.win_state));
-			}
+		
 		}
 		
 		public function check_powerbar(resultob:Object):void

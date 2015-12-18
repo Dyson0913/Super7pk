@@ -23,6 +23,10 @@ package View.ViewComponent
 		private const paynum:String = "pay_num";
 		private const paytable_baridx:String = "paytable_bar_idx";
 		
+		//tag
+		private const tag_paytable:int = 0;		
+		private const tag_paytable_win_tag:int = 1;		
+		
 		public function Visual_Paytable() 
 		{
 			
@@ -134,23 +138,9 @@ package View.ViewComponent
 			var wintype:String = winstr.Value;
 			utilFun.Log("winst = " + wintype);
 			
-			if ( wintype == "") return ;			
+			if ( wintype == "") return ;
 			
-			var y:int = 0;
-			if (wintype == "WSBWStraight") y = 7;
-			if ( wintype == "WSBWFlush") y = 6;
-			if (wintype == "WSBWFullHouse") y = 5;
-			if ( wintype == "WSBWFourOfAKind")y = 4;
-			if ( wintype == "WSBWStraightFlush") y = 3;
-			if ( wintype == "WSBWRoyalFlush") y = 2;		
-						
-			GetSingleItem(x_symble,y).gotoAndStop(23);
-			
-			//utilFun.Log("GetSingleItem =" + GetSingleItem("pay_text"));						
-			//GetSingleItem("pay_text",y).getChildByName("Dy_Text").textColor = 0xFFFF00;			
-			//GetSingleItem("pay_mark",y).getChildByName("Dy_Text").textColor = 0xFFFF00;			
-			//GetSingleItem("pay_odd",y).getChildByName("Dy_Text").textColor = 0xFFFF00;
-			
+			GetSingleItem(x_symble, tag_paytable_win_tag).gotoAndStop(wintype);			
 		}
 		
 		

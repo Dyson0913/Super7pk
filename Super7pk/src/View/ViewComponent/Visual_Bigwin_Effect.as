@@ -101,8 +101,11 @@ package View.ViewComponent
 			pause_sound(sound_getpoint);
 		}
 		
-		public function hitbigwin(bigwin_frame:int):void
+		[MessageHandler(type = "Model.ModelEvent", selector = "settle_bigwin")]
+		public function hitbigwin():void
 		{
+			var bigwin_frame:int = _model.getValue("bigwin");			
+			Log("bigwin =" + bigwin_frame);		
 			_playing = true;
 			
 			//phase start
@@ -120,8 +123,9 @@ package View.ViewComponent
 			
 			play_sound(soundBombLong);
 			odd_present();
-			coin_effect();
+			background_effect();
 			_cunt();
+			
 			//重擊特效
 			//pop_effect(1,0.5);			
 		}
@@ -141,7 +145,7 @@ package View.ViewComponent
 			{
 				play_sound(soundBombLong);
 				odd_present();
-				coin_effect();
+				background_effect();
 				Tweener.addTween(this, {delay:2, transition:"linear",onComplete:this.ready_to_cunt } );
 			}
 			else 
@@ -200,13 +204,13 @@ package View.ViewComponent
 			PowerJPNum.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			PowerJPNum.Post_CustomizedData = [arr.length, 91, 0];
 			PowerJPNum.Create_(arr.length);	
-			coin_effect();
+			background_effect();
 			
 			//停留N秒
 			Tweener.addTween(this, {delay:1, transition:"linear",onComplete:this.num_count } );
 		}
 		
-		public function coin_effect():void
+		public function background_effect():void
 		{
 			GetSingleItem("bigwinfire").gotoAndPlay(2);
 		}

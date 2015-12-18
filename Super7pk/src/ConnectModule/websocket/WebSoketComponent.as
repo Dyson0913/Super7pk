@@ -106,14 +106,31 @@ package ConnectModule.websocket
 					case Message.MSG_TYPE_INTO_GAME:
 					{
 						dispatcher(new ValueObject(  result.remain_time, modelName.REMAIN_TIME) );
+						if ( _opration.getMappingValue("state_mapping", result.game_state) == gameState.NEW_ROUND)
+						{
+							dispatcher(new ValueObject(  result.record_list, "history_list") );
+						}
 						if ( _opration.getMappingValue("state_mapping", result.game_state) == gameState.START_BET)
 						{
 						    dispatcher(new ValueObject(  result.record_list, "history_list") );
 						}
 						dispatcher(new ValueObject(  _opration.getMappingValue("state_mapping", result.game_state) , modelName.GAMES_STATE) );	
 						
-						dispatcher( new ValueObject(result.cards_info["extra_card_list"], modelName.POKER_1) );
-						dispatcher( new ValueObject(result.cards_info["extra_card_list"], modelName.POKER_2) );						
+						var poke1:Array = [];
+						var poke2:Array = [];
+						var po:Array = result.cards_info["extra_card_list"];
+						poke1.push.apply(poke1,po );
+						poke2.push.apply(poke2, po);
+						var ri:Array =  result.cards_info["river_card_list"];
+						if ( ri.length != 0)
+						{
+							poke1.push(ri);
+							poke2.push(ri);
+						}
+						_model.putValue(modelName.POKER_1, poke1);
+						_model.putValue(modelName.POKER_2, poke2);
+						//dispatcher( new ValueObject(poke1, modelName.POKER_1) );
+						//dispatcher( new ValueObject(poke2, modelName.POKER_2) );						
 						
 						dispatcher(new ValueObject(  result.game_round, "game_round") );
 						dispatcher(new ValueObject(  result.game_id, "game_id") );
