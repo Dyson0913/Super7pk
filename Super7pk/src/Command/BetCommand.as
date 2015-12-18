@@ -52,7 +52,7 @@ package Command
 				bet_name_to_idx.putValue(betzone_name[i], i);
 				bet_idx_to_name.putValue(i, betzone_name[i]);
 				
-				_idx_to_result_idx.putValue(i,betzone.length-i );
+				_idx_to_result_idx.putValue(i.toString(), (betzone.length-1) -i );
 			}		
 			
 			
@@ -247,14 +247,20 @@ package Command
 		
 		public function bet_zone_amount():Array
 		{
+			
+			var zone:Array = _model.getValue(modelName.AVALIBLE_ZONE_IDX);
 			var mylist:Array = [];
-			var zone:Array = _model.getValue(modelName.AVALIBLE_ZONE_IDX);			
-			var total:int = 0;
 			for ( var i:int = 0; i < zone.length; i++)
+			{
+				mylist.push(0);
+			}
+			
+			var total:int = 0;
+			for (  i = 0; i < zone.length; i++)
 			{				
 				var map:int = _opration.getMappingValue("idx_to_result_idx", zone[i]);
 				var amount:int = get_total_bet(zone[i]);
-				mylist.splice(map, 0, amount);
+				mylist.splice(map, 1, amount);
 				total += amount;
 			}
 			mylist.push(total);
@@ -327,10 +333,11 @@ package Command
 			_model.putValue("winstr", "");			
 			_model.putValue("hintJp", -1);
 			
-			var total:int = 0;
+			var total_bet:int = 0;
+			var total_settle:int = 0;
 			var result_list:Array = _model.getValue(modelName.ROUND_RESULT);
 			var betZone:Array = _model.getValue(modelName.AVALIBLE_ZONE_IDX);			
-			var num:int = betZone.length;			
+			var num:int = betZone.length;	
 			for ( var i:int = 0; i < num; i++)
 			{
 				var resultob:Object = result_list[i];				
@@ -347,22 +354,22 @@ package Command
 				var display_idx:int = _opration.getMappingValue("idx_to_result_idx", betzon_idx);
 				settle_amount[ display_idx] =  resultob.settle_amount;				
 				zonebet_amount[ display_idx ]  = resultob.bet_amount;				
-				total += resultob.settle_amount;
+				total_settle += resultob.settle_amount;
+				total_bet += resultob.bet_amount;
 			}			
 			
-			
+			settle_amount.push(total_settle);
+			zonebet_amount.push(total_bet);
 			
 			_model.putValue("result_settle_amount",settle_amount);
 			_model.putValue("result_zonebet_amount",zonebet_amount);
-			_model.putValue("result_total", total);
+			_model.putValue("result_total", total_settle);
+			_model.putValue("result_total_bet", total_bet);
 			
-			
-			//var wintzone:Array = utilFun.Get_restItem(betZone, clean);
-			//utilFun.Log("clean zone =" + clean);
-			//utilFun.Log("wintzone =" + wintzone);
 			utilFun.Log("result_settle_amount =" + settle_amount);
 			utilFun.Log("result_zonebet_amount =" + zonebet_amount);
-			utilFun.Log("result_total =" + total);
+			utilFun.Log("total_settle =" + total_settle);
+			utilFun.Log("zonebet_amount =" + zonebet_amount);
 			
 			dispatcher(new ModelEvent("settle_bigwin"));
 			

@@ -237,7 +237,10 @@ package View.Viewutil
 			{			
 				if (CustomizedFun != null)
 				{
-					CustomizedFun(ItemList[i], i,CustomizedData);
+					if ( CustomizedData != null)
+					{
+						CustomizedFun(ItemList[i], i, CustomizedData);
+					}
 				}
 				
 				if (Posi_CustzmiedFun != null)

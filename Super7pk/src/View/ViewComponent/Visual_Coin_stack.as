@@ -178,8 +178,7 @@ package View.ViewComponent
 			var total:int = _betCommand.get_total_bet(type);
 			//TODO temp way
 			var mylist:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];			
-			mylist.splice(type, 0, total);
-			Log("My list ="+mylist);
+			mylist.splice(type, 0, total);			
 			data_setting(r_coin_amount + "_" + type, amount, mylist, type);			
 			
 			//coin動畫

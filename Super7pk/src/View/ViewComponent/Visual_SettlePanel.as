@@ -158,7 +158,7 @@ package View.ViewComponent
 		}
 		
 		public function settleodd(mc:MovieClip, idx:int, data:Array):void
-		{
+		{			
 			var num:String = data[idx];
 			var arr:Array = utilFun.arrFormat(data[idx], num.length);
 			//Log("pay odd = " + mc.parent.name);
@@ -187,9 +187,8 @@ package View.ViewComponent
 			Log("show_settle");
 			
 			//押注
-			//var zone_amount:Array = _model.getValue("result_zonebet_amount");
-			//zone_amount.push(_betCommand.all_betzone_totoal());		
-			var zone_amount:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100];
+			var zone_amount:Array = _model.getValue("result_zonebet_amount");			
+			//var zone_amount:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100];
 			//var mylist:Array = zone_amount;
 			var bet_s:MultiObject = Get(bet_symble);
 			bet_s.CustomizedFun = settleodd;
@@ -197,16 +196,15 @@ package View.ViewComponent
 			bet_s.Create_(zone_amount.length);
 			
 			//總結
-//			var settle_amount:Array = _model.getValue("result_settle_amount");	
-			var settle_amount:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
+			var settle_amount:Array = _model.getValue("result_settle_amount");	
+			//var settle_amount:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
 			var settle_s:MultiObject = Get(settle_symble);
 			settle_s.CustomizedFun = settleodd;
 			settle_s.CustomizedData = settle_amount;
 			settle_s.Create_(settle_amount.length);
 			
 			
-			//= clip or word ,font property push in to mapping,
-			//settle_amount.push(_model.getValue("result_total"));		
+			//= clip or word ,font property push in to mapping,			
 			//Get("settletable_zone_settle").CustomizedFun = _text.colortextSetting;
 			//Get("settletable_zone_settle").CustomizedData = text_update("settletable_zone_settle", settle_amount);
 			//Get("settletable_zone_settle").Create_(settle_amount.length, "settletable_zone_settle");
