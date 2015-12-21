@@ -181,16 +181,13 @@ package View.ViewComponent
 		}
 		
 		public function _cunt():void
-		{			
-			//_model.putValue("result_total", 10000);
-			//沒下注,中大獎
-			if ( _model.getValue("result_total") == 0)
-			{
-				GetSingleItem("bigwinfire").gotoAndPlay(2);
-				dispatcher(new Intobject(1, "settle_step"));
-				return;
-			}
+		{
+			GetSingleItem("bigwinfire").gotoAndPlay(2);
+			dispatcher(new Intobject(1, "settle_step"));
+				
+			return;
 			
+			//跑表
 			_model.putValue("TotalJP_amoount", _model.getValue("result_total"));			
 			var s:String = _model.getValue("TotalJP_amoount");
 			var arr:Array = utilFun.frameAdj(s.split(""));

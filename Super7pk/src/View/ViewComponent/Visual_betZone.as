@@ -84,6 +84,8 @@ package View.ViewComponent
 			betzone.mousedown = null;	
 			betzone.rollout = null;
 			betzone.rollover = null;
+			
+			setFrame("betzone", 1);
 		}
 		
 	}

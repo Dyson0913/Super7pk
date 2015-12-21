@@ -51,7 +51,7 @@ package View.ViewComponent
 				//dispatcher(new Intobject(1, "show_who_win"));		
 			//}
 			
-			//dispatcher(new ModelEvent("show_settle_table"));			
+			dispatcher(new ModelEvent("show_settle_table"));			
 		}
 		
 		//[MessageHandler(type = "Model.valueObject.Intobject", selector = "show_who_win")]

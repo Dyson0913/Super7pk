@@ -142,13 +142,13 @@ package View.ViewComponent
 			symbl.CustomizedData = mylist;
 			symbl.Create_(13);
 			
-			var settle:Array = _model.getValue("result_settle_amount");
+			//var settle:Array = _model.getValue("result_settle_amount");
 			//var mylist:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
-			var symbl:MultiObject = Get(settle_symble);
-			symbl.CustomizedFun = settleodd;
-			symbl.CustomizedData = settle;
-			symbl.Create_(13);
-			
+			//var symbl:MultiObject = Get(settle_symble);
+			//symbl.CustomizedFun = settleodd;
+			//symbl.CustomizedData = settle;
+			//symbl.Create_(13);
+			//
 			//TODO word type setting
 			//var font:Array = [{size:24,align:_text.align_right,color:0xFF0000}];
 			//font = font.concat(mylist);

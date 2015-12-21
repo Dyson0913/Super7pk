@@ -222,13 +222,14 @@ package ConnectModule.websocket
 					break;
 					
 					case Message.MSG_TYPE_ROUND_INFO:
-					{						
-						dispatcher(new ValueObject(  _opration.getMappingValue("state_mapping", result.game_state) , modelName.GAMES_STATE) );							
-						
-						
-						dispatcher( new ValueObject(result.result_list, modelName.ROUND_RESULT));
-						//dispatcher(new ModelEvent("round_result"));				
+					{
+						//update state
+						dispatcher(new ValueObject(  _opration.getMappingValue("state_mapping", result.game_state) , modelName.GAMES_STATE) );						
 						dispatcher(new ModelEvent("update_state"));
+						
+						//model update
+						dispatcher( new ValueObject(result.result_list, modelName.ROUND_RESULT));
+						dispatcher(new ModelEvent("round_result"));		
 					}
 					break;
 					
