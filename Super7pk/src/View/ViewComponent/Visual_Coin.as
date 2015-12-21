@@ -40,11 +40,12 @@ package View.ViewComponent
 		
 		public function init():void
 		{
-			_coin = create(Betcoin, [Betcoin]);
+			_coin = create("CoinOb", [Betcoin]);
 			_coin.container.x = 1080;
 			_coin.container.y = 1000;
 			_coin.MouseFrame = utilFun.Frametype(MouseBehavior.Customized,[1,2,2,0]);
 			_coin.CustomizedFun = ocin_setup;
+			_coin.CustomizedData = [0, 1, 2, 3, 4];
 			_coin.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			_coin.Post_CustomizedData = [5, 85, 0];
 			_coin.Create_(5);
