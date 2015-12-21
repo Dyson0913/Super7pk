@@ -9,6 +9,7 @@ package View.ViewComponent
 	
 	import View.Viewutil.*;
 	import Res.ResName;
+	import caurina.transitions.Tweener;
 	
 	/**
 	 * Paytable present way
@@ -27,6 +28,8 @@ package View.ViewComponent
 		private const tag_paytable:int = 0;		
 		private const tag_paytable_win_tag:int = 1;		
 		
+		private var tween_frame:int;
+		
 		public function Visual_Paytable() 
 		{
 			
@@ -38,7 +41,7 @@ package View.ViewComponent
 			var ptable:MultiObject = create(paytable, [paytable,paytable_baridx]);			
 			ptable.container.x = 80;
 			ptable.container.y =  111;
-			ptable.Create_(2);			
+			ptable.Create_(2);
 			put_to_lsit(ptable);
 			
 			//X
@@ -63,22 +66,26 @@ package View.ViewComponent
 		}
 		
 		public function payodd(mc:MovieClip, idx:int, data:Array):void
-		{
-			var num:String = data[idx];
-			var arr:Array = utilFun.arrFormat(data[idx], num.length);
+		{	
+			var num:Number = data[idx];
+			if ( num == -1 ) num= 0;
+			
+			var s_num:String = num.toString();			
+			var arr:Array = s_num.toString().split("");
 			//Log("pay odd = " + mc.parent.name);
 			
 			var p_num:MultiObject = create_dynamic(mc.parent.name + "_" + idx, [paynum], mc);			
-			p_num.CustomizedFun = FrameSetting
+			p_num.CustomizedFun = FrameSetting;
 			p_num.CustomizedData = arr.reverse();
 			p_num.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
-			p_num.Post_CustomizedData = [num.length, -22, 0];		
-			p_num.Create_(num.length);
+			p_num.Post_CustomizedData = [s_num.length, -22, 0];		
+			p_num.Create_(s_num.length);
 		}
 		
 		public function FrameSetting(mc:MovieClip, idx:int, data:Array):void
 		{
 			if ( data[idx] == 0) data[idx] = 10;
+			if ( data[idx] == ".") data[idx] = 12;
 			var value:int = data[idx];
 			value += 1;
 			data[idx] = value;			
@@ -116,18 +123,23 @@ package View.ViewComponent
 			setFrame(x_symble, 1);
 			
 			Get(paynum).CleanList();
+			
+			Tweener.pauseTweens( GetSingleItem(paytable, tag_paytable_win_tag) );
+			Tweener.pauseTweens( GetSingleItem(x_symble, tween_frame));
 		}
 		
 		public function appear():void
-		{
-			//TODO settle or not settle
+		{			
 			GetSingleItem(paytable).gotoAndStop(2);			
 			setFrame(x_symble, 12);
 			
-			//TODO better way ?
-			var mu:MultiObject = Get(paynum);			
+			
+			var total:Array = _model.getValue("round_paytable");
+			var copyarr:Array = [];
+				copyarr.push.apply(copyarr,total );
+			var mu:MultiObject = Get(paynum);
 			mu.CustomizedFun = payodd;
-			mu.CustomizedData = [10000, 1000, 200, 100, 50, 30, 15, 8, 5, 3, 2, 1,0];
+			mu.CustomizedData = copyarr.reverse();
 			mu.Create_(12);
 		}
 		
@@ -140,7 +152,10 @@ package View.ViewComponent
 			
 			if ( wintype == "") return ;
 			
-			GetSingleItem(x_symble, tag_paytable_win_tag).gotoAndStop(wintype);			
+			var frame:int = parseInt(wintype);
+			tween_frame = frame -2;
+			_regular.Twinkle_by_JumpFrame(GetSingleItem(paytable, tag_paytable_win_tag), 25, 60, 1, frame);
+			_regular.Twinkle_by_JumpFrame(GetSingleItem(x_symble, tween_frame), 25, 60, 12, 24);
 		}
 		
 		

@@ -224,7 +224,8 @@ package View.ViewComponent
 		{			
 			_model.putValue(modelName.REMAIN_TIME, 20);
 			fake_hisotry();
-			_model.putValue("round_paytable",[-1, -1, -1, -1, 175, 22, -1, 17, 7, 1.6, 0.9, -1]);
+			var odd:Array = [ -1, -1, -1, -1, 175, 22, -1, 17, 7, 1.6, 0.9, -1];
+			_model.putValue("round_paytable",odd.reverse());
 			
 			_model.putValue(modelName.GAMES_STATE,gameState.START_BET);			
 			dispatcher(new ModelEvent("update_state"));
