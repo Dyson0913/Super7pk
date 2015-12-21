@@ -51,7 +51,7 @@ package View.ViewComponent
 			bankerCon.Post_CustomizedData = [7, 180, 240];
 			bankerCon.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;			
 			bankerCon.Create_(7);
-			bankerCon.container.x = 145;
+			bankerCon.container.x = 115;
 			bankerCon.container.y = 594;
 			utilFun.scaleXY(bankerCon.container, 1.3, 1.3);
 			bankerCon.container.alpha = 0;
@@ -61,7 +61,7 @@ package View.ViewComponent
 			var mipoker:MultiObject =  create("mipoker", [Mipoker_zone]);	
 			mipoker.Create_(1);
 			mipoker.container.x = 740;
-			mipoker.container.y = 570;
+			mipoker.container.y = 570;			
 			mipoker.container.alpha = 0;
 			
 			put_to_lsit(mipoker);
@@ -88,6 +88,7 @@ package View.ViewComponent
 			Tweener.pauseTweens(bankerCon.container);
 			bankerCon.container.alpha = 0;		
 			
+			//790 670
 			Get("mipoker").CleanList();		
 			Get("mipoker").Create_by_list(1, [Mipoker_zone], 0 , 0, 1, 130, 0, "Bet_");			
 			Get("mipoker").container.alpha = 0;
@@ -127,8 +128,7 @@ package View.ViewComponent
 		public function open_card():void
 		{
 			//_regular.Fadeout(Get(Poker_1).container, 1, 1);			
-			//_regular.FadeIn(Get(Poker_1).container, 1, 1, null);
-			//TODO open five or last 2
+			//_regular.FadeIn(Get(Poker_1).container, 1, 1, null);			
 			Get(modelName.POKER_1).container.alpha = 0;
 			Get(modelName.POKER_2).container.alpha = 1;
 		}
@@ -184,7 +184,7 @@ package View.ViewComponent
 		{
 			return false;
 			var mypoker:Array =   _model.getValue(pokertype);
-			if( mypoker.length <5) return false;
+			if( mypoker.length <6) return false;
 			
 			var pokerid:int = pokerUtil.pokerTrans(mypoker[mypoker.length - 1]);		
 			
@@ -194,12 +194,8 @@ package View.ViewComponent
 				
 				
 			var mipoker:MultiObject = Get("mipoker");
-			if ( pokertype == modelName.POKER_1)
-			{
-				mipoker.container.x = 500;
-				mipoker.container.y = 680;
-			}
-				
+			mipoker.container.x = 790;
+			mipoker.container.y = 670;			
 			var mc:MovieClip = mipoker.ItemList[0];
 				
 			var pokerf:MovieClip = utilFun.GetClassByString(Poker);				
@@ -252,7 +248,8 @@ package View.ViewComponent
 		{
 			var mipoker:MultiObject = Get("mipoker");
 			Tweener.addTween(mipoker.container, { alpha:0, time:1 } );
-			var anipoker:MovieClip = GetSingleItem(pokertype, 1);
+			var mypoker:Array =   _model.getValue(pokertype);
+			var anipoker:MovieClip = GetSingleItem(pokertype, mypoker.length-1);
 			anipoker.visible = true;			
 			anipoker.gotoAndStop(1);
 			anipoker["_poker"].gotoAndStop(pokerid);	

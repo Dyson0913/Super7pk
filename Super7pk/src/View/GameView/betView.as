@@ -113,6 +113,7 @@ package View.GameView
 		
 			_paytable.init();
 			_btn.init();
+			_Bigwin_Effect.init();
 			
 			//dispatcher(new StringObject("Soun_Bet_BGM","Music" ) );
 		}

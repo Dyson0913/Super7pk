@@ -165,8 +165,11 @@ package View.ViewComponent
 							//{"game_state": "StartBetState", "timestamp": 1450434086.266586, "remain_time": 24, "game_type": "Super7PK", "game_round": 76, "game_id": "Super7PK-1", "message_type": "MsgBPState", "id": "185341c8a57111e5b5f4f23c9189e2a9" }
 						//]
 						
-			_pack = [ { "game_state": "OpenState", "timestamp": 1450669533.195196, "remain_time": 0, "game_type": "Super7PK", "game_round": 4372, "cards_info": { "extra_card_list": ["is", "7s", "2c", "1d", "9s"], "banker_card_list": [], "river_card_list": ["1s"], "player_card_list": [] }, "game_id": "Super7PK-1", "message_type": "MsgBPInitialInfo", "id": "49a17396a79511e5a3b1f23c9189e2a9" }
-			              ];
+			//_pack = [ 
+			//
+							//{"result_list": [{"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKPureRoyalFlush", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKRoyalFlush", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFiveOfAKind", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKStraightFlush", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFourOfAKind", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFullHouse", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFlush", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKStraight", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKTripple", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKTwoPair", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0.9, "win_state": "WSWin", "real_win_amount": 0, "bet_type": "BetS7PKOnePair", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKNone", "settle_amount": 0}], "game_state": "EndRoundState", "game_result_id": "testid0001", "timestamp": 1450677420.268911, "remain_time": 9, "game_type": "Super7PK", "game_round": 4516, "game_id": "Super7PK-1", "message_type": "MsgBPEndRound", "id": "a6b16430a7a711e5b5f4f23c9189e2a9"}
+			//
+			              //];
 			_model.putValue("Script_idx", 0);
 		
 		}				
@@ -208,7 +211,7 @@ package View.ViewComponent
 			
 			
 			
-			//_btn.debug();
+			_btn.debug();
 			_model.putValue("test_init",true);
 		}
 		
