@@ -32,6 +32,15 @@ package View.ViewComponent
 		{			
 			var zone_xy:Array = _model.getValue(modelName.AVALIBLE_ZONE_XY);			
 			var avaliblezone_s:Array = _model.getValue(modelName.AVALIBLE_ZONE_S);
+			var avaliblezone_d:Array = _model.getValue(modelName.AVALIBLE_ZONE_d);
+			
+			var betzone_dark:MultiObject = create("betzone_dark", avaliblezone_d);
+			betzone_dark.container.x = 3;
+			betzone_dark.container.y = 605;
+			betzone_dark.Create_(avaliblezone_s.length);
+			
+		
+			
 			
 			var playerzone_s:MultiObject = create("betzone_s", avaliblezone_s);
 			playerzone_s.MouseFrame = utilFun.Frametype(MouseBehavior.Customized, [1, 1, 2, 1]);
@@ -42,6 +51,8 @@ package View.ViewComponent
 			playerzone_s.container.x = 3;
 			playerzone_s.container.y = 605;
 			playerzone_s.Create_(avaliblezone_s.length);
+			
+			
 		}
 		
 		public function bet_sencer(e:Event,idx:int):Boolean
@@ -83,8 +94,37 @@ package View.ViewComponent
 			return true;
 		}
 		
+		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
+		public function pre_open():void
+		{
+			disappear();
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
+		public function stop_bet():void
+		{
+			disappear();
+		}
+		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
+		{
+			appear();			
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		public function openCard():void
+		{			
+			disappear();		
+		}	
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
+		public function settle():void
+		{
+			disappear();
+		}
+		
+		public function appear():void
 		{
 			var betzone:MultiObject = Get("betzone_s");
 			betzone.mousedown = bet_sencer;
@@ -92,42 +132,34 @@ package View.ViewComponent
 			betzone.rollout = bet_sencer;
 			betzone.rollover = bet_sencer;
 			
-			//TODO zone dock
-			var avaliblezone:Array = _model.getValue("round_paytable");
-			//[-1, -1, -1, -1, -1, -1, 15, 21, 24, 10, 0.9, 1.7]
-			//var dark_zone: Array = [];
-			//for ( var i:int = 0; i < avaliblezone.length ; i++)
-			//{
-				//if ( avaliblezone[i] == -1) dark( GetSingleItem("betzone", i));//dark_zone.push[i];
-			//}
-			
+			var avaliblezone:Array = _model.getValue("round_paytable");			
+			for ( var i:int = 0; i < avaliblezone.length ; i++)
+			{
+				var al:Number = 0;
+				if ( avaliblezone[i] == -1) al = 0.5;
+				
+				var mc:MovieClip = GetSingleItem("betzone_dark", i);
+				mc["_dark"].alpha = al;
+			}
 		}
 		
-		private function dark(mc:MovieClip):void
+		public function disappear():void
 		{
-			//var mc:MovieClip = GetSingleItem(type, 2);
-
-			var color:uint = 0x000000;
-			var mul:Number = 70 / 100;
-			var ctMul:Number=(1-mul);
-			var ctRedOff:Number=Math.round(mul*extractRed(color));
-			var ctGreenOff:Number=Math.round(mul*extractGreen(color));
-			var ctBlueOff:Number=Math.round(mul*extractBlue(color));
-			var ct:ColorTransform = new ColorTransform(ctMul,ctMul,ctMul,1,ctRedOff,ctGreenOff,ctBlueOff,0);
-			mc.transform.colorTransform=ct;
+			var betzone:MultiObject = Get("betzone_s");
+			betzone.mousedown = null;
+			betzone.mouseup = null;
+			betzone.rollout = null;
+			betzone.rollover = null;
+			
+			var avaliblezone:Array = _model.getValue("round_paytable");			
+			for ( var i:int = 0; i < avaliblezone.length ; i++)
+			{
+				var al:Number = 0;				
+				var mc:MovieClip = GetSingleItem("betzone_dark", i);
+				mc["_dark"].alpha = al;
+			}
 		}
 		
-			function extractRed(c:uint):uint {
-		return (( c >> 16 ) & 0xFF);
-		}
-		 
-		function extractGreen(c:uint):uint {
-		return ( (c >> 8) & 0xFF );
-		}
-		 
-		function extractBlue(c:uint):uint {
-		return ( c & 0xFF );
-		}
 		
 	}
 

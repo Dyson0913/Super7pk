@@ -27,6 +27,7 @@ package Model
 		public static const AVALIBLE_ZONE_IDX:int = Num++;
 		public static const AVALIBLE_ZONE:int = Num++;
 		public static const AVALIBLE_ZONE_S:int = Num++;
+		public static const AVALIBLE_ZONE_d:int = Num++;
 		public static const AVALIBLE_ZONE_XY:int = Num++;
 		public static const BIG_POKER_MSG:int = Num++;
 		public static const COIN_STACK_XY:int = Num++;

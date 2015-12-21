@@ -116,7 +116,7 @@ package View.ViewComponent
 			var mu:MultiObject = Get("coin_amount_container");
 			mu.FlushObject();
 			
-			var total:Array = _model.getValue("round_paytable");
+			var total:Array = _model.getValue("round_paytable");			
 			if ( total != null)
 			{
 				for ( var i:int = 0; i < total.length ; i++)

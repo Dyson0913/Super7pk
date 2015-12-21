@@ -4,6 +4,7 @@ package View.ViewComponent
 	import flash.display.Graphics;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.geom.ColorTransform;
 	import flash.geom.Point;
 	import flash.geom.Transform;
 	import flash.net.URLRequest;
@@ -168,7 +169,7 @@ package View.ViewComponent
 			//_pack = [ 
 			//
 							//{"result_list": [{"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKPureRoyalFlush", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKRoyalFlush", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFiveOfAKind", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKStraightFlush", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFourOfAKind", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFullHouse", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFlush", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKStraight", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKTripple", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKTwoPair", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0.9, "win_state": "WSWin", "real_win_amount": 0, "bet_type": "BetS7PKOnePair", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKNone", "settle_amount": 0}], "game_state": "EndRoundState", "game_result_id": "testid0001", "timestamp": 1450677420.268911, "remain_time": 9, "game_type": "Super7PK", "game_round": 4516, "game_id": "Super7PK-1", "message_type": "MsgBPEndRound", "id": "a6b16430a7a711e5b5f4f23c9189e2a9"}
-			//
+							//{"result_list": [{"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKPureRoyalFlush", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKRoyalFlush", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFiveOfAKind", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKStraightFlush", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFourOfAKind", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFullHouse", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 0, "odds": 0, "win_state": "WSLost", "real_win_amount": 0, "bet_type": "BetS7PKFlush", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 100, "odds": 2, "win_state": "WSWin", "real_win_amount": 100, "bet_type": "BetS7PKStraight", "settle_amount": 200}, {"bet_attr": "BetAttrSide", "bet_amount": 100, "odds": 0, "win_state": "WSLost", "real_win_amount": -100, "bet_type": "BetS7PKTripple", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 100, "odds": 0, "win_state": "WSLost", "real_win_amount": -100, "bet_type": "BetS7PKTwoPair", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 100, "odds": 0, "win_state": "WSLost", "real_win_amount": -100, "bet_type": "BetS7PKOnePair", "settle_amount": 0}, {"bet_attr": "BetAttrSide", "bet_amount": 100, "odds": 0, "win_state": "WSLost", "real_win_amount": -100, "bet_type": "BetS7PKNone", "settle_amount": 0}], "game_state": "EndRoundState", "game_result_id": "testid0001", "timestamp": 1450683652.818502, "remain_time": 9, "game_type": "Super7PK", "game_round": 45, "game_id": "Super7PK-1", "message_type": "MsgBPEndRound", "id": "2994fc00a7b611e597adf23c9189e2a9"} //結算有數字
 			              //];
 			_model.putValue("Script_idx", 0);
 		
@@ -211,7 +212,7 @@ package View.ViewComponent
 			
 			
 			
-			_btn.debug();
+			//_btn.debug();
 			_model.putValue("test_init",true);
 		}
 		
@@ -220,6 +221,7 @@ package View.ViewComponent
 		{			
 			_model.putValue(modelName.REMAIN_TIME, 20);
 			fake_hisotry();
+			_model.putValue("round_paytable",[-1, -1, -1, -1, 175, 22, -1, 17, 7, 1.6, 0.9, -1]);
 			
 			_model.putValue(modelName.GAMES_STATE,gameState.START_BET);			
 			dispatcher(new ModelEvent("update_state"));
@@ -230,7 +232,39 @@ package View.ViewComponent
 			dispatcher(new Intobject(modelName.POKER_1, "poker_No_mi"));
 			dispatcher(new Intobject(modelName.POKER_2, "poker_No_mi"));
 			
+		
+			//var mc:MovieClip = GetSingleItem("betzone_dark", 4);			
+			//mc.alpha = 0.5;
+			//dark(mc);
+			
 		}	
+		
+			private function dark(mc:MovieClip):void
+		{
+			//var mc:MovieClip = GetSingleItem(type, 2);
+
+			var color:uint = 0x000000;
+			var mul:Number = 70 / 100;
+			var ctMul:Number=(1-mul);
+			var ctRedOff:Number=Math.round(mul*extractRed(color));
+			var ctGreenOff:Number=Math.round(mul*extractGreen(color));
+			var ctBlueOff:Number=Math.round(mul*extractBlue(color));
+			var ct:ColorTransform = new ColorTransform(ctMul,ctMul,ctMul,1,ctRedOff,ctGreenOff,ctBlueOff,0);
+			mc.transform.colorTransform=ct;
+		}
+		
+			function extractRed(c:uint):uint {
+		return (( c >> 16 ) & 0xFF);
+		}
+		 
+		function extractGreen(c:uint):uint {
+		return ( (c >> 8) & 0xFF );
+		}
+		 
+		function extractBlue(c:uint):uint {
+		return ( c & 0xFF );
+		}
+		
 		
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "1")]
 		public function opencardScript():void

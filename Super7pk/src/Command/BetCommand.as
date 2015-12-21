@@ -62,14 +62,18 @@ package Command
 			
 			var avaliblezone:Array = [];
 			var avaliblezone_s:Array = [];
+			var avaliblezone_d:Array = [];
 			for ( i = 0; i < betzone.length; i++)
 			{
 				avaliblezone.push ( "zone_" + i);
 				avaliblezone_s.push ( "zone_" + i + "_sence");				
+				avaliblezone_d.push ( "zone_" + i + "_dark");				
+				
 			}
 			
 			_model.putValue(modelName.AVALIBLE_ZONE, avaliblezone);
 			_model.putValue(modelName.AVALIBLE_ZONE_S, avaliblezone_s);
+			_model.putValue(modelName.AVALIBLE_ZONE_d, avaliblezone_d);
 			
 			_model.putValue(modelName.AVALIBLE_ZONE_IDX, betzone);
 			

@@ -116,7 +116,11 @@ package ConnectModule.websocket
 						}
 						dispatcher(new ValueObject(  _opration.getMappingValue("state_mapping", result.game_state) , modelName.GAMES_STATE) );	
 						
-						if ( result.update_odds) dispatcher(new ValueObject(  result.update_odds, "round_paytable") );						
+						if ( result.update_odds) 
+						{
+							var bigtosmall:Array = result.update_odds;							
+							dispatcher(new ValueObject(  bigtosmall.reverse(), "round_paytable") );						
+						}
 						
 						var poke1:Array = [];
 						var poke2:Array = [];
@@ -160,7 +164,8 @@ package ConnectModule.websocket
 						{																						
 							if ( result.update_odds)
 							{
-								dispatcher(new ValueObject(  result.update_odds, "round_paytable") );								
+								var bigtosmall:Array = result.update_odds;
+								dispatcher(new ValueObject(  bigtosmall.reverse(), "round_paytable") );								
 							}
 						}
 											
