@@ -116,6 +116,8 @@ package ConnectModule.websocket
 						}
 						dispatcher(new ValueObject(  _opration.getMappingValue("state_mapping", result.game_state) , modelName.GAMES_STATE) );	
 						
+						if ( result.update_odds) dispatcher(new ValueObject(  result.update_odds, "round_paytable") );						
+						
 						var poke1:Array = [];
 						var poke2:Array = [];
 						var po:Array = result.cards_info["extra_card_list"];
@@ -158,8 +160,7 @@ package ConnectModule.websocket
 						{																						
 							if ( result.update_odds)
 							{
-								dispatcher(new ValueObject(  result.update_odds, "round_paytable") );						
-								utilFun.Log("get odd");
+								dispatcher(new ValueObject(  result.update_odds, "round_paytable") );								
 							}
 						}
 											

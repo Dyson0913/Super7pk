@@ -115,6 +115,16 @@ package View.ViewComponent
 			
 			var mu:MultiObject = Get("coin_amount_container");
 			mu.FlushObject();
+			
+			var total:Array = _model.getValue("round_paytable");
+			if ( total != null)
+			{
+				for ( var i:int = 0; i < total.length ; i++)
+				{					
+					//type
+					data_setting(r_coin_amount + "_" + i, amount, total, i);
+				}
+			}
 		}
 		
 		public function disappear():void
@@ -174,21 +184,24 @@ package View.ViewComponent
 			play_sound(soundcoin);		
 			
 			//coin amount
-			var type:int = bet_ob["betType"];
-			var total:int = _betCommand.get_total_bet(type);
+			//var type:int = bet_ob["betType"];
+			//var total:int = _betCommand.get_total_bet(type);
 			//TODO temp way
-			var mylist:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];			
-			mylist.splice(type, 0, total);			
-			data_setting(r_coin_amount + "_" + type, amount, mylist, type);			
+			//var mylist:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];			
+			//mylist.splice(type, 0, total);		
+			//
+			
+			
 			
 			//coin動畫
 			stack(_betCommand.Bet_type_betlist(bet_ob["betType"]), GetSingleItem("coinstakeZone",bet_ob["betType"] ),bet_ob["betType"]);	
 		}
 		
-		private function coin_setting(mc:MovieClip,data:int):void
+		private function coin_setting(mc:MovieClip,data:Number):void
 		{			
 			utilFun.Clear_ItemChildren(mc);
 			if ( data == 0 ) return;
+			if ( data == -1 ) return;
 			var arr:Array = data.toString().split("");
 			arr.unshift(11);
 			var num:int = arr.length;
@@ -203,6 +216,7 @@ package View.ViewComponent
 		public function FrameSetting(mc:MovieClip, idx:int, data:Array):void
 		{
 			if ( data[idx] == 0 ) data[idx] = 10;
+			if ( data[idx] == ".") data[idx] = 12;
 			mc.gotoAndStop(data[idx]);
 		}
 		
@@ -258,8 +272,8 @@ package View.ViewComponent
 			
 			if ( idx ==  (betlist_with_type_in_first.length-2))
 			{
-				//var total:int = _betCommand.get_total_bet(betlist_with_type_in_first[0]);			
-				//mc["_text"].text = total.toString();
+				var total:int = _betCommand.get_total_bet(betlist_with_type_in_first[0]);			
+				mc["_text"].text = total.toString();
 			}			
 		}	
 		
