@@ -40,8 +40,6 @@ package View.ViewComponent
 		
 		public function init():void
 		{
-			var avaliblezone:Array = _model.getValue(modelName.AVALIBLE_ZONE);
-			
 			_coin = create(Betcoin, [Betcoin]);
 			_coin.container.x = 1080;
 			_coin.container.y = 1000;

@@ -127,10 +127,9 @@ package ConnectModule.websocket
 							poke1.push(ri);
 							poke2.push(ri);
 						}
-						_model.putValue(modelName.POKER_1, poke1);
-						_model.putValue(modelName.POKER_2, poke2);
-						//dispatcher( new ValueObject(poke1, modelName.POKER_1) );
-						//dispatcher( new ValueObject(poke2, modelName.POKER_2) );						
+						//_model.putValue(modelName.POKER_1, poke1);
+						//_model.putValue(modelName.POKER_2, poke2);
+							
 						
 						dispatcher(new ValueObject(  result.game_round, "game_round") );
 						dispatcher(new ValueObject(  result.game_id, "game_id") );
@@ -138,6 +137,9 @@ package ConnectModule.websocket
 						dispatcher(new Intobject(modelName.Bet, ViewCommand.SWITCH) );								
 						
 						dispatcher(new ModelEvent("update_state"));
+						
+						dispatcher( new ValueObject(poke1, modelName.POKER_1) );
+						dispatcher( new ValueObject(poke2, modelName.POKER_2) );					
 						dispatcher(new Intobject(modelName.POKER_1, "poker_No_mi"));
 						dispatcher(new Intobject(modelName.POKER_2, "poker_No_mi"));
 						
@@ -160,9 +162,7 @@ package ConnectModule.websocket
 								utilFun.Log("get odd");
 							}
 						}
-						
-						
-						
+											
 						mypoker = _model.getValue(modelName.POKER_1);
 						mypoker2 = _model.getValue(modelName.POKER_2);
 						mypoker.push(card[0]);

@@ -122,7 +122,7 @@ package View.ViewComponent
 			_model.putValue("Hit_count", 0);
 			
 			play_sound(soundBombLong);
-			odd_present();
+			//odd_present();
 			background_effect();
 			_cunt();
 			

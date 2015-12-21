@@ -65,6 +65,8 @@ package View.ViewComponent
 			mipoker.container.alpha = 0;
 			
 			put_to_lsit(mipoker);
+			
+		
 		}
 			
 		public function Clean_poker():void
@@ -97,6 +99,8 @@ package View.ViewComponent
 		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
 		public function pre_open():void
 		{
+			//中途進入版不清,   新局清 ( 但model在切view之前就放好)
+			//_model,中途不清   新局清
 			Clean_poker();
 			Get(modelName.POKER_1).container.alpha = 1;
 			Get(modelName.POKER_2).container.alpha = 1;
@@ -133,7 +137,7 @@ package View.ViewComponent
 		public function settle():void
 		{
 			Get(modelName.POKER_1).container.alpha = 0;		
-			Get(modelName.POKER_2).container.alpha = 1;
+			Get(modelName.POKER_2).container.alpha = 1;			
 		}
 		
 		
