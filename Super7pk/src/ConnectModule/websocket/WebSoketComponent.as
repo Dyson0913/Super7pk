@@ -130,8 +130,8 @@ package ConnectModule.websocket
 						var ri:Array =  result.cards_info["river_card_list"];
 						if ( ri.length != 0)
 						{
-							poke1.push(ri);
-							poke2.push(ri);
+							poke1.push.apply(poke1, ri);
+							poke2.push.apply(poke2, ri);
 						}
 						//_model.putValue(modelName.POKER_1, poke1);
 						//_model.putValue(modelName.POKER_2, poke2);
