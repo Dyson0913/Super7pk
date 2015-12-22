@@ -362,6 +362,14 @@ package util
 			var color:String = strpoker.substr(1, 1);
 			
 			var myidx:int = 0;
+			if ( point == "J") 
+			{
+				//53 = red ghost 54= black
+				if (color == "j") myidx = 53;
+				else  myidx = 54;
+				return myidx;
+			}
+			
 			
 			if ( color == "d") myidx = 1;
 			if ( color == "h") myidx = 2;

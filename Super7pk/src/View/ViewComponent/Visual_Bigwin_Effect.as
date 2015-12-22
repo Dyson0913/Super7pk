@@ -105,7 +105,12 @@ package View.ViewComponent
 		public function hitbigwin():void
 		{
 			var bigwin_frame:int = _model.getValue("bigwin");			
-			Log("bigwin =" + bigwin_frame);		
+			Log("bigwin =" + bigwin_frame);
+			if ( bigwin_frame > 9)
+			{
+				dispatcher(new Intobject(1, "settle_step"));
+				return;
+			}
 			_playing = true;
 			
 			//phase start

@@ -59,7 +59,7 @@ package View.ViewComponent
 		{				
 				var avaliblezone:Array = _model.getValue("round_paytable");
 				if ( avaliblezone != null)
-				{
+				{				
 					if ( avaliblezone[idx] == -1) 
 					{
 						utilFun.Log("bet reject");
@@ -135,8 +135,9 @@ package View.ViewComponent
 			var avaliblezone:Array = _model.getValue("round_paytable");			
 			for ( var i:int = 0; i < avaliblezone.length ; i++)
 			{
-				var al:Number = 0;
+				var al:Number = 0;			
 				if ( avaliblezone[i] == -1) al = 0.5;
+				
 				
 				var mc:MovieClip = GetSingleItem("betzone_dark", i);
 				mc["_dark"].alpha = al;
@@ -154,7 +155,7 @@ package View.ViewComponent
 			var avaliblezone:Array = _model.getValue("round_paytable");			
 			for ( var i:int = 0; i < avaliblezone.length ; i++)
 			{
-				var al:Number = 0;				
+				var al:Number = 0;
 				var mc:MovieClip = GetSingleItem("betzone_dark", i);
 				mc["_dark"].alpha = al;
 			}

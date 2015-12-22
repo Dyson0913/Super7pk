@@ -99,7 +99,7 @@ package Command
 			poermapping.putValue("BetS7PKFiveOfAKind", 4);
 			poermapping.putValue("BetS7PKRoyalFlush", 3);
 			poermapping.putValue("BetS7PKPureRoyalFlush", 2);
-			_model.putValue(modelName.BIG_POKER_MSG , poermapping);			
+			_model.putValue(modelName.BIG_POKER_MSG , poermapping);		
 			
 			_model.putValue("power_jp",[0,0]);
 			
