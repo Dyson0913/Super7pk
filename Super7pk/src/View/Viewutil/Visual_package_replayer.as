@@ -25,9 +25,6 @@ package View.Viewutil
 		[Inject]
 		public var _MsgModel:MsgQueue;
 		
-		[Inject]
-		public var _text:Visual_Text;
-		
 		private var _packList:Array = [];
 		
 		

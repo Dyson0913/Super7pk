@@ -46,6 +46,9 @@ package View.ViewBase
 		[Inject]
 		public var _debugTool:Visual_debugTool;
 		
+		[Inject]
+		public var _text:Visual_Text;
+		
 		private var _miss_id:Array = [];
 		
 		public var _tool:AdjustTool;

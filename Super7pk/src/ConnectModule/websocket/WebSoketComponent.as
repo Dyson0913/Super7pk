@@ -118,10 +118,10 @@ package ConnectModule.websocket
 						
 						if ( result.update_odds) 
 						{
-							var bigtosmall:Array = result.update_odds;							
-							bigtosmall.splice(2, 1);
-							bigtosmall.splice(6 - 1, 1);
-							dispatcher(new ValueObject(  bigtosmall, "round_paytable") );						
+							var small_to_big:Array = result.update_odds;							
+							small_to_big.splice(2, 1);
+							small_to_big.splice(6 - 1, 1);
+							dispatcher(new ValueObject(  small_to_big, "round_paytable") );						
 						}
 						
 						var poke1:Array = [];
@@ -166,10 +166,10 @@ package ConnectModule.websocket
 						{																						
 							if ( result.update_odds)
 							{
-								var bigtosmall:Array = result.update_odds;
-								bigtosmall.splice(2, 1);
-								bigtosmall.splice(6 - 1, 1);
-								dispatcher(new ValueObject(  bigtosmall, "round_paytable") );
+								var smallto_big:Array = result.update_odds;
+								smallto_big.splice(2, 1);
+								smallto_big.splice(6 - 1, 1);
+								dispatcher(new ValueObject(  smallto_big, "round_paytable") );
 							}
 						}
 											

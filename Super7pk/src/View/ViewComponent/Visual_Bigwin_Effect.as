@@ -22,9 +22,6 @@ package View.ViewComponent
 		[Inject]
 		public var _betCommand:BetCommand;
 		
-		[Inject]
-		public var _text:Visual_Text;
-		
 		//res name
 		public const Bigwinmsg:String = "big_win_msg";		
 		public const bigwinfire:String = "sun_effect";

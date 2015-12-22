@@ -12,6 +12,7 @@ package View.ViewComponent
 	import flash.text.TextField;
 	import util.math.Path_Generator;
 	import View.ViewBase.Visual_Text;
+	import View.ViewBase.Visual_Version;
 	import View.ViewBase.VisualHandler;
 	import Model.valueObject.*;
 	import Model.*;
@@ -76,9 +77,6 @@ package View.ViewComponent
 		public var _btn:Visual_BtnHandle;
 		
 		[Inject]
-		public var _text:Visual_Text;
-		
-		[Inject]
 		public var _settle_panel:Visual_SettlePanel;
 		
 		[Inject]
@@ -105,6 +103,8 @@ package View.ViewComponent
 		[Inject]
 		public var _theme:Visual_theme;
 		
+		[Inject]
+		public var _Version:Visual_Version;
 		
 		private var _pack:Array = [];
 		
@@ -190,6 +190,8 @@ package View.ViewComponent
 			if ( _model.getValue("test_init")) return;
 			changeBG(ResName.Bet_Scene);
 			
+			_Version.init();
+			
 			_theme.init();
 			_gameinfo.init();			
 			_hint.init();			
@@ -211,7 +213,7 @@ package View.ViewComponent
 			
 			
 			
-			//_btn.debug();
+			_btn.debug();
 			_model.putValue("test_init",true);
 		}
 		
@@ -253,15 +255,15 @@ package View.ViewComponent
 			mc.transform.colorTransform=ct;
 		}
 		
-			function extractRed(c:uint):uint {
+		public	function extractRed(c:uint):uint {
 		return (( c >> 16 ) & 0xFF);
 		}
 		 
-		function extractGreen(c:uint):uint {
+		public function extractGreen(c:uint):uint {
 		return ( (c >> 8) & 0xFF );
 		}
 		 
-		function extractBlue(c:uint):uint {
+		public function extractBlue(c:uint):uint {
 		return ( c & 0xFF );
 		}
 		

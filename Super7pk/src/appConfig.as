@@ -11,6 +11,7 @@ package
 	import View.ViewBase.ViewBase;
 	import ConnectModule.websocket.WebSoketComponent;
 	import View.ViewBase.Visual_Text;
+	import View.ViewBase.Visual_Version;
 	import View.ViewComponent.*;
 	import View.Viewutil.*;
 	
@@ -50,6 +51,7 @@ package
 		public var _path:Path_Generator = new Path_Generator();
 		public var _debug:Visual_debugTool = new Visual_debugTool();
 		public var _replayer:Visual_package_replayer = new Visual_package_replayer();
+		public var _Version:Visual_Version = new Visual_Version();
 		
 		//visual
 		public var _pokerhandler:Visual_poker = new Visual_poker();

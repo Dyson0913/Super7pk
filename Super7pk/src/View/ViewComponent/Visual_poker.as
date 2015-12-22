@@ -309,15 +309,15 @@ package View.ViewComponent
 			
 		}
 		
-		function extractRed(c:uint):uint {
+		public function extractRed(c:uint):uint {
 		return (( c >> 16 ) & 0xFF);
 		}
 		 
-		function extractGreen(c:uint):uint {
+		public function extractGreen(c:uint):uint {
 		return ( (c >> 8) & 0xFF );
 		}
 		 
-		function extractBlue(c:uint):uint {
+		public function extractBlue(c:uint):uint {
 		return ( c & 0xFF );
 		}
 		

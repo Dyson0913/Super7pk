@@ -19,9 +19,7 @@ package View.ViewComponent
 	 * @author ...
 	 */
 	public class Visual_progressbar  extends VisualHandler
-	{	
-		[Inject]
-		public var _text:Visual_Text;
+	{
 		
 		[Inject]
 		public var _betCommand:BetCommand;

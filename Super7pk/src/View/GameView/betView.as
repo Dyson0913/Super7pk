@@ -12,6 +12,7 @@ package View.GameView
 	import Model.*
 	import util.math.Path_Generator;
 	import util.node;
+	import View.ViewBase.Visual_Version;
 	import View.Viewutil.*;
 	import View.ViewBase.ViewBase;
 	import util.*;
@@ -78,6 +79,9 @@ package View.GameView
 		[Inject]
 		public var _theme:Visual_theme;
 		
+		[Inject]
+		public var _Version:Visual_Version;
+		
 		public function betView()  
 		{
 			
@@ -96,6 +100,7 @@ package View.GameView
 			var view:MultiObject = prepare("_view", new MultiObject() , this);
 			view.Create_by_list(1, [ResName.Bet_Scene], 0, 0, 1, 0, 0, "a_");	
 			
+			_Version.init();
 			_theme.init();
 			_gameinfo.init();			
 			_hint.init();			
@@ -113,8 +118,7 @@ package View.GameView
 		
 			_paytable.init();
 			_btn.init();
-			_Bigwin_Effect.init();
-			
+			_Bigwin_Effect.init();			
 			//dispatcher(new StringObject("Soun_Bet_BGM","Music" ) );
 		}
 		

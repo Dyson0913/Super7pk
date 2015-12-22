@@ -31,8 +31,7 @@ package View.ViewComponent
 		[Inject]
 		public var _betCommand:BetCommand;
 		
-		[Inject]
-		public var _text:Visual_Text;
+		
 		
 		public function Visual_Game_Info() 
 		{
