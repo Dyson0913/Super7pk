@@ -57,6 +57,7 @@ package View.ViewComponent
 		
 		public function bet_sencer(e:Event,idx:int):Boolean
 		{				
+						
 				var avaliblezone:Array = _model.getValue("round_paytable");
 				if ( avaliblezone != null)
 				{				
@@ -77,6 +78,7 @@ package View.ViewComponent
 					_betCommand.clean_hisotry_bet();
 				}
 				
+				//utilFun.Log("bet idx = " + idx );
 				if ( CONFIG::debug ) 
 				{				
 					_betCommand.betTypeMain(e, idx);

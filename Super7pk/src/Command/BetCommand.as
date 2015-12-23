@@ -313,20 +313,8 @@ package Command
 		[MessageHandler(type = "Model.ModelEvent", selector = "round_result")]
 		public function settle_data_parse():void
 		{
-			//who win
-			//bigwin_type
-			//bet_amount
-			//settle_amount
-			//special_
-			
-						
 			var settle_amount:Array = [];
-			var zonebet_amount:Array = [];
-			for ( var k:int = 0; k < num; k++)
-			{
-				settle_amount.push(0);
-				zonebet_amount.push(0);
-			}
+			var zonebet_amount:Array = [];		
 			
 			_model.putValue("clean_zone", []);
 			_model.putValue("bigwin",null);
