@@ -37,8 +37,7 @@ package Model
 		public static const POKER_1:int = Num++;
 		public static const POKER_2:int = Num++;
 		
-		public static const BET_AMOUNT:int = Num++;
-		public static const SETTLE_AMOUNT:int = Num++;
+		public static const FINAL_CARD:int = Num++;
 		public static const ROUND_RESULT:int = Num++;
 		
 		

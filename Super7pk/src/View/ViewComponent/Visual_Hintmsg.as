@@ -42,7 +42,7 @@ package View.ViewComponent
 		public function pre_open():void
 		{
 			GetSingleItem(Hint).gotoAndStop(frame_pre_open);
-			_regular.FadeIn( GetSingleItem(Hint), 2, 2, _regular.Fadeout);
+			//_regular.FadeIn( GetSingleItem(Hint), 2, 2, _regular.Fadeout);
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]

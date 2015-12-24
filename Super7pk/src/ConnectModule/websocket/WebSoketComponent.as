@@ -233,7 +233,8 @@ package ConnectModule.websocket
 						dispatcher(new ValueObject(  _opration.getMappingValue("state_mapping", result.game_state) , modelName.GAMES_STATE) );						
 						dispatcher(new ModelEvent("update_state"));
 						
-						//model update
+						//model update						
+						dispatcher( new ValueObject(result.card_showhand_comb, modelName.FINAL_CARD));
 						dispatcher( new ValueObject(result.result_list, modelName.ROUND_RESULT));
 						dispatcher(new ModelEvent("round_result"));		
 					}

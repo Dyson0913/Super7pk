@@ -2,6 +2,7 @@ package View.ViewComponent
 {
 	import caurina.transitions.properties.ColorShortcuts;
 	import flash.display.MovieClip;
+	import Interface.CollectionsInterface;
 	import util.math.Path_Generator;
 	import View.ViewBase.VisualHandler;
 	import Model.valueObject.*;
@@ -281,8 +282,14 @@ package View.ViewComponent
 			//prob_cal();
 			//dispatcher(new Intobject(type, "caculate_prob"));
 			
-			//TODO diplay timing
-			pull_down(type);
+			
+			
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "round_result")]
+		public function final_card():void
+		{
+			pull_down(modelName.POKER_2);
 		}
 		
 		public function pull_down(type:int):void
@@ -290,11 +297,21 @@ package View.ViewComponent
 			var mypoker:Array =   _model.getValue(type);			
 			if ( mypoker.length != 7) return ;
 			
-			Tweener.addTween(GetSingleItem(type, 2), { y: 100 , time:1} );
-			Tweener.addTween(GetSingleItem(type, 4), { y: 100 , time:1 } );
+			//TODO filter fun always using
+			var fin_card:Array = _model.getValue(modelName.FINAL_CARD);
+			var rest_two:Array = [];
+			for ( var i:int = 0; i < mypoker.length; i++)
+			{
+				var idx:int = fin_card.indexOf(mypoker[i]);
+				if ( idx == -1) rest_two.push(i);
+			}
+			
+			
+			Tweener.addTween(GetSingleItem(type, rest_two[0]), { y: 100 , time:1} );
+			Tweener.addTween(GetSingleItem(type, rest_two[1]), { y: 100 , time:1 } );
 			
 			//押暗
-			var mc:MovieClip = GetSingleItem(type, 2);
+			var mc:MovieClip = GetSingleItem(type, rest_two[0]);
 			var color:uint = 0x000000;
 			var mul:Number = 70 / 100;
 			var ctMul:Number=(1-mul);
@@ -304,7 +321,7 @@ package View.ViewComponent
 			var ct:ColorTransform = new ColorTransform(ctMul,ctMul,ctMul,1,ctRedOff,ctGreenOff,ctBlueOff,0);
 			mc.transform.colorTransform=ct;
 			
-			var mc2:MovieClip = GetSingleItem(type, 4);		
+			var mc2:MovieClip = GetSingleItem(type, rest_two[1]);		
 			mc2.transform.colorTransform=ct;
 			
 		}
