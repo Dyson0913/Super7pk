@@ -49,18 +49,18 @@ package View.ViewComponent
 			btn_group.mouseup = empty_reaction;
 			
 			//rebet
-			var mylist:Array = [ rebet_btn];
-			var mybtn_group:MultiObject = create("mybtn_group", mylist);
-			mybtn_group.MouseFrame = utilFun.Frametype(MouseBehavior.Customized,[1,2,3,1]);
-			mybtn_group.container.x = 1710;
-			mybtn_group.container.y = 950;
+			//var mylist:Array = [ rebet_btn];
+			//var mybtn_group:MultiObject = create("mybtn_group", mylist);
+			//mybtn_group.MouseFrame = utilFun.Frametype(MouseBehavior.Customized,[1,2,3,1]);
+			//mybtn_group.container.x = 1710;
+			//mybtn_group.container.y = 950;
 			//mybtn_group.CustomizedFun = scal;			
-			mybtn_group.Create_(mylist.length);
-			mybtn_group.container.visible = false;
-			mybtn_group.rollout = empty_reaction;
-			mybtn_group.rollover = empty_reaction;
-			mybtn_group.mousedown = rebet_fun;
-			mybtn_group.mouseup = empty_reaction;
+			//mybtn_group.Create_(mylist.length);
+			//mybtn_group.container.visible = false;
+			//mybtn_group.rollout = empty_reaction;
+			//mybtn_group.rollover = empty_reaction;
+			//mybtn_group.mousedown = rebet_fun;
+			//mybtn_group.mouseup = empty_reaction;
 			
 			
 			_rule_table  = create("rule_table", [ruletable]);
@@ -103,15 +103,15 @@ package View.ViewComponent
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
 		{			
-			Log("_betCommand.need_rebet() ="+_betCommand.need_rebet());
-			if ( !_betCommand.need_rebet() )
-			{
-				can_not_rebet()				
-			}
-			else
-			{
-				can_rebet();
-			}		
+			//Log("_betCommand.need_rebet() ="+_betCommand.need_rebet());
+			//if ( !_betCommand.need_rebet() )
+			//{
+				//can_not_rebet()				
+			//}
+			//else
+			//{
+				//can_rebet();
+			//}		
 			
 		}
 		
