@@ -163,10 +163,10 @@ package View.ViewComponent
 			_Version.init();
 			
 			_theme.init();
-			//_gameinfo.init();			
-			//_hint.init();			
-			//_timer.init();
-			//_HistoryRecoder.init();
+			_gameinfo.init();			
+			_hint.init();
+			_HistoryRecoder.init();
+			_timer.init();
 			//_progressbar.init();
 			//_poker.init();			
 				//
@@ -183,19 +183,17 @@ package View.ViewComponent
 			
 			
 			
-			//_btn.debug();
+			_Version.debug();
 			_model.putValue("test_init",true);
 		}
 		
 		public function view_test():void
-		{
-			//_Version.init();
+		{			
 			
 			_theme.test_suit();
-			//_gameinfo.init();			
-			//_hint.init();			
-			//_timer.init();
-			//_HistoryRecoder.init();
+			_hint.test_suit();
+			_timer.test_suit();
+			_HistoryRecoder.test_suit();
 			//_progressbar.init();
 			//_poker.init();			
 				//
@@ -342,8 +340,23 @@ package View.ViewComponent
 			var arr:Array = [];
 			for ( var i:int = 0; i < 60; i++)
 			{					
-				var p:int = utilFun.Random(12)+1;				
-				arr.push(p);
+				var p:int = utilFun.Random(11) + 2;
+				var win:String = "";
+				if ( p == 2 ) win = "BetS7PKPureRoyalFlush";
+				if ( p == 3 ) win = "BetS7PKRoyalFlush";
+				if ( p == 4 ) win = "BetS7PKFiveOfAKind";
+				if ( p == 5 ) win = "BetS7PKStraightFlush";
+				if ( p == 6 ) win = "BetS7PKFourOfAKind";
+				if ( p == 7 ) win = "BetS7PKFullHouse";
+				if ( p == 8 ) win = "BetS7PKFlush";
+				if ( p == 9 ) win = "BetS7PKStraight";
+				if ( p == 10 ) win = "BetS7PKTripple";
+				if ( p == 11 ) win = "BetS7PKTwoPair";
+				if ( p == 12 ) win = "BetS7PKOnePair";
+				if ( p == 13 ) win = "BetS7PKNone";
+				
+				var ob:Object = { "winner": win };
+				arr.push(ob);
 			}		
 			_model.putValue("history_list", arr);			
 		}

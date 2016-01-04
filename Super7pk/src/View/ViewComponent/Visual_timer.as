@@ -2,18 +2,17 @@ package View.ViewComponent
 {
 	import flash.display.MovieClip;	
 	import View.ViewBase.VisualHandler;
-	import Model.valueObject.*;
 	import Model.*;
 	import util.*;
 	import Command.*;
 	
-	import View.Viewutil.MultiObject;
-	import Res.ResName;
+	import View.Viewutil.MultiObject;	
 	import caurina.transitions.Tweener;
+	import View.GameView.gameState;
 	
 	/**
 	 * timer present way
-	 * @author ...
+	 * @author Dyson0913
 	 */
 	public class Visual_timer  extends VisualHandler
 	{
@@ -30,36 +29,19 @@ package View.ViewComponent
 		{
 		   var countDown:MultiObject = create(Timer,[Timer]);
 		   countDown.Create_(1);
-		   countDown.container.x = 1188;
-		   countDown.container.y = 528;
+		   countDown.container.x = 1165;
+		   countDown.container.y = 490;
 		   
 		   put_to_lsit(countDown);
-		   disappear();
 		   
 		   Waring_sec = 7;
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
-		public function stop_bet():void
-		{
-			disappear();
-		}		
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
-		public function start_bet():void
-		{			
-			appear();
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function opencard_parse():void
-		{
-			disappear();
+		   
+		   state_parse([gameState.START_BET]);
 		}
 		
 		override public function appear():void
 		{
-			Get(Timer).container.visible = true;	
+			setFrame(Timer, 2);
 			var time:int = _model.getValue(modelName.REMAIN_TIME);
 			frame_setting_way(time);
 			
@@ -67,15 +49,15 @@ package View.ViewComponent
 		}
 		
 		override public function disappear():void
-		{
-			Get(Timer).container.visible = false;			
+		{	
+			setFrame(Timer, 1);			
 		}
 		
 		private function TimeCount():void
 		{			
 			var time:int  = _opration.operator(modelName.REMAIN_TIME, DataOperation.sub, 1);
 			if ( time < 0) return;
-			if ( time <= Waring_sec ) dispatcher(new StringObject("sound_final", "sound" ) );
+			if ( time <= Waring_sec ) play_sound("sound_final");
 			
 			
 			frame_setting_way(time);			
@@ -90,6 +72,22 @@ package View.ViewComponent
 			GetSingleItem(Timer)["_num_1"].gotoAndStop(arr[1]);
 		}		
 		
+		override public function test_suit():void
+		{
+			var state:int = _model.getValue(modelName.GAMES_STATE);
+			if ( state == gameState.START_BET )
+			{
+				test_frame_Not_equal( GetSingleItem(Timer) , 2);	
+			}
+			else if ( state != 0)
+			{
+				test_frame_Not_equal( GetSingleItem(Timer) , 1);	
+			}
+			else
+			{
+				Log("Visual_timer not  handle");
+			}
+		}
 	}
 
 }

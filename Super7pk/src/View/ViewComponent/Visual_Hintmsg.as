@@ -1,14 +1,11 @@
 package View.ViewComponent 
 {
 	import View.ViewBase.VisualHandler;
-	import Model.valueObject.*;
 	import Model.*;
 	import util.*;
-	import Command.*;
 	
 	import View.Viewutil.MultiObject;
-	import Res.ResName;
-	import caurina.transitions.Tweener;
+	import Res.ResName;	
 	import View.GameView.gameState;
 	
 	/**
@@ -34,40 +31,66 @@ package View.ViewComponent
 			var Hintmsg:MultiObject = create(Hint, [Hint]);
 			Hintmsg.Create_(1);
 			Hintmsg.container.x = 951.65;
-			Hintmsg.container.y = 517.80;		
+			Hintmsg.container.y = 517.80;
 			
+			state_parse([gameState.START_BET]);
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
-		public function pre_open():void
+		override public function appear():void
 		{
-			GetSingleItem(Hint).gotoAndStop(frame_pre_open);
-			//_regular.FadeIn( GetSingleItem(Hint), 2, 2, _regular.Fadeout);
+			set_frame(frame_start_bet);
+			play_sound("sound_start_bet");			
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
-		public function start_bet():void
+		override public function disappear():void
 		{			
-			GetSingleItem(Hint).gotoAndStop(frame_start_bet);
-			_regular.FadeIn( GetSingleItem(Hint), 2, 2, _regular.Fadeout);
-			play_sound("sound_start_bet");
+			var state:int = _model.getValue(modelName.GAMES_STATE);
+			var frame:int = 1;
+			if ( state == gameState.NEW_ROUND) frame = frame_pre_open;
+			if ( state == gameState.END_BET)
+			{
+				frame = frame_stop_bet;
+				play_sound("sound_start_bet");
+			}
+			
+			if ( state == gameState.START_OPEN) frame = frame_open_card;
+			set_frame(frame);			
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
-		public function stop_bet():void
+		private function set_frame(frame:int):void
 		{
-			GetSingleItem(Hint).gotoAndStop(frame_stop_bet);
+			GetSingleItem(Hint).gotoAndStop(frame);
 			_regular.FadeIn( GetSingleItem(Hint), 2, 2, _regular.Fadeout);
-			play_sound("sound_stop_bet");			
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function openCard():void
-		{			
-			GetSingleItem(Hint).gotoAndStop(frame_open_card);			
-			_regular.FadeIn( GetSingleItem(Hint), 2, 2, _regular.Fadeout);			
-		}	
-		
+		override public function test_suit():void
+		{
+			var state:int = _model.getValue(modelName.GAMES_STATE);
+			if ( state == gameState.NEW_ROUND )
+			{				
+				test_frame_Not_equal( GetSingleItem(Hint) , frame_pre_open);			
+			}
+			else if ( state == gameState.START_BET )
+			{
+				test_frame_Not_equal( GetSingleItem(Hint) , frame_start_bet);	
+			}
+			else if ( state == gameState.END_BET)
+			{
+				test_frame_Not_equal( GetSingleItem(Hint) , frame_stop_bet);	
+			}
+			else if ( state == gameState.START_OPEN )
+			{
+				test_frame_Not_equal( GetSingleItem(Hint) , frame_open_card);	
+			}
+			else if ( state == gameState.END_ROUND )
+			{
+				test_frame_Not_equal( GetSingleItem(Hint) , 1);
+			}
+			else 
+			{
+				Log("Visual_Hintmsg not  handle");
+			}
+		}
 	}
 
 }

@@ -1,13 +1,12 @@
 package View.ViewComponent 
 {	
 	import flash.display.MovieClip;
-	import View.ViewBase.VisualHandler;
-	import Model.valueObject.*;
+	import View.ViewBase.VisualHandler;	
 	import Model.*;
-	import util.*;
-	import Command.*;
+	import util.*;	
 	
-	import View.Viewutil.*;	
+	import View.Viewutil.*;
+	import View.GameView.gameState;
 	
 	/**
 	 * Paytable present way
@@ -31,44 +30,33 @@ package View.ViewComponent
 			
 			var history_symble:MultiObject = create(historysymble,  [historysymble] , history_bg.container);
 			history_symble.container.x = 1246.55;
-			history_symble.container.y = 159.95;
+			history_symble.container.y = 149.95;
 			history_symble.Post_CustomizedData = [6, 62.2, 60.95 ];
 			history_symble.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
 			history_symble.Create_(60);			
 			
 			put_to_lsit(history_bg);	
-			put_to_lsit(history_symble);			
+			put_to_lsit(history_symble);
+			
+			state_parse([gameState.NEW_ROUND, gameState.START_BET]);
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
-		public function pre_open():void
+		override public function appear():void
 		{
 			Get(historybg).container.visible = true;
 			update_history();
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
-		public function stop_bet():void
+		override public function disappear():void
 		{
-			Get(historybg).container.visible = false;
-		}		
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
-		public function start_bet():void
-		{
-			Get(historybg).container.visible = true;
-			update_history();
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function opencard_parse():void
-		{
-			Get(historybg).container.visible = false;
+			Get(historybg).container.visible = false;	
 		}
 		
 		public function update_history():void
 		{			
 			var history_model:Array = _model.getValue("history_list");			
+			
+			setFrame(historysymble, 1);
 			
 			Get(historysymble).CustomizedData = history_model;
 			Get(historysymble).CustomizedFun = history_ball_Setting;
@@ -79,7 +67,24 @@ package View.ViewComponent
 		{
 			var info:Object = data[idx];
 			var frame:int = _opration.getMappingValue(modelName.BIG_POKER_MSG,  info.winner);	
-			mc.gotoAndStop(frame);			
+			mc.gotoAndStop(frame);
+		}
+		
+		override public function test_suit():void
+		{
+			var state:int = _model.getValue(modelName.GAMES_STATE);
+			if (  state == gameState.NEW_ROUND ||  state == gameState.START_BET )
+			{
+				test_visible( Get(historybg).container , true);	
+			}
+			else if ( state != 0)
+			{
+				test_visible( Get(historybg).container, false);	
+			}
+			else
+			{
+				Log("Visual_HistoryRecoder not  handle");
+			}
 		}
 	}
 

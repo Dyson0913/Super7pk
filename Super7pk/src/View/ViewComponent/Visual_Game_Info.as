@@ -1,24 +1,11 @@
 package View.ViewComponent 
-{
-	import flash.display.MovieClip;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.events.TimerEvent;
-	import flash.globalization.DateTimeFormatter;
-	import flash.text.TextField;
-	import flash.utils.Timer;
-	import org.spicefactory.parsley.core.view.lifecycle.AutoremoveLifecycle;
-	import View.ViewBase.Visual_Text;
-	import View.ViewBase.VisualHandler;
-	import Model.valueObject.*;
-	import Model.*;
+{	
+	import View.ViewBase.VisualHandler;		
 	import util.*;
-	import Command.*;
 	
 	import View.Viewutil.*;
-	import Res.ResName;
-	import caurina.transitions.Tweener;
-	
+	import Res.ResName;	
+	import View.GameView.gameState;
 
 	
 	/**
@@ -27,12 +14,6 @@ package View.ViewComponent
 	 */
 	public class Visual_Game_Info  extends VisualHandler
 	{
-		
-		[Inject]
-		public var _betCommand:BetCommand;
-		
-		
-		
 		public function Visual_Game_Info() 
 		{
 			
@@ -47,19 +28,18 @@ package View.ViewComponent
 			bet.Post_CustomizedData = [2,50,0];
 			bet.Create_(2);
 			bet.container.x = 132;
-			bet.container.y = 48;		
+			bet.container.y = 48;
 			
-			put_to_lsit(bet);			
+			put_to_lsit(bet);
+			
+			state_parse([gameState.START_BET]);
 		}
 		
-		
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
-		public function show():void
-		{			
+		override public function appear():void
+		{	
 			var round_code:int = _model.getValue("game_round");
 			flush_round_code(round_code);
-		}	
+		}
 		
 		public function flush_round_code(round_code:int): void
 		{

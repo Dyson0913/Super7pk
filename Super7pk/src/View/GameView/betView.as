@@ -104,8 +104,9 @@ package View.GameView
 			_theme.init();
 			_gameinfo.init();			
 			_hint.init();			
-			_timer.init();
+			
 			_HistoryRecoder.init();
+			_timer.init();
 			
 			_poker.init();			
 				

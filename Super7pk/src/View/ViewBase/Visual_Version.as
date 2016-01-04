@@ -1,11 +1,8 @@
 package View.ViewBase 
 {
 	import flash.display.MovieClip;		
-	import View.ViewBase.*
-	import Model.valueObject.*;
 	import Model.*;
 	import util.*;	
-	import Command.*;	
 	
 	import View.Viewutil.*;
 	import Res.ResName;	
