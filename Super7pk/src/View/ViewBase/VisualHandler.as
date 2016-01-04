@@ -174,7 +174,7 @@ package View.ViewBase
 			return mu;
 		}
 		
-			[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "new_round",order="1")]
 		public function new_round():void
 		{			
 			if ( _my_appear_state.indexOf(gameState.NEW_ROUND) !=-1) appear();
@@ -188,21 +188,21 @@ package View.ViewBase
 			else disappear();
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet",order="1")]
 		public function end_bet():void
 		{		
 			if ( _my_appear_state.indexOf(gameState.END_BET) !=-1 )  appear();
 			else disappear();
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "open_card",order="1")]
 		public function open_card():void
 		{		
 			if ( _my_appear_state.indexOf(gameState.START_OPEN) !=-1 )  appear();
 			else disappear();
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "settle",order="1")]
 		public function settle():void
 		{		
 			if ( _my_appear_state.indexOf(gameState.END_ROUND) !=-1 )  appear();
@@ -222,6 +222,21 @@ package View.ViewBase
 		public function disappear():void
 		{
 			
+		}
+		
+		public function test_suit():void
+		{
+			
+		}
+		
+		protected function test_frame_Not_equal(mc:MovieClip, frame:int):void
+		{
+			if ( mc.currentFrame != frame) Log(mc.name + "  not pass");
+		}
+		
+		protected function test_frame_equal(mc:MovieClip, frame:int):void
+		{
+			if ( mc.currentFrame == frame) Log(mc.name + "  not pass");
 		}
 		
 		protected function play_sound(soundname:String):void

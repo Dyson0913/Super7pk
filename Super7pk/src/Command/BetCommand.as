@@ -446,7 +446,7 @@ package Command
 		public function save_bet():void
 		{
 			var bet_list:Array = _Bet_info.getValue("self");
-			utilFun.Log("save_bet bet_list  = "+bet_list.length );
+			//utilFun.Log("save_bet bet_list  = "+bet_list.length );
 			if ( bet_list.length ==0) return;
 			_model.putValue("history_bet", bet_list);
 		}

@@ -146,8 +146,7 @@ package View.ViewComponent
 		}				
 		
 		public function script_list_test(e:Event, idx:int):Boolean
-		{
-			utilFun.Log("script_list_test=" + idx);
+		{			
 			_model.putValue("Script_idx", idx);
 			view_init();
 			dispatcher(new TestEvent(_model.getValue("Script_idx").toString()));
@@ -184,8 +183,37 @@ package View.ViewComponent
 			
 			
 			
-			_btn.debug();
+			//_btn.debug();
 			_model.putValue("test_init",true);
+		}
+		
+		public function view_test():void
+		{
+			//_Version.init();
+			
+			_theme.test_suit();
+			//_gameinfo.init();			
+			//_hint.init();			
+			//_timer.init();
+			//_HistoryRecoder.init();
+			//_progressbar.init();
+			//_poker.init();			
+				//
+			//_betzone.init();
+			//_coin_stack.init();
+			//_coin.init();
+			//_sencer.init();
+			//_settle_panel.init();
+			//
+			//
+			//_paytable.init();
+			//_btn.init();
+			//_Bigwin_Effect.init();
+			
+			
+			
+			//_btn.debug();
+			//_model.putValue("test_init",true);
 		}
 		
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "0")]
@@ -203,7 +231,11 @@ package View.ViewComponent
 			//================================================ simu deal
 			var testpoker:Array = ["Player", "Player", "Player","Player","Player"];
 			_regular.Call(this, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 5, 0, 5, "linear");
+			
+			view_test();
 		}
+		
+		
 		
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "1")]
 		public function betScript():void
@@ -221,6 +253,8 @@ package View.ViewComponent
 			
 			dispatcher(new Intobject(modelName.POKER_1, "poker_No_mi"));
 			dispatcher(new Intobject(modelName.POKER_2, "poker_No_mi"));
+			
+			view_test();
 		}	
 		
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "2")]
@@ -229,6 +263,8 @@ package View.ViewComponent
 			fake_hisotry();
 			_model.putValue(modelName.GAMES_STATE,gameState.END_BET);			
 			dispatcher(new ModelEvent("update_state"));
+			
+			view_test();
 		}
 		
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "3")]
@@ -244,7 +280,9 @@ package View.ViewComponent
 			
 			//================================================ simu deal
 			var testpoker:Array = ["Player", "Player"];
-			_regular.Call(this, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 5, 0, 2, "linear");						
+			_regular.Call(this, { onUpdate:this.fackeDeal, onUpdateParams:[testpoker] }, 5, 0, 2, "linear");
+			
+			view_test();
 		}
 		
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "4")]
@@ -265,6 +303,7 @@ package View.ViewComponent
 			
 			_MsgModel.push(fakePacket);	
 			
+			view_test();
 		}
 		
 		[MessageHandler(type = "View.Viewutil.TestEvent", selector = "5")]
@@ -282,7 +321,7 @@ package View.ViewComponent
 			var card:String = cardlist[0];
 			type.shift();
 			cardlist.shift();
-			Log("fackeDeal card = " + card);
+			//Log("fackeDeal card = " + card);
 			var mypoker:Array = [];
 			var mypoker2:Array = [];
 			if ( card_type == "Extra")
