@@ -38,7 +38,7 @@ package View.ViewComponent
 		}
 		
 		[MessageHandler(type="Model.valueObject.Intobject",selector="settle_step")]
-		public function settle(v:Intobject):void
+		public function settle2(v:Intobject):void
 		{
 			//patytable提示框			
 			dispatcher(new StringObject(_model.getValue("winstr"), "winstr_hint"));

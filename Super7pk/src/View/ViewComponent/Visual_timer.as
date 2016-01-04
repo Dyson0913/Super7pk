@@ -57,7 +57,7 @@ package View.ViewComponent
 			disappear();
 		}
 		
-		public function appear():void
+		override public function appear():void
 		{
 			Get(Timer).container.visible = true;	
 			var time:int = _model.getValue(modelName.REMAIN_TIME);
@@ -66,7 +66,7 @@ package View.ViewComponent
 			Tweener.addCaller(this, { time:time , count: time, onUpdate:TimeCount , transition:"linear" } );
 		}
 		
-		public function disappear():void
+		override public function disappear():void
 		{
 			Get(Timer).container.visible = false;			
 		}

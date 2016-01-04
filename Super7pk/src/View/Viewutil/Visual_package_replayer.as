@@ -25,9 +25,8 @@ package View.Viewutil
 		[Inject]
 		public var _MsgModel:MsgQueue;
 		
-		private var _packList:Array = [];
-		
-		
+		private var _packlist:Array = [];
+		private var _pack_idx:int = 0;
 		
 		public function Visual_package_replayer() 
 		{
@@ -36,52 +35,69 @@ package View.Viewutil
 		
 		public function init():void
 		{
-			var sim_pack:MultiObject = create("sim_pack", [ResName.TextInfo]);	
+			//var sim_pack:MultiObject = create("sim_pack", [ResName.TextInfo]);	
+			
+			var data:Array = ["<<", "->", ">>", "frame:"];
+			var font2:Array = [{ size:18 } ];
+			font2 = font2.concat(data);		
+			var script_list:MultiObject = create("replay_interface", [ResName.TextInfo]);	
+			script_list.MouseFrame = utilFun.Frametype(MouseBehavior.ClickBtn);			
+			script_list.stop_Propagation = true;
+			script_list.mousedown = interface_click;
+			script_list.CustomizedData = font2;
+			script_list.CustomizedFun = _text.textSetting;			
+			script_list.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
+			script_list.Post_CustomizedData = [data.length, 50, 100];	
+			script_list.Create_(data.length);	
+			script_list.container.x = 600;
+			
+			_packlist.length = 0;
+			_pack_idx = 0;
 		}
 		
-		[MessageHandler(type="Model.valueObject.ArrayObject",selector="replay_config_complete")]		
+		//[MessageHandler(type="Model.valueObject.ArrayObject",selector="replay_config_complete")]		
 		public function lsit(replayinfo:ArrayObject):void
 		{	
 			//確認為自己要求的mission
 				//utilFun.Log("replayinfo.Value[0]"+replayinfo.Value[0]);
 				//utilFun.Log("mission_id()"+mission_id());
 			if ( replayinfo.Value[0] != mission_id()) return;
-				
 			
-			utilFun.Log("parse");
-			var jsonob:Object =  replayinfo.Value[1];
-			var packinfo:Array = jsonob.packlist;
-			var packName:Array = [];
-			_packList = packinfo;
-			for (var i:int = 0; i < packinfo.length ; i++)
-			{
-				utilFun.Log("my pack = " + packinfo[i]);				
-				packName.push(packinfo[i].message_type);
-				
-			}
-			utilFun.Log("my packName = " + packName);
-			var sim_pack:MultiObject = Get("sim_pack");
-			sim_pack.container.x = 100;
-			sim_pack.container.y = 100;
-			sim_pack.CustomizedFun = _text.textSetting;
-			var ob:Array = [ { size:18, color:0xFF0000 } ];				
-			ob = ob.concat(packName);
-			sim_pack.CustomizedData = ob;
-			sim_pack.MouseFrame = utilFun.Frametype(MouseBehavior.Customized, [0, 0, 2, 0]);
-			sim_pack.mousedown = pack;
-			sim_pack.Post_CustomizedData = [packName.length, 10, 32];
-			sim_pack.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			sim_pack.Create_(packName.length);
-			//
-			//put_to_lsit(sim_pack);
+		}	
+		
+		[MessageHandler(type="Model.valueObject.ArrayObject",selector="replay_pack")]		
+		public function set_data(replayinfo:ArrayObject):void
+		{
+			init();
+			
+			_packlist = replayinfo.Value;
 		}
 		
-		public function pack(e:Event, idx:int):Boolean
-		{			
-			_MsgModel.push(_packList[idx]);	
+		public function interface_click(e:Event, idx:int):Boolean
+		{
+			GetSingleItem("replay_interface", 3).getChildByName("Dy_Text").text = "frame:" + _pack_idx.toString();
+			play_frame()
+			
+			
+			if ( idx == 0) _pack_idx = Math.min(0, _pack_idx -1);
+			if ( idx == 1 || idx == 2) 
+			{
+				_pack_idx += 1;				
+				_pack_idx %= _packlist.length;	
+			}		
+			
+			
+			
 			return true;
 		}
 		
+		public function play_frame():void
+		{
+			var fakePacket:Object  = _packlist[_pack_idx]; 
+			
+			_MsgModel.push(fakePacket);			
+		
+		}
 		
 	}
 

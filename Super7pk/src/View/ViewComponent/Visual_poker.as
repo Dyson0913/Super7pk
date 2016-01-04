@@ -126,7 +126,7 @@ package View.ViewComponent
 		}	
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function open_card():void
+		public function open_card2():void
 		{
 			//_regular.Fadeout(Get(Poker_1).container, 1, 1);			
 			//_regular.FadeIn(Get(Poker_1).container, 1, 1, null);			
@@ -135,7 +135,7 @@ package View.ViewComponent
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
-		public function settle():void
+		public function settle2():void
 		{
 			Get(modelName.POKER_1).container.alpha = 0;		
 			Get(modelName.POKER_2).container.alpha = 1;			

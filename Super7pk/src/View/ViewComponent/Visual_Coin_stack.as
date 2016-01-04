@@ -106,7 +106,7 @@ package View.ViewComponent
 			disappear();
 		}	
 		
-		public function appear():void
+		override public function appear():void
 		{
 			Get("coinstakeZone").container.visible = true;
 			
@@ -127,7 +127,7 @@ package View.ViewComponent
 			}
 		}
 		
-		public function disappear():void
+		override public function disappear():void
 		{
 			Get("coinstakeZone").container.visible = false;
 			

@@ -109,7 +109,7 @@ package View.ViewComponent
 			disappear();
 		}
 		
-		public function appear():void
+		override public function appear():void
 		{
 			var mu:MultiObject = Get("progresstitle");
 			mu.container.visible = true;
@@ -119,7 +119,7 @@ package View.ViewComponent
 			mu.FlushObject();
 		}
 		
-		public function disappear():void
+		override public function disappear():void
 		{
 			var mu:MultiObject = Get("progresstitle");
 			mu.container.visible = false;

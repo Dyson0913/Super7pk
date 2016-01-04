@@ -66,7 +66,7 @@ package View.ViewComponent
 			disappear();
 		}
 		
-		public function appear():void
+		override  public function appear():void
 		{
 			setFrame(bet_tableitem, 2);
 			
@@ -76,7 +76,7 @@ package View.ViewComponent
 			betzone.rollover = empty_reaction;
 		}
 		
-		public function disappear():void
+		override public function disappear():void
 		{
 			setFrame(bet_tableitem, 1);
 			

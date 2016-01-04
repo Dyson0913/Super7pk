@@ -121,12 +121,12 @@ package View.ViewComponent
 		}	
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
-		public function settle():void
+		public function settle2():void
 		{
 			disappear();
 		}
 		
-		public function appear():void
+		override public function appear():void
 		{
 			var betzone:MultiObject = Get("betzone_s");
 			betzone.mousedown = bet_sencer;
@@ -146,7 +146,7 @@ package View.ViewComponent
 			}
 		}
 		
-		public function disappear():void
+		override public function disappear():void
 		{
 			var betzone:MultiObject = Get("betzone_s");
 			betzone.mousedown = null;

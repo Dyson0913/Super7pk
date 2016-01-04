@@ -113,12 +113,12 @@ package View.ViewComponent
 		}	
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
-		public function settle():void
+		public function settle2():void
 		{
 			appear();
 		}
 		
-		public function disappear():void
+		override public function disappear():void
 		{
 			setFrame(settletable, 1);
 			
@@ -127,7 +127,7 @@ package View.ViewComponent
 			Get(settle_symble).CleanList();
 		}
 		
-		public function appear():void
+		override public function appear():void
 		{
 			//TODO settle or not settle
 			setFrame(settletable, 3);

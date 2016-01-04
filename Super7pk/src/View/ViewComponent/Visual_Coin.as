@@ -83,13 +83,13 @@ package View.ViewComponent
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function open_card():void
+		public function open_card2():void
 		{			
 			_regular.Fadeout(_coin.container, 0, 1);
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
-		public function settle():void
+		public function settle2():void
 		{			
 			_regular.Fadeout(_coin.container, 0, 1);
 		}

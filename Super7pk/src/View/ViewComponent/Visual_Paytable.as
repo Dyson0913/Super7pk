@@ -112,12 +112,12 @@ package View.ViewComponent
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
-		public function settle():void
+		public function settle2():void
 		{
 			appear();
 		}
 		
-		public function disappear():void
+		override public function disappear():void
 		{
 			setFrame(paytable, 1);
 			setFrame(x_symble, 1);
@@ -128,7 +128,7 @@ package View.ViewComponent
 			Tweener.pauseTweens( GetSingleItem(x_symble, tween_frame));
 		}
 		
-		public function appear():void
+		override public function appear():void
 		{			
 			GetSingleItem(paytable).gotoAndStop(2);			
 			setFrame(x_symble, 12);
