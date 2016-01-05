@@ -32,11 +32,11 @@ package View.ViewComponent
 			var avaliblezone_s:Array = _model.getValue(modelName.AVALIBLE_ZONE_S);
 			var avaliblezone_d:Array = _model.getValue(modelName.AVALIBLE_ZONE_d);
 			
-			var betzone_dark:MultiObject = create("betzone_dark", avaliblezone_d);
-			betzone_dark.container.x = 3;
-			betzone_dark.container.y = 605;
-			betzone_dark.Create_(avaliblezone_s.length);
-			
+			//var betzone_dark:MultiObject = create("betzone_dark", avaliblezone_d);
+			//betzone_dark.container.x = 3;
+			//betzone_dark.container.y = 605;
+			//betzone_dark.Create_(avaliblezone_s.length);
+			//
 			
 			var playerzone_s:MultiObject = create("betzone_s", avaliblezone_s);
 			playerzone_s.MouseFrame = utilFun.Frametype(MouseBehavior.Customized, [1, 1, 2, 1]);
@@ -65,8 +65,8 @@ package View.ViewComponent
 				var al:Number = 0;			
 				if ( avaliblezone[i] == -1) al = 0.5;				
 				
-				var mc:MovieClip = GetSingleItem("betzone_dark", i);
-				mc["_dark"].alpha = al;
+				//var mc:MovieClip = GetSingleItem("betzone_dark", i);
+				//mc["_dark"].alpha = al;
 			}
 		}
 		

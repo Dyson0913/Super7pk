@@ -31,20 +31,27 @@ package View.ViewComponent
 			
 			var tableitem:MultiObject = create(bet_tableitem, [bet_tableitem]);	
 			tableitem.container.x = 3;
-			tableitem.container.y = 605;
+			tableitem.container.y = 575;
 			tableitem.Create_(1);			
 			
 			put_to_lsit(tableitem);
 			
 			var avaliblezone:Array = _model.getValue(modelName.AVALIBLE_ZONE);
-			
+			var res:Array = ["zone_total"]
 			//下注區
-			var pz:MultiObject = create("betzone", avaliblezone);
+			var pz:MultiObject = create("betzone", res);
 			pz.MouseFrame = utilFun.Frametype(MouseBehavior.Customized, [1, 2, 2, 0]);			
-			pz.container.x = tableitem.container.x;
-			pz.container.y = tableitem.container.y;
-			pz.Create_(avaliblezone.length);			
+			//pz.CustomizedData = [2,3,4,5,6,7,8,9,10,11,12,13];
+			//pz.CustomizedFun = _regular.FrameSetting;
+			pz.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
+			pz.Post_CustomizedData = [[0, 0] , [ -300, 0] , [ -600, 0] , [ -910, 0] , [ -1222, 0], [ -1536, 0], [ -31, -171], [ -312, -175], [ -597, -175], [ -892, -177], [ -1186, -177], [ -1481, -176]];
+			pz.rollover 
+			pz.container.x = tableitem.container.x + 1556;
+			pz.container.y = tableitem.container.y + 214;
+			pz.Create_(12);
 			
+	
+			//setFrame("betzone", 2);
 			put_to_lsit(pz);
 			
 			state_parse([gameState.START_BET]);
@@ -56,9 +63,9 @@ package View.ViewComponent
 			setFrame(bet_tableitem, 2);
 			
 			var betzone:MultiObject = Get("betzone");			
-			betzone.mousedown = empty_reaction;	
+			betzone.mousedown = bet_sencer;	
 			betzone.rollout = empty_reaction;
-			betzone.rollover = empty_reaction;
+			betzone.rollover = bet_sencer;
 		}
 		
 		override public function disappear():void
@@ -73,6 +80,12 @@ package View.ViewComponent
 			setFrame("betzone", 1);
 		}
 		
+		public function bet_sencer(e:Event, idx:int):Boolean
+		{
+			Log("frame = " + idx);
+			e.currentTarget.gotoAndStop(idx + 2);			
+			return false;
+		}
 	}
 
 }
