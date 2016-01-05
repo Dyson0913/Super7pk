@@ -322,6 +322,7 @@ package View.Viewutil
 			return parseInt(s);
 		}
 		
+		//playerCon.container.getChildIndex(item)
 		public function order_switch(target:int ,to:int):void
 		{			
 			_Container.swapChildrenAt(target, to);

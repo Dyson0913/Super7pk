@@ -168,7 +168,7 @@ package View.ViewComponent
 			_HistoryRecoder.init();
 			_timer.init();
 			//_progressbar.init();
-			//_poker.init();			
+			_poker.init();			
 				//
 			//_betzone.init();
 			//_coin_stack.init();
@@ -195,7 +195,7 @@ package View.ViewComponent
 			_timer.test_suit();
 			_HistoryRecoder.test_suit();
 			//_progressbar.init();
-			//_poker.init();			
+			_poker.test_suit();
 				//
 			//_betzone.init();
 			//_coin_stack.init();
@@ -322,7 +322,7 @@ package View.ViewComponent
 			//Log("fackeDeal card = " + card);
 			var mypoker:Array = [];
 			var mypoker2:Array = [];
-			if ( card_type == "Extra")
+			//if ( card_type == "Extra")
 			{										
 				mypoker = _model.getValue(modelName.POKER_1);										
 				mypoker2 = _model.getValue(modelName.POKER_2);										

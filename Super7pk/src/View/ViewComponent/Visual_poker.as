@@ -1,23 +1,19 @@
 package View.ViewComponent 
 {
-	import caurina.transitions.properties.ColorShortcuts;
 	import flash.display.MovieClip;
-	import Interface.CollectionsInterface;
-	import util.math.Path_Generator;
 	import View.ViewBase.VisualHandler;
 	import Model.valueObject.*;
 	import Model.*;
 	import util.*;
 	
 	import View.Viewutil.MultiObject;
-	import Res.ResName;
-	import caurina.transitions.Tweener;	
-	import Command.*;
+	import caurina.transitions.Tweener;
 	import flash.geom.ColorTransform;
 	
+	import View.GameView.gameState;
 	/**
 	 * poker present way
-	 * @author ...
+	 * @author Dsyon0913
 	 */
 	public class Visual_poker  extends VisualHandler
 	{
@@ -40,22 +36,24 @@ package View.ViewComponent
 			playerCon.Post_CustomizedData = [[0.0],[91,108],[192,0],[382,0],[475,108],[572,0],[283,108]];
 			playerCon.Posi_CustzmiedFun = _regular.Posi_xy_Setting;			
 			playerCon.Create_(7);
-			playerCon.container.x = 59;
-			playerCon.container.y = 198;
+			playerCon.container.x = 63;
+			playerCon.container.y = 195;
 			utilFun.scaleXY(playerCon.container, 0.8, 0.8);
-			playerCon.container.alpha = 0;
-			playerCon.order_switch(5, 4);
-			playerCon.order_switch(1, 2);
+			
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[5]));
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[4]));
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[3]));			
+			
 			put_to_lsit(playerCon);
 			
 			var bankerCon:MultiObject =  create(modelName.POKER_2, pokerkind);
-			bankerCon.Post_CustomizedData = [7, 180, 240];
+			bankerCon.Post_CustomizedData = [7, 190, 240];
 			bankerCon.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;			
 			bankerCon.Create_(7);
-			bankerCon.container.x = 115;
-			bankerCon.container.y = 594;
-			utilFun.scaleXY(bankerCon.container, 1.3, 1.3);
-			bankerCon.container.alpha = 0;
+			bankerCon.container.x = 313;
+			bankerCon.container.y = 684;
+			//utilFun.scaleXY(bankerCon.container, 1.3, 1.3);
+			//bankerCon.container.alpha = 0;
 			
 			put_to_lsit(bankerCon);
 			
@@ -67,9 +65,63 @@ package View.ViewComponent
 			
 			put_to_lsit(mipoker);
 			
-		
-		}
+			state_parse([gameState.START_BET]);
 			
+			_model.putValue(modelName.POKER_1, [] );
+			_model.putValue(modelName.POKER_2, [] );
+		}
+		
+		override public function appear():void
+		{
+			Get(modelName.POKER_1).container.visible = false;
+			Get(modelName.POKER_2).container.visible = true;
+			
+			//下拉卡 還原
+			//GetSingleItem(modelName.POKER_2, 2).y = 0;
+			//GetSingleItem(modelName.POKER_2, 4).y = 0;
+		}
+		
+		override public function disappear():void
+		{
+			Get(modelName.POKER_1).container.visible = false;
+			Get(modelName.POKER_2).container.visible = true;
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
+		public function pre_open():void
+		{
+			//中途進入版不清,   新局清 ( 但model在切view之前就放好)
+			//_model,中途不清   新局清
+			//Clean_poker();
+			Get(modelName.POKER_1).container.visible = true;
+			//Get(modelName.POKER_2).container.alpha = 1;
+			//GetSingleItem(modelName.POKER_2, 2).y = 0;
+			//GetSingleItem(modelName.POKER_2, 4).y = 0;
+		}
+		
+		override public function test_suit():void
+		{
+			var state:int = _model.getValue(modelName.GAMES_STATE);
+			if (  state == gameState.START_BET )
+			{				
+				test_visible( Get(modelName.POKER_1).container ,  false);
+				test_visible( Get(modelName.POKER_2).container , false );	
+			}
+			else if (  state == gameState.NEW_ROUND )
+			{
+				test_visible( Get(modelName.POKER_1).container , true );	
+			}
+			else if ( state != 0)
+			{
+				test_visible( Get(modelName.POKER_1).container ,  false);
+				test_visible( Get(modelName.POKER_2).container , true);	
+			}
+			else
+			{
+				Log("Visual_poker not  handle");
+			}
+		}
+		
 		public function Clean_poker():void
 		{			
 			var pokerkind:Array = [just_turnpoker];
@@ -98,47 +150,35 @@ package View.ViewComponent
 			_model.putValue(modelName.POKER_2, [] );
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
-		public function pre_open():void
-		{
-			//中途進入版不清,   新局清 ( 但model在切view之前就放好)
-			//_model,中途不清   新局清
-			Clean_poker();
-			Get(modelName.POKER_1).container.alpha = 1;
-			Get(modelName.POKER_2).container.alpha = 1;
-			GetSingleItem(modelName.POKER_2, 2).y = 0;
-			GetSingleItem(modelName.POKER_2, 4).y = 0;
-		}
+	
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
 		public function start_bet():void
 		{			
-			Get(modelName.POKER_1).container.alpha = 1;
-			Get(modelName.POKER_2).container.alpha = 0;			
+			//Get(modelName.POKER_1).container.alpha = 1;
+			//Get(modelName.POKER_2).container.alpha = 0;			
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
 		public function stop_bet():void
 		{
-			Get(modelName.POKER_1).container.alpha = 0;			
-			Get(modelName.POKER_2).container.alpha = 1;
+			//Get(modelName.POKER_1).container.alpha = 0;			
+			//Get(modelName.POKER_2).container.alpha = 1;
 			
 		}	
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
 		public function open_card2():void
-		{
-			//_regular.Fadeout(Get(Poker_1).container, 1, 1);			
-			//_regular.FadeIn(Get(Poker_1).container, 1, 1, null);			
-			Get(modelName.POKER_1).container.alpha = 0;
-			Get(modelName.POKER_2).container.alpha = 1;
+		{	
+			//Get(modelName.POKER_1).container.alpha = 0;
+			//Get(modelName.POKER_2).container.alpha = 1;
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
 		public function settle2():void
 		{
-			Get(modelName.POKER_1).container.alpha = 0;		
-			Get(modelName.POKER_2).container.alpha = 1;			
+			//Get(modelName.POKER_1).container.alpha = 0;		
+			//Get(modelName.POKER_2).container.alpha = 1;			
 		}
 		
 		
@@ -506,7 +546,7 @@ package View.ViewComponent
 			else if (  parseInt( apoint) > parseInt( bpoint )) return 1;
 			else return 0;			
 		}	 
-	
+		
 	}
 
 }
