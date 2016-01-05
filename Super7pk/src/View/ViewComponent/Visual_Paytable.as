@@ -4,13 +4,13 @@ package View.ViewComponent
 	import View.ViewBase.VisualHandler;
 	import Model.valueObject.*;
 	import Model.*;
-	import util.*;
-	import Command.*;
+	import util.*;	
 	
 	import View.Viewutil.*;
 	import Res.ResName;
 	import caurina.transitions.Tweener;
 	
+	import View.GameView.gameState;
 	/**
 	 * Paytable present way
 	 * @author Dyson0913
@@ -63,6 +63,33 @@ package View.ViewComponent
 			p_num.Create_(12);
 			put_to_lsit(p_num);
 			
+			state_parse([gameState.END_BET,gameState.START_OPEN,gameState.END_ROUND]);
+		}
+		
+		override public function appear():void
+		{			
+			GetSingleItem(paytable).gotoAndStop(2);			
+			setFrame(x_symble, 12);
+			
+			
+			var total:Array = _model.getValue("round_paytable");
+			var copyarr:Array = [];
+			copyarr.push.apply(copyarr,total );
+			var mu:MultiObject = Get(paynum);
+			mu.CustomizedFun = payodd;
+			mu.CustomizedData = copyarr.reverse();
+			mu.Create_(12);
+		}
+		
+		override public function disappear():void
+		{
+			setFrame(paytable, 1);
+			setFrame(x_symble, 1);
+			
+			Get(paynum).CleanList();
+			
+			Tweener.pauseTweens( GetSingleItem(paytable, tag_paytable_win_tag) );
+			Tweener.pauseTweens( GetSingleItem(x_symble, tween_frame));
 		}
 		
 		public function payodd(mc:MovieClip, idx:int, data:Array):void
@@ -92,57 +119,6 @@ package View.ViewComponent
 			
 			mc.gotoAndStop(data[idx]);
 		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
-		public function pre_open():void
-		{
-			disappear();
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
-		public function stop_bet():void
-		{
-			appear();
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function opencard_parse():void
-		{
-			appear();
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
-		public function settle2():void
-		{
-			appear();
-		}
-		
-		override public function disappear():void
-		{
-			setFrame(paytable, 1);
-			setFrame(x_symble, 1);
-			
-			Get(paynum).CleanList();
-			
-			Tweener.pauseTweens( GetSingleItem(paytable, tag_paytable_win_tag) );
-			Tweener.pauseTweens( GetSingleItem(x_symble, tween_frame));
-		}
-		
-		override public function appear():void
-		{			
-			GetSingleItem(paytable).gotoAndStop(2);			
-			setFrame(x_symble, 12);
-			
-			
-			var total:Array = _model.getValue("round_paytable");
-			var copyarr:Array = [];
-				copyarr.push.apply(copyarr,total );
-			var mu:MultiObject = Get(paynum);
-			mu.CustomizedFun = payodd;
-			mu.CustomizedData = copyarr.reverse();
-			mu.Create_(12);
-		}
-		
 		
 		[MessageHandler(type = "Model.valueObject.StringObject",selector="winstr_hint")]
 		public function win_frame_hint(winstr:StringObject):void

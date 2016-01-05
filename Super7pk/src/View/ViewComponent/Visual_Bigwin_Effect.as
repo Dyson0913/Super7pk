@@ -1,8 +1,7 @@
 package View.ViewComponent 
 {
 	import flash.display.MovieClip;
-	import flash.display.Sprite;
-	import View.ViewBase.Visual_Text;
+	import flash.display.Sprite;	
 	import View.ViewBase.VisualHandler;
 	import Model.valueObject.*;
 	import Model.*;
@@ -10,12 +9,12 @@ package View.ViewComponent
 	import Command.*;
 	
 	import View.Viewutil.MultiObject;
-	import Res.ResName;
 	import caurina.transitions.Tweener;
+	import View.GameView.gameState;
 	
 	/**
 	 * bigwin effect
-	 * @author ...
+	 * @author Dyson0913
 	 */
 	public class Visual_Bigwin_Effect  extends VisualHandler
 	{
@@ -69,15 +68,15 @@ package View.ViewComponent
 			put_to_lsit(bigwinCon);
 			put_to_lsit(PowerJPNum);
 			
+			state_parse([gameState.NEW_ROUND]);
 		}		
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
-		public function pre_open():void
-		{
-			hide();
+		override public function appear():void
+		{			
+			reset();
 		}
 		
-		public function hide():void
+		private function reset():void
 		{
 			_playing = false;
 			setFrame("bigwinmsg", 1);
@@ -252,7 +251,7 @@ package View.ViewComponent
 				dispatcher(new Intobject(1, "settle_step"));
 				PowerJPNum.ItemList[PowerJPNum.ItemList.length - 1].gotoAndStop(10);				
 				pause_sound(sound_getpoint);
-				utilFun.SetTime(hide, 2);		
+				utilFun.SetTime(reset, 2);		
 				return;
 			}
 		}

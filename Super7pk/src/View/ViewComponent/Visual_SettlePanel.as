@@ -1,7 +1,6 @@
 package View.ViewComponent 
 {
-	import flash.display.MovieClip;
-	import View.ViewBase.Visual_Text;
+	import flash.display.MovieClip;	
 	import View.ViewBase.VisualHandler;
 	import Model.valueObject.*;
 	import Model.*;
@@ -13,8 +12,8 @@ package View.ViewComponent
 	import caurina.transitions.Tweener;
 	import View.GameView.*;
 	/**
-	 * hintmsg present way
-	 * @author ...
+	 * settlePanel present way
+	 * @author Dyson0913
 	 */
 	public class Visual_SettlePanel  extends VisualHandler
 	{
@@ -80,52 +79,8 @@ package View.ViewComponent
 			
 			//CustomizedData = [ { size:18,align:_text.align_right }, "0", "0", "1000", "0", "0", "100000", "10000"];
 			//settletable_zone_settle.Post_CustomizedData = [7, 30, 32];
-			
+			state_parse([gameState.END_BET,gameState.START_OPEN,gameState.END_ROUND]);
 		}		
-		
-		public function sprite_idx_setting_player(mc:*, idx:int, data:Array):void
-		{			
-			var code:int  = pokerUtil.pokerTrans_s(data[idx]);			
-			mc.x += 25;			
-			//押暗
-			//if ( history_win[Math.floor(idx / 5)] != ResName.angelball) mc.alpha =  0.5;			
-			mc.drawTile(code);	
-			//utilFun.scaleXY(mc, 2, 2);
-		
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
-		public function pre_open():void
-		{
-			disappear();
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
-		public function stop_bet():void
-		{
-			appear();
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function opencard_parse():void
-		{
-			appear();
-		}	
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
-		public function settle2():void
-		{
-			appear();
-		}
-		
-		override public function disappear():void
-		{
-			setFrame(settletable, 1);
-			
-			
-			Get(bet_symble).CleanList();
-			Get(settle_symble).CleanList();
-		}
 		
 		override public function appear():void
 		{
@@ -153,6 +108,25 @@ package View.ViewComponent
 			//utilFun.Log("font = "+mylist);
 			//Get("settletable_zone_bet").CustomizedData = font;
 			//Get("settletable_zone_bet").Create_by_list(mylist.length, [ResName.TextInfo], 0 , 0, 1, 0, 30, "Bet_");	
+		}
+		
+		override public function disappear():void
+		{
+			setFrame(settletable, 1);
+			
+			Get(bet_symble).CleanList();
+			Get(settle_symble).CleanList();
+		}
+		
+		public function sprite_idx_setting_player(mc:*, idx:int, data:Array):void
+		{			
+			var code:int  = pokerUtil.pokerTrans_s(data[idx]);			
+			mc.x += 25;			
+			//押暗
+			//if ( history_win[Math.floor(idx / 5)] != ResName.angelball) mc.alpha =  0.5;			
+			mc.drawTile(code);	
+			//utilFun.scaleXY(mc, 2, 2);
+		
 		}
 		
 		public function settleodd(mc:MovieClip, idx:int, data:Array):void

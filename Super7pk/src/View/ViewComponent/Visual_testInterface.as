@@ -174,12 +174,12 @@ package View.ViewComponent
 			_coin_stack.init();
 			_coin.init();
 			_sencer.init();
-			//_settle_panel.init();
+			_settle_panel.init();
 			//
 			//
-			//_paytable.init();
+			_paytable.init();
 			//_btn.init();
-			//_Bigwin_Effect.init();
+			_Bigwin_Effect.init();
 			
 			
 			
