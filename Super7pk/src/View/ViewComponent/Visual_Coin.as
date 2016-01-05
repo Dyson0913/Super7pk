@@ -1,14 +1,11 @@
 package View.ViewComponent 
 {
 	import flash.events.Event;
-	import View.ViewBase.VisualHandler;
-	import Model.valueObject.*;
+	import View.ViewBase.VisualHandler;	
 	import Model.*;
 	import util.*;
-	import Command.*;
 	
-	import View.Viewutil.*;
-	import flash.display.DisplayObjectContainer;
+	import View.Viewutil.*;	
 	import flash.display.MovieClip;
 	import View.GameView.*;
 	import Res.ResName;
@@ -16,12 +13,10 @@ package View.ViewComponent
 	
 	/**
 	 * coin present way
-	 * @author ...
+	 * @author Dyson0913
 	 */
 	public class Visual_Coin  extends VisualHandler
 	{
-		[Inject]
-		public var _betCommand:BetCommand;
 		
 		[Inject]
 		public var _Actionmodel:ActionQueue;		
@@ -52,11 +47,13 @@ package View.ViewComponent
 			_coin.rollout = excusive_rollout;
 			_coin.rollover = excusive_select_action;
 			_coin.mousedown = betSelect;
-			_coin.ItemList[0].y -= 20;
-			_coin.ItemList[0].gotoAndStop(2);
+			_coin.ItemList[2].y -= 20;
+			_coin.ItemList[2].gotoAndStop(2);			
+			_coin.ItemList[2]["_coin"].gotoAndStop(3);
 			
 			put_to_lsit(_coin);
 			
+			state_parse([gameState.START_BET]);
 		}
 		
 		public function ocin_setup(mc:MovieClip, idx:int, data:Array):void
@@ -64,32 +61,12 @@ package View.ViewComponent
 			mc["_coin"].gotoAndStop(idx+1);
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
-		public function pre_open():void
+		override public function appear():void
 		{
-			_regular.Fadeout(_coin.container, 0, 1);
+			_regular.FadeIn(_coin.container, 0, 1, null);	
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
-		public function start_bet():void
-		{
-			_regular.FadeIn(_coin.container, 0, 1, null);
-		}		
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
-		public function stop_bet():void
-		{			
-			_regular.Fadeout(_coin.container, 0, 1);			
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function open_card2():void
-		{			
-			_regular.Fadeout(_coin.container, 0, 1);
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
-		public function settle2():void
+		override public function disappear():void
 		{			
 			_regular.Fadeout(_coin.container, 0, 1);
 		}

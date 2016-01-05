@@ -239,7 +239,7 @@ package View.ViewBase
 			if ( mc.currentFrame == frame) Log(mc.name + "  not pass");
 		}
 		
-		protected function test_visible(mc:MovieClip, visible:Boolean):void
+		protected function test_visible(mc:DisplayObjectContainer, visible:Boolean):void
 		{
 			if ( mc.visible != visible) Log(mc.name + "  not pass");
 		}	

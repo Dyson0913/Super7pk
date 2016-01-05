@@ -170,10 +170,10 @@ package View.ViewComponent
 			//_progressbar.init();
 			_poker.init();			
 				//
-			//_betzone.init();
-			//_coin_stack.init();
-			//_coin.init();
-			//_sencer.init();
+			_betzone.init();
+			_coin_stack.init();
+			_coin.init();
+			_sencer.init();
 			//_settle_panel.init();
 			//
 			//
@@ -183,7 +183,7 @@ package View.ViewComponent
 			
 			
 			
-			_Version.debug();
+			//_Version.debug();
 			_model.putValue("test_init",true);
 		}
 		

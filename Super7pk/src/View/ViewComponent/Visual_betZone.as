@@ -11,9 +11,11 @@ package View.ViewComponent
 	import Res.ResName;
 	import caurina.transitions.Tweener;
 	
+	import View.GameView.gameState;
+	
 	/**
 	 * betzone present way
-	 * @author ...
+	 * @author Dyson0913
 	 */
 	public class Visual_betZone  extends VisualHandler
 	{	
@@ -41,33 +43,16 @@ package View.ViewComponent
 			pz.MouseFrame = utilFun.Frametype(MouseBehavior.Customized, [1, 2, 2, 0]);			
 			pz.container.x = tableitem.container.x;
 			pz.container.y = tableitem.container.y;
-			pz.Create_(avaliblezone.length);
-			
-			disappear();
+			pz.Create_(avaliblezone.length);			
 			
 			put_to_lsit(pz);
+			
+			state_parse([gameState.START_BET]);
 		}		
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
-		public function start_bet():void
-		{
-			appear();			
-		}		
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
-		public function stop_bet():void
-		{
-			disappear();			
-		}		
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function opencard_parse():void
-		{
-			disappear();
-		}
 		
 		override  public function appear():void
-		{
+		{			
+			
 			setFrame(bet_tableitem, 2);
 			
 			var betzone:MultiObject = Get("betzone");			

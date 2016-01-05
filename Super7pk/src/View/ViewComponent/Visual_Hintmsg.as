@@ -10,7 +10,7 @@ package View.ViewComponent
 	
 	/**
 	 * hintmsg present way
-	 * @author ...
+	 * @author Dyson0913
 	 */
 	public class Visual_Hintmsg  extends VisualHandler
 	{
@@ -31,7 +31,9 @@ package View.ViewComponent
 			var Hintmsg:MultiObject = create(Hint, [Hint]);
 			Hintmsg.Create_(1);
 			Hintmsg.container.x = 951.65;
-			Hintmsg.container.y = 517.80;
+			Hintmsg.container.y = 507.80;
+			
+			put_to_lsit(Hintmsg);
 			
 			state_parse([gameState.START_BET]);
 		}

@@ -73,8 +73,8 @@ package View.ViewComponent
 		
 		override public function appear():void
 		{
-			Get(modelName.POKER_1).container.visible = false;
-			Get(modelName.POKER_2).container.visible = true;
+			Get(modelName.POKER_1).container.visible = true;
+			Get(modelName.POKER_2).container.visible = false;
 			
 			//下拉卡 還原
 			//GetSingleItem(modelName.POKER_2, 2).y = 0;
@@ -104,7 +104,7 @@ package View.ViewComponent
 			var state:int = _model.getValue(modelName.GAMES_STATE);
 			if (  state == gameState.START_BET )
 			{				
-				test_visible( Get(modelName.POKER_1).container ,  false);
+				test_visible( Get(modelName.POKER_1).container , true);
 				test_visible( Get(modelName.POKER_2).container , false );	
 			}
 			else if (  state == gameState.NEW_ROUND )
@@ -149,38 +149,6 @@ package View.ViewComponent
 			_model.putValue(modelName.POKER_1, [] );
 			_model.putValue(modelName.POKER_2, [] );
 		}
-		
-	
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
-		public function start_bet():void
-		{			
-			//Get(modelName.POKER_1).container.alpha = 1;
-			//Get(modelName.POKER_2).container.alpha = 0;			
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
-		public function stop_bet():void
-		{
-			//Get(modelName.POKER_1).container.alpha = 0;			
-			//Get(modelName.POKER_2).container.alpha = 1;
-			
-		}	
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function open_card2():void
-		{	
-			//Get(modelName.POKER_1).container.alpha = 0;
-			//Get(modelName.POKER_2).container.alpha = 1;
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "settle")]
-		public function settle2():void
-		{
-			//Get(modelName.POKER_1).container.alpha = 0;		
-			//Get(modelName.POKER_2).container.alpha = 1;			
-		}
-		
 		
 		[MessageHandler(type = "Model.valueObject.Intobject", selector = "poker_No_mi")]
 		public function poker_no_mi(type:Intobject):void

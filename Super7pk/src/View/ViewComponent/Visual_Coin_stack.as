@@ -2,9 +2,8 @@ package View.ViewComponent
 {
 	import ConnectModule.websocket.WebSoketInternalMsg;
 	import flash.display.Sprite;
-	import flash.events.Event;
-	import View.ViewBase.VisualHandler;
-	import Model.valueObject.*;
+	
+	import View.ViewBase.VisualHandler;	
 	import Model.*;
 	import util.*;
 	import Command.*;
@@ -18,7 +17,7 @@ package View.ViewComponent
 	
 	/**
 	 * coin present way
-	 * @author ...
+	 * @author Dyson0913
 	 */
 	public class Visual_Coin_stack  extends VisualHandler
 	{
@@ -75,6 +74,8 @@ package View.ViewComponent
 			put_to_lsit(coin_amount_container);
 			
 			disappear();
+			
+			state_parse([gameState.START_BET]);
 		}
 		
 		public function obinit(mc:MovieClip, idx:int, data:Array):void
@@ -87,24 +88,6 @@ package View.ViewComponent
 			
 			//put_to_lsit(progress_bar);	
 		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
-		public function start_bet():void
-		{			
-			appear();
-		}
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "stop_bet")]
-		public function stop_bet():void
-		{
-			disappear();
-		}		
-		
-		[MessageHandler(type = "Model.ModelEvent", selector = "open_card")]
-		public function opencard_parse():void
-		{
-			disappear();
-		}	
 		
 		override public function appear():void
 		{
@@ -168,7 +151,6 @@ package View.ViewComponent
 			a.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
 			a.Post_CustomizedData =  _model.getValue(modelName.COIN_STACK_XY);
 			a.customized();
-			
 			
 		}
 		

@@ -36,7 +36,7 @@ package Command
 		
 		public function bet_init():void
 		{
-			_model.putValue("coin_selectIdx", 0);
+			_model.putValue("coin_selectIdx", 2);
 			_model.putValue("coin_list", [100, 500, 1000, 5000, 10000]);
 			_model.putValue("after_bet_credit", 0);
 			
