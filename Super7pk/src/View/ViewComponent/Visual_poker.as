@@ -52,8 +52,6 @@ package View.ViewComponent
 			bankerCon.Create_(7);
 			bankerCon.container.x = 313;
 			bankerCon.container.y = 684;
-			//utilFun.scaleXY(bankerCon.container, 1.3, 1.3);
-			//bankerCon.container.alpha = 0;
 			
 			put_to_lsit(bankerCon);
 			
@@ -67,18 +65,12 @@ package View.ViewComponent
 			
 			state_parse([gameState.START_BET]);
 			
-			_model.putValue(modelName.POKER_1, [] );
-			_model.putValue(modelName.POKER_2, [] );
 		}
 		
 		override public function appear():void
 		{
 			Get(modelName.POKER_1).container.visible = true;
-			Get(modelName.POKER_2).container.visible = false;
-			
-			//下拉卡 還原
-			//GetSingleItem(modelName.POKER_2, 2).y = 0;
-			//GetSingleItem(modelName.POKER_2, 4).y = 0;
+			Get(modelName.POKER_2).container.visible = false;			
 		}
 		
 		override public function disappear():void
@@ -92,11 +84,8 @@ package View.ViewComponent
 		{
 			//中途進入版不清,   新局清 ( 但model在切view之前就放好)
 			//_model,中途不清   新局清
-			//Clean_poker();
+			Clean_poker();
 			Get(modelName.POKER_1).container.visible = true;
-			//Get(modelName.POKER_2).container.alpha = 1;
-			//GetSingleItem(modelName.POKER_2, 2).y = 0;
-			//GetSingleItem(modelName.POKER_2, 4).y = 0;
 		}
 		
 		override public function test_suit():void
@@ -129,19 +118,18 @@ package View.ViewComponent
 			var playerCon:MultiObject = Get(modelName.POKER_1);
 			playerCon.CleanList();
 			playerCon.Create_(7);
-			playerCon.order_switch(5, 4);
-			playerCon.order_switch(1, 2);
-			Tweener.pauseTweens(playerCon.container);
-			playerCon.container.alpha = 0;		
+			utilFun.scaleXY(playerCon.container, 0.8, 0.8);
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[5]));
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[4]));
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[3]));			
+			
+			Tweener.pauseTweens(playerCon.container);		
 			
 			var bankerCon:MultiObject = Get(modelName.POKER_2);
 			bankerCon.CleanList();			    
-			bankerCon.Create_(7);
-			utilFun.scaleXY(bankerCon.container, 1.35, 1.35);
-			Tweener.pauseTweens(bankerCon.container);
-			bankerCon.container.alpha = 0;		
+			bankerCon.Create_(7);			
+			Tweener.pauseTweens(bankerCon.container);		
 			
-			//790 670
 			Get("mipoker").CleanList();		
 			Get("mipoker").Create_by_list(1, [Mipoker_zone], 0 , 0, 1, 130, 0, "Bet_");			
 			Get("mipoker").container.alpha = 0;

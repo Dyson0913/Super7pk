@@ -62,6 +62,7 @@ package View.ViewComponent
 		private function set_frame(frame:int):void
 		{
 			GetSingleItem(Hint).gotoAndStop(frame);
+			if ( frame == frame_pre_open) return;
 			_regular.FadeIn( GetSingleItem(Hint), 2, 2, _regular.Fadeout);
 		}
 		

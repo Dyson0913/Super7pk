@@ -131,7 +131,7 @@ package View.ViewComponent
 				//utilFun.Log("bet idx = " + idx );
 				if ( CONFIG::debug ) 
 				{				
-					_betCommand.bet_local(e, idx);
+					_betCommand.betTypeMain(e, idx);
 				}		
 				else
 				{				

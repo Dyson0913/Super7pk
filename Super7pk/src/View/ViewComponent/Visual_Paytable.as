@@ -105,14 +105,6 @@ package View.ViewComponent
 			
 			Get(paynum).CleanList();
 			
-			//var mu:MovieClip = GetSingleItem(paynum, _win_item);
-			//var mul:Sprite = mu.getChildByName(paynum + "_" + fin) as Sprite;
-			//for ( var i:int = 0; i < mul.numChildren; i++)
-			//{
-				//var _item:MovieClip= mul.getChildAt(i) as MovieClip
-				//var f:int = _item.currentFrame;
-				//Tweener.pauseTweens(_item);
-			//}
 		}
 		
 		public function payodd(mc:MovieClip, idx:int, data:Array):void
@@ -122,7 +114,7 @@ package View.ViewComponent
 			
 			var s_num:String = num.toString();			
 			var arr:Array = s_num.toString().split("");
-			Log("pay odd = " + mc.parent.name + "_" + idx);
+			//Log("pay odd = " + mc.parent.name + "_" + idx);
 			
 			var p_num:MultiObject = create_dynamic(mc.parent.name + "_" + idx, [paynum], mc);			
 			p_num.CustomizedFun = FrameSetting;
