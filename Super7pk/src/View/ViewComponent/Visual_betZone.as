@@ -80,7 +80,7 @@ package View.ViewComponent
 		
 		public function bet_sencer(e:Event, idx:int):Boolean
 		{
-			Log("frame = " + idx);
+			
 			e.currentTarget.gotoAndStop(idx + 2);			
 			return false;
 		}

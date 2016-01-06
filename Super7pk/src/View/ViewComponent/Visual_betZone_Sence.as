@@ -29,7 +29,7 @@ package View.ViewComponent
 		public function init():void
 		{			
 			var zone_xy:Array = _model.getValue(modelName.AVALIBLE_ZONE_XY);			
-			var avaliblezone_s:Array = _model.getValue(modelName.AVALIBLE_ZONE_S);			
+			
 			
 			var res:Array = ["zone_dark"]
 			var betzone_dark:MultiObject = create("betzone_dark", res);
@@ -49,16 +49,18 @@ package View.ViewComponent
 			//}
 			
 			
-			
+			var avaliblezone_s:Array =  ["zone_sense"]; // _model.getValue(modelName.AVALIBLE_ZONE_S);			
 			var playerzone_s:MultiObject = create("betzone_s", avaliblezone_s);
 			playerzone_s.MouseFrame = utilFun.Frametype(MouseBehavior.Customized, [1, 1, 2, 1]);
+			playerzone_s.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
+			playerzone_s.Post_CustomizedData = [[0, 0] , [ -300, 0] , [ -600, 0] , [ -910, 0] , [ -1222, 0], [ -1536, 0], [ -31, -171], [ -312, -175], [ -597, -175], [ -892, -177], [ -1186, -177], [ -1481, -176]];				
 			playerzone_s.mousedown = null;
 			playerzone_s.mouseup = null;
 			playerzone_s.rollout = null;
 			playerzone_s.rollover = null;
-			playerzone_s.container.x = 3;
-			playerzone_s.container.y = 605;
-			playerzone_s.Create_(avaliblezone_s.length);
+			playerzone_s.container.x = 1560;
+			playerzone_s.container.y = 791;
+			playerzone_s.Create_(12);
 			
 			state_parse([gameState.START_BET]);
 		}
@@ -80,6 +82,9 @@ package View.ViewComponent
 				var mc:MovieClip = GetSingleItem("betzone_dark", i);
 				mc.gotoAndStop(i + 2);
 				mc["_dark"].alpha = al;
+				
+				var sense:MovieClip = betzone.ItemList[i];
+				sense.gotoAndStop(i + 2);
 			}
 		}
 		
@@ -138,7 +143,7 @@ package View.ViewComponent
 			var mc:MovieClip = betzone.ItemList[idx];
 			mc.dispatchEvent(new MouseEvent(e.type, true, false));			
 			
-			return true;
+			return false;
 		}
 	}
 
