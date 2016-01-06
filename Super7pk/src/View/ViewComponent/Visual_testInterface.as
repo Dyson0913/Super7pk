@@ -147,11 +147,20 @@ package View.ViewComponent
 		
 		public function script_list_test(e:Event, idx:int):Boolean
 		{			
-			_model.putValue("Script_idx", idx);
+			var clickname:String = GetSingleItem("script_list", idx).getChildByName("Dy_Text").text;
+			var idx:int = _opration.getMappingValue("name_map",clickname);
+			if (clickname == "封包") 
+			{
+				view_init();
+				_model.putValue(modelName.GAMES_STATE,gameState.NEW_ROUND);			
+				dispatcher(new ModelEvent("update_state"));
+				
+				dispatcher(new TestEvent(idx.toString()));
+				return true;
+			}
+			
 			view_init();
-			dispatcher(new TestEvent(_model.getValue("Script_idx").toString()));
-			
-			
+			dispatcher(new TestEvent(idx.toString()));
 			return true;
 		}
 		
@@ -243,7 +252,7 @@ package View.ViewComponent
 			var odd:Array = [-1,-1, -1, 3.2, -1, 19, 18, 47, 80, -1, 528, -1];
 			_model.putValue("round_paytable", odd);
 			
-			handle_odd();
+			_betCommand.handle_odd(_model.getValue("round_paytable"));			
 			
 			_model.putValue(modelName.GAMES_STATE,gameState.START_BET);			
 			dispatcher(new ModelEvent("update_state"));
@@ -312,40 +321,7 @@ package View.ViewComponent
 			_fileStream.load();
 		}
 		
-		public function handle_odd():void
-		{
-			//handle data
-			var total:Array = _model.getValue("round_paytable");			
-			var frame:Array = [];
-			var xmark:Array = [];
-			var zero:Array = [];
-			var odd:Array  = [];
-			var idx:int = 0;
-			for ( var i:int = 0; i < total.length; i++)
-			{				
-				if ( total[i] == -1)
-				{
-					zero.push(1);
-				}
-				else 
-				{
-					frame[idx] = _opration.getMappingValue(modelName.BET_ZONE_MAPPING, i);
-					odd[idx] = total[i];
-					idx++;
-					
-					xmark.push(12);
-				}
-			}
-			_model.putValue("paytable_frame", frame.reverse());
-			
-			xmark.push.apply(xmark, zero);
-			_model.putValue("paytable_xmark", xmark);
-			
-			odd.reverse();			
-			var copyarr:Array = [];
-			copyarr.push.apply(copyarr, odd );
-			_model.putValue("odd_data",copyarr);
-		}
+		
 		
 		public function fackeDeal(type:Array):void
 		{			

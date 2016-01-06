@@ -96,13 +96,26 @@ package View.ViewComponent
 			settletable.CustomizedFun = _regular.FrameSetting;
 			settletable.FlushObject();
 			
-			//TODO better way ?
+			//
 			var mylist:Array = _betCommand.bet_zone_amount();			
-			Log("mylist = " +mylist);			
+			var sortarr:Array = [];
+			sortarr.push.apply(sortarr, mylist );
+			sortarr.pop();
+			sortarr.reverse();
+			//Log("mylist = " +sortarr);			
+			var display_idx:Array = _model.getValue("paytable_display_idx");
+			//Log("display_idx = " +display_idx);			
+			var display_list:Array = [];
+			for (var i:int = 0; i < display_idx.length ; i++)
+			{
+				display_list.push( sortarr[display_idx[i]]);
+			}
+			display_list.reverse();
+			display_list.push(mylist[mylist.length - 1]);
 			//var mylist:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
 			var symbl:MultiObject = Get(bet_symble);
 			symbl.CustomizedFun = settleodd;
-			symbl.CustomizedData = mylist;
+			symbl.CustomizedData = display_list;
 			symbl.Create_(9);
 			//symbl.FlushObject();
 			

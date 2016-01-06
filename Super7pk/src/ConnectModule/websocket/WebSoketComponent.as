@@ -43,6 +43,9 @@ package ConnectModule.websocket
 		[Inject]
 		public var _opration:DataOperation;
 		
+		[Inject]
+		public var _betCommand:BetCommand;
+		
 		private var websocket:WebSocket;
 		
 		public function WebSoketComponent() 
@@ -122,7 +125,8 @@ package ConnectModule.websocket
 							small_to_big.push.apply(small_to_big, result.update_odds);						
 							small_to_big.splice(2, 1);
 							small_to_big.splice(6 - 1, 1);
-							dispatcher(new ValueObject(  small_to_big, "round_paytable") );						
+							dispatcher(new ValueObject(  small_to_big, "round_paytable") );
+							_betCommand.handle_odd(_model.getValue("round_paytable"));
 						}
 						
 						var poke1:Array = [];
@@ -172,6 +176,7 @@ package ConnectModule.websocket
 								smallto_big.splice(2, 1);
 								smallto_big.splice(6 - 1, 1);
 								dispatcher(new ValueObject(  smallto_big, "round_paytable") );
+								_betCommand.handle_odd(_model.getValue("round_paytable"));
 							}
 						}
 											

@@ -52,6 +52,7 @@ package Command
 				bet_name_to_idx.putValue(betzone_name[i], i);
 				bet_idx_to_name.putValue(i, betzone_name[i]);
 				
+				//nono = 0 -> 11 onePair= 1-> 10
 				_idx_to_result_idx.putValue(i.toString(), (betzone.length-1) -i );
 			}		
 			
@@ -99,7 +100,7 @@ package Command
 			bet_idx_mapping.putValue(9, 4);
 			bet_idx_mapping.putValue(10, 3);
 			bet_idx_mapping.putValue(11, 2);
-			_model.putValue(modelName.BET_ZONE_MAPPING , bet_idx_mapping);	
+			_model.putValue(modelName.BET_ZONE_MAPPING , bet_idx_mapping);			
 			
 			_model.putValue("power_jp",[0,0]);
 			
@@ -490,6 +491,43 @@ package Command
 				dispatcher( new ActionEvent(mybet, "bet_action"));
 				dispatcher( new WebSoketInternalMsg(WebSoketInternalMsg.BET));
 			}
+		}
+		
+		public function handle_odd(checkarr:Array):void
+		{
+			//handle data
+			var total:Array = checkarr; //_model.getValue("round_paytable");			
+			var frame:Array = [];
+			var xmark:Array = [];
+			var zero:Array = [];
+			var odd:Array  = [];
+			var idx:int = 0;
+			var select_idx:Array = [];
+			for ( var i:int = 0; i < total.length; i++)
+			{				
+				if ( total[i] == -1)
+				{
+					zero.push(1);
+				}
+				else 
+				{
+					frame[idx] = _opration.getMappingValue(modelName.BET_ZONE_MAPPING, i);
+					odd[idx] = total[i];
+					idx++;
+					select_idx.push(i);
+					xmark.push(12);
+				}
+			}
+			_model.putValue("paytable_frame", frame.reverse());
+			_model.putValue("paytable_display_idx", select_idx);
+			
+			xmark.push.apply(xmark, zero);
+			_model.putValue("paytable_xmark", xmark);
+			
+			odd.reverse();			
+			var copyarr:Array = [];
+			copyarr.push.apply(copyarr, odd );
+			_model.putValue("odd_data",copyarr);
 		}
 		
 	}
