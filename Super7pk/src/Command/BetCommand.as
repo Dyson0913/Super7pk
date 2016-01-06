@@ -60,14 +60,6 @@ package Command
 			_model.putValue("Bet_idx_to_name", bet_idx_to_name);
 			_model.putValue("idx_to_result_idx", _idx_to_result_idx);
 			
-			var avaliblezone_s:Array = [];			
-			for ( i = 0; i < betzone.length; i++)
-			{
-				avaliblezone_s.push ( "zone_" + i + "_sence");									
-				
-			}
-			
-			_model.putValue(modelName.AVALIBLE_ZONE_S, avaliblezone_s);			
 			_model.putValue(modelName.AVALIBLE_ZONE_IDX, betzone);
 			
 						
@@ -93,6 +85,21 @@ package Command
 			poermapping.putValue("BetS7PKRoyalFlush", 3);
 			poermapping.putValue("BetS7PKPureRoyalFlush", 2);
 			_model.putValue(modelName.BIG_POKER_MSG , poermapping);		
+			
+			var bet_idx_mapping:DI = new DI();			
+			bet_idx_mapping.putValue(0, 13);
+			bet_idx_mapping.putValue(1, 12);
+			bet_idx_mapping.putValue(2, 11);
+			bet_idx_mapping.putValue(3, 10);
+			bet_idx_mapping.putValue(4, 9);
+			bet_idx_mapping.putValue(5, 8);
+			bet_idx_mapping.putValue(6, 7);
+			bet_idx_mapping.putValue(7, 6);
+			bet_idx_mapping.putValue(8, 5);
+			bet_idx_mapping.putValue(9, 4);
+			bet_idx_mapping.putValue(10, 3);
+			bet_idx_mapping.putValue(11, 2);
+			_model.putValue(modelName.BET_ZONE_MAPPING , bet_idx_mapping);	
 			
 			_model.putValue("power_jp",[0,0]);
 			

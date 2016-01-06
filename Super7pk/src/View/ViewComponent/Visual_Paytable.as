@@ -20,7 +20,7 @@ package View.ViewComponent
 		private const x_symble:String = "x_symble"
 		
 		//res
-		private const paytable:String = "paytable_main";		
+		private const paytable:String = "odd_title";		
 		private const paynum:String = "pay_num";
 		private const paytable_baridx:String = "paytable_bar_idx";
 		
@@ -38,29 +38,32 @@ package View.ViewComponent
 		public function init():void
 		{			
 			//賠率提示
-			var ptable:MultiObject = create(paytable, [paytable,paytable_baridx]);			
+			var ptable:MultiObject = create(paytable, [paytable]);			
 			ptable.container.x = 80;
-			ptable.container.y =  111;
-			ptable.Create_(2);
+			ptable.container.y = 141;
+			ptable.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
+			ptable.Post_CustomizedData = [8, 0, 50];
+			ptable.Create_(8);
+			
 			put_to_lsit(ptable);
 			
 			//X
 			var x_sym:MultiObject = create(x_symble, [paynum]);
 			x_sym.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			x_sym.Post_CustomizedData = [12, 0, 36];
+			x_sym.Post_CustomizedData = [12, 0, 50];
 			x_sym.container.x = 380;
-			x_sym.container.y =  118;
-			x_sym.Create_(12);
+			x_sym.container.y =  149;
+			x_sym.Create_(8);
 			
 			put_to_lsit(x_sym);
 			
 			//odd
 			var p_num:MultiObject = create(paynum, [ResName.emptymc]);			
 			p_num.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			p_num.Post_CustomizedData = [12, 0, 36];
+			p_num.Post_CustomizedData = [12, 0, 50];
 			p_num.container.x = 630;
-			p_num.container.y =  118;			
-			p_num.Create_(12);
+			p_num.container.y =  148;			
+			p_num.Create_(8);
 			put_to_lsit(p_num);
 			
 			state_parse([gameState.END_BET,gameState.START_OPEN,gameState.END_ROUND]);
@@ -68,17 +71,26 @@ package View.ViewComponent
 		
 		override public function appear():void
 		{			
-			GetSingleItem(paytable).gotoAndStop(2);			
-			setFrame(x_symble, 12);
+			var paytable:MultiObject = Get(paytable);
+			paytable.CustomizedData = _model.getValue("paytable_frame");
+			paytable.CustomizedFun = _regular.FrameSetting;
+			paytable.FlushObject();
+			
+			//x mark
+			//setFrame(x_symble, 12);
+			var x_mark:MultiObject = Get(x_symble);
+			x_mark.CustomizedData = _model.getValue("paytable_xmark");
+			x_mark.CustomizedFun = _regular.FrameSetting;
+			x_mark.FlushObject();
 			
 			
-			var total:Array = _model.getValue("round_paytable");
-			var copyarr:Array = [];
-			copyarr.push.apply(copyarr,total );
+			//odd
+			var odd_data:Array = _model.getValue("odd_data");
 			var mu:MultiObject = Get(paynum);
 			mu.CustomizedFun = payodd;
-			mu.CustomizedData = copyarr.reverse();
-			mu.Create_(12);
+			mu.CustomizedData = odd_data;
+			//mu.FlushObject();
+			mu.Create_(odd_data.length);
 		}
 		
 		override public function disappear():void

@@ -49,7 +49,7 @@ package View.ViewComponent
 			//}
 			
 			
-			var avaliblezone_s:Array =  ["zone_sense"]; // _model.getValue(modelName.AVALIBLE_ZONE_S);			
+			var avaliblezone_s:Array =  ["zone_sense"];		
 			var playerzone_s:MultiObject = create("betzone_s", avaliblezone_s);
 			playerzone_s.MouseFrame = utilFun.Frametype(MouseBehavior.Customized, [1, 1, 2, 1]);
 			playerzone_s.Posi_CustzmiedFun = _regular.Posi_xy_Setting;

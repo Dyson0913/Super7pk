@@ -27,8 +27,8 @@ package View.ViewComponent
 		private const settle_symble:String = "settle_symble";
 		
 		//res
-		private const paytable:String = "paytable_main";		
-		private const settlenum:String = "settle_num";		
+		private const paytable:String = "odd_title";		
+		private const settlenum:String = "pay_num";		
 		private const paytable_baridx:String = "paytable_bar_idx";
 		
 		public function Visual_SettlePanel() 
@@ -41,26 +41,28 @@ package View.ViewComponent
 			//settle
 			var settle_table:MultiObject = create(settletable, [paytable]);			
 			settle_table.container.x = 1270;
-			settle_table.container.y =  111;
-			settle_table.Create_(1);
+			settle_table.container.y =  141;
+			settle_table.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
+			settle_table.Post_CustomizedData = [8, 0, 50];
+			settle_table.Create_(9);
 			
 			put_to_lsit(settle_table);
 			
 			//bet_num
 			var bet_num:MultiObject = create(bet_symble, [ResName.emptymc]);			
 			bet_num.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			bet_num.Post_CustomizedData = [13, 0, 33.5];
+			bet_num.Post_CustomizedData = [9, 0, 50];
 			bet_num.container.x = 1600;
-			bet_num.container.y =  118;
+			bet_num.container.y =  148;
 			
 			put_to_lsit(bet_num);			
 			
 			//settle_num
 			var settlesymble:MultiObject = create(settle_symble, [ResName.emptymc]);			
 			settlesymble.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			settlesymble.Post_CustomizedData = [13, 0, 33.5];
+			settlesymble.Post_CustomizedData = [9, 0, 50];
 			settlesymble.container.x = 1830;
-			settlesymble.container.y =  118;
+			settlesymble.container.y = bet_num.container.y;
 			
 			put_to_lsit(settlesymble);		
 			
@@ -84,16 +86,25 @@ package View.ViewComponent
 		
 		override public function appear():void
 		{
-			//TODO settle or not settle
-			setFrame(settletable, 3);
+			//setFrame(settletable, 3);			
+			var payframe:Array = _model.getValue("paytable_frame");
+			var copyarr:Array = [];
+			copyarr.push.apply(copyarr, payframe );
+			copyarr.push(26);
+			var settletable:MultiObject = Get(settletable);
+			settletable.CustomizedData =  copyarr;
+			settletable.CustomizedFun = _regular.FrameSetting;
+			settletable.FlushObject();
 			
 			//TODO better way ?
 			var mylist:Array = _betCommand.bet_zone_amount();			
+			Log("mylist = " +mylist);			
 			//var mylist:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
 			var symbl:MultiObject = Get(bet_symble);
 			symbl.CustomizedFun = settleodd;
 			symbl.CustomizedData = mylist;
-			symbl.Create_(13);
+			symbl.Create_(9);
+			//symbl.FlushObject();
 			
 			//var settle:Array = _model.getValue("result_settle_amount");
 			//var mylist:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
