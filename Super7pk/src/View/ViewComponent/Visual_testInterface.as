@@ -183,7 +183,7 @@ package View.ViewComponent
 			
 			
 			
-			_Version.debug();
+			//_Version.debug();
 			_model.putValue("test_init",true);
 		}
 		

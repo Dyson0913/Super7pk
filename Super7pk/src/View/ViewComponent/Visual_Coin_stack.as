@@ -47,7 +47,7 @@ package View.ViewComponent
 		
 		public function init():void
 		{
-			var avaliblezone:Array = _model.getValue(modelName.AVALIBLE_ZONE);						
+			var avaliblezone:Array = _model.getValue(modelName.AVALIBLE_ZONE_IDX);						
 			var coin_xy:Array = _model.getValue(modelName.COIN_STACK_XY);
 			
 			var coinstack:MultiObject = create("coinstakeZone", [ResName.emptymc]);			

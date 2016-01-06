@@ -29,14 +29,26 @@ package View.ViewComponent
 		public function init():void
 		{			
 			var zone_xy:Array = _model.getValue(modelName.AVALIBLE_ZONE_XY);			
-			var avaliblezone_s:Array = _model.getValue(modelName.AVALIBLE_ZONE_S);
-			var avaliblezone_d:Array = _model.getValue(modelName.AVALIBLE_ZONE_d);
+			var avaliblezone_s:Array = _model.getValue(modelName.AVALIBLE_ZONE_S);			
 			
-			//var betzone_dark:MultiObject = create("betzone_dark", avaliblezone_d);
-			//betzone_dark.container.x = 3;
-			//betzone_dark.container.y = 605;
-			//betzone_dark.Create_(avaliblezone_s.length);
-			//
+			var res:Array = ["zone_dark"]
+			var betzone_dark:MultiObject = create("betzone_dark", res);
+			betzone_dark.container.x = 1560;
+			betzone_dark.container.y = 791;
+			betzone_dark.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
+			betzone_dark.Post_CustomizedData = [[0, 0] , [ -300, 0] , [ -600, 0] , [ -910, 0] , [ -1222, 0], [ -1536, 0], [ -31, -171], [ -312, -175], [ -597, -175], [ -892, -177], [ -1186, -177], [ -1481, -176]];	
+			betzone_dark.Create_(12);
+			
+			put_to_lsit(betzone_dark);
+			
+			//for ( var i:int = 0; i < 12; i++)
+			//{
+				//var mc:MovieClip = GetSingleItem("betzone_dark", i);
+				//mc.gotoAndStop(i + 2);
+				//mc["_dark"].alpha = 0.5;
+			//}
+			
+			
 			
 			var playerzone_s:MultiObject = create("betzone_s", avaliblezone_s);
 			playerzone_s.MouseFrame = utilFun.Frametype(MouseBehavior.Customized, [1, 1, 2, 1]);
@@ -65,8 +77,9 @@ package View.ViewComponent
 				var al:Number = 0;			
 				if ( avaliblezone[i] == -1) al = 0.5;				
 				
-				//var mc:MovieClip = GetSingleItem("betzone_dark", i);
-				//mc["_dark"].alpha = al;
+				var mc:MovieClip = GetSingleItem("betzone_dark", i);
+				mc.gotoAndStop(i + 2);
+				mc["_dark"].alpha = al;
 			}
 		}
 		
@@ -83,6 +96,7 @@ package View.ViewComponent
 			{
 				var al:Number = 0;
 				var mc:MovieClip = GetSingleItem("betzone_dark", i);
+				mc.gotoAndStop(i + 2);
 				mc["_dark"].alpha = al;
 			}
 		}
@@ -94,7 +108,7 @@ package View.ViewComponent
 			{				
 				if ( avaliblezone[idx] == -1) 
 				{
-					utilFun.Log("bet reject");
+					//utilFun.Log("bet reject");
 					return false;
 				}
 			}

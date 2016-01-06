@@ -36,7 +36,6 @@ package View.ViewComponent
 			
 			put_to_lsit(tableitem);
 			
-			var avaliblezone:Array = _model.getValue(modelName.AVALIBLE_ZONE);
 			var res:Array = ["zone_total"]
 			//下注區
 			var pz:MultiObject = create("betzone", res);
@@ -44,8 +43,7 @@ package View.ViewComponent
 			//pz.CustomizedData = [2,3,4,5,6,7,8,9,10,11,12,13];
 			//pz.CustomizedFun = _regular.FrameSetting;
 			pz.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
-			pz.Post_CustomizedData = [[0, 0] , [ -300, 0] , [ -600, 0] , [ -910, 0] , [ -1222, 0], [ -1536, 0], [ -31, -171], [ -312, -175], [ -597, -175], [ -892, -177], [ -1186, -177], [ -1481, -176]];
-			pz.rollover 
+			pz.Post_CustomizedData = [[0, 0] , [ -300, 0] , [ -600, 0] , [ -910, 0] , [ -1222, 0], [ -1536, 0], [ -31, -171], [ -312, -175], [ -597, -175], [ -892, -177], [ -1186, -177], [ -1481, -176]];			
 			pz.container.x = tableitem.container.x + 1556;
 			pz.container.y = tableitem.container.y + 214;
 			pz.Create_(12);

@@ -60,21 +60,14 @@ package Command
 			_model.putValue("Bet_idx_to_name", bet_idx_to_name);
 			_model.putValue("idx_to_result_idx", _idx_to_result_idx);
 			
-			var avaliblezone:Array = [];
-			var avaliblezone_s:Array = [];
-			var avaliblezone_d:Array = [];
+			var avaliblezone_s:Array = [];			
 			for ( i = 0; i < betzone.length; i++)
 			{
-				avaliblezone.push ( "zone_" + i);
-				avaliblezone_s.push ( "zone_" + i + "_sence");				
-				avaliblezone_d.push ( "zone_" + i + "_dark");				
+				avaliblezone_s.push ( "zone_" + i + "_sence");									
 				
 			}
 			
-			_model.putValue(modelName.AVALIBLE_ZONE, avaliblezone);
-			_model.putValue(modelName.AVALIBLE_ZONE_S, avaliblezone_s);
-			_model.putValue(modelName.AVALIBLE_ZONE_d, avaliblezone_d);
-			
+			_model.putValue(modelName.AVALIBLE_ZONE_S, avaliblezone_s);			
 			_model.putValue(modelName.AVALIBLE_ZONE_IDX, betzone);
 			
 						
