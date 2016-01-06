@@ -1,6 +1,8 @@
 package View.ViewComponent 
 {
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import View.ViewBase.VisualHandler;
 	import Model.valueObject.*;
 	import Model.*;
@@ -28,7 +30,7 @@ package View.ViewComponent
 		private const tag_paytable:int = 0;		
 		private const tag_paytable_win_tag:int = 1;		
 		
-		private var tween_frame:int;
+		private var _win_item:int = 0;
 		
 		public function Visual_Paytable() 
 		{
@@ -95,13 +97,22 @@ package View.ViewComponent
 		
 		override public function disappear():void
 		{
+			Tweener.pauseTweens( GetSingleItem(paytable, _win_item) );
+			Tweener.pauseTweens( GetSingleItem(x_symble, _win_item));
+			
 			setFrame(paytable, 1);
 			setFrame(x_symble, 1);
 			
 			Get(paynum).CleanList();
 			
-			Tweener.pauseTweens( GetSingleItem(paytable, tag_paytable_win_tag) );
-			Tweener.pauseTweens( GetSingleItem(x_symble, tween_frame));
+			//var mu:MovieClip = GetSingleItem(paynum, _win_item);
+			//var mul:Sprite = mu.getChildByName(paynum + "_" + fin) as Sprite;
+			//for ( var i:int = 0; i < mul.numChildren; i++)
+			//{
+				//var _item:MovieClip= mul.getChildAt(i) as MovieClip
+				//var f:int = _item.currentFrame;
+				//Tweener.pauseTweens(_item);
+			//}
 		}
 		
 		public function payodd(mc:MovieClip, idx:int, data:Array):void
@@ -111,7 +122,7 @@ package View.ViewComponent
 			
 			var s_num:String = num.toString();			
 			var arr:Array = s_num.toString().split("");
-			//Log("pay odd = " + mc.parent.name);
+			Log("pay odd = " + mc.parent.name + "_" + idx);
 			
 			var p_num:MultiObject = create_dynamic(mc.parent.name + "_" + idx, [paynum], mc);			
 			p_num.CustomizedFun = FrameSetting;
@@ -139,11 +150,26 @@ package View.ViewComponent
 			utilFun.Log("winst = " + wintype);
 			
 			if ( wintype == "") return ;
+			var fra:Array = _model.getValue("paytable_frame");
 			
+			Log("paytable_frame =" + fra);
 			var frame:int = parseInt(wintype);
-			tween_frame = frame -2;
-			_regular.Twinkle_by_JumpFrame(GetSingleItem(paytable, tag_paytable_win_tag), 25, 60, 1, frame);
-			_regular.Twinkle_by_JumpFrame(GetSingleItem(x_symble, tween_frame), 25, 60, 12, 24);
+			_win_item = fra.indexOf(frame);			
+			
+			var win_item:MovieClip = GetSingleItem(paytable, _win_item );
+			var fr:int = win_item.currentFrame;
+			_regular.Twinkle_by_JumpFrame(GetSingleItem(paytable,_win_item ), 25, 60, fr, fr+12);
+			_regular.Twinkle_by_JumpFrame(GetSingleItem(x_symble, _win_item), 25, 60, 12, 24);
+			
+			var mu:MovieClip = GetSingleItem(paynum, _win_item);
+			var mul:Sprite = mu.getChildByName(paynum + "_" + _win_item) as Sprite
+			for ( var i:int = 0; i < mul.numChildren; i++)
+			{
+				var _item:MovieClip= mul.getChildAt(i) as MovieClip
+				var f:int = _item.currentFrame;
+				_regular.Twinkle_by_JumpFrame(_item, 25, 60, f, f+12);
+			}
+			
 		}
 		
 		

@@ -183,7 +183,7 @@ package View.ViewComponent
 			Log("show_settle");
 			
 			//押注
-			var zone_amount:Array = _model.getValue("result_zonebet_amount");			
+			var zone_amount:Array = filter( _model.getValue("result_zonebet_amount"));			
 			//var zone_amount:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100];
 			//var mylist:Array = zone_amount;
 			var bet_s:MultiObject = Get(bet_symble);
@@ -192,7 +192,7 @@ package View.ViewComponent
 			bet_s.Create_(zone_amount.length);
 			
 			//總結
-			var settle_amount:Array = _model.getValue("result_settle_amount");	
+			var settle_amount:Array =  filter( _model.getValue("result_settle_amount"));
 			//var settle_amount:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
 			var settle_s:MultiObject = Get(settle_symble);
 			settle_s.CustomizedFun = settleodd;
@@ -220,6 +220,25 @@ package View.ViewComponent
 			var font:Array = _model.getValue(font_property);
 			font = font.concat(data);
 			return font;
+		}
+		
+		public function filter(arr:Array):Array
+		{
+			var sortarr:Array = [];
+			sortarr.push.apply(sortarr, arr );
+			sortarr.pop();
+			sortarr.reverse();
+			//Log("mylist = " +sortarr);			
+			var display_idx:Array = _model.getValue("paytable_display_idx");
+			//Log("display_idx = " +display_idx);			
+			var display_list:Array = [];
+			for (var i:int = 0; i < display_idx.length ; i++)
+			{
+				display_list.push( sortarr[display_idx[i]]);
+			}
+			display_list.reverse();
+			display_list.push(arr[arr.length - 1]);
+			return display_list;
 		}
 		
 	}
