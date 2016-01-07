@@ -1,5 +1,6 @@
 package View.ViewComponent 
 {
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	import View.ViewBase.VisualHandler;
 	import Model.valueObject.*;
@@ -48,9 +49,14 @@ package View.ViewComponent
 			pz.container.y = tableitem.container.y + 214;
 			pz.Create_(12);
 			
-	
-			//setFrame("betzone", 2);
 			put_to_lsit(pz);
+			
+			var effect:MultiObject = create("zone_effect", ["zone_effect"]);		
+			effect.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
+			effect.Post_CustomizedData = [[0, 0] , [ -300, 0] , [ -600, 0] , [ -910, 0] , [ -1222, 0], [ -1536, 0], [ -31, -171], [ -312, -175], [ -597, -175], [ -892, -177], [ -1186, -177], [ -1481, -176]];			
+			effect.container.x = tableitem.container.x + 1556;
+			effect.container.y = tableitem.container.y + 214;
+			effect.Create_(12);
 			
 			state_parse([gameState.START_BET]);
 		}		
@@ -64,6 +70,11 @@ package View.ViewComponent
 			betzone.mousedown = bet_sencer;	
 			betzone.rollout = empty_reaction;
 			betzone.rollover = bet_sencer;
+			
+			var high_odd_ind:int = _model.getValue("highest_idx");
+			var odd_high:MovieClip = GetSingleItem("zone_effect", high_odd_ind);
+			odd_high.gotoAndStop(high_odd_ind+2);			
+			odd_high["effect"].gotoAndPlay(2);			
 		}
 		
 		override public function disappear():void
@@ -76,11 +87,16 @@ package View.ViewComponent
 			betzone.rollover = null;
 			
 			setFrame("betzone", 1);
+			
+			var high_odd_ind:int = _model.getValue("highest_idx");
+			var odd_high:MovieClip = GetSingleItem("zone_effect", high_odd_ind);
+			odd_high.gotoAndStop(high_odd_ind+2);			
+			odd_high["effect"].gotoAndStop(1);		
+			
 		}
 		
 		public function bet_sencer(e:Event, idx:int):Boolean
-		{
-			
+		{		
 			e.currentTarget.gotoAndStop(idx + 2);			
 			return false;
 		}

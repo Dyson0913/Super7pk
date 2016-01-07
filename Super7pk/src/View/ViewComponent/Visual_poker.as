@@ -82,8 +82,6 @@ package View.ViewComponent
 		[MessageHandler(type = "Model.ModelEvent", selector = "new_round")]
 		public function pre_open():void
 		{
-			//中途進入版不清,   新局清 ( 但model在切view之前就放好)
-			//_model,中途不清   新局清
 			Clean_poker();
 			Get(modelName.POKER_1).container.visible = true;
 		}
@@ -273,13 +271,8 @@ package View.ViewComponent
 		public function show_point_prob(type:int):void
 		{			
 			
-			//dispatcher(new Intobject(type, "show_judge"));
-			
 			//prob_cal();
 			//dispatcher(new Intobject(type, "caculate_prob"));
-			
-			
-			
 		}
 		
 		[MessageHandler(type = "Model.ModelEvent", selector = "round_result")]
@@ -333,69 +326,6 @@ package View.ViewComponent
 		public function extractBlue(c:uint):uint {
 		return ( c & 0xFF );
 		}
-		
-		//[MessageHandler(type = "Model.valueObject.Intobject",selector="show_judge")]
-		public function early_check_point(type:Intobject):void
-		{
-			var Mypoker:Array =   _model.getValue(type.Value);
-			
-			var zone:int = -1;
-			if ( modelName.POKER_1 == type.Value)  zone = 0;
-			else if ( modelName.POKER_2 == type.Value) zone = 1;
-			if ( zone == -1 ) return;
-			
-			if ( Mypoker.length != 2) return;
-			
-			var point:int = pokerUtil.ca_point(Mypoker);
-			utilFun.Log("point = " + point);
-			if ( point == 0) point = 10;
-			GetSingleItem("zone", zone ).gotoAndStop(2);
-			GetSingleItem("zone", zone)["_num0"].gotoAndStop(point);
-			if ( zone == 0)
-			{
-				dispatcher(new StringObject("sound_player", "sound" ) );			
-			}
-			else
-			{
-				dispatcher(new StringObject("sound_deal", "sound" ) );
-			}
-			
-			_regular.Call(this, { onComplete:this.playPoint,onCompleteParams:[point] }, 1, 0.5, 1, "linear");
-		
-			
-			//是否該提示公牌
-			dispatcher(new Intobject(type.Value, "check_opencard_msg"));			
-		}
-		
-		public function playPoint(point:int):void
-		{
-			utilFun.Log("playPoint = " + point);
-			if ( point == 10) point = 0;
-			dispatcher(new StringObject("sound_" + point, "sound" ) );
-			if ( point == 9) 
-			{
-				_regular.Call(this, { onComplete:this.po,onCompleteParams:[point] }, 1, 0.5, 1, "linear");
-				
-			}
-		}
-		
-		public function po(point:int):void
-		{
-			dispatcher(new StringObject("sound_point", "sound" ) );
-		}
-		
-		[MessageHandler(type = "Model.valueObject.Intobject",selector="check_opencard_msg")]
-		public function early_check_result(type:Intobject):void
-		{			
-			var ppoker:Array =   _model.getValue(modelName.POKER_1);
-			var bpoker:Array =   _model.getValue(modelName.POKER_2);			
-			
-			if ( ppoker.length + bpoker.length != 4) return;
-			dispatcher(new ModelEvent("show_public_card_hint"));		
-		}
-		
-		
-		
 		
 		//TODO compare to pounit
 		private function countPoint(poke:Array):int

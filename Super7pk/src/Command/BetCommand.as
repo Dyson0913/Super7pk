@@ -503,6 +503,7 @@ package Command
 			var odd:Array  = [];
 			var idx:int = 0;
 			var select_idx:Array = [];
+			var highest_idx:Number = 0;
 			for ( var i:int = 0; i < total.length; i++)
 			{				
 				if ( total[i] == -1)
@@ -516,10 +517,13 @@ package Command
 					idx++;
 					select_idx.push(i);
 					xmark.push(12);
+					
+					highest_idx = highest_idx > total[i] ? highest_idx :  total[i];
 				}
 			}
 			_model.putValue("paytable_frame", frame.reverse());
 			_model.putValue("paytable_display_idx", select_idx);
+			_model.putValue("highest_idx", total.indexOf(highest_idx));
 			
 			xmark.push.apply(xmark, zero);
 			_model.putValue("paytable_xmark", xmark);

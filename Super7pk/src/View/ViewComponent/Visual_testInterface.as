@@ -367,7 +367,7 @@ package View.ViewComponent
 				if ( p == 12 ) win = "BetS7PKOnePair";
 				if ( p == 13 ) win = "BetS7PKNone";
 				
-				var ob:Object = { "winner": win };
+				var ob:Object = { "winner": win ,"ghost":utilFun.Random(2)};
 				arr.push(ob);
 			}		
 			_model.putValue("history_list", arr);			

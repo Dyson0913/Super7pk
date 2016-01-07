@@ -54,13 +54,21 @@ package View.ViewComponent
 		
 		public function update_history():void
 		{			
-			var history_model:Array = _model.getValue("history_list");			
+			var history_model:Array = _model.getValue("history_list");
 			
-			setFrame(historysymble, 1);
+			//setFrame(historysymble, 1);		
+			var history:MultiObject = Get(historysymble);
+			var len:int = history.ItemList.length;
+			for (var i:int =0; i < len; i++)
+			{
+				GetSingleItem(historysymble, i).gotoAndStop(1);
+				//GetSingleItem(historysymble, i)["ghost"].gotoAndStop(1);
+			}
 			
-			Get(historysymble).CustomizedData = history_model;
-			Get(historysymble).CustomizedFun = history_ball_Setting;
-			Get(historysymble).FlushObject();
+			
+			history.CustomizedData = history_model;
+			history.CustomizedFun = history_ball_Setting;
+			history.FlushObject();
 		}
 		
 		public function history_ball_Setting(mc:MovieClip, idx:int, data:Array):void
@@ -68,6 +76,10 @@ package View.ViewComponent
 			var info:Object = data[idx];
 			var frame:int = _opration.getMappingValue(modelName.BIG_POKER_MSG,  info.winner);	
 			mc.gotoAndStop(frame);
+			
+			//ghost
+			//if ( info.ghost == 1)
+			//mc["ghost"].gotoAndStop(2);
 		}
 		
 		override public function test_suit():void
