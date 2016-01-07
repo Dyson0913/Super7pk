@@ -526,7 +526,8 @@ package Command
 			_model.putValue("highest_idx", total.indexOf(highest_idx));
 			
 			xmark.push.apply(xmark, zero);
-			_model.putValue("paytable_xmark", xmark);
+			_model.putValue("paytable_xmark", xmark);			
+			_model.putValue("paytable_xmark_", xmark);
 			
 			odd.reverse();			
 			var copyarr:Array = [];

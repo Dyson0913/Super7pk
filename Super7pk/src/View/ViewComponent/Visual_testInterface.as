@@ -249,7 +249,7 @@ package View.ViewComponent
 		{			
 			_model.putValue(modelName.REMAIN_TIME, 20);
 			fake_hisotry();
-			var odd:Array = [-1,-1, -1, 3.2, -1, 19, 18, 47, 80, -1, 528, -1];
+			var odd:Array = [-1,9, -1, -1, -1, 19, 88, 12, -1, 18, 528, -1];
 			_model.putValue("round_paytable", odd);
 			
 			_betCommand.handle_odd(_model.getValue("round_paytable"));			

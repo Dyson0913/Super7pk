@@ -29,7 +29,6 @@ package View.ViewComponent
 		//res
 		private const paytable:String = "odd_title";		
 		private const settlenum:String = "pay_num";		
-		private const paytable_baridx:String = "paytable_bar_idx";
 		
 		public function Visual_SettlePanel() 
 		{
@@ -42,16 +41,16 @@ package View.ViewComponent
 			var settle_table:MultiObject = create(settletable, [paytable]);			
 			settle_table.container.x = 1270;
 			settle_table.container.y =  141;
-			settle_table.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			settle_table.Post_CustomizedData = [8, 0, 50];
-			settle_table.Create_(9);
+			//settle_table.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
+			//settle_table.Post_CustomizedData = [8, 0, 50];
+			settle_table.Create_(12);
 			
 			put_to_lsit(settle_table);
 			
 			//bet_num
 			var bet_num:MultiObject = create(bet_symble, [ResName.emptymc]);			
-			bet_num.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			bet_num.Post_CustomizedData = [9, 0, 50];
+			//bet_num.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
+			//bet_num.Post_CustomizedData = [9, 0, 50];
 			bet_num.container.x = 1600;
 			bet_num.container.y =  148;
 			
@@ -59,8 +58,8 @@ package View.ViewComponent
 			
 			//settle_num
 			var settlesymble:MultiObject = create(settle_symble, [ResName.emptymc]);			
-			settlesymble.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			settlesymble.Post_CustomizedData = [9, 0, 50];
+			//settlesymble.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
+			//settlesymble.Post_CustomizedData = [9, 0, 50];
 			settlesymble.container.x = 1830;
 			settlesymble.container.y = bet_num.container.y;
 			
@@ -91,10 +90,17 @@ package View.ViewComponent
 			var copyarr:Array = [];
 			copyarr.push.apply(copyarr, payframe );
 			copyarr.push(26);
+			
+			var dis_cnt:int = dis_cnt = dis_cnt  < 8 ? 8:copyarr.length;
+			var dis:Number = utilFun.NPointInterpolateDistance(dis_cnt, 0, 390);
+			
+			//title
 			var settletable:MultiObject = Get(settletable);
 			settletable.CustomizedData =  copyarr;
 			settletable.CustomizedFun = _regular.FrameSetting;
-			settletable.FlushObject();
+			settletable.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
+			settletable.Post_CustomizedData = [dis_cnt, 0, dis];
+			settletable.customized();
 			
 			//
 			var mylist:Array = filter( _betCommand.bet_zone_amount());		
@@ -102,7 +108,9 @@ package View.ViewComponent
 			var symbl:MultiObject = Get(bet_symble);
 			symbl.CustomizedFun = settleodd;
 			symbl.CustomizedData = mylist;
-			symbl.Create_(9);
+			symbl.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
+			symbl.Post_CustomizedData = [dis_cnt, 0, dis];
+			symbl.Create_(mylist.length);
 			//symbl.FlushObject();
 			
 			//var settle:Array = _model.getValue("result_settle_amount");
@@ -181,21 +189,27 @@ package View.ViewComponent
 		{			
 			Log("show_settle");
 			
+		
 			//押注
-			var zone_amount:Array = filter( _model.getValue("result_zonebet_amount"));			
-			//var zone_amount:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100];
-			//var mylist:Array = zone_amount;
+			var zone_amount:Array = filter( _model.getValue("result_zonebet_amount"));					
+			
+			var dis_cnt:int = dis_cnt = dis_cnt  < 8 ? 8:zone_amount.length;
+			var dis:Number = utilFun.NPointInterpolateDistance(dis_cnt, 0, 390);
+			
 			var bet_s:MultiObject = Get(bet_symble);
 			bet_s.CustomizedFun = settleodd;
 			bet_s.CustomizedData = zone_amount;
+			bet_s.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
+			bet_s.Post_CustomizedData = [dis_cnt, 0, dis];
 			bet_s.Create_(zone_amount.length);
 			
 			//總結
-			var settle_amount:Array =  filter( _model.getValue("result_settle_amount"));
-			//var settle_amount:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
+			var settle_amount:Array =  filter( _model.getValue("result_settle_amount"));			
 			var settle_s:MultiObject = Get(settle_symble);
 			settle_s.CustomizedFun = settleodd;
 			settle_s.CustomizedData = settle_amount;
+			settle_s.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
+			settle_s.Post_CustomizedData = [dis_cnt, 0, dis];
 			settle_s.Create_(settle_amount.length);			
 			
 			//= clip or word ,font property push in to mapping,			
