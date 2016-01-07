@@ -43,7 +43,7 @@ package View.ViewComponent
 			settle_table.container.y =  141;
 			//settle_table.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
 			//settle_table.Post_CustomizedData = [8, 0, 50];
-			settle_table.Create_(12);
+			settle_table.Create_(13);
 			
 			put_to_lsit(settle_table);
 			
@@ -91,7 +91,7 @@ package View.ViewComponent
 			copyarr.push.apply(copyarr, payframe );
 			copyarr.push(26);
 			
-			var dis_cnt:int = dis_cnt = dis_cnt  < 8 ? 8:copyarr.length;
+			var dis_cnt:int  = copyarr.length  < 8 ? 8:copyarr.length;
 			var dis:Number = utilFun.NPointInterpolateDistance(dis_cnt, 0, 390);
 			
 			//title

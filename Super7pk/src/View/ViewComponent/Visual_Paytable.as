@@ -67,7 +67,7 @@ package View.ViewComponent
 		override public function appear():void
 		{			
 			var data:Array = _model.getValue("paytable_frame");
-			var dis_cnt:int = dis_cnt = dis_cnt  < 8 ? 8:data.length;
+			var dis_cnt:int = data.length  < 8 ? 8:data.length;
 			var dis:Number = utilFun.NPointInterpolateDistance(dis_cnt, 0, 390);
 			
 			var paytable:MultiObject = Get(paytable);
