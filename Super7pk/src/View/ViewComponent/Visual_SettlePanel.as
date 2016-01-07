@@ -97,25 +97,11 @@ package View.ViewComponent
 			settletable.FlushObject();
 			
 			//
-			var mylist:Array = _betCommand.bet_zone_amount();			
-			var sortarr:Array = [];
-			sortarr.push.apply(sortarr, mylist );
-			sortarr.pop();
-			sortarr.reverse();
-			//Log("mylist = " +sortarr);			
-			var display_idx:Array = _model.getValue("paytable_display_idx");
-			//Log("display_idx = " +display_idx);			
-			var display_list:Array = [];
-			for (var i:int = 0; i < display_idx.length ; i++)
-			{
-				display_list.push( sortarr[display_idx[i]]);
-			}
-			display_list.reverse();
-			display_list.push(mylist[mylist.length - 1]);
+			var mylist:Array = filter( _betCommand.bet_zone_amount());		
 			//var mylist:Array = [100, 1000, 200, 100, 500, 300, 100, 800, 500, 300, 200, 100, 30000];
 			var symbl:MultiObject = Get(bet_symble);
 			symbl.CustomizedFun = settleodd;
-			symbl.CustomizedData = display_list;
+			symbl.CustomizedData = mylist;
 			symbl.Create_(9);
 			//symbl.FlushObject();
 			
@@ -159,20 +145,33 @@ package View.ViewComponent
 			var arr:Array = utilFun.arrFormat(data[idx], num.length);
 			//Log("pay odd = " + mc.parent.name);
 			
+			var color_change:Boolean = false;
+			if ( idx == (data.length - 1))
+			{
+				color_change = true;
+			}
+			
+			arr.unshift(color_change);
+			arr.reverse();
+			
 			var p_num:MultiObject = create_dynamic(mc.parent.name + "_" + idx, [settlenum], mc);			
 			p_num.CustomizedFun = FrameSetting;
-			p_num.CustomizedData = arr.reverse();
+			p_num.CustomizedData = arr;
 			p_num.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			p_num.Post_CustomizedData = [num.length, -22, 0];		
-			p_num.Create_(num.length);
+			p_num.Create_(num.length+1);
 		}
 		
 		public function FrameSetting(mc:MovieClip, idx:int, data:Array):void
 		{
+			if (idx == (data.length-1)) return;
 			if ( data[idx] == 0) data[idx] = 10;
 			var value:int = data[idx];
 			value += 1;
-			data[idx] = value;			
+			data[idx] = value;
+			
+			//變色
+			if ( data[data.length-1] ==true) data[idx] += 12;
 			
 			mc.gotoAndStop(data[idx]);
 		}

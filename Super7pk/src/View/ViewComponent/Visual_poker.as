@@ -189,8 +189,10 @@ package View.ViewComponent
 				
 				
 			var mipoker:MultiObject = Get("mipoker");
-			mipoker.container.x = 790;
-			mipoker.container.y = 670;			
+			if ( mypoker.length == 6) mipoker.container.x = 1340;			
+			else mipoker.container.x = 1530;			
+			mipoker.container.y = 760;
+			
 			var mc:MovieClip = mipoker.ItemList[0];
 				
 			var pokerf:MovieClip = utilFun.GetClassByString(Poker);				
@@ -208,7 +210,7 @@ package View.ViewComponent
 			mc.addChild(pokerf);
 			mc.addChild(pokerb);
 				
-			//_tool.SetControlMc(pokerb);
+			//_tool.SetControlMc(mipoker.container);
 			//add(_tool);				
 			Tweener.addTween(mipoker.container, { alpha:1, time:1, onCompleteParams:[pokerf, pokerid, pokertype], onComplete:this.poker_mi_ani } );
 			return true;
@@ -241,6 +243,7 @@ package View.ViewComponent
 		
 		public function showfinal(pokerid:int,pokertype:int):void
 		{
+			
 			var mipoker:MultiObject = Get("mipoker");
 			Tweener.addTween(mipoker.container, { alpha:0, time:1 } );
 			var mypoker:Array =   _model.getValue(pokertype);
