@@ -503,7 +503,12 @@ package Command
 			var odd:Array  = [];
 			var idx:int = 0;
 			var select_idx:Array = [];
-			var highest_idx:Number = 0;
+			
+			
+			var sort_data:Array = [];
+			sort_data.push.apply(sort_data, total);
+			sort_data.sort(sort_high_to_low);
+			utilFun.Log("sort_data = "+sort_data);
 			for ( var i:int = 0; i < total.length; i++)
 			{				
 				if ( total[i] == -1)
@@ -516,18 +521,16 @@ package Command
 					odd[idx] = total[i];
 					idx++;
 					select_idx.push(i);
-					xmark.push(12);
-					
-					highest_idx = highest_idx > total[i] ? highest_idx :  total[i];
+					xmark.push(12);					
 				}
 			}
 			_model.putValue("paytable_frame", frame.reverse());
 			_model.putValue("paytable_display_idx", select_idx);
-			_model.putValue("highest_idx", total.indexOf(highest_idx));
+			_model.putValue("highest_idx", total.indexOf(sort_data[0]));
+			_model.putValue("sec_high_idx", total.indexOf(sort_data[1]));
 			
 			xmark.push.apply(xmark, zero);
 			_model.putValue("paytable_xmark", xmark);			
-			_model.putValue("paytable_xmark_", xmark);
 			
 			odd.reverse();			
 			var copyarr:Array = [];
@@ -535,6 +538,22 @@ package Command
 			_model.putValue("odd_data",copyarr);
 		}
 		
+		//傳回值 -1 表示第一個參數 a 是在第二個參數 b 之前。
+		//傳回值 1 表示第二個參數 b 是在第一個參數 a 之前。
+		//傳回值 0 指出元素都具有相同的排序優先順序。
+		private function sort_high_to_low(a:Object, b:Object):int 
+		{
+			if ( a >b) return -1;
+			else if ( a < b) return 1;
+			else return 0;			
+		}
+		
+		private function sort_low_to_high(a:Object, b:Object):int 
+		{
+			if ( a <b) return -1;
+			else if ( a > b) return 1;
+			else return 0;			
+		}
 	}
 
 }

@@ -177,7 +177,7 @@ package ConnectModule.websocket
 								smallto_big.splice(6 - 1, 1);
 								dispatcher(new ValueObject(  smallto_big, "round_paytable") );
 								_betCommand.handle_odd(_model.getValue("round_paytable"));
-							}
+							}							
 						}
 											
 						mypoker = _model.getValue(modelName.POKER_1);
@@ -195,6 +195,8 @@ package ConnectModule.websocket
 							dispatcher(new ValueObject(  _opration.getMappingValue("state_mapping", result.game_state) , modelName.GAMES_STATE) );
 							dispatcher(new ModelEvent("update_state"));
 						}
+						
+						
 					}
 					break;
 					

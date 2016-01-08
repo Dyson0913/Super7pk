@@ -193,7 +193,7 @@ package View.ViewComponent
 			//押注
 			var zone_amount:Array = filter( _model.getValue("result_zonebet_amount"));					
 			
-			var dis_cnt:int = dis_cnt = dis_cnt  < 8 ? 8:zone_amount.length;
+			var dis_cnt:int  = zone_amount.length  < 8 ? 8:zone_amount.length;
 			var dis:Number = utilFun.NPointInterpolateDistance(dis_cnt, 0, 390);
 			
 			var bet_s:MultiObject = Get(bet_symble);

@@ -33,16 +33,19 @@ package View.ViewComponent
 		{			
 			var pokerkind:Array = [just_turnpoker];
 			var playerCon:MultiObject = create(modelName.POKER_1, pokerkind);			
-			playerCon.Post_CustomizedData = [[0.0],[91,108],[192,0],[382,0],[475,108],[572,0],[283,108]];
+			playerCon.Post_CustomizedData = [[0.0],[192,0],[382,0],[475,42],[572,0],[91,42],[283,42]];
 			playerCon.Posi_CustzmiedFun = _regular.Posi_xy_Setting;			
 			playerCon.Create_(7);
-			playerCon.container.x = 63;
-			playerCon.container.y = 195;
-			utilFun.scaleXY(playerCon.container, 0.8, 0.8);
+			utilFun.scaleXY(playerCon.container, 0.75, 0.75);
+			playerCon.container.x = 84;
+			playerCon.container.y = 234;			
 			
-			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[5]));
+			//0,5,1,6,2,3,4   6->4, 3->4,5->4,1->4,2->4			
 			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[4]));
-			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[3]));			
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[3]));
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[5]) , playerCon.container.getChildIndex(playerCon.ItemList[3]));			
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[1]) , playerCon.container.getChildIndex(playerCon.ItemList[5]));
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[2]) , playerCon.container.getChildIndex(playerCon.ItemList[1]));
 			
 			put_to_lsit(playerCon);
 			
@@ -116,11 +119,13 @@ package View.ViewComponent
 			var playerCon:MultiObject = Get(modelName.POKER_1);
 			playerCon.CleanList();
 			playerCon.Create_(7);
-			utilFun.scaleXY(playerCon.container, 0.8, 0.8);
-			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[5]));
+			utilFun.scaleXY(playerCon.container, 0.75, 0.75);
 			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[4]));
-			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[3]));			
-			
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[3]));
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[5]) , playerCon.container.getChildIndex(playerCon.ItemList[3]));			
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[1]) , playerCon.container.getChildIndex(playerCon.ItemList[5]));
+			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[2]) , playerCon.container.getChildIndex(playerCon.ItemList[1]));
+			//
 			Tweener.pauseTweens(playerCon.container);		
 			
 			var bankerCon:MultiObject = Get(modelName.POKER_2);

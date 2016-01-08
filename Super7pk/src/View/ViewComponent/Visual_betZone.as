@@ -71,10 +71,8 @@ package View.ViewComponent
 			betzone.rollout = empty_reaction;
 			betzone.rollover = bet_sencer;
 			
-			var high_odd_ind:int = _model.getValue("highest_idx");
-			var odd_high:MovieClip = GetSingleItem("zone_effect", high_odd_ind);
-			odd_high.gotoAndStop(high_odd_ind+2);			
-			odd_high["effect"].gotoAndPlay(2);			
+			play_ani(_model.getValue("highest_idx"));
+			play_ani(_model.getValue("sec_high_idx"),2);
 		}
 		
 		override public function disappear():void
@@ -88,11 +86,24 @@ package View.ViewComponent
 			
 			setFrame("betzone", 1);
 			
-			var high_odd_ind:int = _model.getValue("highest_idx");
-			var odd_high:MovieClip = GetSingleItem("zone_effect", high_odd_ind);
-			odd_high.gotoAndStop(high_odd_ind+2);			
-			odd_high["effect"].gotoAndStop(1);		
-			
+			stop_ani(_model.getValue("highest_idx"));
+			stop_ani(_model.getValue("sec_high_idx"),2);
+		}
+		
+		private function play_ani(idx:int,order:int = 0):void
+		{		
+			var odd_high:MovieClip = GetSingleItem("zone_effect", idx);
+			odd_high.gotoAndStop(idx + 2);			
+			if( order ==2) odd_high["effect2"].gotoAndPlay(2);
+			else odd_high["effect"].gotoAndPlay(2);			
+		}
+		
+		private function stop_ani(idx:int,order:int = 0):void
+		{			
+			var odd_high:MovieClip = GetSingleItem("zone_effect", idx);
+			odd_high.gotoAndStop(idx+2);			
+			if( order ==2) odd_high["effect2"].gotoAndStop(1);				
+			odd_high["effect"].gotoAndStop(1);				
 		}
 		
 		public function bet_sencer(e:Event, idx:int):Boolean
