@@ -136,17 +136,16 @@ package View.ViewComponent
 			mc.gotoAndStop(data[idx]);
 		}
 		
-		[MessageHandler(type = "Model.valueObject.StringObject",selector="winstr_hint")]
-		public function win_frame_hint(winstr:StringObject):void
+		[MessageHandler(type = "Model.valueObject.Intobject",selector="winstr_hint")]
+		public function win_frame_hint(winstr:Intobject):void
 		{
-			var wintype:String = winstr.Value;
+			var wintype:int = winstr.Value;
 			utilFun.Log("winst = " + wintype);
 			
-			if ( wintype == "") return ;
 			var fra:Array = _model.getValue("paytable_frame");
 			
 			Log("paytable_frame =" + fra);
-			var frame:int = parseInt(wintype);
+			var frame:int = wintype;
 			_win_item = fra.indexOf(frame);			
 			
 			var win_item:MovieClip = GetSingleItem(paytable, _win_item );

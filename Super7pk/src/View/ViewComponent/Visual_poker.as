@@ -303,14 +303,14 @@ package View.ViewComponent
 				if ( idx == -1) rest_two.push(i);
 			}
 			
-			
-			Tweener.addTween(GetSingleItem(type, rest_two[0]), { y: 100 , time:1} );
-			Tweener.addTween(GetSingleItem(type, rest_two[1]), { y: 100 , time:1 } );
+			//無賴 不下拉  也不押暗
+			var wintype:int = _model.getValue("winstr");			
+			if ( wintype == 13) return;
 			
 			//押暗
 			var mc:MovieClip = GetSingleItem(type, rest_two[0]);
 			var color:uint = 0x000000;
-			var mul:Number = 70 / 100;
+			var mul:Number = 90 / 100;
 			var ctMul:Number=(1-mul);
 			var ctRedOff:Number=Math.round(mul*extractRed(color));
 			var ctGreenOff:Number=Math.round(mul*extractGreen(color));
@@ -320,6 +320,12 @@ package View.ViewComponent
 			
 			var mc2:MovieClip = GetSingleItem(type, rest_two[1]);		
 			mc2.transform.colorTransform=ct;
+			
+		
+			
+			//下拉
+			Tweener.addTween(GetSingleItem(type, rest_two[0]), { y: 100 , time:1} );
+			Tweener.addTween(GetSingleItem(type, rest_two[1]), { y: 100 , time:1 } );
 			
 		}
 		

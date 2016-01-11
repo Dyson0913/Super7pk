@@ -71,8 +71,26 @@ package View.ViewComponent
 			betzone.rollout = empty_reaction;
 			betzone.rollover = bet_sencer;
 			
-			play_ani(_model.getValue("highest_idx"));
-			play_ani(_model.getValue("sec_high_idx"),2);
+			//random time play
+			var randtime:Number = utilFun.Random(3) + 1;
+			utilFun.SetTime(first,randtime)
+			utilFun.SetTime(sec, randtime + utilFun.Random(2) + 1);			
+		}
+		
+		public function first():void
+		{
+			var idx:int = _model.getValue("highest_idx");
+			if (idx == -1) return;
+			
+			play_ani(idx);
+		}
+		
+		public function sec():void
+		{
+			var idx:int = _model.getValue("sec_high_idx");
+			if (idx == -1) return;
+			
+			play_ani(idx,2);			
 		}
 		
 		override public function disappear():void

@@ -44,7 +44,7 @@ package View.ViewComponent
 		public function settle2(v:Intobject):void
 		{
 			//patytable提示框
-			dispatcher(new StringObject(_model.getValue("winstr"), "winstr_hint"));
+			dispatcher(new Intobject(_model.getValue("winstr"), "winstr_hint"));
 			
 			dispatcher(new ModelEvent("show_settle_table"));			
 		}

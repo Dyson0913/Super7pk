@@ -321,7 +321,7 @@ package Command
 			_model.putValue("bigwin",null);
 			_model.putValue("sigwin",-1);
 			_model.putValue("win_odd", -1);
-			_model.putValue("winstr", "");
+			_model.putValue("winstr", -1);
 			_model.putValue("hintJp", -1);
 			
 			var total_bet:int = 0;
@@ -362,7 +362,7 @@ package Command
 			utilFun.Log("total_settle =" + total_settle);
 			utilFun.Log("zonebet_amount =" + zonebet_amount);
 			
-			if ( _model.getValue("bigwin") != null)
+			if ( _model.getValue("bigwin") != -1)
 			{
 				dispatcher(new ModelEvent("settle_bigwin"));
 			}
@@ -526,8 +526,21 @@ package Command
 			}
 			_model.putValue("paytable_frame", frame.reverse());
 			_model.putValue("paytable_display_idx", select_idx);
-			_model.putValue("highest_idx", total.indexOf(sort_data[0]));
-			_model.putValue("sec_high_idx", total.indexOf(sort_data[1]));
+			
+			var oddvalue:Number = sort_data[0];
+			if ( oddvalue>= 15 && oddvalue != -1) 
+			{
+				_model.putValue("highest_idx", total.indexOf(sort_data[0]));
+			} 
+			else _model.putValue("highest_idx", -1);
+			
+			oddvalue = sort_data[1];
+			if ( oddvalue >= 15 && oddvalue != -1) 
+			{
+				_model.putValue("sec_high_idx", total.indexOf(sort_data[1]));
+			} 
+			else _model.putValue("sec_high_idx", -1);
+			
 			
 			xmark.push.apply(xmark, zero);
 			_model.putValue("paytable_xmark", xmark);			
