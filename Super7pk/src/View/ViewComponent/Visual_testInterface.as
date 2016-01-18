@@ -28,6 +28,7 @@ package View.ViewComponent
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
 	import com.adobe.serialization.json.JSON;
+	import com.laiyonghao.Uuid;
 	/**
 	 * testinterface to fun quick test
 	 * @author ...
@@ -143,6 +144,14 @@ package View.ViewComponent
 			script_list.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			script_list.Post_CustomizedData = [6, 100, 50];			
 			script_list.Create_(script_list.CustomizedData.length -1);
+			
+			//uuid
+			//for ( var i:int = 0; i < 10;i++)
+			//{
+				//var uuid:Uuid = new Uuid();			
+				//Log("id=" + uuid);
+			//}
+			//
 		}				
 		
 		public function script_list_test(e:Event, idx:int):Boolean
