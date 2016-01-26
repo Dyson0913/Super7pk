@@ -239,6 +239,8 @@ package View.ViewComponent
 			_model.putValue(modelName.POKER_2, []);			
 			_model.putValue("scirpt_pai", ["1s","2d","3s","5c","6h","9d","7d"]);			
 			
+				var odd:Array = [-1,9, -1, -1, -1, 19, 88, 12, -1, 18, 528, -1];
+			_model.putValue("round_paytable", odd);
 			fake_hisotry();
 			
 			_model.putValue(modelName.GAMES_STATE,gameState.NEW_ROUND);			
@@ -258,7 +260,7 @@ package View.ViewComponent
 		{			
 			_model.putValue(modelName.REMAIN_TIME, 20);
 			fake_hisotry();
-			var odd:Array = [-1,9, -1, -1, -1, 19, 88, 12, -1, 18, 528, -1];
+			var odd:Array = [-1,9, -1, -1, -1, 19, 88, 529, -1, 18, 528, -1];
 			_model.putValue("round_paytable", odd);
 			
 			_betCommand.handle_odd(_model.getValue("round_paytable"));			

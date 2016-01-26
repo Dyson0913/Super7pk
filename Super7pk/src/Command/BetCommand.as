@@ -504,11 +504,6 @@ package Command
 			var idx:int = 0;
 			var select_idx:Array = [];
 			
-			
-			var sort_data:Array = [];
-			sort_data.push.apply(sort_data, total);
-			sort_data.sort(sort_high_to_low);
-			utilFun.Log("sort_data = "+sort_data);
 			for ( var i:int = 0; i < total.length; i++)
 			{				
 				if ( total[i] == -1)
@@ -527,17 +522,22 @@ package Command
 			_model.putValue("paytable_frame", frame.reverse());
 			_model.putValue("paytable_display_idx", select_idx);
 			
-			var oddvalue:Number = sort_data[0];
+			var odd_with_idx:Array = create_with_idx(total);
+			odd_with_idx.sort(sort_high_to_low);
+			
+			var oddvalue:Number =  odd_with_idx[0]["value"];			
 			if ( oddvalue>= 15 && oddvalue != -1) 
 			{
-				_model.putValue("highest_idx", total.indexOf(sort_data[0]));
+				var idx:int = odd_with_idx[0]["origi_position"];
+				_model.putValue("highest_idx", idx);
 			} 
 			else _model.putValue("highest_idx", -1);
 			
-			oddvalue = sort_data[1];
+			oddvalue = odd_with_idx[1]["value"];
 			if ( oddvalue >= 15 && oddvalue != -1) 
 			{
-				_model.putValue("sec_high_idx", total.indexOf(sort_data[1]));
+				var idx:int = odd_with_idx[1]["origi_position"];
+				_model.putValue("sec_high_idx", idx);
 			} 
 			else _model.putValue("sec_high_idx", -1);
 			
@@ -551,13 +551,52 @@ package Command
 			_model.putValue("odd_data",copyarr);
 		}
 		
+		private function create_with_idx(raw_arr:Array):Array
+		{
+			var copy_instance:Array = [];
+			copy_instance.push.apply(copy_instance, raw_arr);
+			
+			var ob_with_origi_idx:Array = [];
+			
+			for ( var i:int = 0; i < raw_arr.length; i++)
+			{
+				var info_ob:Object = { "value": raw_arr[i],												
+													   "origi_position": i
+				};
+				
+				ob_with_origi_idx.push(info_ob);
+			}
+			
+			return ob_with_origi_idx;
+		}
+		
+			//籌碼面額換算
+		public function getAllcoinData(betType:int):Array {
+			var total:int = get_total_bet(betType);			
+			var allcoinData:Array = [];
+			var coin:Array = _model.getValue("coin_list").concat();
+			//由大到小
+			coin.reverse();
+			
+			for each(var chipValue:int in coin){
+				var coinNum:int = total / chipValue;
+				for (var i:int = 0; i < coinNum; i++ ) {
+					allcoinData.push(chipValue);
+				}
+				
+				total = total % chipValue;
+			}
+			
+			return allcoinData;
+		}
+		
 		//傳回值 -1 表示第一個參數 a 是在第二個參數 b 之前。
 		//傳回值 1 表示第二個參數 b 是在第一個參數 a 之前。
 		//傳回值 0 指出元素都具有相同的排序優先順序。
 		private function sort_high_to_low(a:Object, b:Object):int 
 		{
-			if ( a >b) return -1;
-			else if ( a < b) return 1;
+			if ( a["value"] >b["value"]) return -1;
+			else if ( a["value"] < b["value"]) return 1;
 			else return 0;			
 		}
 		
