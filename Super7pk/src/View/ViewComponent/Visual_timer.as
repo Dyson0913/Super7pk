@@ -20,6 +20,12 @@ package View.ViewComponent
 		
 		public var Waring_sec:int;
 		
+		[Inject]
+		public var _betCommand:BetCommand;
+		
+		[Inject]
+		public var _betTimer:Visual_betTimer;
+		
 		public function Visual_timer() 
 		{
 			
@@ -31,8 +37,6 @@ package View.ViewComponent
 		   countDown.Create_(1);
 		   countDown.container.x = 1165;
 		   countDown.container.y = 490;
-		   
-		   put_to_lsit(countDown);
 		   
 		   Waring_sec = 7;
 		   
@@ -56,9 +60,23 @@ package View.ViewComponent
 		private function TimeCount():void
 		{			
 			var time:int  = _opration.operator(modelName.REMAIN_TIME, DataOperation.sub, 1);
-			if ( time < 0) return;
+			if ( time < 0) 
+			{
+				return;
+			}
 			if ( time <= Waring_sec ) play_sound("sound_final");
 			
+			if (time == 0) {
+				//注區停止押注
+				var betzone:MultiObject = Get("betzone_s");
+				betzone.mousedown = null;
+				betzone.mouseup = null;
+				betzone.rollout = null;
+				betzone.rollover = null;
+			
+				//送出最後一張還在計時的注單
+				_betTimer.send_bet(_betTimer.current_idx);
+			}
 			
 			frame_setting_way(time);			
 		}

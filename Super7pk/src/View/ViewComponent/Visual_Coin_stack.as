@@ -27,6 +27,9 @@ package View.ViewComponent
 		[Inject]
 		public var _Actionmodel:ActionQueue;	
 		
+		[Inject]
+		public var _betTimer:Visual_betTimer;
+		
 		//sound name
 		public const soundcoin:String = "sound_coin";
 		
@@ -54,11 +57,9 @@ package View.ViewComponent
 			coinstack.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
 			coinstack.Post_CustomizedData =  coin_xy;
 			coinstack.container.x = 3;
-			coinstack.container.y = 605;
+			coinstack.container.y = 607;
 			coinstack.Create_(avaliblezone.length);
-			coinstack.container.visible = false;
-			
-			put_to_lsit(coinstack);
+			coinstack.container.visible = false;			
 			
 			var amount_xy:Array = _model.getValue(modelName.COIN_AMOUNT_XY);
 			//coin amount
@@ -70,8 +71,6 @@ package View.ViewComponent
 			coin_amount_container.container.x = -47;
 			coin_amount_container.container.y = 565;
 			coin_amount_container.Create_(12);			
-			
-			put_to_lsit(coin_amount_container);
 			
 			disappear();
 			
@@ -85,8 +84,6 @@ package View.ViewComponent
 			coin_amount_.Create_(res.length);			
 			
 			object_init(r_coin_amount + "_" + idx, amount);			
-			
-			//put_to_lsit(progress_bar);	
 		}
 		
 		override public function appear():void
@@ -160,8 +157,14 @@ package View.ViewComponent
 			var bet_ob:Object = _Actionmodel.excutionMsg();			
 			_Actionmodel.dropMsg();
 			
+			//coin動畫
+			stack(_betCommand.Bet_type_betlist(bet_ob["betType"]), GetSingleItem("coinstakeZone", bet_ob["betType"] ), bet_ob["betType"]);	
+			
+			//顯示下注倒數
+			_betTimer.TimerStart(bet_ob["betType"]);
+			
 			//TODO  一次一次pop
-			_betCommand.re_bet();
+			//_betCommand.re_bet();
 			
 			play_sound(soundcoin);		
 			
@@ -171,12 +174,16 @@ package View.ViewComponent
 			//TODO temp way
 			//var mylist:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];			
 			//mylist.splice(type, 0, total);		
-			//
 			
-			
+		}
+		
+		[MessageHandler(type = "Model.ModelEvent", selector = "refreshCoin")]
+		public function refreshCoin(msg:ModelEvent):void
+		{
+			var betType:int = msg.Value;
 			
 			//coin動畫
-			stack(_betCommand.Bet_type_betlist(bet_ob["betType"]), GetSingleItem("coinstakeZone",bet_ob["betType"] ),bet_ob["betType"]);	
+			stack(_betCommand.Bet_type_betlist(betType), GetSingleItem("coinstakeZone",betType ),betType);	
 		}
 		
 		private function coin_setting(mc:MovieClip,data:Number):void
@@ -210,11 +217,33 @@ package View.ViewComponent
 			var shX:int = 0;
 			var coinshY:int = -5;		
 			
+			var allCoin:Array = getAllcoinData(bettype);
 			for (var i:int = 0; i < _stack_num ; i++)
 			{				
 				//每疊coin 的multiobject
-				createcoin(i, Allcoin.concat(), contain,shY,shX,coinshY,bettype);
+				//createcoin(i, Allcoin.concat(), contain,shY,shX,coinshY,bettype);
+				createcoin(i, allCoin, contain,shY,shX,coinshY,bettype);
 			}			
+		}
+		
+		//籌碼面額換算
+		public function getAllcoinData(betType:int):Array {
+			var total:int = _betCommand.get_total_bet(betType);			
+			var allcoinData:Array = [];
+			var coin:Array = _model.getValue("coin_list").concat();
+			//由大到小
+			coin.reverse();
+			
+			for each(var chipValue:int in coin){
+				var coinNum:int = total / chipValue;
+				for (var i:int = 0; i < coinNum; i++ ) {
+					allcoinData.push(chipValue);
+				}
+				
+				total = total % chipValue;
+			}
+			
+			return allcoinData;
 		}
 		
 		public function createcoin(cointype:int, Allcoin:Array, contain:DisplayObjectContainer ,shY:int,shX:int,coinshY:int,bettype:int):void
@@ -239,7 +268,7 @@ package View.ViewComponent
 			secoin.CustomizedFun = coinput;
 			secoin.CustomizedData = Allcoin;
 			secoin.setContainer(contain);
-			secoin.Create_by_list( Allcoin.length-1, [Betcoin] , 0 +shiftx+ (cointype * shX) , 0+shifty +shY, 1, 0, coinshY, "Bet_1");			
+			secoin.Create_by_list( Allcoin.length - 1, [Betcoin] , 0 +shiftx + (cointype * shX) , 0 + shifty +shY, 1, 0, coinshY, "Bet_1");			
 		}
 		
 		public function coinput(mc:MovieClip, idx:int, betlist_with_type_in_first:Array):void

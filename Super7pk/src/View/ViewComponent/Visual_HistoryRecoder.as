@@ -33,10 +33,7 @@ package View.ViewComponent
 			history_symble.container.y = 149.95;
 			history_symble.Post_CustomizedData = [6, 62.2, 60.95 ];
 			history_symble.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			history_symble.Create_(60);			
-			
-			put_to_lsit(history_bg);	
-			put_to_lsit(history_symble);
+			history_symble.Create_(60);
 			
 			state_parse([gameState.NEW_ROUND, gameState.START_BET]);
 		}

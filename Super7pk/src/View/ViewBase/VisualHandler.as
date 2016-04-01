@@ -181,7 +181,7 @@ package View.ViewBase
 			else disappear();
 		}
 		
-		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet")]
+		[MessageHandler(type = "Model.ModelEvent", selector = "start_bet",order="1")]
 		public function star_bet():void
 		{			
 			if ( _my_appear_state.indexOf(gameState.START_BET) !=-1) appear();

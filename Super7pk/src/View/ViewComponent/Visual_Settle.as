@@ -28,9 +28,7 @@ package View.ViewComponent
 		public function init():void
 		{
 			var zoneCon:MultiObject = create("zone", [ResName.emptymc]);		
-			zoneCon.Create_(3);			
-			
-			put_to_lsit(zoneCon);
+			zoneCon.Create_(3);
 			
 			state_parse([gameState.END_ROUND]);
 		}	

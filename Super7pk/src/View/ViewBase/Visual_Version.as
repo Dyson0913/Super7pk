@@ -33,9 +33,7 @@ package View.ViewBase
 			version_container.CustomizedData = [];
 			version_container.container.x = 1780;
 			version_container.container.y = 1060;
-			version_container.Create_(1);
-			
-			put_to_lsit(version_container);
+			version_container.Create_(1);			
 		}
 		
 		public function version_init(mc:MovieClip, idx:int, data:Array):void
@@ -54,8 +52,6 @@ package View.ViewBase
 		
 			//specialize setting
 			//var mc:MovieClip = GetSingleItem(name + idx, version_texts);			
-			
-			put_to_lsit(ob_cotainer);	
 		}		
 		
 		private function major_minor_build():String

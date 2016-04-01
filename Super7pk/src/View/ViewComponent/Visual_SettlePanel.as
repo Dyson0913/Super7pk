@@ -41,29 +41,17 @@ package View.ViewComponent
 			var settle_table:MultiObject = create(settletable, [paytable]);			
 			settle_table.container.x = 1270;
 			settle_table.container.y =  141;
-			//settle_table.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			//settle_table.Post_CustomizedData = [8, 0, 50];
 			settle_table.Create_(13);
 			
-			put_to_lsit(settle_table);
-			
 			//bet_num
-			var bet_num:MultiObject = create(bet_symble, [ResName.emptymc]);			
-			//bet_num.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			//bet_num.Post_CustomizedData = [9, 0, 50];
+			var bet_num:MultiObject = create(bet_symble, [ResName.emptymc]);	
 			bet_num.container.x = 1600;
-			bet_num.container.y =  148;
-			
-			put_to_lsit(bet_num);			
+			bet_num.container.y =  148;	
 			
 			//settle_num
-			var settlesymble:MultiObject = create(settle_symble, [ResName.emptymc]);			
-			//settlesymble.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
-			//settlesymble.Post_CustomizedData = [9, 0, 50];
+			var settlesymble:MultiObject = create(settle_symble, [ResName.emptymc]);
 			settlesymble.container.x = 1830;
 			settlesymble.container.y = bet_num.container.y;
-			
-			put_to_lsit(settlesymble);		
 			
 			//= clip or word ,font property push in to mapping,
 			//Posi_CustzmiedFun  = _regular.Posi_xy_Setting;

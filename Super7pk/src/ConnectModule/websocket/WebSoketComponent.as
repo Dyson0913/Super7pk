@@ -19,8 +19,6 @@ package ConnectModule.websocket
 	import View.GameView.gameState;
 	import util.utilFun;	
 	import ConnectModule.websocket.Message
-
-
 	
 	/**
 	 * socket 連線元件
@@ -75,7 +73,15 @@ package ConnectModule.websocket
 			}
 			else if ( event.type == WebSocketEvent.CLOSED)
 			{
-				utilFun.Log("Connected  DK close="+ event.type );
+				utilFun.Log("Connected  7pk close=" + event.type );
+				if (_model.getValue("lobby_disconnect") ==  false) {
+					//通知大廳遊戲斷線
+					var lobbyevent:Function =  _model.getValue(modelName.HandShake_chanel);			
+					if ( lobbyevent != null)
+					{
+						lobbyevent(_model.getValue(modelName.Client_ID), ["GameDisconnect"]);			
+					}		
+				}
 			}
 		}
 		
@@ -103,6 +109,8 @@ package ConnectModule.websocket
 			   var result:Object  = _MsgModel.getMsg();
 			   
 			    if ( result.game_type != _model.getValue(modelName.Game_Name) ) return;				
+				
+				dispatcher(new ArrayObject([result], "pack_recoder"));
 				
 				switch(result.message_type)
 				{
@@ -220,17 +228,17 @@ package ConnectModule.websocket
 					
 					case Message.MSG_TYPE_BET_INFO:
 					{
-						
+						utilFun.Log("bet result ="+result.result );			
 						if (result.result == 0)
 						{
-							dispatcher( new WebSoketInternalMsg(WebSoketInternalMsg.BETRESULT));							
-							dispatcher(new ModelEvent("updateCoin"));
+
 						}
 						else
 						{						
-							_actionqueue.dropMsg();
-							//error handle
+							//下注失敗處理
+							_betCommand.cleanBetUUID(result.id);
 						}
+						
 					}	
 					break;
 					
@@ -249,29 +257,8 @@ package ConnectModule.websocket
 					
 				}
 				
-				dispatcher(new ArrayObject([result], "pack_recoder"));
 				
-		}
-		
-		[MessageHandler(type="ConnectModule.websocket.WebSoketInternalMsg",selector="Bet")]
-		public function SendBet():void
-		{			
-			var ob:Object = _actionqueue.getMsg();
-			var idx_to_name:DI = _model.getValue("Bet_idx_to_name");					
-			
-			
-			var bet:Object = {  "id": String(_model.getValue(modelName.UUID)),
-			                                "timestamp":1111,
-											"message_type":"MsgPlayerBet", 
-			                               "game_id":_model.getValue("game_id"),
-										   "game_type":_model.getValue(modelName.Game_Name),
-										   "game_round":_model.getValue("game_round"),
-										   "bet_type": idx_to_name.getValue( ob["betType"]),
-										    "bet_amount":ob["bet_amount"],
-											"total_bet_amount":ob["total_bet_amount"]
-											};
-											
-			SendMsg(bet);
+				
 		}
 		
 		public function SendMsg(msg:Object):void 

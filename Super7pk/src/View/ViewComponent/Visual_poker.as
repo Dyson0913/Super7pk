@@ -33,12 +33,12 @@ package View.ViewComponent
 		{			
 			var pokerkind:Array = [just_turnpoker];
 			var playerCon:MultiObject = create(modelName.POKER_1, pokerkind);			
-			playerCon.Post_CustomizedData = [[0.0],[192,0],[382,0],[475,102],[572,0],[91,102],[283,102]];
+			playerCon.Post_CustomizedData = [[0.0],[192,0],[382,0],[475,42],[572,0],[91,42],[283,42]];
 			playerCon.Posi_CustzmiedFun = _regular.Posi_xy_Setting;			
 			playerCon.Create_(7);
 			utilFun.scaleXY(playerCon.container, 0.75, 0.75);
 			playerCon.container.x = 84;
-			playerCon.container.y = 201;			
+			playerCon.container.y = 234;			
 			
 			//0,5,1,6,2,3,4   6->4, 3->4,5->4,1->4,2->4			
 			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[6]) , playerCon.container.getChildIndex(playerCon.ItemList[4]));
@@ -47,24 +47,18 @@ package View.ViewComponent
 			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[1]) , playerCon.container.getChildIndex(playerCon.ItemList[5]));
 			playerCon.order_switch(playerCon.container.getChildIndex(playerCon.ItemList[2]) , playerCon.container.getChildIndex(playerCon.ItemList[1]));
 			
-			put_to_lsit(playerCon);
-			
 			var bankerCon:MultiObject =  create(modelName.POKER_2, pokerkind);
 			bankerCon.Post_CustomizedData = [7, 190, 240];
-			bankerCon.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;			
+			bankerCon.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
 			bankerCon.Create_(7);
 			bankerCon.container.x = 313;
 			bankerCon.container.y = 684;
-			
-			put_to_lsit(bankerCon);
 			
 			var mipoker:MultiObject =  create("mipoker", [Mipoker_zone]);	
 			mipoker.Create_(1);
 			mipoker.container.x = 740;
 			mipoker.container.y = 570;			
 			mipoker.container.alpha = 0;
-			
-			put_to_lsit(mipoker);
 			
 			state_parse([gameState.START_BET]);
 			
@@ -182,7 +176,6 @@ package View.ViewComponent
 		
 		public function need_mi_poker(pokertype:int):Boolean
 		{
-			return false;
 			var mypoker:Array =   _model.getValue(pokertype);
 			if( mypoker.length <6) return false;
 			

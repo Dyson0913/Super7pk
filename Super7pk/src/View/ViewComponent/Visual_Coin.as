@@ -1,5 +1,6 @@
 package View.ViewComponent 
 {
+	import Command.BetCommand;
 	import flash.events.Event;
 	import View.ViewBase.VisualHandler;	
 	import Model.*;
@@ -21,6 +22,9 @@ package View.ViewComponent
 		[Inject]
 		public var _Actionmodel:ActionQueue;		
 		
+		[Inject]
+		public var _betCommand:BetCommand;
+		
 		//coin seperate to N stack
 		private var _stack_num:int = 1;
 		
@@ -37,19 +41,16 @@ package View.ViewComponent
 		{
 			_coin = create("CoinOb", [Betcoin]);
 			_coin.container.x = 1080;
-			_coin.container.y = 1000;
+			_coin.container.y = 980;
 			_coin.MouseFrame = utilFun.Frametype(MouseBehavior.Customized,[1,2,2,0]);
 			_coin.CustomizedFun = ocin_setup;
-			_coin.CustomizedData = [0, 1, 2, 3, 4];
+			_coin.CustomizedData = [0, 1, 2, 3, 4, 5, 6, 7];
 			_coin.Posi_CustzmiedFun = _regular.Posi_Row_first_Setting;
-			_coin.Post_CustomizedData = [5, 85, 0];
-			_coin.Create_(5);
+			_coin.Post_CustomizedData = [8, 85, 0];
+			_coin.Create_(8);
 			_coin.rollout = excusive_rollout;
 			_coin.rollover = excusive_select_action;
 			_coin.mousedown = betSelect;
-			_coin.ItemList[2].y -= 20;
-			_coin.ItemList[2].gotoAndStop(2);			
-			_coin.ItemList[2]["_coin"].gotoAndStop(3);
 			
 			put_to_lsit(_coin);
 			
@@ -64,6 +65,8 @@ package View.ViewComponent
 		override public function appear():void
 		{
 			_regular.FadeIn(_coin.container, 0, 1, null);	
+			
+			setCoinLimit();
 		}
 		
 		override public function disappear():void
@@ -131,6 +134,49 @@ package View.ViewComponent
 			return true;
 		}
 		
+		private function setCoinLimit():void {
+			var creadit:int = _model.getValue(modelName.CREDIT);
+			var coin_limit:Array = null; 
+			if (creadit <= 1000) {
+				coin_limit = _model.getValue("coin_limit_1000");
+			}else if (creadit <= 5000) {
+				coin_limit = _model.getValue("coin_limit_5000");
+			}else if (creadit <= 10000) {
+				coin_limit = _model.getValue("coin_limit_10000");
+			}else {
+				coin_limit = _model.getValue("coin_limit_50000");
+			}
+			
+			var rePosi_mc:Array = [];
+			var coin_selectIdx:int;
+			for (var i:int = 0; i < coin_limit.length; i++) {
+				GetSingleItem("CoinOb", i).visible = coin_limit[i];
+				if (coin_limit[i] == true) {
+					rePosi_mc.push(GetSingleItem("CoinOb", i));
+					if (rePosi_mc.length == 3) {
+						coin_selectIdx =  i;
+					}
+				}
+			}
+			
+			var xy:Array = _model.getValue(modelName.COIN_SELECT_XY);
+			for ( i = 0; i < xy.length; i++) {
+				rePosi_mc[i].x = xy[i][0];
+				rePosi_mc[i].y = xy[i][1];
+			}
+			
+			var sele_idx:int = _model.getValue("coin_selectIdx");
+			if (GetSingleItem("CoinOb", sele_idx).visible == true) {
+				GetSingleItem("CoinOb", sele_idx).y -= 20;
+				GetSingleItem("CoinOb", sele_idx).gotoAndStop(2);	
+				GetSingleItem("CoinOb", sele_idx)["_coin"].gotoAndStop(sele_idx + 1);
+			}else{
+				_model.putValue("coin_selectIdx", coin_selectIdx);
+				rePosi_mc[2].y -= 20;
+				rePosi_mc[2].gotoAndStop(2);			
+				rePosi_mc[2]["_coin"].gotoAndStop(coin_selectIdx + 1);
+			}
+		}
 			
 	}
 

@@ -56,8 +56,6 @@ package View.ViewComponent
 			title.container.y = 170;
 			title.Create_(1);
 			
-			put_to_lsit(title);	
-			
 			var progress_container:MultiObject = create("progress_container", [ResName.emptymc]);
 			progress_container.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
 			progress_container.Post_CustomizedData = [6, 0, 55];
@@ -65,8 +63,6 @@ package View.ViewComponent
 			progress_container.container.x = 887;
 			progress_container.container.y = 220;
 			progress_container.Create_(6);		
-			
-			put_to_lsit(progress_container);	
 			
 			_model.putValue("power_idx",[0,0,0,0,0]);
 			

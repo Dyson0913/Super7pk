@@ -54,6 +54,8 @@ package
 		public var _Version:Visual_Version = new Visual_Version();
 		
 		//visual
+		public var _bg:Visual_bg = new Visual_bg();
+		public var _stream:Visual_stream = new Visual_stream();
 		public var _pokerhandler:Visual_poker = new Visual_poker();
 		public var _timer:Visual_timer = new Visual_timer();
 		public var _hint:Visual_Hintmsg = new Visual_Hintmsg();		
@@ -72,7 +74,7 @@ package
 		public var _progressbar:Visual_progressbar = new Visual_progressbar();
 		public var _Bigwin_Effect:Visual_Bigwin_Effect = new Visual_Bigwin_Effect();
 		public var _theme:Visual_theme = new Visual_theme();
-		
+		public var _betTimer:Visual_betTimer = new Visual_betTimer();
 		
 		//test
 		public var _test:Visual_testInterface = new Visual_testInterface();

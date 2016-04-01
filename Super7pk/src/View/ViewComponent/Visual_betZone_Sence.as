@@ -10,7 +10,7 @@ package View.ViewComponent
 	
 	import View.Viewutil.*;
 	import View.GameView.gameState;
-	
+	import Res.ResName;
 	/**
 	 * betzone present way
 	 * @author Dyson0913
@@ -19,7 +19,7 @@ package View.ViewComponent
 	{		
 		
 		[Inject]
-		public var _betCommand:BetCommand;	
+		public var _betCommand:BetCommand;
 		
 		public function Visual_betZone_Sence() 
 		{
@@ -29,7 +29,7 @@ package View.ViewComponent
 		public function init():void
 		{			
 			var zone_xy:Array = _model.getValue(modelName.AVALIBLE_ZONE_XY);			
-			
+			var cancel_xy:Array = _model.getValue(modelName.COIN_CANCEL_XY);
 			
 			var res:Array = ["zone_dark"]
 			var betzone_dark:MultiObject = create("betzone_dark", res);
@@ -38,16 +38,6 @@ package View.ViewComponent
 			betzone_dark.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
 			betzone_dark.Post_CustomizedData = [[0, 0] , [ -300, 0] , [ -600, 0] , [ -910, 0] , [ -1222, 0], [ -1536, 0], [ -31, -171], [ -312, -175], [ -597, -175], [ -892, -177], [ -1186, -177], [ -1481, -176]];	
 			betzone_dark.Create_(12);
-			
-			put_to_lsit(betzone_dark);
-			
-			//for ( var i:int = 0; i < 12; i++)
-			//{
-				//var mc:MovieClip = GetSingleItem("betzone_dark", i);
-				//mc.gotoAndStop(i + 2);
-				//mc["_dark"].alpha = 0.5;
-			//}
-			
 			
 			var avaliblezone_s:Array =  ["zone_sense"];		
 			var playerzone_s:MultiObject = create("betzone_s", avaliblezone_s);
@@ -73,19 +63,19 @@ package View.ViewComponent
 			betzone.rollout = bet_sencer;
 			betzone.rollover = bet_sencer;
 			
-			var avaliblezone:Array = _model.getValue("round_paytable");			
+			var avaliblezone:Array = _model.getValue("round_paytable");		
 			for ( var i:int = 0; i < avaliblezone.length ; i++)
-			{
-				var al:Number = 0;			
-				if ( avaliblezone[i] == -1) al = 0.5;				
-				
-				var mc:MovieClip = GetSingleItem("betzone_dark", i);
-				mc.gotoAndStop(i + 2);
-				mc["_dark"].alpha = al;
-				
-				var sense:MovieClip = betzone.ItemList[i];
-				sense.gotoAndStop(i + 2);
-			}
+				{
+					var al:Number = 0;			
+					if ( avaliblezone[i] == -1) al = 0.5;				
+					
+					var mc:MovieClip = GetSingleItem("betzone_dark", i);
+					mc.gotoAndStop(i + 2);
+					mc["_dark"].alpha = al;
+					
+					var sense:MovieClip = betzone.ItemList[i];
+					sense.gotoAndStop(i + 2);
+				}	
 		}
 		
 		override public function disappear():void
@@ -97,12 +87,15 @@ package View.ViewComponent
 			betzone.rollover = null;
 			
 			var avaliblezone:Array = _model.getValue("round_paytable");			
-			for ( var i:int = 0; i < avaliblezone.length ; i++)
-			{
-				var al:Number = 0;
-				var mc:MovieClip = GetSingleItem("betzone_dark", i);
-				mc.gotoAndStop(i + 2);
-				mc["_dark"].alpha = al;
+			//無賠率資料，不處理
+			if(avaliblezone != null){
+				for (  var i:int  = 0; i < avaliblezone.length ; i++)
+				{
+					var al:Number = 0;
+					var mc:MovieClip = GetSingleItem("betzone_dark", i);
+					mc.gotoAndStop(i + 2);
+					mc["_dark"].alpha = al;
+				}
 			}
 		}
 		
@@ -131,10 +124,10 @@ package View.ViewComponent
 				//utilFun.Log("bet idx = " + idx );
 				if ( CONFIG::debug ) 
 				{				
-					_betCommand.betTypeMain(e, idx);
+					_betCommand.bet_local(e, idx);
 				}		
 				else
-				{				
+				{		
 					_betCommand.betTypeMain(e, idx);
 				}
 			}

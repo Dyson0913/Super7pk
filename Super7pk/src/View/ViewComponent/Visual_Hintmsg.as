@@ -33,8 +33,6 @@ package View.ViewComponent
 			Hintmsg.container.x = 951.65;
 			Hintmsg.container.y = 507.80;
 			
-			put_to_lsit(Hintmsg);
-			
 			state_parse([gameState.START_BET]);
 		}
 		
@@ -52,7 +50,7 @@ package View.ViewComponent
 			if ( state == gameState.END_BET)
 			{
 				frame = frame_stop_bet;
-				play_sound("sound_start_bet");
+				play_sound("sound_stop_bet");
 			}
 			
 			if ( state == gameState.START_OPEN) frame = frame_open_card;
@@ -64,6 +62,12 @@ package View.ViewComponent
 			GetSingleItem(Hint).gotoAndStop(frame);
 			if ( frame == frame_pre_open) return;
 			_regular.FadeIn( GetSingleItem(Hint), 2, 2, _regular.Fadeout);
+		}
+		
+		[MessageHandler(type = "ConnectModule.websocket.WebSoketInternalMsg", selector = "CreditNotEnough")]
+		public function no_credit():void
+		{
+			set_frame(6);
 		}
 		
 		override public function test_suit():void

@@ -31,6 +31,8 @@ package View.ViewComponent
 		
 		private var _win_item:int = 0;
 		
+		private var _wintype:int = 0;
+		
 		public function Visual_Paytable() 
 		{
 			
@@ -44,22 +46,17 @@ package View.ViewComponent
 			ptable.container.y = 141;
 			ptable.Create_(12);
 			
-			put_to_lsit(ptable);
-			
 			//X
 			var x_sym:MultiObject = create(x_symble, [paynum]);
 			x_sym.container.x = 380;
 			x_sym.container.y =  149;
 			x_sym.Create_(12);
 			
-			put_to_lsit(x_sym);
-			
 			//odd
 			var p_num:MultiObject = create(paynum, [ResName.emptymc]);
 			p_num.container.x = 630;
 			p_num.container.y =  148;			
 			p_num.Create_(12);
-			put_to_lsit(p_num);
 			
 			state_parse([gameState.END_BET,gameState.START_OPEN,gameState.END_ROUND]);
 		}
@@ -94,6 +91,8 @@ package View.ViewComponent
 			odd.Posi_CustzmiedFun = _regular.Posi_Colum_first_Setting;
 			odd.Post_CustomizedData = [dis_cnt, 0, dis];			
 			odd.Create_(odd_data.length);
+			
+			
 		}
 		
 		override public function disappear():void
@@ -141,7 +140,7 @@ package View.ViewComponent
 		{
 			var wintype:int = winstr.Value;
 			utilFun.Log("winst = " + wintype);
-			
+			_wintype = wintype;
 			var fra:Array = _model.getValue("paytable_frame");
 			
 			Log("paytable_frame =" + fra);
@@ -162,8 +161,26 @@ package View.ViewComponent
 				_regular.Twinkle_by_JumpFrame(_item, 25, 60, f, f+12);
 			}
 			
+			
+			utilFun.SetTime(sound, 1);
 		}
 		
+		private function sound():void
+		{
+			var  wintype:int = _wintype;
+			if( wintype == 13) play_sound("sound_none")
+			if( wintype == 12) play_sound("sound_one_pair")
+			if( wintype == 11) play_sound("sound_two_pair")
+			if( wintype == 10) play_sound("sound_tripple")
+			if( wintype == 9) play_sound("sound_straight")
+			if( wintype == 8) play_sound("sound_flush")
+			if( wintype == 7) play_sound("sound_full_house")
+			if( wintype == 6) play_sound("sound_four_of_a_kind")
+			if( wintype == 5) play_sound("sound_straight_flush")
+			if( wintype == 4) play_sound("sound_royal_flush")
+			if( wintype == 3) play_sound("sound_five_of_a_kind")
+			if( wintype == 2) play_sound("sound_pure_royal_Flush")
+		}
 		
 	}
 

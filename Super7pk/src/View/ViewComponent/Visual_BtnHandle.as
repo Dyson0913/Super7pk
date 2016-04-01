@@ -72,7 +72,6 @@ package View.ViewComponent
 			_rule_table.Create_(1);
 			_rule_table.container.visible = false;
 			
-			put_to_lsit(_rule_table);
 		}		
 		
 		//public function scal(mc:MovieClip, idx:int, data:Array):void

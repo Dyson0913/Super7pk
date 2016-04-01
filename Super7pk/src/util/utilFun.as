@@ -12,6 +12,7 @@ package util
 	import flash.text.TextFieldAutoSize;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.setTimeout;
+	import flash.utils.clearTimeout;
 	import Interface.ViewComponentInterface;
 	
 	import com.hexagonstar.util.debug.Debug;
@@ -116,6 +117,15 @@ package util
 		{			
 			setTimeout(listen, sec*1000);
 		}	
+		
+		public static function SetTimeUint(listen:Function,sec:int):uint
+		{			
+			return setTimeout(listen, sec*1000);
+		}	
+		
+		public static function ClearTime(id:uint):void {
+			clearTimeout(id);
+		}
 		
 		//滑鼠監聽
 		public static function AddMouseListen(mc:DisplayObject,listen:Function):void

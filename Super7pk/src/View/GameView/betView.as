@@ -82,6 +82,15 @@ package View.GameView
 		[Inject]
 		public var _Version:Visual_Version;
 		
+		[Inject]
+		public var _betTimer:Visual_betTimer;
+		
+		[Inject]
+		public var _bg:Visual_bg;
+		
+		[Inject]
+		public var _stream:Visual_stream;
+		
 		public function betView()  
 		{
 			
@@ -101,7 +110,10 @@ package View.GameView
 			view.Create_by_list(1, [ResName.Bet_Scene], 0, 0, 1, 0, 0, "a_");	
 			
 			_Version.init();
+			
+			_bg.init();
 			_theme.init();
+			
 			_gameinfo.init();			
 			_hint.init();			
 			
@@ -116,12 +128,31 @@ package View.GameView
 			_sencer.init();
 			_settle_panel.init();
 			
-		
+			
 			_paytable.init();
 			_btn.init();
 			_Bigwin_Effect.init();
 			_settle.init();
-			//dispatcher(new StringObject("Soun_Bet_BGM","Music" ) );
+			
+			_betTimer.init();
+			_stream.init();
+				var jsonob:Object = {
+												  "online":{
+															 "stream_link":[
+																						{"stream_name":"live1", "strem_url":"52.69.102.66/live", "channel_ID":" /BW", "size": { "itemwidth":800, "itemheight":600 }},
+																					   {"stream_name":"live2", "strem_url":"52.69.102.66/live", "channel_ID":" /BW1", "size": { "itemwidth":800, "itemheight":600 }}
+																					   ]
+														   },
+												 "development":{
+															 "stream_link":[
+																					  {"stream_name":"live1", "strem_url":"52.69.102.66/live", "channel_ID":" /BW", "size": { "itemwidth":800, "itemheight":600 }},
+																					   {"stream_name":"live2", "strem_url":"52.69.102.66/live", "channel_ID":" /BW1", "size": { "itemwidth":800, "itemheight":600 }}																					 
+																					]
+															
+															   }
+												}
+			dispatcher(new ArrayObject([1, jsonob], "urlLoader_complete"));
+			dispatcher(new StringObject("live1", "stream_connect"));
 		}
 		
 		

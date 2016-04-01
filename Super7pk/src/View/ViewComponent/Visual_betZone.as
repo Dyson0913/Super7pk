@@ -22,6 +22,9 @@ package View.ViewComponent
 	{	
 		public const bet_tableitem:String = "bet_table_item";
 		
+		private var ani1_tId:int = -1;
+		private var ani2_tId:int = -1;
+		
 		public function Visual_betZone() 
 		{
 			
@@ -33,9 +36,7 @@ package View.ViewComponent
 			var tableitem:MultiObject = create(bet_tableitem, [bet_tableitem]);	
 			tableitem.container.x = 3;
 			tableitem.container.y = 575;
-			tableitem.Create_(1);			
-			
-			put_to_lsit(tableitem);
+			tableitem.Create_(1);
 			
 			var res:Array = ["zone_total"]
 			//下注區
@@ -48,8 +49,6 @@ package View.ViewComponent
 			pz.container.x = tableitem.container.x + 1556;
 			pz.container.y = tableitem.container.y + 214;
 			pz.Create_(12);
-			
-			put_to_lsit(pz);
 			
 			var effect:MultiObject = create("zone_effect", ["zone_effect"]);		
 			effect.Posi_CustzmiedFun = _regular.Posi_xy_Setting;
@@ -71,10 +70,12 @@ package View.ViewComponent
 			betzone.rollout = empty_reaction;
 			betzone.rollover = bet_sencer;
 			
+			ani1_tId = -1;
+			ani2_tId = -1;
 			//random time play
 			var randtime:Number = utilFun.Random(3) + 1;
-			utilFun.SetTime(first,randtime)
-			utilFun.SetTime(sec, randtime + utilFun.Random(2) + 1);			
+			ani1_tId = utilFun.SetTimeUint(first,randtime)
+			ani2_tId = utilFun.SetTimeUint(sec, randtime + utilFun.Random(2) + 1);			
 		}
 		
 		public function first():void
@@ -104,8 +105,15 @@ package View.ViewComponent
 			
 			setFrame("betzone", 1);
 			
+			if(ani1_tId >= -1){
+				utilFun.ClearTime(ani1_tId);
+			}
+			if(ani2_tId >= -1){
+				utilFun.ClearTime(ani2_tId);
+			}
+			
 			stop_ani(_model.getValue("highest_idx"));
-			stop_ani(_model.getValue("sec_high_idx"),2);
+			stop_ani(_model.getValue("sec_high_idx"), 2);
 		}
 		
 		private function play_ani(idx:int,order:int = 0):void

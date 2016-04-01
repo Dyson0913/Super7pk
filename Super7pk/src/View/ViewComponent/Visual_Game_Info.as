@@ -30,8 +30,6 @@ package View.ViewComponent
 			bet.container.x = 132;
 			bet.container.y = 48;
 			
-			put_to_lsit(bet);
-			
 			state_parse([gameState.START_BET]);
 		}
 		

@@ -64,10 +64,6 @@ package View.ViewComponent
 			
 			_playing = false;
 			
-			put_to_lsit(bigwinfire);
-			put_to_lsit(bigwinCon);
-			put_to_lsit(PowerJPNum);
-			
 			state_parse([gameState.NEW_ROUND]);
 		}		
 		
@@ -117,12 +113,12 @@ package View.ViewComponent
 		public function win_word(bigwin_frame:int):void
 		{
 			//phase i  ( sound ,data set ,play)
-			play_sound(sound_bigwin);			
+			//play_sound(sound_bigwin);			
 			GetSingleItem("bigwinmsg").gotoAndStop(bigwin_frame);
 			
 			_model.putValue("Hit_count", 0);
 			
-			play_sound(soundBombLong);
+			//play_sound(soundBombLong);
 			//odd_present();
 			background_effect();
 			_cunt();

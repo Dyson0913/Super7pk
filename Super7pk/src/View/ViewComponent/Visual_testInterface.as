@@ -28,7 +28,6 @@ package View.ViewComponent
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
 	import com.adobe.serialization.json.JSON;
-	import com.laiyonghao.Uuid;
 	/**
 	 * testinterface to fun quick test
 	 * @author ...
@@ -109,6 +108,15 @@ package View.ViewComponent
 		
 		private var _pack:Array = [];
 		
+		[Inject]
+		public var _betTimer:Visual_betTimer;
+		
+		[Inject]
+		public var _stream:Visual_stream;
+		
+		[Inject]
+		public var _bg:Visual_bg;
+		
 		public function Visual_testInterface() 
 		{
 			
@@ -145,13 +153,6 @@ package View.ViewComponent
 			script_list.Post_CustomizedData = [6, 100, 50];			
 			script_list.Create_(script_list.CustomizedData.length -1);
 			
-			//uuid
-			//for ( var i:int = 0; i < 10;i++)
-			//{
-				//var uuid:Uuid = new Uuid();			
-				//Log("id=" + uuid);
-			//}
-			//
 		}				
 		
 		public function script_list_test(e:Event, idx:int):Boolean
@@ -178,9 +179,11 @@ package View.ViewComponent
 			if ( _model.getValue("test_init")) return;
 			changeBG(ResName.Bet_Scene);
 			
-			_Version.init();
-			
+			_Version.init();		
+			_bg.init();
 			_theme.init();
+			
+			
 			_gameinfo.init();			
 			_hint.init();
 			_HistoryRecoder.init();
@@ -193,15 +196,33 @@ package View.ViewComponent
 			_coin.init();
 			_sencer.init();
 			_settle_panel.init();
+			_betTimer.init();
 			//
 			//
 			_paytable.init();
 			//_btn.init();
 			_Bigwin_Effect.init();
+			_stream.init();
 			
+				var jsonob:Object = {
+												  "online":{
+															 "stream_link":[
+																						{"stream_name":"live1", "strem_url":"52.69.102.66/live", "channel_ID":" /BW", "size": { "itemwidth":800, "itemheight":600 }},
+																					   {"stream_name":"live2", "strem_url":"52.69.102.66/live", "channel_ID":" /BW1", "size": { "itemwidth":800, "itemheight":600 }}
+																					   ]
+														   },
+												 "development":{
+															 "stream_link":[
+																					  {"stream_name":"live1", "strem_url":"52.69.102.66/live", "channel_ID":" /BW", "size": { "itemwidth":800, "itemheight":600 }},
+																					   {"stream_name":"live2", "strem_url":"52.69.102.66/live", "channel_ID":" /BW1", "size": { "itemwidth":800, "itemheight":600 }}																					 
+																					]
+															
+															   }
+												}
+			dispatcher(new ArrayObject([1, jsonob], "urlLoader_complete"));
+			dispatcher(new StringObject("live1", "stream_connect"));
 			
-			
-			_Version.debug();
+			//_Version.debug();
 			_model.putValue("test_init",true);
 		}
 		
@@ -239,7 +260,7 @@ package View.ViewComponent
 			_model.putValue(modelName.POKER_2, []);			
 			_model.putValue("scirpt_pai", ["1s","2d","3s","5c","6h","9d","7d"]);			
 			
-				var odd:Array = [-1,9, -1, -1, -1, 19, 88, 12, -1, 18, 528, -1];
+			var odd:Array = [-1,9, -1, -1, -1, 19, 88, 12, -1, 18, 528, -1];
 			_model.putValue("round_paytable", odd);
 			fake_hisotry();
 			
@@ -260,7 +281,8 @@ package View.ViewComponent
 		{			
 			_model.putValue(modelName.REMAIN_TIME, 20);
 			fake_hisotry();
-			var odd:Array = [-1,9, -1, -1, -1, 19, 88, 529, -1, 18, 528, -1];
+			//var odd:Array = [-1,9, -1, -1, -1, 19, 88, 12, -1, 18, 528, -1];
+			var odd:Array = [1,9, 1, 1, 1, 19, 88, 12, 1, 18, 528, 1];
 			_model.putValue("round_paytable", odd);
 			
 			_betCommand.handle_odd(_model.getValue("round_paytable"));			

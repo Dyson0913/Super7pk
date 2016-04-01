@@ -16,13 +16,11 @@ package Model
 			
 		}
 		
-		
 		[MessageHandler(type = "Model.ActionEvent")]
 		public function push(msg:ActionEvent):void
 		{		    
-		   	_queue.push(msg.Value);			
+		   	_queue.push(msg.Value);
 		}
-		
 		
 		public function getMsg():Object
 		{			
