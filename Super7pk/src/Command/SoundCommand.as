@@ -86,15 +86,17 @@ package Command
 				_mute = false;				
 			}
 			
-			if ( CMD[0] == "UPDATE_CREDIT")
-			{
-				var  credit:int = CMD[1]	;
-				_model.putValue(modelName.CREDIT, credit);
-			}
 			
 			if ( CMD[0] == "LOBBY_DISCONNET")
 			{
 				_model.putValue("lobby_disconnect", true);				
+			}
+			
+			if ( CMD[0] == "package_from_lobby")
+			{
+				var  mypackage:Object = CMD[1]	;				
+				_model.putValue(CMD[0], mypackage);
+				dispatcher(new ModelEvent("package_from_lobby"));
 			}
 		}
 		

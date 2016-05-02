@@ -92,10 +92,22 @@ package View.GameView
 				}		
 				else
 				{		
-					utilFun.SetTime(connet, 0.1);
+					//utilFun.SetTime(connet, 0.1);
+					join_game();
 				}
 				
 		}
+		
+		private function join_game():void
+		{
+			//通知大廳加入遊戲
+			var lobbyevent:Function =  _model.getValue(modelName.HandShake_chanel);			
+			if ( lobbyevent != null)
+			{
+				lobbyevent(_model.getValue(modelName.Client_ID), ["GameJoin",_model.getValue(modelName.Game_Name)]);			
+			}		
+		}
+		
 		private function connet():void
 		{	
 			dispatcher( new WebSoketInternalMsg(WebSoketInternalMsg.CONNECT));

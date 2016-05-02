@@ -73,7 +73,7 @@ package Command
 			_model.putValue(modelName.AVALIBLE_ZONE_IDX, betzone);
 			
 			
-			_model.putValue(modelName.COIN_SELECT_XY, [ [0, 0], [85, 0], [170, 0], [255, 0], [340, 0] ]);
+			_model.putValue(modelName.COIN_SELECT_XY, [ [0, 0], [100, 0], [200, 0], [300, 0], [400, 0] ]);
 			
 			_model.putValue(modelName.COIN_STACK_XY,   [ [1608, 295], [1299, 295],  [993, 295], [683, 295], [375, 295], [65, 295],
 																									  [1564, 100], [1276, 100],  [982,100], [694, 100], [398, 100], [106, 100]			
@@ -139,7 +139,7 @@ package Command
 				}		
 				else
 				{				
-					_socket.SendMsg(bet_msg);
+					_socket.send_to_lobby(bet_msg);
 				}
 			
 		}
